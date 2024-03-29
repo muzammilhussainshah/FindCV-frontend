@@ -1,0 +1,19 @@
+.link {
+    text-decoration: none;
+    display: inline-block;
+}
+
+.link span {
+    font-size: 16px;
+    color: #09AEEF;
+    text-decoration: none;
+}
+
+.link span:hover {
+    text-decoration: underline;
+    color: #093559;
+}
+
+.link:global(.white) span {
+    color: #fff;
+}

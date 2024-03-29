@@ -1,0 +1,31 @@
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    z-index: 100;
+}
+
+.header img {
+    max-width: 195px;
+    width: 100%;
+}
+
+.header .col {
+    width: 50%;
+}
+
+.header .col:nth-child(2) {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.header :global(.fcv-row) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1340px;
+}

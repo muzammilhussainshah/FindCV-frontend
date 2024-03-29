@@ -1,0 +1,71 @@
+.field {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.label {
+    margin-bottom: 10px;
+}
+
+.option {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.option label {
+}
+
+.option input {
+    display: none;
+}
+
+.option span {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    padding-left: 30px;
+}
+
+.option span:before {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 0;
+    top: 50%;
+    margin-top: -10px;
+    border: 2px solid #fff;
+    border-radius: 100%;
+    content: '';
+}
+
+.option span:after {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    left: 4px;
+    top: 50%;
+    margin-top: -6px;
+    background-color: #fff;
+    border-radius: 100%;
+    content: '';
+    opacity: 0;
+}
+
+.option span:hover:after {
+    opacity: 0.2;
+}
+
+.option input:checked + span:after {
+    opacity: 1;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.wrapper_error {}
+
+.error {}

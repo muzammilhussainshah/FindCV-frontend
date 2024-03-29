@@ -1,0 +1,90 @@
+.loader {
+    position: fixed;
+    background: #093559;
+    background: linear-gradient(180deg, #093559 0%, #093559e6 100%);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader div {
+    text-align: center;
+}
+
+.loader div img {
+    display: block;
+    max-width: 190px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.loader div p {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 2px;
+    display: block;
+}
+
+.loader > i {
+    position: fixed;
+    border: 4px solid #fff;
+    border-radius: 100%;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.loader > i:nth-child(2) {
+    top: -85px;
+    right: calc(0% - 125px);
+    width: 300px;
+    height: 300px;
+}
+
+.loader > i:nth-child(3) {
+    top: calc(50% - 95px);
+    left: 12px;
+    width: 40px;
+    height: 40px;
+}
+
+.loader > i:nth-child(4) {
+    top: calc(50% - 55px);
+    left: -120px;
+    width: 160px;
+    height: 160px;
+}
+
+.loader > i:nth-child(5) {
+    bottom: -28px;
+    left: 2px;
+    width: 90px;
+    height: 90px;
+}
+
+.loader > i:nth-child(6) {
+    bottom: 33px;
+    right: calc(0% + 30px);
+    width: 90px;
+    height: 90px;
+}
+
+.loader > i:nth-child(7) {
+    bottom: 90px;
+    right: calc(0% + 135px);
+    width: 20px;
+    height: 20px;
+}
+
+.loader > i:nth-child(8) {
+    bottom: 130px;
+    right: calc(0% + 105px);
+    width: 40px;
+    height: 40px;
+}
