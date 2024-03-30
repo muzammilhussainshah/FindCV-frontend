@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -5,12 +6,14 @@ import { fetchUserByToken } from '../../app/features/userSlice';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import toast from 'react-hot-toast';
+
 import FormField from '../FormField/FormField';
 import Button from '../Buttons/Button/Button';
 
 import { login } from '../../services/authService';
 
 function LoginForm(props) {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.user);
     const [formLoading, setFormLoading] = useState(false);
@@ -36,8 +39,8 @@ function LoginForm(props) {
             password: '',
         },
         validationSchema: Yup.object({
-            email: Yup.string().email('Invalid email address').required('Required'),
-            password: Yup.string().required('Required'),
+            email: Yup.string().email(t('forms.login.invalid_email_address')).required(t('forms.login.required')),
+            password: Yup.string().required(t('forms.login.required')),
         }),
         onSubmit: values => {
             // alert(JSON.stringify(values, null, 2));
@@ -49,16 +52,16 @@ function LoginForm(props) {
             setFormLoading(true);
 
             toast.promise(login(values.email, values.password), {
-                loading: 'Logging in...',
-                success: <b>Logged in successfully!</b>,
+                loading: t('forms.login.logging_in'),
+                success: <b>{t('forms.login.logged_in_successfully')}</b>,
                 error: (err) => {
                     return <b>{err.response.data.error}</b>;
                 },
             })
             .then((response) => {
                 toast.promise(dispatch(fetchUserByToken(response)), {
-                    loading: 'Receiving Data...',
-                    success: <b>User Verified</b>,
+                    loading: t('forms.login.receiving_data'),
+                    success: <b>{t('forms.login.user_verified')}</b>,
                     error: (err) => {
                         return <b>{err.response.data.error}</b>;
                     },
@@ -85,7 +88,7 @@ function LoginForm(props) {
                 <FormField 
                     name="email" 
                     type="email" 
-                    placeholder="Email" 
+                    placeholder={t('forms.login.email')} 
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.email}
@@ -96,7 +99,7 @@ function LoginForm(props) {
                 <FormField 
                     name="password" 
                     type="password" 
-                    placeholder="Password" 
+                    placeholder={t('forms.login.password')} 
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.password}
@@ -104,7 +107,7 @@ function LoginForm(props) {
                 />
             </div>
             <Button type="submit">
-                {formLoading ? 'Processing...' : 'Login'}
+                {formLoading ? t('forms.login.processing') : t('forms.login.login')}
             </Button>
         </form>
     );

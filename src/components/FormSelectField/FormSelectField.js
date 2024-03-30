@@ -1,17 +1,18 @@
+import { useTranslation } from 'react-i18next';
 import { useMemo } from 'react';
 import Select, { components } from 'react-select';
 import countryList from 'country-list';
 
 import styles from './FormSelectField.module.css';
 
-function FormSelectField({ error, label, type, value, children, ...props }) {
+function FormSelectField({ error, label, type, value, onChange, children, ...props }) {
+    const { t } = useTranslation();
     const countries = useMemo(() => countryList.getData(), []);
     let options = [];
 
-    if (type === 'country') {
-
+    if (type === 'country' || type === 'nationality') {
         options = countries.map(country => ({
-            label: `${country.name}`,
+            label: `${t('general.' + type + '.' + country.code)}`,
             value: country.name,
             flag: country.code
         }));
@@ -27,7 +28,7 @@ function FormSelectField({ error, label, type, value, children, ...props }) {
 
     const customSingleValue = ({ data }) => {
 
-        if (type === 'country') {
+        if (type === 'country' || type === 'nationality') {
             return (
                 <div className="country-select">
                     <span>{data.flag ? String.fromCodePoint(...[...data.flag].map(c => 0x1f1a5 + c.charCodeAt())) : ''}</span> 
@@ -37,6 +38,16 @@ function FormSelectField({ error, label, type, value, children, ...props }) {
         }
 
     }
+
+    // Handler to adapt react-select's onChange event to Formik's expectations
+    const handleChange = (selectedOption) => {
+        onChange({
+            target: {
+                name: props.name,
+                value: selectedOption ? selectedOption.value : '',
+            }
+        });
+    };
 
     return (
         <div className={styles.field}>
@@ -56,6 +67,7 @@ function FormSelectField({ error, label, type, value, children, ...props }) {
                         SingleValue: customSingleValue,
                         Input: Input
                     }}
+                    onChange={handleChange}
                     {...props}
                 />
             </div>

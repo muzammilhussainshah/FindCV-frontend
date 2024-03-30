@@ -1,0 +1,99 @@
+.languageSwitch svg,
+.languageSwitch svg path {
+    color: #093559;
+}
+
+.languageSwitch :global(.react-language-select__control) {
+    min-height: 0;
+    background-color: #EBF9FF;
+    border-width: 0;
+    cursor: pointer;
+    padding: 2px 5px 2px 5px;
+}
+
+.languageSwitch :global(.language-select) {
+    font-size: 12px;
+    grid-area: 1 / 1 / 2 / 3;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+    color: #093559;
+}
+
+.languageSwitch :global(.language-select) span {
+    display: inline-block;
+    margin-right: 4px;
+}
+
+.languageSwitch :global(.react-language-select__indicator-separator) {
+    display: none;
+}
+
+.languageSwitch :global(.react-language-select__indicator) {
+    transition: all 0.3s ease;
+    transform: rotate(0deg);
+    padding: 0;
+    margin-left: 5px;
+}
+
+.languageSwitch :global(.react-language-select__control--menu-is-open .react-language-select__indicator) {
+    transform: rotate(180deg);
+}
+
+.languageSwitch :global(.react-language-select__value-container) {
+    padding: 0;
+}
+
+.languageSwitch :global(.react-language-select__input-container) {
+    padding: 0;
+    margin: 0;
+}
+
+.languageSwitch input {
+    font-size: 12px !important;
+    line-height: 1;
+    font-family: 'Inter', sans-serif;
+    color: #093559;
+}
+
+.languageSwitch :global(.react-language-select__placeholder) {
+    font-size: 12px;
+    line-height: 1;
+    font-family: 'Inter', sans-serif;
+    color: #093559;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+
+.languageSwitch :global(.react-language-select__menu) {
+    overflow: hidden;
+}
+
+.languageSwitch :global(.react-language-select__option) {
+    cursor: pointer;
+    padding: 2px 5px;
+}
+
+.languageSwitch :global(.react-language-select__option) div {
+    font-size: 12px;
+    text-align: left;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #093559;
+}
+
+.languageSwitch :global(.react-language-select__option) div span {
+    display: inline-block;
+    margin-right: 4px;
+}
+
+.languageSwitch :global(.react-language-select__option--is-selected) div {
+    color: #fff;
+}

@@ -69,3 +69,32 @@
 .wrapper_error {}
 
 .error {}
+
+:global(.fcv-rtl) .label {
+    text-align: right;
+    direction: rtl;
+}
+
+:global(.fcv-rtl) .wrapper {
+    direction: rtl;
+}
+
+:global(.fcv-rtl) .option {
+    margin-right: 0;
+    margin-left: 20px;
+}
+
+:global(.fcv-rtl) .option span {
+    padding-left: 0;
+    padding-right: 30px;
+}
+
+:global(.fcv-rtl) .option span:before {
+    left: auto;
+    right: 0;
+}
+
+:global(.fcv-rtl) .option span:after {
+    left: auto;
+    right: 4px;
+}

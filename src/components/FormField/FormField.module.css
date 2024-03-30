@@ -68,3 +68,18 @@
     border-bottom-right-radius: 5px;
     padding: 5px 20px 7px 20px;
 }
+
+:global(.fcv-rtl) .field input {
+    direction: rtl;
+    text-align: right;
+}
+
+:global(.fcv-rtl) .wrapper.password::after {
+    right: auto;
+    left: 20px;
+}
+
+:global(.fcv-rtl) .wrapper.password input {
+    padding-left: 62px;
+    padding-right: 20px;
+}

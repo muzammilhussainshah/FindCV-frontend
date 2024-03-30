@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setBackButtonLink } from '../../app/features/headerUISlice';
@@ -6,6 +7,7 @@ import RequestResetPasswordForm from '../../components/Forms/RequestResetPasswor
 
 function ResetPassword() {
     const dispatch = useDispatch();
+    const { t } = useTranslation();
 
     useEffect(() => {
         dispatch(setBackButtonLink('/login'));
@@ -19,7 +21,7 @@ function ResetPassword() {
     return (
         <SignupLayout>
             <div>
-                <h1>Reset Password</h1>
+                <h1>{t('reset_password.reset_password')}</h1>
                 <RequestResetPasswordForm />
             </div>
         </SignupLayout>

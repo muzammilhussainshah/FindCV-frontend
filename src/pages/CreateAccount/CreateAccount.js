@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setBackButtonLink } from '../../app/features/headerUISlice';
@@ -5,6 +6,7 @@ import SignupLayout from '../../components/Layouts/signupLayout';
 import CreateAccountForm from '../../components/Forms/CreateAccountForm';
 
 function ResetPassword() {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -19,7 +21,7 @@ function ResetPassword() {
     return (
         <SignupLayout>
             <div>
-                <h1>Create Account</h1>
+                <h1>{t('create_account.create_account')}</h1>
                 <CreateAccountForm />
             </div>
         </SignupLayout>

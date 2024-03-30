@@ -4,3 +4,8 @@
     border-radius: 5px;
     background-color: #ffffff20;
 }
+
+:global(.fcv-rtl) .verify_email {
+    text-align: right;
+    direction: rtl;
+}

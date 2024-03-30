@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +13,7 @@ import Button from '../Buttons/Button/Button';
 import { signup } from '../../services/authService';
 
 function CreateAccountForm(props) {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.user);
     const [formLoading, setFormLoading] = useState(false);
@@ -32,9 +34,9 @@ function CreateAccountForm(props) {
             account_type: 'employer'
         },
         validationSchema: Yup.object({
-            email: Yup.string().email('Invalid email address').required('Required'),
-            password: Yup.string().min(8, 'Must be at least 8 characters').required('Required'),
-            password_repeat: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Required')
+            email: Yup.string().email(t('forms.create_account.invalid_email_address')).required(t('forms.create_account.required')),
+            password: Yup.string().min(8, t('forms.create_account.must_be_at_least_8_characters')).required(t('forms.create_account.required')),
+            password_repeat: Yup.string().oneOf([Yup.ref('password'), null], t('forms.create_account.passwords_must_match')).required(t('forms.create_account.required'))
         }),
         onSubmit: async (values) => {
 
@@ -45,16 +47,16 @@ function CreateAccountForm(props) {
             setFormLoading(true);
 
             toast.promise(signup(values.email, values.password, values.account_type), {
-                loading: 'Creating Account...',
-                success: <b>Account created successfully!</b>,
+                loading: t('forms.create_account.creating_account'),
+                success: <b>{t('forms.create_account.account_created_successfully')}</b>,
                 error: (err) => {
                     return <b>{err.response.data.error}</b>;
                 },
             })
             .then((response) => {
                 toast.promise(dispatch(fetchUserByToken(response)), {
-                    loading: 'Logging in...',
-                    success: <b>Successfully logged in</b>,
+                    loading: t('forms.create_account.logging_in'),
+                    success: <b>{t('forms.create_account.successfully_logged_in')}</b>,
                     error: (err) => {
                         return <b>{err.response.data.error}</b>;
                     },
@@ -76,8 +78,8 @@ function CreateAccountForm(props) {
     });
 
     const accountTypeOptions = [
-        { value: 'employer', label: 'Employer' },
-        { value: 'jobseeker', label: 'Job Seeker' }
+        { value: 'employer', label: t('forms.create_account.employer') },
+        { value: 'jobseeker', label: t('forms.create_account.job_seeker') }
     ];
 
     return (
@@ -86,7 +88,7 @@ function CreateAccountForm(props) {
                 <FormField 
                     name="email" 
                     type="email" 
-                    placeholder="Email*" 
+                    placeholder={t('forms.create_account.email')} 
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.email}
@@ -97,7 +99,7 @@ function CreateAccountForm(props) {
                 <FormField 
                     name="password" 
                     type="password" 
-                    placeholder="Password*" 
+                    placeholder={t('forms.create_account.password')}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.password}
@@ -108,7 +110,7 @@ function CreateAccountForm(props) {
                 <FormField 
                     name="password_repeat" 
                     type="password" 
-                    placeholder="Repeat Password*" 
+                    placeholder={t('forms.create_account.repeat_password')}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.password_repeat}
@@ -118,7 +120,7 @@ function CreateAccountForm(props) {
             <div>
                 <FormOptionField
                     name="account_type"
-                    label="Account Type*"
+                    label={t('forms.create_account.account_type')}
                     type="radio"
                     onChange={formik.handleChange}
                     options={accountTypeOptions}
@@ -126,7 +128,7 @@ function CreateAccountForm(props) {
                 />
             </div>
             <Button type="submit" style={{display: 'block', marginTop: 30}}>
-                {formLoading ? 'Please wait...' : 'Proceed'}
+                {formLoading ? t('forms.create_account.please_wait') : t('forms.create_account.proceed')}
             </Button>
         </form>
     );
