@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import SignupLayout from '../../components/Layouts/signupLayout';
 import EmployerWelcomeForm from '../../components/Forms/EmployerWelcomeForm';
+import JobseekerWelcomeFormStep1 from '../../components/Forms/JobseekerWelcomeFormStep1';
 
 import styles from './Welcome.module.css';
 
@@ -22,7 +23,18 @@ function Welcome() {
 
         }
         else {
-            // 
+            
+            if (user.registration_process === '1') {
+                content = <div>
+                    <span className={styles.step}>{t('welcome.step_1')}</span>
+                    <h1>{t('welcome.welcome')}</h1>
+                    <JobseekerWelcomeFormStep1 />
+                </div>;
+            }
+            else {
+                //
+            }
+
         }
 
     }

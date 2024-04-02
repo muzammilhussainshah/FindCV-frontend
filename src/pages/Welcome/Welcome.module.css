@@ -1,3 +1,18 @@
+.step {
+    color: #093559;
+    background-color: #fff;
+    text-transform: uppercase;
+    display: block;
+    width: fit-content;
+    font-size: 12px;
+    line-height: 1.6;
+    letter-spacing: 2px;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 4px 10px;
+    margin-bottom: 15px;
+}
+
 .verify_email {
     padding: 15px;
     text-align: left;
@@ -8,4 +23,10 @@
 :global(.fcv-rtl) .verify_email {
     text-align: right;
     direction: rtl;
+}
+
+:global(.fcv-rtl) .step {
+    direction: rtl;
+    margin-right: 0;
+    margin-left: auto;
 }

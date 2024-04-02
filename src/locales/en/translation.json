@@ -12,7 +12,8 @@
     },
     "welcome": {
         "welcome": "Welcome",
-        "verify_email_message": "Please verify your email. We sent you email with verification link to "
+        "verify_email_message": "Please verify your email. We sent you email with verification link to ",
+        "step_1": "Step 1"
     },
     "forms": {
         "login": {
@@ -67,6 +68,25 @@
             "processing": "Processing...",
             "updating_profile": "Updating Profile...",
             "profile_successfully_updated": "Profile Successfully Updated!"
+        },
+        "welcome_job_seeker": {
+            "step_1": {
+                "required": "Required",
+                "file_size_must_be_less_than_5MB": "File size must be less than 5MB",
+                "unsupported_file_format": "Unsupported File Format",
+                "male": "Male",
+                "female": "Female",
+                "full_name": "Full Name*",
+                "nationality": "Nationality*",
+                "country_of_current_residence": "Country of current residence*",
+                "gender": "Gender*",
+                "birth_date": "Birth Date*",
+                "cv": "CV (recommended)",
+                "reference_letter": "Reference letter (optional)",
+                "profile_picture": "Profile Picture (optional)",
+                "proceed": "Proceed",
+                "please_wait": "Please wait..."
+            }
         }
     },
     "signupHeader": {

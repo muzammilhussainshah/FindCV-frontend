@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import Yup from '../../utils/yupExtensions'; 
 import toast from 'react-hot-toast';
 import { getCode } from 'country-list';
 
@@ -121,7 +121,7 @@ function EmployerWelcomeForm(props) {
             <div>
                 <FormField 
                     name="company_name" 
-                    type="company_name" 
+                    type="text" 
                     placeholder={t('forms.welcome_employer.company_name')} 
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -151,7 +151,7 @@ function EmployerWelcomeForm(props) {
             <div>
                 <FormField 
                     name="name" 
-                    type="name" 
+                    type="text" 
                     placeholder={t('forms.welcome_employer.name')}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -172,7 +172,7 @@ function EmployerWelcomeForm(props) {
             <div>
                 <FormField 
                     name="city" 
-                    type="city" 
+                    type="text" 
                     placeholder={t('forms.welcome_employer.city')}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}

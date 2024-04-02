@@ -5,16 +5,23 @@ import countryList from 'country-list';
 
 import styles from './FormSelectField.module.css';
 
-function FormSelectField({ error, label, type, value, onChange, children, ...props }) {
+function FormSelectField({ error, label, type, value, options, onChange, children, ...props }) {
     const { t } = useTranslation();
     const countries = useMemo(() => countryList.getData(), []);
-    let options = [];
+    let selectOptions = [];
 
     if (type === 'country' || type === 'nationality') {
-        options = countries.map(country => ({
+        selectOptions = countries.map(country => ({
             label: `${t('general.' + type + '.' + country.code)}`,
             value: country.name,
             flag: country.code
+        }));
+    }
+
+    if (type === 'default') {
+        selectOptions = options.map(option => ({
+            label: option.label,
+            value: option.value
         }));
     }
 
@@ -37,6 +44,12 @@ function FormSelectField({ error, label, type, value, onChange, children, ...pro
             );
         }
 
+        if (type === 'default') {
+            return (
+                <div className="default-select">{data.label}</div>
+            );
+        }
+
     }
 
     // Handler to adapt react-select's onChange event to Formik's expectations
@@ -55,8 +68,8 @@ function FormSelectField({ error, label, type, value, onChange, children, ...pro
             <div className={wrapper_class}>
                 <Select
                     classNamePrefix="react-select"
-                    options={options}
-                    value={options.find(option => option.value === value)}
+                    options={selectOptions}
+                    value={selectOptions.find(option => option.value === value)}
                     getOptionLabel={option => (
                         <div>
                             <span>{option.flag ? String.fromCodePoint(...[...option.flag].map(c => 0x1f1a5 + c.charCodeAt())) : ''}</span>

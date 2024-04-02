@@ -12,7 +12,8 @@
     },
     "welcome": {
         "welcome": "مرحباً",
-        "verify_email_message": "يرجى التحقق من البريد الإلكتروني الخاص بك. لقد أرسلنا لك بريدًا إلكترونيًا يحتوي على رابط التحقق إلى "
+        "verify_email_message": "يرجى التحقق من البريد الإلكتروني الخاص بك. لقد أرسلنا لك بريدًا إلكترونيًا يحتوي على رابط التحقق إلى ",
+        "step_1": "الخطوة 1"
     },
     "forms": {
         "login": {
@@ -67,6 +68,25 @@
             "processing": "يعالج...",
             "updating_profile": "جارٍ تحديث الملف الشخصي...",
             "profile_successfully_updated": "تم تحديث الملف الشخصي بنجاح!"
+        },
+        "welcome_job_seeker": {
+            "step_1": {
+                "required": "مطلوب",
+                "file_size_must_be_less_than_5MB": "يجب أن يكون حجم الملف أقل من 5 ميغابايت",
+                "unsupported_file_format": "تنسيق ملف غير معتمد",
+                "male": "ذكر",
+                "female": "أنثى",
+                "full_name": "الاسم الكامل*",
+                "nationality": "جنسية*",
+                "country_of_current_residence": "بلد الإقامة الحالية*",
+                "gender": "جنس*",
+                "birth_date": "تاريخ الميلاد*",
+                "cv": "السيرة الذاتية (مستحسن)",
+                "reference_letter": "خطاب مرجعي (اختياري)",
+                "profile_picture": "صورة الملف الشخصي (اختياري)",
+                "proceed": "يتابع",
+                "please_wait": "انتظر من فضلك..."
+            }
         }
     },
     "signupHeader": {

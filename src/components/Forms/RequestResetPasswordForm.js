@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import Yup from '../../utils/yupExtensions';
 import FormField from '../FormField/FormField';
 import Button from '../Buttons/Button/Button';
 

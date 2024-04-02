@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserByToken } from '../../app/features/userSlice';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import Yup from '../../utils/yupExtensions'; 
 import toast from 'react-hot-toast';
 
 import FormField from '../FormField/FormField';
