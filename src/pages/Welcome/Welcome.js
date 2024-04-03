@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import SignupLayout from '../../components/Layouts/signupLayout';
 import EmployerWelcomeForm from '../../components/Forms/EmployerWelcomeForm';
 import JobseekerWelcomeFormStep1 from '../../components/Forms/JobseekerWelcomeFormStep1';
+import JobseekerWelcomeFormStep2 from '../../components/Forms/JobseekerWelcomeFormStep2';
 
 import styles from './Welcome.module.css';
 
@@ -31,8 +32,12 @@ function Welcome() {
                     <JobseekerWelcomeFormStep1 />
                 </div>;
             }
-            else {
-                //
+            else if (user.registration_process === '2') {
+                content = <div>
+                    <span className={styles.step}>{t('welcome.step_2')}</span>
+                    <h4>{t('forms.welcome_job_seeker.step_2.highlight_your_strong_sides')}</h4>
+                    <JobseekerWelcomeFormStep2 />
+                </div>;
             }
 
         }

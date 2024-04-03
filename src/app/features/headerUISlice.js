@@ -13,6 +13,7 @@ export const headerUISlice = createSlice({
     },
     setShowLogoutButton: (state, action) => {
       state.showLogoutButton = action.payload;
+      state.registrationProcess = false;
     }
   },
   extraReducers: (builder) => {

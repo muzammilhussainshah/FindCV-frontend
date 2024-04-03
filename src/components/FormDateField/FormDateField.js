@@ -32,7 +32,7 @@ function FormDateField({ error, label, value, placeholder, onChange, ...props })
                     scrollableMonthYearDropdown
                     onChange={handleChange}
                     placeholderText={placeholder}
-                    autoComplete={'do-not-autofill'}
+                    autoComplete='do-not-autofill'
                     {...props}
                 />
             </div>

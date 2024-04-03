@@ -13,7 +13,8 @@
     "welcome": {
         "welcome": "Welcome",
         "verify_email_message": "Please verify your email. We sent you email with verification link to ",
-        "step_1": "Step 1"
+        "step_1": "Step 1",
+        "step_2": "Step 2"
     },
     "forms": {
         "login": {
@@ -85,7 +86,12 @@
                 "reference_letter": "Reference letter (optional)",
                 "profile_picture": "Profile Picture (optional)",
                 "proceed": "Proceed",
-                "please_wait": "Please wait..."
+                "please_wait": "Please wait...",
+                "updating_profile": "Updating profile...",
+                "profile_updated": "Profile updated!"
+            },
+            "step_2": {
+                "highlight_your_strong_sides": "Highlight your strong sides"
             }
         }
     },

@@ -8,6 +8,7 @@ import { getCode } from 'country-list';
 
 import { fetchUserByToken } from '../../app/features/userSlice';
 import { updateUser } from '../../services/userService';
+import { formatDateForMySQL } from '../../utils/formatHelpers';
 
 import FormField from '../FormField/FormField';
 import FormFileField from '../FormFileField/FormFileField';
@@ -57,7 +58,7 @@ function JobseekerWelcomeFormStep1(props) {
                 ], t('forms.welcome_job_seeker.step_1.unsupported_file_format')),
             profile_image: Yup.mixed()
                 .fileSize(1024 * 1024 * 5, t('forms.welcome_job_seeker.step_1.file_size_must_be_less_than_5MB'))
-                .fileType(['image/jpeg', 'image/png'], t('forms.welcome_job_seeker.step_1.unsupported_file_format'))
+                .fileType(['image/jpg', 'image/jpeg', 'image/png'], t('forms.welcome_job_seeker.step_1.unsupported_file_format'))
         }),
         onSubmit: values => {
 
@@ -68,26 +69,34 @@ function JobseekerWelcomeFormStep1(props) {
             setFormLoading(true);
 
             const formData = new FormData();
+            formData.append('token', userToken);
             formData.append('full_name', values.full_name);
-            formData.append('nationality', (values.nationality));
+            formData.append('nationality', getCode(values.nationality));
             formData.append('country', getCode(values.country));
             formData.append('gender', values.gender);
-            formData.append('birthdate', values.birthdate);
-            formData.append('cv_file', values.cv_file);
-            formData.append('cv_ref_letter', values.cv_ref_letter);
-            formData.append('profile_image', values.profile_image);
+            formData.append('birth_date', formatDateForMySQL(values.birthdate));
 
-            toast.promise(updateUser(formData, userToken), {
-                loading: 'updateUser',
-                success: <b>updateUser</b>,
+            if (values.cv_file) {
+                formData.append('cv_file', values.cv_file);
+            }
+            if (values.cv_ref_letter) {
+                formData.append('cv_ref_letter', values.cv_ref_letter);
+            }
+            if (values.profile_image) {
+                formData.append('profile_image', values.profile_image);
+            }
+
+            toast.promise(updateUser(formData), {
+                loading: t('forms.welcome_job_seeker.step_1.updating_profile'),
+                success: <b>{t('forms.welcome_job_seeker.step_1.profile_updated')}</b>,
                 error: (err) => {
                     return <b>{err.response.data.error}</b>;
                 },
             })
             .then(() => {
                 toast.promise(dispatch(fetchUserByToken(userToken)), {
-                    loading: 'fetchUserByToken',
-                    success: <b>fetchUserByToken</b>,
+                    loading: t('forms.login.receiving_data'),
+                    success: <b>{t('forms.login.user_verified')}</b>,
                     error: (err) => {
                         return <b>{err.response.data.error}</b>;
                     },
@@ -104,6 +113,7 @@ function JobseekerWelcomeFormStep1(props) {
                 setFormLoading(false);
 
             });
+
         },
     });
 
@@ -195,7 +205,7 @@ function JobseekerWelcomeFormStep1(props) {
                     name="profile_image" 
                     type="file"
                     label={t('forms.welcome_job_seeker.step_1.profile_picture')}
-                    accept="image/jpeg, image/png"
+                    accept="image/jpg, image/jpeg, image/png"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.profile_image}

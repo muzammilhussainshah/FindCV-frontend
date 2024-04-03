@@ -72,14 +72,23 @@ function EmployerWelcomeForm(props) {
                 values.nationality = '';
             }
 
-            if (values.country) {
+            if (values.country !== '') {
                 values.country = getCode(values.country);
             }
-            if (values.nationality) {
+            if (values.nationality !== '') {
                 values.nationality = getCode(values.nationality);
             }
 
-            toast.promise(updateUser(values, userToken), {
+            const formData = new FormData();
+            formData.append('token', userToken);
+            formData.append('name', values.name);
+            formData.append('city', values.city);
+            formData.append('country', values.country);
+            formData.append('nationality', values.nationality);
+            formData.append('company_name', values.company_name);
+            formData.append('employer_status', values.employer_status);
+
+            toast.promise(updateUser(formData), {
                 loading: t('forms.welcome_employer.updating_profile'),
                 success: <b>{t('forms.welcome_employer.profile_successfully_updated')}</b>,
                 error: (err) => {

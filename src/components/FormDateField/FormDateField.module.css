@@ -67,6 +67,7 @@
 
 .field :global(.react-datepicker-popper) {
     width: 100%;
+    z-index: 3;
 }
 
 .field :global(.react-datepicker) {
