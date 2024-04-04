@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import ScreenLoader from '../Loaders/screenLoader';
+import ScreenLoader from '../UI/Loaders/screenLoader';
 
 const ProtectedRoute = ({ children, ...props }) => {
     const [showLoader, setShowLoader] = useState(true);

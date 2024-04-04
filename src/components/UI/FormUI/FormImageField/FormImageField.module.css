@@ -1,0 +1,94 @@
+.field {
+    margin-bottom: 20px;
+}
+
+.field label {
+    text-align: left;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.field input {
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.wrapper {
+    text-align: left;
+    position: relative;
+    color: #093559;
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    border: 3px solid #fff;
+    outline: none;
+}
+
+.wrapper img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    object-fit: cover;
+    object-position: center;
+    z-index: 2;
+}
+
+.wrapper::after {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 50%;
+    margin-top: -20px;
+    left: 50%;
+    margin-left: -20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url('../../../../assets/images/icons/upload-white.svg');
+    pointer-events: none;
+    content: '';
+    z-index: 1;
+}
+
+.wrapper:hover {
+    background-color: #ffffff20;
+}
+
+.wrapper_error {
+    border-color: #C8102E;
+    margin-bottom: 10px;
+}
+
+.error {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    display: block;
+    background-color: #C8102E;
+    color: #fff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 5px 20px 7px 20px;
+}
+
+:global(.fcv-rtl) .field label {
+    text-align: right;
+    direction: rtl;
+}
+
+:global(.fcv-rtl) .wrapper {
+    direction: rtl;
+    margin-left: auto;
+    margin-right: 0;
+}

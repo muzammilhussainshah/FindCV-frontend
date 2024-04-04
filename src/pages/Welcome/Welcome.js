@@ -1,9 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import SignupLayout from '../../components/Layouts/signupLayout';
-import EmployerWelcomeForm from '../../components/Forms/EmployerWelcomeForm';
-import JobseekerWelcomeFormStep1 from '../../components/Forms/JobseekerWelcomeFormStep1';
-import JobseekerWelcomeFormStep2 from '../../components/Forms/JobseekerWelcomeFormStep2';
+import EmployerWelcomeForm from '../../components/Forms/Signup/EmployerWelcomeForm';
+import JobseekerWelcomeFormStep1 from '../../components/Forms/Signup/JobseekerWelcomeFormStep1';
+import JobseekerWelcomeFormStep2 from '../../components/Forms/Signup/JobseekerWelcomeFormStep2';
 
 import styles from './Welcome.module.css';
 

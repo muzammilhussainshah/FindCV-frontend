@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setBackButtonLink } from '../../app/features/headerUISlice';
 import SignupLayout from '../../components/Layouts/signupLayout';
-import CreateAccountForm from '../../components/Forms/CreateAccountForm';
+import CreateAccountForm from '../../components/Forms/Signup/CreateAccountForm';
 
 function ResetPassword() {
     const { t } = useTranslation();

@@ -1,0 +1,45 @@
+.skill {
+    background-color: #fff;
+    position: relative;
+    padding: 6px 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.skill p {
+    font-size: 14px;
+    line-height: 1.3;
+    font-weight: 500;
+    color: #0E2E47;
+}
+
+.skill.removable {
+    padding-right: 35px;
+}
+
+.skill .removeButton {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    margin-top: -10px;
+    right: 5px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url('../../../../../assets/images/icons/close.svg');
+    cursor: pointer;
+}
+
+:global(.fcv-rtl) .skill {
+    text-align: right;
+    padding-left: 35px;
+    padding-right: 15px;
+    direction: rtl;
+}
+
+:global(.fcv-rtl) .skill .removeButton {
+    right: auto;
+    left: 5px;
+}

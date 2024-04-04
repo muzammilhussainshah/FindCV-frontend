@@ -99,7 +99,7 @@
 }
 
 .col:nth-child(2) img {
-    position: absolute;
+    position: fixed;
     object-fit: cover;
     object-position: center;
     height: 100%;

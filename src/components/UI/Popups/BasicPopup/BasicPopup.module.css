@@ -1,0 +1,20 @@
+.popupOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #093559c8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.popup {
+    max-width: 500px;
+    width: 100%;
+    background-color: #EBF9FF;
+    padding: 30px;
+    border-radius: 10px;
+}

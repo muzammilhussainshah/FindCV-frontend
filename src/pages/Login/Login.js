@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
 
 import SignupLayout from '../../components/Layouts/signupLayout';
-import SimpleLink from '../../components/Buttons/SimpleLink/SimpleLink';
-import LoginForm from '../../components/Forms/LoginForm';
+import SimpleLink from '../../components/UI/Buttons/SimpleLink/SimpleLink';
+import LoginForm from '../../components/Forms/Signup/LoginForm';
 
 import styles from './Login.module.css';
 

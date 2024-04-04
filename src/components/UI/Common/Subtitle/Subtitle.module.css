@@ -1,0 +1,28 @@
+.subtitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ffffff40;
+    padding-bottom: 6px;
+    padding-top: 6px;
+    margin-bottom: 20px;
+}
+
+.subtitle h6 {
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    color: #ffffff40;
+}
+
+.subtitle .button {
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.subtitle .button:hover {
+    opacity: 0.8;
+}
+
+:global(.fcv-rtl) .subtitle {
+    direction: rtl;
+}

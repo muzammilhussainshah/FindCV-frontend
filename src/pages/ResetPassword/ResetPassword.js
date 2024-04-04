@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setBackButtonLink } from '../../app/features/headerUISlice';
 import SignupLayout from '../../components/Layouts/signupLayout';
-import RequestResetPasswordForm from '../../components/Forms/RequestResetPasswordForm';
+import RequestResetPasswordForm from '../../components/Forms/Signup/RequestResetPasswordForm';
 
 function ResetPassword() {
     const dispatch = useDispatch();

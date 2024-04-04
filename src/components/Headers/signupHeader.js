@@ -2,8 +2,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import LanguageSwitch from '../LanguageSwitch/LanguageSwitch';
-import BubbleButton from '../Buttons/BubbleButton/BubbleButton';
+import LanguageSwitch from '../UI/LanguageSwitch/LanguageSwitch';
+import BubbleButton from '../UI/Buttons/BubbleButton/BubbleButton';
 import { logoutUser } from '../../app/features/userSlice';
 import { setShowLogoutButton } from '../../app/features/headerUISlice';
 
