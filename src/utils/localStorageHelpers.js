@@ -29,3 +29,34 @@ export const getItemWithExpiration = (key) => {
   
     return item.value;
 };
+
+export const getLanguageLevelText = (level) => {
+  let languageLevelText = '';
+
+  switch (level) {
+    case 1:
+        languageLevelText = 'A1';
+        break;
+    case 2:
+        languageLevelText = 'A2';
+        break;
+    case 3:
+        languageLevelText = 'B1';
+        break;
+    case 4:
+        languageLevelText = 'B2';
+        break;
+    case 5:
+        languageLevelText = 'C1';
+        break;
+    case 6:
+        languageLevelText = 'C2';
+        break;
+    default:
+        languageLevelText = 'B1';
+        break;
+  }
+
+  return languageLevelText;
+
+}

@@ -519,3 +519,41 @@ export const formatLanguageCodeEmoji = (code) => {
 
     return result;
 };
+
+export const getLanguageLevelName = (level) => {
+
+    let result = {
+        'code': '',
+        'name': '',
+        'description': ''
+    };
+
+    switch (level) {
+        case 1:
+            result.code = 'A1';
+            result.name = 'Beginner';
+            break;
+        case 2:
+            result.code = 'A2';
+            result.name = 'Pre-intermediate';
+            break;
+        case 3:
+            result.code = 'B1';
+            result.name = 'Intermediate';
+            break;
+        case 4:
+            result.code = 'B2';
+            result.name = 'Upper-Intermediate';
+            break;
+        case 5:
+            result.code = 'C1';
+            result.name = 'Advanced';
+            break;
+        case 6:
+            result.code = 'C2';
+            result.name = 'Mastery';
+            break;
+    }
+
+    return result;
+}

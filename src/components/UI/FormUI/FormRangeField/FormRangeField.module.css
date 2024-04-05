@@ -1,0 +1,22 @@
+.field {
+    margin-bottom: 20px;
+}
+
+.field :global(.rc-slider-handle) {
+    z-index: auto;
+    background-color: #09AEEF;
+    border-color: #09AEEF;
+    opacity: 1;
+}
+
+.field :global(.rc-slider-rail) {
+    background-color: rgba(9, 174, 239, 0.3);
+}
+
+.field :global(.rc-slider-track) {
+    background-color: #09AEEF;
+}
+
+.field :global(.rc-slider-dot) {
+    border-color: #09AEEF;
+}

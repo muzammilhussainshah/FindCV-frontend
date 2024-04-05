@@ -1,0 +1,32 @@
+.levelText {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.level_1 {
+    color: #ff6b6b;
+}
+
+.level_2 {
+    color: #ffa96c;
+}
+
+.level_3 {
+    color: #ffcf56;
+}
+
+.level_4 {
+    color: #59cd90;
+}
+
+.level_5 {
+    color: #39a78e;
+}
+
+.level_6 {
+    color: #da70d6;
+}

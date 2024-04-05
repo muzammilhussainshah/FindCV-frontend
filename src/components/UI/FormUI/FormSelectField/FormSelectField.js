@@ -10,7 +10,7 @@ import { formatLanguageCodeEmoji } from '../../../../utils/formatHelpers';
 
 import styles from './FormSelectField.module.css';
 
-function FormSelectField({ error, label, type, value, options, onFormikChange, onChange, children, ...props }) {
+function FormSelectField({ hasBorder, error, label, type, value, options, onFormikChange, onChange, children, ...props }) {
     const { t } = useTranslation();
     const countries = useMemo(() => countryList.getData(), []);
     const languages = useMemo(() => languageList().getData(), []);
@@ -36,13 +36,15 @@ function FormSelectField({ error, label, type, value, options, onFormikChange, o
             })
             .map(language => ({
                 label: `${t('general.' + type + '.' + language.code.toUpperCase())}`,
-                value: language.language,
+                // value: language.language,
+                value: language.code,
                 flag: formatLanguageCodeEmoji(language.code.toUpperCase())
             }));
         
         selectOptions.push({
             label: `${t('general.' + type + '.UK')}`,
-            value: 'Ukrainian',
+            // value: 'Ukrainian',
+            value: 'uk',
             flag: formatLanguageCodeEmoji('UK')
         });
 
@@ -60,6 +62,10 @@ function FormSelectField({ error, label, type, value, options, onFormikChange, o
 
     if (error) {
         wrapper_class += ' ' + styles.wrapper_error;
+    }
+
+    if (hasBorder) {
+        wrapper_class += ' ' + styles.hasBorder;
     }
 
     const Input = ({ ...rest }) => <components.Input {...rest} autoComplete={'do-not-autofill'} />;

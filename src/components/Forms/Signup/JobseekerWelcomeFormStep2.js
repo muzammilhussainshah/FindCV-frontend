@@ -21,6 +21,8 @@ import Button from '../../UI/Buttons/Button/Button';
 function JobseekerWelcomeFormStep2(props) {
     const { t } = useTranslation();
     const [formLoading, setFormLoading] = useState(false);
+    const [isOpenLanguagePopup, setIsOpenLanguagePopup] = useState(false);
+    const [isOpenEducationPopup, setIsOpenEducationPopup] = useState(false);
 
     const formik = useFormik({
         initialValues: {
@@ -79,57 +81,84 @@ function JobseekerWelcomeFormStep2(props) {
         formik.setFieldValue(field, filteredField);
     }
 
+    const handlePopupClose = (popupName) => {
+        if (popupName === 'language') {
+            setIsOpenLanguagePopup(false);
+        } else if (popupName === 'education') {
+            setIsOpenEducationPopup(false);
+        }
+    }
+
+    const handlePopupOpen = (popupName) => {
+        if (popupName === 'language') {
+            setIsOpenLanguagePopup(true);
+        } else if (popupName === 'education') {
+            setIsOpenEducationPopup(true);
+        }
+    }
+
+    const handleAddLanguage = (values) => {
+        formik.setFieldValue('languages', [...formik.values.languages, { id: formik.values.languages.length + 1, ...values }]);
+        setIsOpenLanguagePopup(false);
+    }
+
     return (
-        <form onSubmit={formik.handleSubmit} {...props}>
-            <div style={{marginBottom: 20}}>
-                <Subtitle 
-                    hasButton 
-                    buttonText={t('general.UI.add')}
-                    buttonOnClick={() => alert('Add language')}
-                >
-                    {t('general.UI.languages')}
-                </Subtitle>
-                <LanguageLevelList languages={formik.values.languages} onRemove={handleOptionRemove} />
-                <BasicPopup isOpen>
-                    <LanguageForm />
-                </BasicPopup>
-            </div>
-            <div style={{marginBottom: 20}}>
-                <Subtitle 
-                    hasButton 
-                    buttonText={t('general.UI.add')}
-                    buttonOnClick={() => alert('Add Work Experience')}
-                >
-                    {t('general.UI.work_experience')}
-                </Subtitle>
-                <WorkExperienceList experience={formik.values.workExperience} onRemove={handleOptionRemove} />
-            </div>
-            <div style={{marginBottom: 20}}>
-                <Subtitle 
-                    hasButton 
-                    buttonText={t('general.UI.add')}
-                    buttonOnClick={() => alert('Add Education')}
-                >
-                    {t('general.UI.education')}
-                </Subtitle>
-                <EducationList education={formik.values.education} onRemove={handleOptionRemove} />
-            </div>
-            <div style={{marginBottom: 20}}>
-                <Subtitle 
-                    hasButton 
-                    buttonText={t('general.UI.add')}
-                    buttonOnClick={() => alert('Add Skills')}
-                >
-                    {t('general.UI.skills')}
-                </Subtitle>
-                <SkillsList skills={formik.values.skills} onRemove={handleOptionRemove} />
-            </div>
-            <div>
-                <Button type="submit" style={{display: 'block'}}>
-                    {formLoading ? t('general.UI.please_wait') : t('general.UI.proceed')}
-                </Button>
-            </div>
-        </form>
+        <>
+            <form onSubmit={formik.handleSubmit} {...props}>
+                <div style={{marginBottom: 20}}>
+                    <Subtitle 
+                        hasButton 
+                        buttonText={t('general.UI.add')}
+                        buttonOnClick={() => handlePopupOpen('language')}
+                    >
+                        {t('general.UI.languages')}
+                    </Subtitle>
+                    <LanguageLevelList languages={formik.values.languages} onRemove={handleOptionRemove} />
+                </div>
+                <div style={{marginBottom: 20}}>
+                    <Subtitle 
+                        hasButton 
+                        buttonText={t('general.UI.add')}
+                        buttonOnClick={() => alert('Add Work Experience')}
+                    >
+                        {t('general.UI.work_experience')}
+                    </Subtitle>
+                    <WorkExperienceList experience={formik.values.workExperience} onRemove={handleOptionRemove} />
+                </div>
+                <div style={{marginBottom: 20}}>
+                    <Subtitle 
+                        hasButton 
+                        buttonText={t('general.UI.add')}
+                        buttonOnClick={() => alert('Add Education')}
+                    >
+                        {t('general.UI.education')}
+                    </Subtitle>
+                    <EducationList education={formik.values.education} onRemove={handleOptionRemove} />
+                </div>
+                <div style={{marginBottom: 20}}>
+                    <Subtitle 
+                        hasButton 
+                        buttonText={t('general.UI.add')}
+                        buttonOnClick={() => alert('Add Skills')}
+                    >
+                        {t('general.UI.skills')}
+                    </Subtitle>
+                    <SkillsList skills={formik.values.skills} onRemove={handleOptionRemove} />
+                </div>
+                <div>
+                    <Button type="submit" style={{display: 'block'}}>
+                        {formLoading ? t('general.UI.please_wait') : t('general.UI.proceed')}
+                    </Button>
+                </div>
+            </form>
+
+            <BasicPopup 
+                isOpen={isOpenLanguagePopup}
+                closePopup={() => handlePopupClose('language')}
+            >
+                <LanguageForm onSubmit={handleAddLanguage} />
+            </BasicPopup>
+        </>
     );
 }
 
