@@ -1,59 +1,69 @@
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { useFormik } from 'formik';
+import Yup from '../../../../utils/yupExtensions';
 
 import FormSelectField from '../../../UI/FormUI/FormSelectField/FormSelectField';
 import FormRangeField from '../../../UI/FormUI/FormRangeField/FormRangeField';
 import Button from '../../../UI/Buttons/Button/Button';
 
-import { getLanguageLevelName } from '../../../../utils/formatHelpers';
+import { getLanguageLevelCode } from '../../../../utils/formatHelpers';
 
 import styles from './LanguageForm.module.css';
 
 function LanguageForm({ onSubmit, ...props }) {
-    const [language, setLanguage] = useState('');
-    const [languageLevel, setLanguageLevel] = useState(3);
+    const { t } = useTranslation();
+    const tDirection = useSelector((state) => state.translation.textDirection);
 
-    let languageLevelName = getLanguageLevelName(languageLevel);
-    let languageLevelClass = styles['level_' + languageLevel];
+    const formik = useFormik({
+        initialValues: {
+            language: '',
+            languageLevel: 3
+        },
+        validationSchema: Yup.object({
+            language: Yup.string().required(t('forms.language.required'))
+        }),
+        onSubmit: values => {
+            onSubmit({ 
+                languageCode: values.language.toUpperCase(),
+                level: values.languageLevel 
+            });
+        },
+    });
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        onSubmit({ 
-            languageCode: language.toUpperCase(),
-            level: languageLevel 
-        });
-    }
-
-    // REDO WITH FORMIK
+    let languageRangeReverse = tDirection === 'ltr' ? false : true;
+    let languageLevelCode = getLanguageLevelCode(formik.values.languageLevel);
+    let languageLevelClass = styles['level_' + formik.values.languageLevel];
 
     return (
-        <form onSubmit={handleSubmit} {...props}>
+        <form onSubmit={formik.handleSubmit} {...props}>
             <div>
                 <FormSelectField 
-                    name="add_languages" 
+                    name="language" 
                     type="language" 
-                    placeholder="Select language"
+                    placeholder={t('forms.language.select_language')}
                     hasBorder
-                    required
-                    onChange={(e) => setLanguage(e)}
-                    value={language}
+                    onFormikChange={formik.handleChange}
+                    value={formik.values.language}
+                    error={formik.touched.language && formik.errors.language}
                 />
             </div>
             <div>
                 <FormRangeField 
+                    name="languageLevel" 
                     min={1}
                     max={6}
-                    value={languageLevel}
-                    onChange={(e) => setLanguageLevel(e)}
+                    value={formik.values.languageLevel}
+                    onFormikChange={formik.handleChange}
                     dots
+                    reverse={languageRangeReverse}
                 />
             </div>
             <div>
-                <p className={styles.levelText}>Language proficiency level: <span className={languageLevelClass}>{languageLevelName.name} ({languageLevelName.code})</span></p>
+                <p className={styles.levelText}>{t('forms.language.language_proficiency_level')} <span className={languageLevelClass}>{t('forms.language.' + languageLevelCode)} ({languageLevelCode})</span></p>
             </div>
             <div>
-                <Button type="submit">Add</Button>
+                <Button type="submit" className={styles.button}>{t('forms.language.add')}</Button>
             </div>
         </form>
     );

@@ -105,3 +105,8 @@
 :global(.fcv-rtl) .WorkExperience .body {
     text-align: right;
 }
+
+:global(.fcv-rtl) .WorkExperience .bottom p img {
+    margin-right: 0;
+    margin-left: 5px;
+}

@@ -109,13 +109,15 @@
     position: relative;
 }
 
-.wrapper_error :global(.react-select__control){
+.wrapper_error :global(.react-select__control),
+.field .wrapper_error.hasBorder :global(.react-select__control) {
     border-color: #C8102E !important;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
 
 .error {
+    text-align: center;
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 700;

@@ -30,3 +30,13 @@
 .level_6 {
     color: #da70d6;
 }
+
+:global(.fcv-rtl) .levelText {
+    direction: rtl;
+}
+
+:global(.fcv-rtl) .button {
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+}

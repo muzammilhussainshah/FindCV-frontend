@@ -1,6 +1,6 @@
 import styles from './FormField.module.css';
 
-function FormField({ error, label, children, ...props }) {
+function FormField({ error, label, hasBorder, children, ...props }) {
 
     let wrapper_class = styles.wrapper;
 
@@ -10,6 +10,10 @@ function FormField({ error, label, children, ...props }) {
 
     if (props.type === 'password') {
         wrapper_class += ' ' + styles.password;
+    }
+
+    if (hasBorder) {
+        wrapper_class += ' ' + styles.hasBorder;
     }
 
     return (

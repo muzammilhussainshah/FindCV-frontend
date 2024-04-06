@@ -93,6 +93,27 @@
             "step_2": {
                 "highlight_your_strong_sides": "أبرز جوانبك القوية"
             }
+        },
+        "language": {
+            "add": "يضيف",
+            "select_language": "اختار اللغة",
+            "language_proficiency_level": "مستوى إتقان اللغة:",
+            "required": "مطلوب",
+            "A1": "مبتدئ",
+            "A2": "ما قبل المتوسط",
+            "B1": "متوسط",
+            "B2": "وسيط ذو مستوي رفيع",
+            "C1": "متقدم",
+            "C2": "تمكن"
+        },
+        "workExperience": {
+            "add": "يضيف",
+            "required": "مطلوب",
+            "working_position": "موقف العمل*",
+            "company_name_optional": "اسم الشركة (اختياري)",
+            "select_country": "حدد الدولة*",
+            "start_date": "تاريخ البدء*",
+            "end_date": "تاريخ الانتهاء*"
         }
     },
     "signupHeader": {

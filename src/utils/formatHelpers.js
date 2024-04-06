@@ -514,46 +514,40 @@ export const formatLanguageCodeEmoji = (code) => {
             break;
         case 'ZU':
             result = 'ZA'; // Zulu is one of the official languages of South Africa
-            break;        
+            break;   
+        default:
+            result = false;
     }
 
     return result;
 };
 
-export const getLanguageLevelName = (level) => {
+export const getLanguageLevelCode = (level) => {
 
-    let result = {
-        'code': '',
-        'name': '',
-        'description': ''
-    };
+    let code = '';
 
     switch (level) {
         case 1:
-            result.code = 'A1';
-            result.name = 'Beginner';
+            code = 'A1';
             break;
         case 2:
-            result.code = 'A2';
-            result.name = 'Pre-intermediate';
+            code = 'A2';
             break;
         case 3:
-            result.code = 'B1';
-            result.name = 'Intermediate';
+            code = 'B1';
             break;
         case 4:
-            result.code = 'B2';
-            result.name = 'Upper-Intermediate';
+            code = 'B2';
             break;
         case 5:
-            result.code = 'C1';
-            result.name = 'Advanced';
+            code = 'C1';
             break;
         case 6:
-            result.code = 'C2';
-            result.name = 'Mastery';
+            code = 'C2';
             break;
+        default:
+            code = 'A1';
     }
 
-    return result;
+    return code;
 }

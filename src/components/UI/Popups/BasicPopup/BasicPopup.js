@@ -1,7 +1,10 @@
+import { useSelector } from 'react-redux';
+
 import ReactDOM from 'react-dom';
 import styles from './BasicPopup.module.css';
 
 function BasicPopup({ isOpen, closePopup, children, ...props }) {
+    const tDirection = useSelector((state) => state.translation.textDirection);
 
     if (!isOpen) {
         return null;
@@ -16,7 +19,7 @@ function BasicPopup({ isOpen, closePopup, children, ...props }) {
     }
 
     return ReactDOM.createPortal(
-        <div className={styles.popupOverlay} onClick={handlePopupClose}>
+        <div className={`${styles.popupOverlay} fcv-${tDirection}`} onMouseDown={handlePopupClose} onTouchEnd={handlePopupClose}>
             <div className={styles.popup}>
                 {children}
             </div>

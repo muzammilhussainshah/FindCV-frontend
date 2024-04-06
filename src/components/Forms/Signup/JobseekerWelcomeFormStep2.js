@@ -10,6 +10,7 @@ import Yup from '../../../utils/yupExtensions';
 
 import BasicPopup from '../../UI/Popups/BasicPopup/BasicPopup';
 import LanguageForm from '../Common/LanguageForm/LanguageForm';
+import WorkExperienceForm from '../Common/WorkExperienceForm/WorkExperienceForm';
 
 import LanguageLevelList from '../../UI/Common/LanguageLevel/LanguageLevelList/LanguageLevelList';
 import WorkExperienceList from '../../UI/Common/WorkExperience/WorkExperienceList/WorkExperienceList';
@@ -22,27 +23,12 @@ function JobseekerWelcomeFormStep2(props) {
     const { t } = useTranslation();
     const [formLoading, setFormLoading] = useState(false);
     const [isOpenLanguagePopup, setIsOpenLanguagePopup] = useState(false);
-    const [isOpenEducationPopup, setIsOpenEducationPopup] = useState(false);
+    const [isOpenWorkExperiencePopup, setIsOpenWorkExperiencePopup] = useState(false);
 
     const formik = useFormik({
         initialValues: {
-            languages: [
-                // {
-                //     id: 1,
-                //     languageCode: 'GB',
-                //     level: 3
-                // }
-            ],
-            workExperience: [
-                // {
-                //     id: 1,
-                //     country: 'SN',
-                //     company: 'Amazon',
-                //     position: 'Construction Worker',
-                //     startDate: '2020',
-                //     endDate: '2023'
-                // }
-            ],
+            languages: [],
+            workExperience: [],
             education: [
                 // {
                 //     id: 1,
@@ -84,22 +70,34 @@ function JobseekerWelcomeFormStep2(props) {
     const handlePopupClose = (popupName) => {
         if (popupName === 'language') {
             setIsOpenLanguagePopup(false);
-        } else if (popupName === 'education') {
-            setIsOpenEducationPopup(false);
+        } else if (popupName === 'workExperience') {
+            setIsOpenWorkExperiencePopup(false);
         }
     }
 
     const handlePopupOpen = (popupName) => {
         if (popupName === 'language') {
             setIsOpenLanguagePopup(true);
-        } else if (popupName === 'education') {
-            setIsOpenEducationPopup(true);
+        } else if (popupName === 'workExperience') {
+            setIsOpenWorkExperiencePopup(true);
         }
     }
 
     const handleAddLanguage = (values) => {
-        formik.setFieldValue('languages', [...formik.values.languages, { id: formik.values.languages.length + 1, ...values }]);
-        setIsOpenLanguagePopup(false);
+
+        // check if language already exists
+        const languageExists = formik.values.languages.find((language) => language.languageCode === values.languageCode);
+
+        if (!languageExists) {
+            formik.setFieldValue('languages', [...formik.values.languages, { id: Date.now(), ...values }]);
+            handlePopupClose('language');
+        }
+
+    }
+
+    const handleAddWorkExperience = (values) => {
+        formik.setFieldValue('workExperience', [...formik.values.workExperience, { id: Date.now(), ...values }]);
+        handlePopupClose('workExperience');
     }
 
     return (
@@ -119,7 +117,7 @@ function JobseekerWelcomeFormStep2(props) {
                     <Subtitle 
                         hasButton 
                         buttonText={t('general.UI.add')}
-                        buttonOnClick={() => alert('Add Work Experience')}
+                        buttonOnClick={() => handlePopupOpen('workExperience')}
                     >
                         {t('general.UI.work_experience')}
                     </Subtitle>
@@ -152,12 +150,22 @@ function JobseekerWelcomeFormStep2(props) {
                 </div>
             </form>
 
-            <BasicPopup 
-                isOpen={isOpenLanguagePopup}
-                closePopup={() => handlePopupClose('language')}
-            >
-                <LanguageForm onSubmit={handleAddLanguage} />
-            </BasicPopup>
+            {isOpenLanguagePopup && 
+                <BasicPopup 
+                    isOpen={isOpenLanguagePopup}
+                    closePopup={() => handlePopupClose('language')}
+                >
+                    <LanguageForm onSubmit={handleAddLanguage} />
+                </BasicPopup>
+            }
+            {isOpenWorkExperiencePopup && 
+                <BasicPopup 
+                    isOpen={isOpenWorkExperiencePopup}
+                    closePopup={() => handlePopupClose('workExperience')}
+                >
+                    <WorkExperienceForm onSubmit={handleAddWorkExperience} />
+                </BasicPopup>
+            }
         </>
     );
 }

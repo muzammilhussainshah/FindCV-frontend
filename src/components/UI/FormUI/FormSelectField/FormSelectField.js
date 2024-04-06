@@ -19,7 +19,7 @@ function FormSelectField({ hasBorder, error, label, type, value, options, onForm
     if (type === 'country' || type === 'nationality') {
         selectOptions = countries.map(country => ({
                 label: `${t('general.' + type + '.' + country.code)}`,
-                value: country.name,
+                value: country.code,
                 flag: country.code
             }));
     }
@@ -36,14 +36,12 @@ function FormSelectField({ hasBorder, error, label, type, value, options, onForm
             })
             .map(language => ({
                 label: `${t('general.' + type + '.' + language.code.toUpperCase())}`,
-                // value: language.language,
                 value: language.code,
                 flag: formatLanguageCodeEmoji(language.code.toUpperCase())
             }));
         
         selectOptions.push({
             label: `${t('general.' + type + '.UK')}`,
-            // value: 'Ukrainian',
             value: 'uk',
             flag: formatLanguageCodeEmoji('UK')
         });
@@ -109,7 +107,12 @@ function FormSelectField({ hasBorder, error, label, type, value, options, onForm
             onChange(selectedOption ? selectedOption.value : '');
         }
 
-    };
+    }
+
+    const filterByLabel = (option, inputValue) => {
+        return option.data.label.toLowerCase().includes(inputValue.toLowerCase());
+    }
+      
 
     return (
         <div className={styles.field}>
@@ -119,6 +122,7 @@ function FormSelectField({ hasBorder, error, label, type, value, options, onForm
                     classNamePrefix="react-select"
                     options={selectOptions}
                     value={selectOptions.find(option => option.value === value)}
+                    filterOption={filterByLabel}
                     getOptionLabel={option => (
                         <div>
                             <Flag 

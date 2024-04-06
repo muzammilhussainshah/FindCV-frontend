@@ -93,6 +93,27 @@
             "step_2": {
                 "highlight_your_strong_sides": "Highlight your strong sides"
             }
+        },
+        "language": {
+            "add": "Add",
+            "select_language": "Select Language",
+            "language_proficiency_level": "Language Proficiency Level:",
+            "required": "Required",
+            "A1": "Beginner",
+            "A2": "Pre-intermediate",
+            "B1": "Intermediate",
+            "B2": "Upper-Intermediate",
+            "C1": "Advanced",
+            "C2": "Mastery"
+        },
+        "workExperience": {
+            "add": "Add",
+            "required": "Required",
+            "working_position": "Working Position*",
+            "company_name_optional": "Company Name (optional)",
+            "select_country": "Select Country*",
+            "start_date": "Start Date*",
+            "end_date": "End Date*"
         }
     },
     "signupHeader": {
