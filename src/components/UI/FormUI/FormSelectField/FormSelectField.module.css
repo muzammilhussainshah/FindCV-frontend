@@ -51,12 +51,16 @@
     display: none;
 }
 
-.field :global(.react-select__indicator) {
+.field :global(.react-select__clear-indicator) path {
+    fill: #C8102E;
+}
+
+.field :global(.react-select__dropdown-indicator) {
     transition: all 0.3s ease;
     transform: rotate(0deg);
 }
 
-.field :global(.react-select__control--menu-is-open .react-select__indicator) {
+.field :global(.react-select__control--menu-is-open .react-select__dropdown-indicator) {
     transform: rotate(180deg);
 }
 
@@ -102,6 +106,30 @@
 }
 
 .field :global(.react-select__option--is-selected) div {
+    color: #fff;
+}
+
+.field :global(.react-select__multi-value) {
+    background-color: #093559;
+}
+
+.field :global(.react-select__multi-value__label) div {
+    padding-right: 5px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.field :global(.react-select__multi-value__remove) {
+    background-color: #C8102E;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.field :global(.react-select__multi-value__remove):hover {
+    background-color: #e04862;
+}
+
+.field :global(.react-select__multi-value__remove) path {
     color: #fff;
 }
 

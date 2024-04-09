@@ -39,6 +39,11 @@
     overflow: hidden;
 }
 
+.wrapper.hasBorder {
+    border-width: 2px;
+    border-color: #093559;
+}
+
 .wrapper span {
 }
 
@@ -73,8 +78,13 @@
     border-bottom-right-radius: 0;
 }
 
+.wrapper_error.hasBorder {
+    border-color: #C8102E;
+}
+
 .error {
     text-transform: uppercase;
+    text-align: center;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.5px;

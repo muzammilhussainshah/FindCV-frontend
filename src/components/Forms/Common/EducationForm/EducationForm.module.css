@@ -1,0 +1,5 @@
+:global(.fcv-rtl) .button {
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+}

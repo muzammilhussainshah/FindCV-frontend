@@ -1,6 +1,6 @@
 import styles from './EducationBlock.module.css';
 
-function EducationBlock({ institution, startDate, endDate, onRemove, ...props }) {
+function EducationBlock({ institution, startDate, endDate, diploma, onRemove, ...props }) {
 
     let elementClasses = [styles.education];
 
@@ -15,7 +15,7 @@ function EducationBlock({ institution, startDate, endDate, onRemove, ...props })
                 <span>{startDate} - {endDate}</span>
             </p>
             <div className={styles.bottom}>
-                <p>myDiploma.pdf</p>
+                <p>{diploma.name}</p>
             </div>
             {onRemove && <span onClick={() => onRemove('education', props.id)} className={styles.removeButton}></span>}
         </div>

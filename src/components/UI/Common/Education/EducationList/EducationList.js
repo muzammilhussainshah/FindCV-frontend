@@ -11,6 +11,7 @@ function EducationList({ children, education, onRemove, ...props }) {
                     institution={single.institution}
                     startDate={single.startDate}
                     endDate={single.endDate}
+                    diploma={single.diploma}
                     onRemove={onRemove}
                 />
             ))}

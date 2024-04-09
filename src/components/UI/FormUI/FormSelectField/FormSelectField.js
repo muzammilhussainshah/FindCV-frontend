@@ -104,7 +104,14 @@ function FormSelectField({ hasBorder, error, label, type, value, options, onForm
             });
         }
         else if (onChange) {
-            onChange(selectedOption ? selectedOption.value : '');
+
+            if (Array.isArray(selectedOption)) {
+                onChange(selectedOption.map(option => option.value));
+            }
+            else {
+                onChange(selectedOption ? selectedOption.value : '');
+            }
+
         }
 
     }
@@ -125,12 +132,14 @@ function FormSelectField({ hasBorder, error, label, type, value, options, onForm
                     filterOption={filterByLabel}
                     getOptionLabel={option => (
                         <div>
-                            <Flag 
-                                name={option.flag}
-                                format="svg"
-                                shiny={false}
-                                basePath="/vendor/flags"
-                            />
+                            {option.flag && 
+                                <Flag 
+                                    name={option.flag}
+                                    format="svg"
+                                    shiny={false}
+                                    basePath="/vendor/flags"
+                                />
+                            }
                             {` ${option.label}`}
                         </div>
                     )}

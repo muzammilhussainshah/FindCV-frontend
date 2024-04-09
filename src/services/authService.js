@@ -7,7 +7,7 @@ export const signup = async (email, password, account_type) => {
         const response = await axios.post(`${process.env.REACT_APP_API_URL}auth/signup`, { email, password, account_type });
         if (response.data) {
             // save token
-            setItemWithExpiration('findcv_user', response.data.token, 3600000); // 1 hour
+            setItemWithExpiration('findcv_user', response.data.token, 3600000 * 24); // 1 hour
         }
         return response.data.token;
     } catch (error) {
@@ -30,7 +30,7 @@ export const login = async (email, password) => {
         const response = await axios.post(`${process.env.REACT_APP_API_URL}auth/login`, { email, password });
         if (response.data) {
             // save token
-            setItemWithExpiration('findcv_user', response.data.token, 3600000); // 1 hour
+            setItemWithExpiration('findcv_user', response.data.token, 3600000 * 24); // 1 hour
         }
         return response.data.token;
     } catch (error) {

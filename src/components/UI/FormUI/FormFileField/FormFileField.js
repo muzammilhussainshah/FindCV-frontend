@@ -1,6 +1,6 @@
 import styles from './FormFileField.module.css';
 
-function FormFileField({ error, label, value, onChange, children, ...props }) {
+function FormFileField({ error, label, value, onChange, hasBorder, children, ...props }) {
     let placeholder = props.placeholder;
     let wrapper_class = styles.wrapper;
 
@@ -10,6 +10,10 @@ function FormFileField({ error, label, value, onChange, children, ...props }) {
 
     if (error) {
         wrapper_class += ' ' + styles.wrapper_error;
+    }
+
+    if (hasBorder) {
+        wrapper_class += ' ' + styles.hasBorder;
     }
 
     const handleChange = (e) => {

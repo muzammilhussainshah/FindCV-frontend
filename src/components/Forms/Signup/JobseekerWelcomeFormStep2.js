@@ -1,16 +1,17 @@
 import { useState } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-import Yup from '../../../utils/yupExtensions';
-// import toast from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
-// import { fetchUserByToken } from '../../app/features/userSlice';
-// import { updateUser } from '../../services/userService';
+import { fetchUserByToken } from '../../../app/features/userSlice';
+import { updateUser } from '../../../services/userService';
 
 import BasicPopup from '../../UI/Popups/BasicPopup/BasicPopup';
 import LanguageForm from '../Common/LanguageForm/LanguageForm';
 import WorkExperienceForm from '../Common/WorkExperienceForm/WorkExperienceForm';
+import EducationForm from '../Common/EducationForm/EducationForm';
+import SkillsForm from '../Common/SkillsForm/SkillsForm';
 
 import LanguageLevelList from '../../UI/Common/LanguageLevel/LanguageLevelList/LanguageLevelList';
 import WorkExperienceList from '../../UI/Common/WorkExperience/WorkExperienceList/WorkExperienceList';
@@ -21,32 +22,22 @@ import Button from '../../UI/Buttons/Button/Button';
 
 function JobseekerWelcomeFormStep2(props) {
     const { t } = useTranslation();
+    const dispatch = useDispatch();
+    const userToken = useSelector(state => state.user.token);
+
     const [formLoading, setFormLoading] = useState(false);
     const [isOpenLanguagePopup, setIsOpenLanguagePopup] = useState(false);
     const [isOpenWorkExperiencePopup, setIsOpenWorkExperiencePopup] = useState(false);
+    const [isOpenEducationPopup, setIsOpenEducationPopup] = useState(false);
+    const [isOpenSkillsPopup, setIsOpenSkillsPopup] = useState(false);
 
     const formik = useFormik({
         initialValues: {
             languages: [],
             workExperience: [],
-            education: [
-                // {
-                //     id: 1,
-                //     institution: 'Harvard University',
-                //     startDate: '2018',
-                //     endDate: '2020',
-                // }
-            ],
-            skills: [
-                // {
-                //     id: 1,
-                //     name: 'Works well under pressure',
-                // }
-            ]
+            education: [],
+            skills: []
         },
-        validationSchema: Yup.object({
-            // full_name: Yup.string().required(t('forms.welcome_job_seeker.step_1.required'))
-        }),
         onSubmit: values => {
 
             if (formLoading) {
@@ -55,9 +46,63 @@ function JobseekerWelcomeFormStep2(props) {
 
             setFormLoading(true);
 
-            alert(JSON.stringify(values, null, 2));
+            const formData = new FormData();
+            formData.append('token', userToken);
 
-            // setFormLoading(false);
+            // languages
+            if (values.languages.length > 0) {
+                values.languages.forEach((language, index) => {
+                    formData.append(`languages[${index}][languageCode]`, language.languageCode);
+                    formData.append(`languages[${index}][level]`, language.level);
+                });
+            }
+            else {
+                formData.append('languages', '');
+            }
+
+            // work experience
+            if (values.workExperience.length > 0) {
+                values.workExperience.forEach((experience, index) => {
+                    formData.append(`workExperience[${index}][position]`, experience.position);
+                    formData.append(`workExperience[${index}][country]`, experience.country);
+                    formData.append(`workExperience[${index}][company]`, experience.company);
+                    formData.append(`workExperience[${index}][start]`, experience.start);
+                    formData.append(`workExperience[${index}][end]`, experience.end);
+                });
+            }
+            else {
+                formData.append('workExperience', '');
+            }
+
+            toast.promise(updateUser(formData), {
+                loading: "updateUser",
+                success: <b>updateUser</b>,
+                error: (err) => {
+                    return <b>{err.response.data.error}</b>;
+                },
+            })
+            // .then(() => {
+            //     toast.promise(dispatch(fetchUserByToken(userToken)), {
+            //         loading: "fetchUserByToken",
+            //         success: <b>fetchUserByToken</b>,
+            //         error: (err) => {
+            //             return <b>{err.response.data.error}</b>;
+            //         },
+            //     });
+            // })
+            .catch((error) => {
+                
+                if (error.response.data.field) {
+                    formik.setErrors({
+                        [error.response.data.field]: error.response.data.error
+                    });
+                }
+
+                setFormLoading(false);
+
+            });
+
+            setFormLoading(false);
 
         },
     });
@@ -72,6 +117,10 @@ function JobseekerWelcomeFormStep2(props) {
             setIsOpenLanguagePopup(false);
         } else if (popupName === 'workExperience') {
             setIsOpenWorkExperiencePopup(false);
+        } else if (popupName === 'education') {
+            setIsOpenEducationPopup(false);
+        } else if (popupName === 'skills') {
+            setIsOpenSkillsPopup(false);
         }
     }
 
@@ -80,6 +129,10 @@ function JobseekerWelcomeFormStep2(props) {
             setIsOpenLanguagePopup(true);
         } else if (popupName === 'workExperience') {
             setIsOpenWorkExperiencePopup(true);
+        } else if (popupName === 'education') {
+            setIsOpenEducationPopup(true);
+        } else if (popupName === 'skills') {
+            setIsOpenSkillsPopup(true);
         }
     }
 
@@ -98,6 +151,22 @@ function JobseekerWelcomeFormStep2(props) {
     const handleAddWorkExperience = (values) => {
         formik.setFieldValue('workExperience', [...formik.values.workExperience, { id: Date.now(), ...values }]);
         handlePopupClose('workExperience');
+    }
+
+    const handleAddEducation = (values) => {
+        formik.setFieldValue('education', [...formik.values.education, { id: Date.now(), ...values }]);
+        handlePopupClose('education');
+    }
+
+    const handleAddSkills = (values) => {
+        formik.setFieldValue('skills', [...formik.values.skills, ...values.skills.map((skill) => {
+            return {
+                id: Date.now() + '-' + skill,
+                code: skill,
+                name: t('general.skill.' + skill)
+            }
+        })]);
+        handlePopupClose('skills');
     }
 
     return (
@@ -127,7 +196,7 @@ function JobseekerWelcomeFormStep2(props) {
                     <Subtitle 
                         hasButton 
                         buttonText={t('general.UI.add')}
-                        buttonOnClick={() => alert('Add Education')}
+                        buttonOnClick={() => handlePopupOpen('education')}
                     >
                         {t('general.UI.education')}
                     </Subtitle>
@@ -137,7 +206,7 @@ function JobseekerWelcomeFormStep2(props) {
                     <Subtitle 
                         hasButton 
                         buttonText={t('general.UI.add')}
-                        buttonOnClick={() => alert('Add Skills')}
+                        buttonOnClick={() => handlePopupOpen('skills')}
                     >
                         {t('general.UI.skills')}
                     </Subtitle>
@@ -164,6 +233,22 @@ function JobseekerWelcomeFormStep2(props) {
                     closePopup={() => handlePopupClose('workExperience')}
                 >
                     <WorkExperienceForm onSubmit={handleAddWorkExperience} />
+                </BasicPopup>
+            }
+            {isOpenEducationPopup && 
+                <BasicPopup 
+                    isOpen={isOpenEducationPopup}
+                    closePopup={() => handlePopupClose('education')}
+                >
+                    <EducationForm onSubmit={handleAddEducation} />
+                </BasicPopup>
+            }
+            {isOpenSkillsPopup && 
+                <BasicPopup 
+                    isOpen={isOpenSkillsPopup}
+                    closePopup={() => handlePopupClose('skills')}
+                >
+                    <SkillsForm onSubmit={handleAddSkills} excludeSkills={formik.values.skills.map(option => option.code)} />
                 </BasicPopup>
             }
         </>
