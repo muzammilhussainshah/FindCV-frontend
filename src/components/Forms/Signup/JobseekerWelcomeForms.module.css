@@ -1,0 +1,28 @@
+.logic_test {}
+
+.logic_test_info {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 9px 15px;
+    margin-bottom: 30px;
+}
+
+.logic_test_info span:nth-child(1) {
+    color: #093559;
+}
+
+.logic_test_info span:nth-child(2) {
+    color: #0464B2;
+}
+
+.logic_test_buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logic_test_buttons button {
+    width: calc(50% - 10px);
+}

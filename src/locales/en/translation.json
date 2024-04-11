@@ -91,7 +91,9 @@
                 "profile_updated": "Profile updated!"
             },
             "step_2": {
-                "highlight_your_strong_sides": "Highlight your strong sides"
+                "highlight_your_strong_sides": "Highlight your strong sides",
+                "updating_profile": "Updating profile...",
+                "profile_updated": "Profile updated!"
             }
         },
         "language": {

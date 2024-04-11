@@ -70,6 +70,7 @@ function JobseekerWelcomeFormStep1(props) {
 
             const formData = new FormData();
             formData.append('token', userToken);
+            formData.append('step', 1);
             formData.append('full_name', values.full_name);
             formData.append('nationality', getCode(values.nationality));
             formData.append('country', getCode(values.country));

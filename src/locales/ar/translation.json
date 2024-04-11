@@ -91,7 +91,9 @@
                 "profile_updated": "تحديث الملف الشخصي!"
             },
             "step_2": {
-                "highlight_your_strong_sides": "أبرز جوانبك القوية"
+                "highlight_your_strong_sides": "أبرز جوانبك القوية",
+                "updating_profile": "جارٍ تحديث الملف الشخصي...",
+                "profile_updated": "تحديث الملف الشخصي!"
             }
         },
         "language": {

@@ -48,6 +48,7 @@ function JobseekerWelcomeFormStep2(props) {
 
             const formData = new FormData();
             formData.append('token', userToken);
+            formData.append('step', 2);
 
             // languages
             if (values.languages.length > 0) {
@@ -66,30 +67,57 @@ function JobseekerWelcomeFormStep2(props) {
                     formData.append(`workExperience[${index}][position]`, experience.position);
                     formData.append(`workExperience[${index}][country]`, experience.country);
                     formData.append(`workExperience[${index}][company]`, experience.company);
-                    formData.append(`workExperience[${index}][start]`, experience.start);
-                    formData.append(`workExperience[${index}][end]`, experience.end);
+                    formData.append(`workExperience[${index}][start]`, experience.startDate);
+                    formData.append(`workExperience[${index}][end]`, experience.endDate);
                 });
             }
             else {
                 formData.append('workExperience', '');
             }
+            
+            // education
+            if (values.education.length > 0) {
+                values.education.forEach((education, index) => {
+
+                    if (index < 5) {
+                        formData.append(`education[${index}][institution]`, education.institution);
+                        formData.append(`education[${index}][diploma]`, education.diploma);
+                        formData.append(`education[${index}][start]`, education.startDate);
+                        formData.append(`education[${index}][end]`, education.endDate);
+                        formData.append(`education[${index}][id]`, 0);
+                    }
+                });
+            }
+            else {
+                formData.append('education', '');
+            }
+
+            // skills
+            if (values.skills.length > 0) {
+                values.skills.forEach((skill, index) => {
+                    formData.append(`skills[${index}][code]`, skill.code);
+                });
+            }
+            else {
+                formData.append('skills', '');
+            }
 
             toast.promise(updateUser(formData), {
-                loading: "updateUser",
-                success: <b>updateUser</b>,
+                loading: t('forms.welcome_job_seeker.step_2.updating_profile'),
+                success: <b>{t('forms.welcome_job_seeker.step_2.profile_updated')}</b>,
                 error: (err) => {
                     return <b>{err.response.data.error}</b>;
                 },
             })
-            // .then(() => {
-            //     toast.promise(dispatch(fetchUserByToken(userToken)), {
-            //         loading: "fetchUserByToken",
-            //         success: <b>fetchUserByToken</b>,
-            //         error: (err) => {
-            //             return <b>{err.response.data.error}</b>;
-            //         },
-            //     });
-            // })
+            .then(() => {
+                toast.promise(dispatch(fetchUserByToken(userToken)), {
+                    loading: t('forms.login.receiving_data'),
+                    success: <b>{t('forms.login.user_verified')}</b>,
+                    error: (err) => {
+                        return <b>{err.response.data.error}</b>;
+                    },
+                });
+            })
             .catch((error) => {
                 
                 if (error.response.data.field) {

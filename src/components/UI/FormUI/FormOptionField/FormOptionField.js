@@ -1,11 +1,15 @@
 import styles from './FormOptionField.module.css';
 
-function FormOptionField({ options, error, label, children, ...props }) {
+function FormOptionField({ options, error, label, onePerLine, children, ...props }) {
 
     let wrapper_class = styles.wrapper;
 
     if (error) {
         wrapper_class += ' ' + styles.wrapper_error;
+    }
+
+    if (onePerLine) {
+        wrapper_class += ' ' + styles.wrapper_onePerLine;
     }
 
     return (
@@ -14,7 +18,7 @@ function FormOptionField({ options, error, label, children, ...props }) {
             <div className={wrapper_class}>
                 {options && options.map(option => (
                     <label key={option.value} className={styles.option}>
-                        <input type="radio" {...props} value={option.value} checked={props.value === option.value} />
+                        <input {...props} value={option.value} checked={props.value === option.value} />
                         <span>{option.label}</span>
                     </label>
                 ))}

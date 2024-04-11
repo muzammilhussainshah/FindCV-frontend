@@ -15,3 +15,12 @@
 .button:hover {
     opacity: 0.7;
 }
+
+.buttonOutline {
+    background-color: transparent;
+}
+
+.buttonOutline:hover {
+    opacity: 1;
+    background-color: #09AEEF;
+}
