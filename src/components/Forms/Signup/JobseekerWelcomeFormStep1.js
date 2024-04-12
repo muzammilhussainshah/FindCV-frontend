@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import Yup from '../../../utils/yupExtensions';
 import toast from 'react-hot-toast';
-import { getCode } from 'country-list';
 
 import { fetchUserByToken } from '../../../app/features/userSlice';
 import { updateUser } from '../../../services/userService';
@@ -72,8 +71,8 @@ function JobseekerWelcomeFormStep1(props) {
             formData.append('token', userToken);
             formData.append('step', 1);
             formData.append('full_name', values.full_name);
-            formData.append('nationality', getCode(values.nationality));
-            formData.append('country', getCode(values.country));
+            formData.append('nationality', values.nationality);
+            formData.append('country', values.country);
             formData.append('gender', values.gender);
             formData.append('birth_date', formatDateForMySQL(values.birthdate));
 

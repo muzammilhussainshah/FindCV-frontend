@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import Yup from '../../../utils/yupExtensions'; 
 import toast from 'react-hot-toast';
-import { getCode } from 'country-list';
 
 import { fetchUserByToken } from '../../../app/features/userSlice';
 import { updateUser } from '../../../services/userService';
@@ -70,13 +69,6 @@ function EmployerWelcomeForm(props) {
             }
             else {
                 values.nationality = '';
-            }
-
-            if (values.country !== '') {
-                values.country = getCode(values.country);
-            }
-            if (values.nationality !== '') {
-                values.nationality = getCode(values.nationality);
             }
 
             const formData = new FormData();
