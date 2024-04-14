@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import SignupLayout from '../../components/Layouts/signupLayout';
 import EmployerWelcomeForm from '../../components/Forms/Signup/EmployerWelcomeForm';
 import JobseekerWelcomeFormStep1 from '../../components/Forms/Signup/JobseekerWelcomeFormStep1';
 import JobseekerWelcomeFormStep2 from '../../components/Forms/Signup/JobseekerWelcomeFormStep2';
@@ -67,9 +66,9 @@ function Welcome() {
     }
 
     return (
-        <SignupLayout>
+        <>
             {content}
-        </SignupLayout>
+        </>
     );
 }
     
