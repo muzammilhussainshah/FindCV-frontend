@@ -36,11 +36,15 @@ function SignupHeader() {
                         {backButtonLink && <BubbleButton 
                                                 icon={'arrow-back'} 
                                                 icon_position={'left'} 
+                                                iconOnlyOnMobile
                                                 to={backButtonLink} 
                                                 style={{ marginLeft: 20 }}>
                                                     {t('signupHeader.back')}
                                             </BubbleButton>}
                         {showLogoutButton && <BubbleButton 
+                                                icon={'logout-white'}
+                                                icon_position={'left'}
+                                                iconOnlyOnMobile
                                                 onClick={handleLogout} 
                                                 style={{ marginLeft: 20 }}
                                             >

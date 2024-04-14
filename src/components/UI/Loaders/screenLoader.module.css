@@ -88,3 +88,21 @@
     width: 40px;
     height: 40px;
 }
+
+@media screen and (max-width: 1024px) {
+    .loader > i:nth-child(2) {
+        right: -200px;
+    }
+    .loader > i:nth-child(6) {
+        right: -50px;
+        bottom: -40px;
+    }
+    .loader > i:nth-child(7) {
+        right: 55px;
+        bottom: 17px;
+    }
+    .loader > i:nth-child(8) {
+        right: 25px;
+        bottom: 57px;
+    }
+}

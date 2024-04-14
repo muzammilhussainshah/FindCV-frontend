@@ -29,3 +29,9 @@
     align-items: center;
     max-width: 1340px;
 }
+
+@media screen and (max-width: 1024px) {
+    .header img {
+        max-width: 130px;
+    }
+}

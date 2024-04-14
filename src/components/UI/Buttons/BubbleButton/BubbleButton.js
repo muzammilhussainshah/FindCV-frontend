@@ -1,13 +1,17 @@
 import { Link } from 'react-router-dom';
 import styles from './BubbleButton.module.css';
 
-function BubbleButton({ className, icon, icon_position, children, ...props }) {
+function BubbleButton({ className, icon, icon_position, iconOnlyOnMobile, children, ...props }) {
     // console.log(props);
 
     const icon_class = icon ? `icon-${icon}` : '';
     const icon_position_class = icon_position ? `icon-${icon_position}` : '';
     const defaultClass = className ? className : '';
-    const buttonClass = `${styles.button} ${icon_class} ${icon_position_class} ${defaultClass}`;
+    let buttonClass = `${styles.button} ${icon_class} ${icon_position_class} ${defaultClass}`;
+    
+    if (iconOnlyOnMobile) {
+        buttonClass += ` ${styles.iconOnlyOnMobile}`;
+    }
 
     const href = props.href ? props.href : false;
 

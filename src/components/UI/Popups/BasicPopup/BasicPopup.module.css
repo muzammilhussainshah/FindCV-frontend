@@ -18,3 +18,10 @@
     padding: 30px;
     border-radius: 10px;
 }
+
+@media (max-width: 600px) {
+    .popup {
+        padding: 20px;
+        max-width: calc(100% - 40px);
+    }
+}

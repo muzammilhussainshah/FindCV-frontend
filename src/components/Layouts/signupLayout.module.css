@@ -120,3 +120,27 @@
     margin-left: auto;
     margin-right: 0;
 }
+
+@media screen and (max-width: 1024px) {
+    .col:nth-child(1) {
+        width: 100%;
+    }
+    .col:nth-child(2) {
+        display: none;
+    }
+    .content > i:nth-child(2) {
+        right: -200px;
+    }
+    .content > i:nth-child(6) {
+        right: -50px;
+        bottom: -40px;
+    }
+    .content > i:nth-child(7) {
+        right: 55px;
+        bottom: 17px;
+    }
+    .content > i:nth-child(8) {
+        right: 25px;
+        bottom: 57px;
+    }
+}

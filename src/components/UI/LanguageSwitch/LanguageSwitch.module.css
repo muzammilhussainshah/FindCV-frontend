@@ -100,3 +100,17 @@
 .languageSwitch :global(.react-language-select__option--is-selected) div {
     color: #fff;
 }
+
+@media screen and (max-width: 1024px) {
+    .languageSwitch :global(.language-select) {
+        font-size: 0;
+    }
+    .languageSwitch :global(.language-select) img {
+        margin-right: 0;
+    }
+    .languageSwitch :global(.react-language-select__menu) {
+        width: 110px;
+        right: 0;
+        left: auto;
+    }
+}
