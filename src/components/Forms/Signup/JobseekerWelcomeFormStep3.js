@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import toast from 'react-hot-toast';
 
 import LogicTestForm from '../Common/LogicTestForm/LogicTestForm';
 import Button from '../../UI/Buttons/Button/Button';
@@ -13,9 +14,11 @@ import styles from './JobseekerWelcomeForms.module.css';
 
 function JobseekerWelcomeFormStep3(props) {
     const userToken = useSelector(state => state.user.token);
+    const language = useSelector((state) => state.translation.language);
     const dispatch = useDispatch();
     const { t } = useTranslation();
 
+    const [isTestLoading, setIsTestLoading] = useState(false);
     const [showTest, setShowTest] = useState(false);
     const [testOptions, setTestOptions] = useState([]);
 
@@ -30,25 +33,55 @@ function JobseekerWelcomeFormStep3(props) {
     }
 
     const handleStartTest = () => {
-        getQuestions({ token: userToken })
+        setIsTestLoading(true);
+
+        toast.promise(getQuestions({ token: userToken, language: language }), {
+            loading: t('forms.welcome_job_seeker.step_3.generationg_test'),
+            success: <b>{t('forms.welcome_job_seeker.step_3.test_ready')}</b>,
+            error: (err) => {
+                return <b>{err.response.data.error}</b>;
+            },
+        })
         .then((data) => {
+            let questions = [];
             
             if (data.questions) {
-                const questions = data.questions.map((question, index) => {
-                    return {
-                        id: index,
-                        question: question.question,
-                        answers: Object.entries(question.answers).map(([key, value]) => {
-                            return { label: value, value: key };
-                        })
-                    }
-                });
+
+                if (data.questions.questions) {
+                    questions = data.questions.questions.map((question, index) => {
+                        return {
+                            id: index,
+                            question: question.question,
+                            answers: Object.entries(question.answers).map(([key, value]) => {
+                                return { label: value, value: key };
+                            })
+                        }
+                    });
+                }
+                else {
+                    questions = data.questions.map((question, index) => {
+                        return {
+                            id: index,
+                            question: question.question,
+                            answers: Object.entries(question.answers).map(([key, value]) => {
+                                return { label: value, value: key };
+                            })
+                        }
+                    });
+                }
+
                 setTestOptions(questions);
 
                 setShowTest(true);
+                setIsTestLoading(false);
             }
 
+        })
+        .catch((error) => {
+            toast.error(error.response.data.error);
+            setIsTestLoading(false);
         });
+
     }
 
     let content = '';
@@ -59,12 +92,16 @@ function JobseekerWelcomeFormStep3(props) {
     else {
         content = <>
             <div className={styles.logic_test_info}>
-                <span>Test on logic</span>
-                <span>10-15 minutes</span>
+                <span>{t('forms.welcome_job_seeker.step_3.test_on_logic')}</span>
+                <span>{t('forms.welcome_job_seeker.step_3.minutes')}</span>
             </div>
             <div className={styles.logic_test_buttons}>
-                <Button type="button" outlined onClick={handleTestSkip}>Skip</Button>
-                <Button type="button" onClick={handleStartTest}>Take Test</Button>
+                <Button type="button" outlined onClick={handleTestSkip}>
+                    {t('general.UI.skip')}
+                </Button>
+                <Button type="button" onClick={handleStartTest}>
+                    {isTestLoading ? t('general.UI.loading') : t('forms.welcome_job_seeker.step_3.take_test')}
+                </Button>
             </div>
         </>;
     }

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import Yup from '../../../../utils/yupExtensions';
@@ -9,6 +10,7 @@ import Button from '../../../UI/Buttons/Button/Button';
 
 function LogicTestForm({questions, props}) {
     const { t } = useTranslation();
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const initialValues = {};
     questions.forEach((question, index) => {
@@ -27,6 +29,9 @@ function LogicTestForm({questions, props}) {
         validationSchema: validationSchema,
         onSubmit: values => {
             console.log(values);
+
+            setIsSubmitting(true);
+
             // onSubmit({ 
             //     languageCode: values.language.toUpperCase(),
             //     level: values.languageLevel 
@@ -52,7 +57,9 @@ function LogicTestForm({questions, props}) {
                     </div>
                 );
             })}
-            <Button type="submit" style={{display: 'block'}}>Submit</Button>
+            <Button type="submit" style={{display: 'block'}}>
+                {isSubmitting ? t('general.UI.loading') : t('general.UI.submit')}
+            </Button>
         </form>
     );
 }

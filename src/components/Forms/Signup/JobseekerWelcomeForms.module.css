@@ -26,3 +26,15 @@
 .logic_test_buttons button {
     width: calc(50% - 10px);
 }
+
+:global(.fcv-rtl) .logic_test_info {
+    direction: rtl;
+}
+
+:global(.fcv-rtl) .logic_test_buttons {
+    direction: rtl;
+}
+
+:global(.fcv-rtl) .logic_test_buttons button:nth-child(2) {
+    margin-left: 0;
+}

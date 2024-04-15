@@ -14,7 +14,8 @@
         "welcome": "Welcome",
         "verify_email_message": "Please verify your email. We sent you email with verification link to ",
         "step_1": "Step 1",
-        "step_2": "Step 2"
+        "step_2": "Step 2",
+        "step_3": "Step 3"
     },
     "forms": {
         "login": {
@@ -92,6 +93,16 @@
             },
             "step_2": {
                 "highlight_your_strong_sides": "Highlight your strong sides",
+                "updating_profile": "Updating profile...",
+                "profile_updated": "Profile updated!"
+            },
+            "step_3": {
+                "title": "Improve your chances of employment with IQ testing",
+                "test_on_logic": "Test on logic",
+                "minutes": "10-15 minutes",
+                "take_test": "Take Test",
+                "generationg_test": "Generating test...",
+                "test_ready": "Test questions are ready!",
                 "updating_profile": "Updating profile...",
                 "profile_updated": "Profile updated!"
             }
@@ -1263,7 +1274,10 @@
             "education": "Education",
             "skills": "Skills",
             "proceed": "Proceed",
-            "please_wait": "Please wait..."
+            "please_wait": "Please wait...",
+            "submit": "Submit",
+            "loading": "Loading...",
+            "skip": "Skip"
         }
     }
 }

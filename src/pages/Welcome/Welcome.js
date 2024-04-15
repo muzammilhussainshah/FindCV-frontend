@@ -41,8 +41,8 @@ function Welcome() {
             }
             else if (user.registration_process === '3') {
                 content = <div>
-                    <span className={styles.step}>Step 3</span>
-                    <h4>Improve your chances of employment with IQ testing</h4>
+                    <span className={styles.step}>{t('welcome.step_3')}</span>
+                    <h4>{t('forms.welcome_job_seeker.step_3.title')}</h4>
                     <JobseekerWelcomeFormStep3 />
                 </div>;
             }
