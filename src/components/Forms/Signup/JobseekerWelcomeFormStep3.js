@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 
 import LogicTestForm from '../Common/LogicTestForm/LogicTestForm';
 import Button from '../../UI/Buttons/Button/Button';
+import Notice from '../../UI/Common/Notice/Notice';
 
 import { fetchUserByToken } from '../../../app/features/userSlice';
 import { updateUser } from '../../../services/userService';
@@ -21,6 +22,7 @@ function JobseekerWelcomeFormStep3(props) {
     const [isTestLoading, setIsTestLoading] = useState(false);
     const [showTest, setShowTest] = useState(false);
     const [testOptions, setTestOptions] = useState([]);
+    const [answersToken, setAnswersToken] = useState('');
 
     const handleTestSkip = () => {
         updateUser({
@@ -70,12 +72,19 @@ function JobseekerWelcomeFormStep3(props) {
                     });
                 }
 
+                setAnswersToken(data.answers_token);
                 setTestOptions(questions);
 
                 setShowTest(true);
                 setIsTestLoading(false);
             }
 
+        })
+        .then((data) => {
+            updateUser({
+                token: userToken,
+                step: 3
+            })
         })
         .catch((error) => {
             toast.error(error.response.data.error);
@@ -87,7 +96,7 @@ function JobseekerWelcomeFormStep3(props) {
     let content = '';
 
     if (showTest) {
-        content = <LogicTestForm questions={testOptions} />;
+        content = <LogicTestForm questions={testOptions} answersToken={answersToken} />;
     }
     else {
         content = <>
@@ -95,6 +104,7 @@ function JobseekerWelcomeFormStep3(props) {
                 <span>{t('forms.welcome_job_seeker.step_3.test_on_logic')}</span>
                 <span>{t('forms.welcome_job_seeker.step_3.minutes')}</span>
             </div>
+            <Notice warning>{t('forms.welcome_job_seeker.step_3.test_frequency')}</Notice>
             <div className={styles.logic_test_buttons}>
                 <Button type="button" outlined onClick={handleTestSkip}>
                     {t('general.UI.skip')}

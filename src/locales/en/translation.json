@@ -104,7 +104,8 @@
                 "generationg_test": "Generating test...",
                 "test_ready": "Test questions are ready!",
                 "updating_profile": "Updating profile...",
-                "profile_updated": "Profile updated!"
+                "profile_updated": "Profile updated!",
+                "test_frequency": "You can pass the test once every 30 days."
             }
         },
         "language": {
@@ -142,6 +143,9 @@
             "add": "Add",
             "required": "Required",
             "your_skills": "Your Skills*"
+        },
+        "logic_test": {
+            "notice": "Do not close/reload the page until submitting your answers, otherwise result will be lost."
         }
     },
     "signupHeader": {
@@ -1277,6 +1281,7 @@
             "please_wait": "Please wait...",
             "submit": "Submit",
             "loading": "Loading...",
+            "success": "Success!",
             "skip": "Skip"
         }
     }

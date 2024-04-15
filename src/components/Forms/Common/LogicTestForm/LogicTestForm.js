@@ -1,16 +1,24 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import Yup from '../../../../utils/yupExtensions';
+import toast from 'react-hot-toast';
+
+import { fetchUserByToken } from '../../../../app/features/userSlice';
+import { submitAnswers } from '../../../../services/logicTestService';
 
 import FormOptionField from '../../../UI/FormUI/FormOptionField/FormOptionField';
 import Button from '../../../UI/Buttons/Button/Button';
+import Notice from '../../../UI/Common/Notice/Notice';
 
 // import styles from './LogicTestForm.module.css';
 
-function LogicTestForm({questions, props}) {
-    const { t } = useTranslation();
+function LogicTestForm({questions, answersToken, props}) {
+    const userToken = useSelector(state => state.user.token);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const { t } = useTranslation();
+    const dispatch = useDispatch();
 
     const initialValues = {};
     questions.forEach((question, index) => {
@@ -28,19 +36,35 @@ function LogicTestForm({questions, props}) {
         initialValues: initialValues,
         validationSchema: validationSchema,
         onSubmit: values => {
-            console.log(values);
 
             setIsSubmitting(true);
 
-            // onSubmit({ 
-            //     languageCode: values.language.toUpperCase(),
-            //     level: values.languageLevel 
-            // });
+            if (isSubmitting) {
+                return;
+            }
+
+            toast.promise(submitAnswers({ token: userToken, answers_token: answersToken, answers: values }), {
+                loading: t('general.UI.loading'),
+                success: <b>{t('general.UI.success')}</b>,
+                error: (err) => {
+                    return <b>{err.response.data.error}</b>;
+                },
+            })
+            .then((data) => {
+                dispatch(fetchUserByToken(userToken));
+            })
+            .catch((err) => {
+                toast.error(err.response.data.error);
+                setIsSubmitting(false);
+            });
+
         },
     });
 
     return (
         <form onSubmit={formik.handleSubmit} {...props}>
+            <Notice warning>{t('forms.logic_test.notice')}</Notice>
+
             {questions && questions.map((question, index) => {
                 return (
                     <div key={'question_' + index}>
@@ -57,6 +81,7 @@ function LogicTestForm({questions, props}) {
                     </div>
                 );
             })}
+            
             <Button type="submit" style={{display: 'block'}}>
                 {isSubmitting ? t('general.UI.loading') : t('general.UI.submit')}
             </Button>
