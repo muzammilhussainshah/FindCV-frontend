@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './SimpleLink.module.css';
 
-function SimpleLink({ children, ...props }) {
+function SimpleLink({ onClick, children, ...props }) {
     // console.log(props);
 
     const icon_class = props.icon ? `icon-${props.icon}` : '';
@@ -12,7 +12,14 @@ function SimpleLink({ children, ...props }) {
     const target = props.target ? props.target : '_self';
     const to = props.to ? props.to : false;
 
-    if (href) {
+    if (onClick) {
+        return (
+            <span className={linkClass} onClick={onClick}>
+                <span>{children}</span>
+            </span>
+        );
+    }
+    else if (href) {
         return (
             <a className={linkClass} href={href} target={target}>
                 <span>{children}</span>

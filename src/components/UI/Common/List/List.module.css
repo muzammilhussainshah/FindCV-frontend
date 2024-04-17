@@ -1,0 +1,39 @@
+.list li {
+    padding-left: 20px;
+    margin-bottom: 5px;
+}
+
+.list li:last-child {
+    margin-bottom: 0;
+}
+
+.list.checkmark li {
+    font-weight: 500;
+    font-size: 18px;
+    padding-left: 30px;
+    position: relative;
+    list-style: none;
+}
+
+.list.checkmark li:before {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url('../../../../assets/images/icons/check_green.svg');
+    left: 0;
+    top: 2px;
+    content: '';
+}
+
+:global(.fcv-rtl) .list.checkmark li {
+    padding-right: 30px;
+    padding-left: 0;
+}
+
+:global(.fcv-rtl) .list.checkmark li:before {
+    left: auto;
+    right: 0;
+}

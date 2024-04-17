@@ -19,6 +19,10 @@
     border-radius: 10px;
 }
 
+:global(.fcv-rtl) .popup {
+    direction: rtl;
+}
+
 @media (max-width: 600px) {
     .popup {
         padding: 20px;

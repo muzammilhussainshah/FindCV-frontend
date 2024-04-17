@@ -31,7 +31,8 @@
     position: relative;
 }
 
-.wrapper.password::after {
+.wrapper.password::after,
+.wrapper.withIcon::after {
     position: absolute;
     width: 22px;
     height: 22px;
@@ -41,13 +42,21 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-    background-image: url('../../../../assets/images/icons/lock_green.svg');
     pointer-events: none;
     z-index: 2;
     content: '';
 }
 
-.wrapper.password input {
+.wrapper.password::after {
+    background-image: url('../../../../assets/images/icons/lock_green.svg');
+}
+
+.wrapper.withIcon::after {
+    background-image: url('../../../../assets/images/icons/cc.svg');
+}
+
+.wrapper.password input,
+.wrapper.withIcon input {
     padding-right: 62px;
 }
 
@@ -84,12 +93,14 @@
     text-align: right;
 }
 
-:global(.fcv-rtl) .wrapper.password::after {
+:global(.fcv-rtl) .wrapper.password::after,
+:global(.fcv-rtl) .wrapper.withIcon::after {
     right: auto;
     left: 20px;
 }
 
-:global(.fcv-rtl) .wrapper.password input {
+:global(.fcv-rtl) .wrapper.password input,
+:global(.fcv-rtl) .wrapper.withIcon input {
     padding-left: 62px;
     padding-right: 20px;
 }

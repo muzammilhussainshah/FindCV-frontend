@@ -38,3 +38,44 @@
 :global(.fcv-rtl) .logic_test_buttons button:nth-child(2) {
     margin-left: 0;
 }
+
+.verification {
+    text-align: left;
+}
+
+.verification p {
+    margin-bottom: 10px;
+}
+
+.verification .link {
+    text-decoration: underline;
+    margin-bottom: 20px;
+}
+
+.verification_buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.verification_buttons button {
+    width: calc(50% - 10px);
+}
+
+.verification_popup > div {
+    max-width: 650px;
+}
+
+:global(.fcv-rtl) .verification {
+    text-align: right;
+    direction: rtl;
+}
+
+:global(.fcv-rtl) .verification_buttons button:nth-child(2) {
+    margin-left: 0;
+}
+
+@media screen and (max-width: 700px) {
+    .verification_popup > div {
+        max-width: calc(100% - 40px);
+    }
+}

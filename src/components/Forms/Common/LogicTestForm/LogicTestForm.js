@@ -47,14 +47,14 @@ function LogicTestForm({questions, answersToken, props}) {
                 loading: t('general.UI.loading'),
                 success: <b>{t('general.UI.success')}</b>,
                 error: (err) => {
-                    return <b>{err.response.data.error}</b>;
+                    return <b>{t('general.UI.something_went_wrong')}</b>;
                 },
             })
             .then((data) => {
                 dispatch(fetchUserByToken(userToken));
             })
             .catch((err) => {
-                toast.error(err.response.data.error);
+                toast.error(t('general.UI.something_went_wrong'));
                 setIsSubmitting(false);
             });
 

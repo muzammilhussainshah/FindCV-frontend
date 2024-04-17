@@ -15,7 +15,8 @@
         "verify_email_message": "Please verify your email. We sent you email with verification link to ",
         "step_1": "Step 1",
         "step_2": "Step 2",
-        "step_3": "Step 3"
+        "step_3": "Step 3",
+        "step_4": "Step 4"
     },
     "forms": {
         "login": {
@@ -106,6 +107,11 @@
                 "updating_profile": "Updating profile...",
                 "profile_updated": "Profile updated!",
                 "test_frequency": "You can pass the test once every 30 days."
+            },
+            "step_4": {
+                "title": "Verify your account",
+                "text": "Verify your account to stand out in the crowd.",
+                "learn_more_about_benefits": "Learn more about benefits"
             }
         },
         "language": {
@@ -146,6 +152,17 @@
         },
         "logic_test": {
             "notice": "Do not close/reload the page until submitting your answers, otherwise result will be lost."
+        },
+        "verification": {
+            "verification_benefits": "Verification Benefits",
+            "item1": "Get a verified badge on your profile",
+            "item2": "Stand out from the crowd",
+            "item3": "Let others know you're the real deal",
+            "item4": "Be shown at the top of employer's feed",
+            "item5": "See who visited your profile",
+            "item6": "See if employer viewed your job application",
+            "identity_verification": "Identity Verification",
+            "one_time_payment": "one time payment"
         }
     },
     "signupHeader": {
@@ -1282,7 +1299,8 @@
             "submit": "Submit",
             "loading": "Loading...",
             "success": "Success!",
-            "skip": "Skip"
+            "skip": "Skip",
+            "something_went_wrong": "Opps, Something went wrong."
         }
     }
 }

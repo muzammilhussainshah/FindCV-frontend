@@ -1,15 +1,29 @@
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import EmployerWelcomeForm from '../../components/Forms/Signup/EmployerWelcomeForm';
 import JobseekerWelcomeFormStep1 from '../../components/Forms/Signup/JobseekerWelcomeFormStep1';
 import JobseekerWelcomeFormStep2 from '../../components/Forms/Signup/JobseekerWelcomeFormStep2';
 import JobseekerWelcomeFormStep3 from '../../components/Forms/Signup/JobseekerWelcomeFormStep3';
+import JobseekerWelcomeFormStep4 from '../../components/Forms/Signup/JobseekerWelcomeFormStep4';
 
 import styles from './Welcome.module.css';
 
 function Welcome() {
-    const { t } = useTranslation();
     const user = useSelector((state) => state.user.user);
+    const { t } = useTranslation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user) {
+            
+            if (user.registration_process === 'completed') {
+                navigate('/dashboard');
+            }
+
+        }
+    }, [navigate, user]);
 
     let content = '';
 
@@ -48,8 +62,9 @@ function Welcome() {
             }
             else if (user.registration_process === '4') {
                 content = <div>
-                    <span className={styles.step}>Step 4</span>
-                    <h4>test</h4>
+                    <span className={styles.step}>{t('welcome.step_4')}</span>
+                    <h4>{t('forms.welcome_job_seeker.step_4.title')}</h4>
+                    <JobseekerWelcomeFormStep4 />
                 </div>;
             }
 

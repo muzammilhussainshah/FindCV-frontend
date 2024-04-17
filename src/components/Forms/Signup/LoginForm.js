@@ -24,7 +24,7 @@ function LoginForm(props) {
         if (user) {
             
             if (user.registration_process === 'completed') {
-                // navigate('/dashboard');
+                navigate('/dashboard');
             }
             else {
                 navigate('/welcome');
