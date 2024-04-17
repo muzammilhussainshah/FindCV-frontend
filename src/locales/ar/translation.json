@@ -162,7 +162,9 @@
             "item5": "معرفة من زار ملفك الشخصي",
             "item6": "معرفة ما إذا كان صاحب العمل قد شاهد طلب الوظيفة الخاص بك",
             "identity_verification": "التحقق من الهوية",
-            "one_time_payment": "دفعة لمرة واحدة"
+            "one_time_payment": "دفعة لمرة واحدة",
+            "passport_input_placeholder": "صورة جواز السفر*",
+            "passport_input_label": "يرجى إرفاق صورة واضحة لبطاقة الهوية / جواز السفر"
         }
     },
     "signupHeader": {
@@ -1298,6 +1300,7 @@
             "please_wait": "انتظر من فضلك...",
             "submit": "يقدم",
             "loading": "تحميل...",
+            "purchase": "شراء",
             "success": "نجاح",
             "skip": "يتخطى",
             "something_went_wrong": "حدث خطأ ما"

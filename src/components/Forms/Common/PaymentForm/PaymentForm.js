@@ -105,7 +105,9 @@ function StripeForm({ props }) {
                 {error && <div className={styles.error}>{error}</div>}
             </div>
             <div style={{textAlign: 'center'}}>
-                <Button type="submit">Purchase</Button>
+                <Button type="submit">
+                    {loading ? t('general.UI.loading') : t('general.UI.purchase')}
+                </Button>
             </div>
         </form>
     );

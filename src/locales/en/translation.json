@@ -162,7 +162,9 @@
             "item5": "See who visited your profile",
             "item6": "See if employer viewed your job application",
             "identity_verification": "Identity Verification",
-            "one_time_payment": "one time payment"
+            "one_time_payment": "one time payment",
+            "passport_input_placeholder": "Passport Photo*",
+            "passport_input_label": "Please attach clearly visible photo of your ID card / Passport"
         }
     },
     "signupHeader": {
@@ -1298,6 +1300,7 @@
             "please_wait": "Please wait...",
             "submit": "Submit",
             "loading": "Loading...",
+            "purchase": "Purchase",
             "success": "Success!",
             "skip": "Skip",
             "something_went_wrong": "Opps, Something went wrong."

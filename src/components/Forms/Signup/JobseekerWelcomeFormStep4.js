@@ -22,7 +22,7 @@ function JobseekerWelcomeFormStep4() {
     const navigate = useNavigate();
 
     const [isVerificationBenefitsOpen, setIsVerificationBenefitsOpen] = useState(false);
-    const [isVerificationProcessOpen, setIsVerificationProcessOpen] = useState(true);
+    const [isVerificationProcessOpen, setIsVerificationProcessOpen] = useState(false);
 
     useEffect(() => {
         if (user) {
@@ -56,6 +56,10 @@ function JobseekerWelcomeFormStep4() {
         });
     }
 
+    const handleOpenProcessPopup = () => {
+        setIsVerificationProcessOpen(true);
+    }
+
     return (
         <>
             <div className={styles.verification}>
@@ -63,7 +67,7 @@ function JobseekerWelcomeFormStep4() {
                 <SimpleLink className={`white ${styles.link}`} onClick={handleOpenBenefitsPopup}>{t('forms.welcome_job_seeker.step_4.learn_more_about_benefits')}</SimpleLink>
                 <div className={styles.verification_buttons}>
                     <Button type="button" outlined onClick={handleVerificationSkip}>{t('general.UI.skip')}</Button>
-                    <Button type="button">{t('general.UI.proceed')}</Button>
+                    <Button type="button" onClick={handleOpenProcessPopup}>{t('general.UI.proceed')}</Button>
                 </div>
             </div>
 
