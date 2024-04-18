@@ -1,5 +1,22 @@
 .VerificationProcess {}
 
+.VerificationProcess :global(#veriff-root) {
+    margin: auto;
+}
+
+.VerificationProcess :global(.veriff-submit) {
+    background-color: #09AEEF;
+    cursor: pointer;
+}
+
+.VerificationProcess :global(.veriff-submit):hover {
+    opacity: 0.7;
+}
+
+.VerificationProcess :global(.veriff-description) {
+    display: none;
+}
+
 .VerificationProcessHead {
     display: flex;
     justify-content: space-between;

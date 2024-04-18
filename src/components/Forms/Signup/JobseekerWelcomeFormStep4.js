@@ -26,6 +26,10 @@ function JobseekerWelcomeFormStep4() {
 
     useEffect(() => {
         if (user) {
+
+            if (user.verification_payment_done) {
+                setIsVerificationProcessOpen(false);
+            }
             
             if (user.registration_process === 'completed') {
                 navigate('/dashboard');
@@ -46,6 +50,10 @@ function JobseekerWelcomeFormStep4() {
         setIsVerificationProcessOpen(false);
     }
 
+    const handleOpenProcessPopup = () => {
+        setIsVerificationProcessOpen(true);
+    }
+
     const handleVerificationSkip = () => {
         updateUser({
             token: userToken,
@@ -54,10 +62,6 @@ function JobseekerWelcomeFormStep4() {
         .then(() => {
             dispatch(fetchUserByToken(userToken));
         });
-    }
-
-    const handleOpenProcessPopup = () => {
-        setIsVerificationProcessOpen(true);
     }
 
     return (
