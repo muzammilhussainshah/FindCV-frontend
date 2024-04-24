@@ -36,7 +36,14 @@
             "invalid_email_address": "عنوان البريد الإلكتروني غير صالح",
             "required": "مطلوب",
             "email": "بريد إلكتروني",
-            "reset": "إعادة ضبط"
+            "reset": "إعادة ضبط",
+            "requesting_reset_link": "جارٍ طلب إعادة ضبط الرابط...",
+            "check_email_for_reset_link": "تحقق من بريدك الإلكتروني للحصول على رابط إعادة التعيين",
+            "enter_new_password": "أدخل كلمة المرور الجديدة",
+            "repeat_new_password": "كرر كلمة المرور الجديدة",
+            "updating_password": "جارٍ تحديث كلمة المرور...",
+            "password_updated": "تم تحديث كلمة السر!",
+            "your_password_reset_link_is_expired": "انتهت صلاحية رابط إعادة تعيين كلمة المرور الخاصة بك"
         },
         "create_account": {
             "email": "بريد إلكتروني*",
@@ -1298,6 +1305,7 @@
             "skills": "مهارات",
             "proceed": "يتابع",
             "please_wait": "انتظر من فضلك...",
+            "save": "يحفظ",
             "submit": "يقدم",
             "loading": "تحميل...",
             "purchase": "شراء",

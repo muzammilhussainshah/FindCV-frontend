@@ -1,11 +1,16 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import Yup from '../../../utils/yupExtensions';
 import FormField from '../../UI/FormUI/FormField/FormField';
 import Button from '../../UI/Buttons/Button/Button';
+import toast from 'react-hot-toast';
+
+import { requestPasswordReset } from '../../../services/authService';
 
 function RequestResetPasswordForm(props) {
     const { t } = useTranslation();
+    const [formLoading, setFormLoading] = useState(false);
 
     const formik = useFormik({
         initialValues: {
@@ -15,7 +20,35 @@ function RequestResetPasswordForm(props) {
             email: Yup.string().email(t('forms.reset_password.invalid_email_address')).required(t('forms.reset_password.required'))
         }),
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+
+            if (formLoading) {
+                return;
+            }
+
+            setFormLoading(true);
+            
+            toast.promise(requestPasswordReset(values.email), {
+                loading: t('forms.reset_password.requesting_reset_link'),
+                success: <b>{t('forms.reset_password.check_email_for_reset_link')}</b>,
+                error: (err) => {
+                    return <b>{err.response.data.error}</b>;
+                },
+            })
+            .then((response) => {
+                setFormLoading(false);
+            })
+            .catch((error) => {
+                
+                if (error.response.data.field) {
+                    formik.setErrors({
+                        [error.response.data.field]: error.response.data.error
+                    });
+                }
+
+                setFormLoading(false);
+
+            });
+
         },
     });
 
@@ -32,7 +65,9 @@ function RequestResetPasswordForm(props) {
                     error={formik.touched.email && formik.errors.email}
                 />
             </div>
-            <Button type="submit">{t('forms.reset_password.reset')}</Button>
+            <Button type="submit">{
+                formLoading ? t('general.UI.loading') : t('forms.reset_password.reset')
+            }</Button>
         </form>
     );
 }

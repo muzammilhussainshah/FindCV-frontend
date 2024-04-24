@@ -7,6 +7,7 @@
 .VerificationProcess :global(.veriff-submit) {
     background-color: #09AEEF;
     cursor: pointer;
+    -webkit-appearance: none;
 }
 
 .VerificationProcess :global(.veriff-submit):hover {

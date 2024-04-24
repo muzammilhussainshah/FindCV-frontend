@@ -1,19 +1,43 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+
 import EmployerWelcomeForm from '../../components/Forms/Signup/EmployerWelcomeForm';
 import JobseekerWelcomeFormStep1 from '../../components/Forms/Signup/JobseekerWelcomeFormStep1';
 import JobseekerWelcomeFormStep2 from '../../components/Forms/Signup/JobseekerWelcomeFormStep2';
 import JobseekerWelcomeFormStep3 from '../../components/Forms/Signup/JobseekerWelcomeFormStep3';
 import JobseekerWelcomeFormStep4 from '../../components/Forms/Signup/JobseekerWelcomeFormStep4';
 
+import { useGetQueryParam } from '../../utils/utilityHooks';
+import { userVerifyEmail } from '../../services/userService';
+import { fetchUserByToken } from '../../app/features/userSlice';
+
 import styles from './Welcome.module.css';
 
 function Welcome() {
+    const userToken = useSelector(state => state.user.token);
     const user = useSelector((state) => state.user.user);
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const emailToken = useGetQueryParam('token');
+
+    const verifyEmailToken = useCallback((emailToken) => {
+        toast.promise(userVerifyEmail(userToken, emailToken), {
+            loading: t('general.UI.loading'),
+            success: t('general.UI.success'),
+            error: t('general.UI.something_went_wrong'),
+        })
+        .then((data) => {
+            dispatch(fetchUserByToken(userToken));
+        })
+        .catch((error) => {
+            toast.error(error.error);
+        });
+    }, [dispatch, t, userToken]);
 
     useEffect(() => {
         if (user) {
@@ -22,12 +46,16 @@ function Welcome() {
                 navigate('/dashboard');
             }
 
+            if (emailToken && !user.email_verified) {
+                verifyEmailToken(emailToken);
+            }
+
         }
-    }, [navigate, user]);
+    }, [navigate, verifyEmailToken, user, emailToken]);
 
     let content = '';
 
-    if (!user.email_verified) {
+    if (user.email_verified) {
         
         if (user.account_type === 'employer') {
 

@@ -36,7 +36,14 @@
             "invalid_email_address": "Invalid email address",
             "required": "Required",
             "email": "Email",
-            "reset": "Reset"
+            "reset": "Reset",
+            "requesting_reset_link": "Requesting reset link...",
+            "check_email_for_reset_link": "Check your email for reset link",
+            "enter_new_password": "Enter new password",
+            "repeat_new_password": "Repeat new password",
+            "updating_password": "Updating password...",
+            "password_updated": "Password updated!",
+            "your_password_reset_link_is_expired": "Your password reset link is expired"
         },
         "create_account": {
             "email": "Email*",
@@ -1298,6 +1305,7 @@
             "skills": "Skills",
             "proceed": "Proceed",
             "please_wait": "Please wait...",
+            "save": "Save",
             "submit": "Submit",
             "loading": "Loading...",
             "purchase": "Purchase",

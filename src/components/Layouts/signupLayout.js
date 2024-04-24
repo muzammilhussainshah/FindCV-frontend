@@ -22,28 +22,30 @@ function SignupLayout() {
     return (
         <>
             {loading || showLoader ? <ScreenLoader /> : null}
-            <section className={`${styles.signup_layout} fcv-${tDirection}`}>
-                <SignupHeader />
-                <div className={styles.content + ' fcv-content'}>
-                    <div className={styles.row + ' fcv-row'}>
-                        <div className={styles.col}>
-                            <main>
-                                <Outlet />
-                            </main>
+            {!loading &&
+                <section className={`${styles.signup_layout} fcv-${tDirection}`}>
+                    <SignupHeader />
+                    <div className={styles.content + ' fcv-content'}>
+                        <div className={styles.row + ' fcv-row'}>
+                            <div className={styles.col}>
+                                <main>
+                                    <Outlet />
+                                </main>
+                            </div>
+                            <div className={styles.col}>
+                                <img src={backgroundImage} alt="background" />
+                            </div>
                         </div>
-                        <div className={styles.col}>
-                            <img src={backgroundImage} alt="background" />
-                        </div>
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                        <i></i>
                     </div>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                </div>
-            </section>
+                </section>
+            }
         </>
     );
 }

@@ -47,3 +47,21 @@ export const login = async (email, password) => {
 
     }
 };
+
+export const requestPasswordReset = async (email) => {
+    try {
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}auth/resetPassword`, { email });
+        return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};
+
+export const submitPasswordReset = async (passwordToken, password) => {
+    try {
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}auth/submitResetPassword`, { passwordToken, password });
+        return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};

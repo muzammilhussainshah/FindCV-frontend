@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useLocation } from 'react-router-dom';
 
 export const useGetSkillsHook = () => {
     const { t } = useTranslation();
@@ -15,3 +16,10 @@ export const useGetSkillsHook = () => {
 
     return skills;
 }
+
+export const useGetQueryParam = (param) => {
+    const location = useLocation();
+
+    const urlParams = new URLSearchParams(location.search);
+    return urlParams.get(param);
+};
