@@ -1,0 +1,28 @@
+.infoBlock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 12px 15px 12px 50px;
+    border-radius: 5px;
+    background-color: #EBF9FF;
+    margin-bottom: 10px;
+}
+
+.infoBlock img {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.infoBlock span {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.infoBlock span:nth-child(3) {
+    color: #0464B2;
+}

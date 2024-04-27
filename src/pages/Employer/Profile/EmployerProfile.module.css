@@ -1,0 +1,21 @@
+.employer_profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 935px;
+    margin: auto;
+}
+
+.employer_profile_col:nth-child(1) {
+    width: 300px;
+}
+
+.employer_profile_col:nth-child(2) {
+    width: calc(100% - 300px - 50px);
+}
+
+.employer_profile_image {
+    border-radius: 15px;
+    border: 2px solid #093559;
+}

@@ -45,6 +45,7 @@ function EmployerWelcomeForm(props) {
         validationSchema: Yup.object({
             name: Yup.string().required(t('forms.welcome_employer.required')),
             city: Yup.string().required(t('forms.welcome_employer.required')),
+            country: Yup.string().required(t('forms.welcome_employer.required')),
             company_name: Yup.string().when('employer_status', {
                 is: 'business',
                 then: schema => schema.required(t('forms.welcome_employer.required')),
@@ -165,7 +166,7 @@ function EmployerWelcomeForm(props) {
                     name="country" 
                     type="country" 
                     placeholder={t('forms.welcome_employer.country')}
-                    onChange={formik.handleChange}
+                    onFormikChange={formik.handleChange}
                     value={formik.values.country}
                     error={formik.touched.country && formik.errors.country}
                 />

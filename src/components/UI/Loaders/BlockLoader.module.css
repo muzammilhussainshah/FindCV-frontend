@@ -1,0 +1,33 @@
+.blockLoader {
+    width: 100%;
+}
+
+.blockLoader:before {
+    display: block;
+    background-image: linear-gradient(
+        110deg,
+        #ececed 73%,
+        #e5e5eb 75%,
+        #ececed 77%,
+        #ececed 78%,
+        #e9e9ea 84%,
+        #e9e9ea 88%,
+        #ececed 94%,
+        #ececed 100%
+    );
+    background-size: 200% 100%;
+    background-position: 0 center;
+    border-radius: inherit;
+    animation: 2s ease-in-out loading infinite;
+    content: '';
+}
+
+.blockLoader:before {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes loading {
+    0% { background-position-x: 0; }
+    40%, 100% { background-position-x: -200%; }
+}

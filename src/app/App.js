@@ -8,11 +8,14 @@ import { Toaster } from 'react-hot-toast';
 import './App.css';
 
 import SignupLayout from '../components/Layouts/signupLayout';
+import DefaultLayout from '../components/Layouts/defaultLayout';
 import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute';
+
 import Login from '../pages/Login/Login';
 import ResetPassword from '../pages/ResetPassword/ResetPassword';
 import CreateAccount from '../pages/CreateAccount/CreateAccount';
 import Welcome from '../pages/Welcome/Welcome';
+import EmployerProfile from '../pages/Employer/Profile/EmployerProfile';
 
 import i18n from './i18n';
 
@@ -61,6 +64,9 @@ function App() {
               <Welcome />
             </ProtectedRoute>} 
           />
+        </Route>
+        <Route path="/" element={<DefaultLayout />} >
+          <Route path="employer/:id" element={<EmployerProfile />} />
         </Route>
       </Routes>
     </Router>

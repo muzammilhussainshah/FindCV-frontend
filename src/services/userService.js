@@ -16,6 +16,15 @@ export const updateUser = async (data) => {
     }
 };
 
+export const getUser = async (account_type, user_id) => {
+    try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}user/getUserById/${account_type}/${user_id}`);
+        return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};
+
 export const userVerifyEmail = async (token, emailToken) => {
     try {
         const response = await axios.post(`${process.env.REACT_APP_API_URL}user/verifyEmail`, {token, emailToken});

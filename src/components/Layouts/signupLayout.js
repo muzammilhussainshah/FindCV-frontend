@@ -51,4 +51,3 @@ function SignupLayout() {
 }
 
 export default SignupLayout;
-  
