@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
+import DefaultHeader from '../Headers/defautHeader';
+
 import styles from './defaultLayout.module.css';
 
 function DefaultLayout() {
@@ -8,17 +10,13 @@ function DefaultLayout() {
 
     return (
         <section className={`${styles.default_layout} fcv-${tDirection}`}>
-            {/* <SignupHeader /> */}
+            <DefaultHeader />
             <div className={styles.content + ' fcv-content'}>
                 <div className={styles.row + ' fcv-row'}>
                     <main>
                         <Outlet />
                     </main>
                 </div>
-                <i></i>
-                <i></i>
-                <i></i>
-                <i></i>
                 <i></i>
                 <i></i>
                 <i></i>

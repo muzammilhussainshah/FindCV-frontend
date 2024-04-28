@@ -6,6 +6,7 @@ import { getUser } from '../../../services/userService';
 
 import BlockLoader from '../../../components/UI/Loaders/BlockLoader';
 import InfoBlock from '../../../components/UI/Common/InfoBlock/InfoBlock';
+import JobsList from '../../../components/UI/Common/Jobs/JobsList/JobsList';
 
 import styles from './EmployerProfile.module.css';
 
@@ -51,7 +52,7 @@ function EmployerProfile() {
                         <InfoBlock icon={location_icon} label="Location" text={`${t('general.country.' + employer.country)}, ${employer.city}`} style={{marginBottom: 30}} />
 
                         <h4>Jobs</h4>
-                        {/* add job posting component */}
+                        <JobsList />
                     </div>
                 </div>
             ) : (

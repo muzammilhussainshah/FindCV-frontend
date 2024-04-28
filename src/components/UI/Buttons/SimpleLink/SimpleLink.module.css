@@ -1,20 +1,20 @@
 .link {
     text-decoration: none;
     display: inline-block;
+    color: #09AEEF;
     cursor: pointer;
 }
 
 .link span {
     font-size: 16px;
-    color: #09AEEF;
-    text-decoration: none;
+    color: inherit;
 }
 
-.link span:hover {
+.link:hover {
     text-decoration: underline;
     color: #093559;
 }
 
-.link:global(.white) span {
+.link:global(.white) {
     color: #fff;
 }

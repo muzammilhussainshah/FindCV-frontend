@@ -66,7 +66,7 @@ function App() {
           />
         </Route>
         <Route path="/" element={<DefaultLayout />} >
-          <Route path="employer/:id" element={<EmployerProfile />} />
+          <Route path="employers/:id" element={<EmployerProfile />} />
         </Route>
       </Routes>
     </Router>

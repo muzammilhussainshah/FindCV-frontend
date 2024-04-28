@@ -1,10 +1,12 @@
 .default_layout {
     padding-top: 150px;
     padding-bottom: 120px;
+    overflow: hidden;
 }
 
 .default_layout .content {
     min-height: 100vh;
+    position: relative;
 }
 
 .default_layout h1 {
@@ -17,4 +19,34 @@
 .default_layout h5,
 .default_layout h6 {
     font-family: "Inter", sans-serif;
+}
+
+.content > i {
+    position: absolute;
+    border: 4px solid #0464B2;
+    border-radius: 100%;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.content > i:nth-child(2) {
+    top: 145px;
+    right: -115px;
+    width: 200px;
+    height: 200px;
+}
+
+.content > i:nth-child(3) {
+    top: 360px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+}
+
+.content > i:nth-child(4) {
+    top: 440px;
+    right: 8px;
+    width: 20px;
+    height: 20px;
 }
