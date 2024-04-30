@@ -1,0 +1,54 @@
+.form_wrapper {
+    max-width: 820px;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.form_wrapper .col:nth-child(1) {
+    width: 200px;
+}
+
+.form_wrapper .col:nth-child(2) {
+    width: 585px;
+}
+
+.form_wrapper .profile_image_wrapper {
+    opacity: 1;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.form_wrapper .profile_image_wrapper:hover {
+    opacity: 0.7;
+}
+
+.form_wrapper .profile_image_wrapper:before {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 18px;
+    background-image: url('../../../../assets/images/icons/pen-white.svg');
+    background-color: #0464B2;
+    border-radius: 5px;
+    bottom: 7px;
+    right: 7px;
+    z-index: 3;
+    content: '';
+}
+
+.form_wrapper .profile_image {
+    margin-bottom: 0;
+}
+
+.form_wrapper .profile_image > div {
+    border-width: 0;
+    width: 200px;
+    height: 200px;
+    margin-bottom: 0 !important;
+}

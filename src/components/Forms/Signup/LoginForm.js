@@ -24,7 +24,7 @@ function LoginForm(props) {
         if (user) {
             
             if (user.registration_process === 'completed') {
-                navigate('/dashboard');
+                navigate('/' + user.account_type + 's/' + user.id);
             }
             else {
                 navigate('/welcome');
@@ -59,13 +59,10 @@ function LoginForm(props) {
                 },
             })
             .then((response) => {
-                toast.promise(dispatch(fetchUserByToken(response)), {
-                    loading: t('forms.login.receiving_data'),
-                    success: <b>{t('forms.login.user_verified')}</b>,
-                    error: (err) => {
-                        return <b>{err.response.data.error}</b>;
-                    },
-                });
+                dispatch(fetchUserByToken(response));
+            })
+            .then(() => {
+                setFormLoading(false);
             })
             .catch((error) => {
                 

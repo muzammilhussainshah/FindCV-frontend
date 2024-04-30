@@ -119,7 +119,6 @@ function FormSelectField({ hasBorder, error, label, type, value, options, onForm
     const filterByLabel = (option, inputValue) => {
         return option.data.label.toLowerCase().includes(inputValue.toLowerCase());
     }
-      
 
     return (
         <div className={styles.field}>
@@ -128,7 +127,16 @@ function FormSelectField({ hasBorder, error, label, type, value, options, onForm
                 <Select
                     classNamePrefix="react-select"
                     options={selectOptions}
-                    value={selectOptions.find(option => option.value === value)}
+                    value={selectOptions.filter(option => {
+
+                        if (Array.isArray(value)) {
+                            return value.includes(option.value);
+                        }
+                        else {
+                            return option.value === value;
+                        }
+
+                    })}
                     filterOption={filterByLabel}
                     getOptionLabel={option => (
                         <div>

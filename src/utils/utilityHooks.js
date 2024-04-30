@@ -17,6 +17,23 @@ export const useGetSkillsHook = () => {
     return skills;
 }
 
+export const useGetCompanyIndustriesHook = () => {
+    // const { t } = useTranslation();
+
+    const industry_codes = ["Agriculture", "Automotive", "Banking", "Biotechnology", "Chemical", "Construction", "Consulting", "Education", "Electronics", "Energy", "Engineering", "Entertainment", "Environmental", "Finance", "Food and Beverage", "government", "Healthcare", "Hospitality", "Insurance", "Legal", "Manufacturing", "Media", "Nonprofit", "Pharmaceutical", "Real Estate", "Retail", "Telecommunications", "Transportation", "Travel", "Utilities"];
+    const industries = [];
+
+    industry_codes.forEach(industry => {
+        industries.push({
+            value: industry,
+            label: industry
+            // label: t(`general.industry.${industry}`)
+        });
+    });
+
+    return industries;
+}
+
 export const useGetQueryParam = (param) => {
     const location = useLocation();
 

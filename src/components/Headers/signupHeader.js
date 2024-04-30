@@ -21,7 +21,7 @@ function SignupHeader() {
     const handleLogout = () => {
         dispatch(logoutUser());
         dispatch(setShowLogoutButton(false));
-        navigate('/');
+        navigate('/login');
     };
     
     return (

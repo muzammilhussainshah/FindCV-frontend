@@ -38,7 +38,7 @@ function EmployerProfile() {
                 <div className={styles.employer_profile}>
                     <div className={styles.employer_profile_col}>
                         {employer.profile_image ? (
-                            <img className={styles.employer_profile_image} src={employer.profile_image} alt={employer.company_name ? employer.company_name : employer.name} />
+                            <img className={styles.employer_profile_image} src={process.env.REACT_APP_UPLOADS_PATH + employer.profile_image} alt={employer.company_name ? employer.company_name : employer.name} />
                         ) : (
                             <img className={styles.employer_profile_image} src={user_image_placeholder} alt={employer.company_name ? employer.company_name : employer.name} />
                         )}
@@ -49,6 +49,7 @@ function EmployerProfile() {
                         {employer.company_size && <InfoBlock icon={company_size_icon} label="Company Size" text={employer.company_size} />}
                         {employer.company_website && <InfoBlock icon={website_icon} label="Website" text={employer.company_website} />}
                         {employer.company_industries && <InfoBlock icon={industry_icon} label="Industry" text={employer.company_industries.replaceAll(';', ', ')} />}
+                        {employer.nationality && <InfoBlock icon={website_icon} label="Nationality" text={t('general.nationality.' + employer.nationality)} />}
                         <InfoBlock icon={location_icon} label="Location" text={`${t('general.country.' + employer.country)}, ${employer.city}`} style={{marginBottom: 30}} />
 
                         <h4>Jobs</h4>

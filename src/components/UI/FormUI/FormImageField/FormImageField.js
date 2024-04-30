@@ -1,8 +1,8 @@
 import styles from './FormImageField.module.css';
 
-function FormImageField({ error, label, value, onChange, children, ...props }) {
+function FormImageField({ error, label, value, placeholder, onChange, className = '', children, ...props }) {
     let wrapper_class = styles.wrapper;
-    let imageURL = value ? URL.createObjectURL(value) : null;
+    let imageURL = value ? URL.createObjectURL(value) : placeholder ? placeholder : null;
 
     if (error) {
         wrapper_class += ' ' + styles.wrapper_error;
@@ -18,7 +18,7 @@ function FormImageField({ error, label, value, onChange, children, ...props }) {
     };
 
     return (
-        <div className={styles.field}>
+        <div className={`${styles.field} ${className}`}>
             {label && <label htmlFor={props.name}>{label}</label>}
             <div className={wrapper_class}>
                 {imageURL && <img src={imageURL} alt="Preview" />}

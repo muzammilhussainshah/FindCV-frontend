@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
 import DefaultHeader from '../Headers/defautHeader';
+import DefaultFooter from '../Footers/defaultFooter';
 
 import styles from './defaultLayout.module.css';
 
@@ -21,6 +22,7 @@ function DefaultLayout() {
                 <i></i>
                 <i></i>
             </div>
+            <DefaultFooter />
         </section>
     );
 }

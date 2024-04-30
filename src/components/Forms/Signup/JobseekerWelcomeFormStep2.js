@@ -130,8 +130,6 @@ function JobseekerWelcomeFormStep2(props) {
 
             });
 
-            setFormLoading(false);
-
         },
     });
 

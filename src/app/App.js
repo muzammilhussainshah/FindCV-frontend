@@ -16,6 +16,7 @@ import ResetPassword from '../pages/ResetPassword/ResetPassword';
 import CreateAccount from '../pages/CreateAccount/CreateAccount';
 import Welcome from '../pages/Welcome/Welcome';
 import EmployerProfile from '../pages/Employer/Profile/EmployerProfile';
+import ProfileSettings from '../pages/Profile/ProfileSettings/ProfileSettings';
 
 import i18n from './i18n';
 
@@ -67,6 +68,10 @@ function App() {
         </Route>
         <Route path="/" element={<DefaultLayout />} >
           <Route path="employers/:id" element={<EmployerProfile />} />
+          <Route path="profile/settings" element={
+            <ProtectedRoute userStatus="loggedIn">
+              <ProfileSettings />
+            </ProtectedRoute>}  />
         </Route>
       </Routes>
     </Router>

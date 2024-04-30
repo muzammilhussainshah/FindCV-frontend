@@ -52,7 +52,6 @@
     border-radius: 4px;
     cursor: pointer;
     position: relative;
-    padding: 7px 15px;
 }
 
 .header_user_main {
@@ -61,7 +60,7 @@
     justify-content: flex-start;
     align-items: center;
     position: relative;
-    padding-right: 30px;
+    padding: 7px 45px 7px 15px;
 }
 
 .header_user:hover {
@@ -74,7 +73,7 @@
     position: absolute;
     width: 20px;
     height: 20px;
-    right: 0;
+    right: 15px;
     top: 50%;
     margin-top: -10px;
     background-position: center;

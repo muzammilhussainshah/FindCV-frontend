@@ -52,7 +52,7 @@ function LanguageSwitch() {
 
     return (
         <Select 
-            className={styles.languageSwitch}
+            className={`languageSwitch ${styles.languageSwitch}`}
             classNamePrefix="react-language-select"
             options={options}
             value={options.find(option => option.value === language)}

@@ -1311,6 +1311,7 @@
             "purchase": "شراء",
             "success": "نجاح",
             "skip": "يتخطى",
+            "required": "مطلوب",
             "something_went_wrong": "حدث خطأ ما"
         }
     }

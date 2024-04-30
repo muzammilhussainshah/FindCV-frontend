@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import SimpleLink from '../UI/Buttons/SimpleLink/SimpleLink';
 import Button from '../UI/Buttons/Button/Button';
+
+import { logoutUser } from '../../app/features/userSlice';
 
 import styles from './defaultHeader.module.css';
 
@@ -9,9 +12,11 @@ import logoImage from '../../assets/images/logo.png';
 import userAvatarPlaceholder from '../../assets/images/other/user_avatar_placeholder.svg';
 
 function DefaultHeader() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const user = useSelector((state) => state.user.user);
     const [isOpenDropdown, setIsOpenDropdown] = useState(false);
-    // user.account_type
     
     let displayName = '';
     let menuItems = <>
@@ -45,6 +50,11 @@ function DefaultHeader() {
     const toggleDropdown = () => {
         setIsOpenDropdown(!isOpenDropdown);
     }
+
+    const handleLogout = () => {
+        dispatch(logoutUser());
+        navigate('/login');
+    }
     
     return (
         <header className={styles.header}>
@@ -60,16 +70,16 @@ function DefaultHeader() {
                             <div className={styles.header_user}>
                                 <div className={`${styles.header_user_main} ${isOpenDropdown ? styles.open : ''}`} onClick={toggleDropdown}>
                                     {user.profile_image ? (
-                                        <img src={user.profile_image} alt="User avatar" />
+                                        <img src={process.env.REACT_APP_UPLOADS_PATH + user.profile_image} alt="User avatar" />
                                     ) : (
                                         <img src={userAvatarPlaceholder} alt="User avatar" />
                                     )}
                                     <span>{displayName.length > 10 ? `${displayName.substring(0, 10)}...` : displayName}</span>
                                 </div>
                                 <div className={`${styles.header_user_drop} ${isOpenDropdown ? styles.open : ''}`}>
-                                    <SimpleLink to="/profile">Profile</SimpleLink>
-                                    <SimpleLink to="/settings">Settings</SimpleLink>
-                                    <SimpleLink onClick={() => {console.log('test')}}>Logout</SimpleLink>
+                                    <SimpleLink onClick={toggleDropdown} to={`${user.account_type}s/${user.id}`}>Profile</SimpleLink>
+                                    <SimpleLink onClick={toggleDropdown} to="/profile/settings">Settings</SimpleLink>
+                                    <SimpleLink onClick={handleLogout}>Logout</SimpleLink>
                                 </div>
                             </div>
                         ) : (

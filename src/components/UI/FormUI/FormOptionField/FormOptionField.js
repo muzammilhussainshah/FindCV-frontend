@@ -1,6 +1,6 @@
 import styles from './FormOptionField.module.css';
 
-function FormOptionField({ options, error, label, onePerLine, children, ...props }) {
+function FormOptionField({ options, error, label, dark, onePerLine, children, ...props }) {
 
     let wrapper_class = styles.wrapper;
 
@@ -10,6 +10,10 @@ function FormOptionField({ options, error, label, onePerLine, children, ...props
 
     if (onePerLine) {
         wrapper_class += ' ' + styles.wrapper_onePerLine;
+    }
+
+    if (dark) {
+        wrapper_class += ' ' + styles.wrapper_dark;
     }
 
     return (

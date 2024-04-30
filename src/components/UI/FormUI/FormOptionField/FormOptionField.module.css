@@ -83,6 +83,13 @@
     margin-bottom: 0;
 }
 
+.wrapper_dark .option span:before {
+    border-color: #093559;
+}
+.wrapper_dark .option span:after {
+    background-color: #093559;
+}
+
 .wrapper_error {}
 
 .error {

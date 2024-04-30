@@ -12,7 +12,7 @@ function SimpleLink({ onClick, children, ...props }) {
     const target = props.target ? props.target : '_self';
     const to = props.to ? props.to : false;
 
-    if (onClick) {
+    if (onClick && !href && !to) {
         return (
             <span className={linkClass} onClick={onClick}>
                 <span>{children}</span>
@@ -21,14 +21,14 @@ function SimpleLink({ onClick, children, ...props }) {
     }
     else if (href) {
         return (
-            <a className={linkClass} href={href} target={target}>
+            <a className={linkClass} href={href} target={target} onClick={onClick}>
                 <span>{children}</span>
             </a>
         );
     }
     else {
         return (
-            <Link className={linkClass} to={to}>
+            <Link className={linkClass} to={to} onClick={onClick}>
                 <span>{children}</span>
             </Link>
         );

@@ -1,0 +1,119 @@
+.footer {
+    padding-top: 120px;
+}
+
+.footer_main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    max-width: 1180px;
+    border-bottom: 2px solid #EBF9FF;
+    padding-bottom: 60px;
+}
+
+.footer_main .col:nth-child(1) {
+    max-width: 320px;
+    width: 100%;
+    margin-right: 40px;
+}
+
+.footer_main .col:nth-child(1) > img {
+    max-width: 195px;
+    margin-bottom: 10px;
+}
+
+.footer_main .col:nth-child(1) > p {
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.footer_main .col:nth-child(1) :global(.languageSwitch) {
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.footer_main .col:nth-child(1) > nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.footer_main .col:nth-child(1) > nav a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 100%;
+    margin-right: 10px;
+}
+
+.footer_main .col:nth-child(1) > nav a img {}
+
+.footer_main .col:nth-child(1) > nav a img:nth-child(2) {
+    display: none;
+}
+
+.footer_main .col:nth-child(1) > nav a:hover {
+    background-color: #0464B2;
+}
+
+.footer_main .col:nth-child(1) > nav a:hover img:nth-child(1) {
+    display: none;
+}
+
+.footer_main .col:nth-child(1) > nav a:hover img:nth-child(2) {
+    display: block;
+}
+
+.footer_main .col:nth-child(2) {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 630px;
+    width: 100%;
+}
+
+.footer_main .col:nth-child(2) nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer_main .col:nth-child(2) nav a {
+    color: #093559;
+    margin-bottom: 8px;
+}
+
+.footer_second {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.footer_second .col {
+    width: 33.33%;
+}
+
+.footer_second .col * {
+    font-size: 12px;
+}
+
+.footer_second .col:nth-child(1) a {
+    color: #093559;
+    margin-right: 15px;
+}
+
+.footer_second .col:nth-child(2) {
+    text-align: center;
+}
+
+.footer_second .col:nth-child(3) {
+    text-align: right;
+}
+
+.footer_second .col:nth-child(3) a:hover {
+    color: #09AEEF;
+}

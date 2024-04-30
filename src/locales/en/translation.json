@@ -1311,6 +1311,7 @@
             "purchase": "Purchase",
             "success": "Success!",
             "skip": "Skip",
+            "required": "Required",
             "something_went_wrong": "Opps, Something went wrong."
         }
     }

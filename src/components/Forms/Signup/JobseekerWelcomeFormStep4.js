@@ -32,7 +32,7 @@ function JobseekerWelcomeFormStep4() {
             }
             
             if (user.registration_process === 'completed') {
-                navigate('/dashboard');
+                navigate('/' + user.account_type + 's/' + user.id);
             }
 
         }
