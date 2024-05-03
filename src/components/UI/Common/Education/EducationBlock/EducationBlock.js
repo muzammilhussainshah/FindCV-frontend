@@ -1,11 +1,15 @@
 import styles from './EducationBlock.module.css';
 
-function EducationBlock({ institution, startDate, endDate, diploma, onRemove, ...props }) {
+function EducationBlock({ institution, isDark, startDate, endDate, diploma, onRemove, ...props }) {
 
     let elementClasses = [styles.education];
 
     if (onRemove) {
         elementClasses.push(styles.removable);
+    }
+
+    if (isDark) {
+        elementClasses.push(styles.dark);
     }
 
     return (

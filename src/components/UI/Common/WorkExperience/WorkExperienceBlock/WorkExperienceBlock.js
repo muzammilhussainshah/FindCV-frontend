@@ -3,13 +3,17 @@ import Flag from 'react-flags';
 
 import styles from './WorkExperienceBlock.module.css';
 
-function WorkExperienceBlock({ position, startDate, endDate, company, country, onRemove, ...props }) {
+function WorkExperienceBlock({ isDark, position, startDate, endDate, company, country, onRemove, ...props }) {
     const { t } = useTranslation();
 
     let elementClasses = [styles.WorkExperience];
 
     if (onRemove) {
         elementClasses.push(styles.removable);
+    }
+
+    if (isDark) {
+        elementClasses.push(styles.dark);
     }
 
     return (

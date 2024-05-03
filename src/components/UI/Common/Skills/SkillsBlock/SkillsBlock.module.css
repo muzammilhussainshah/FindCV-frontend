@@ -32,6 +32,10 @@
     cursor: pointer;
 }
 
+.skill.dark {
+    background-color: #EBF9FF;
+}
+
 :global(.fcv-rtl) .skill {
     text-align: right;
     padding-left: 35px;

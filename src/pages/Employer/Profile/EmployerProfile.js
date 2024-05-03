@@ -13,6 +13,7 @@ import styles from './EmployerProfile.module.css';
 import user_image_placeholder from '../../../assets/images/other/user_image_placeholder.svg';
 import location_icon from '../../../assets/images/icons/location.svg';
 import website_icon from '../../../assets/images/icons/globe.svg';
+import nationality_icon from '../../../assets/images/icons/passport.svg';
 import company_size_icon from '../../../assets/images/icons/users.svg';
 import industry_icon from '../../../assets/images/icons/building.svg';
 
@@ -44,12 +45,12 @@ function EmployerProfile() {
                         )}
                     </div>
                     <div className={styles.employer_profile_col}>
-                        <h1>{employer.company_name ? employer.company_name : employer.name }</h1>
+                        <h1>{employer.company_name ? employer.company_name : employer.name}</h1>
 
                         {employer.company_size && <InfoBlock icon={company_size_icon} label="Company Size" text={employer.company_size} />}
                         {employer.company_website && <InfoBlock icon={website_icon} label="Website" text={employer.company_website} />}
                         {employer.company_industries && <InfoBlock icon={industry_icon} label="Industry" text={employer.company_industries.replaceAll(';', ', ')} />}
-                        {employer.nationality && <InfoBlock icon={website_icon} label="Nationality" text={t('general.nationality.' + employer.nationality)} />}
+                        {employer.nationality && <InfoBlock icon={nationality_icon} label="Nationality" text={t('general.nationality.' + employer.nationality)} />}
                         <InfoBlock icon={location_icon} label="Location" text={`${t('general.country.' + employer.country)}, ${employer.city}`} style={{marginBottom: 30}} />
 
                         <h4>Jobs</h4>

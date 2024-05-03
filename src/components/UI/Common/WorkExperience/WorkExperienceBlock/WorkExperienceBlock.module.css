@@ -83,6 +83,14 @@
     opacity: 0.8;
 }
 
+.WorkExperience.dark {
+    background-color: #EBF9FF;
+}
+
+.WorkExperience.dark .bottom p span {
+    color: #fff;
+}
+
 :global(.fcv-rtl) .WorkExperience.removable {
     padding-left: 40px;
     padding-right: 15px;

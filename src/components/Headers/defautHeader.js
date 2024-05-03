@@ -21,7 +21,7 @@ function DefaultHeader() {
     let displayName = '';
     let menuItems = <>
         <SimpleLink to="/jobs">Jobs List</SimpleLink>
-        <SimpleLink to="/talents">Discover Employees</SimpleLink>
+        <SimpleLink to="/jobseekers">Discover Employees</SimpleLink>
     </>;
 
     if (user) {
@@ -30,7 +30,7 @@ function DefaultHeader() {
             menuItems = <>
                 <SimpleLink to="/my-jobs">My Jobs</SimpleLink>
                 <SimpleLink to="/post-a-jobs">Post a Job</SimpleLink>
-                <SimpleLink to="/talents">Discover Employees</SimpleLink>
+                <SimpleLink to="/jobseekers">Discover Employees</SimpleLink>
             </>;
 
             if (user.employer_status === 'business') {
@@ -42,7 +42,11 @@ function DefaultHeader() {
 
         }
         else {
-            displayName = user.name;
+            menuItems = <>
+                <SimpleLink to="/jobs">Jobs List</SimpleLink>
+            </>;
+
+            displayName = user.full_name;
         }
 
     }

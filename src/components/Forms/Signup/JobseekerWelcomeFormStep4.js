@@ -85,8 +85,8 @@ function JobseekerWelcomeFormStep4() {
                     <li>{t('forms.verification.item2')}</li>
                     <li>{t('forms.verification.item3')}</li>
                     <li>{t('forms.verification.item4')}</li>
-                    <li>{t('forms.verification.item5')}</li>
-                    <li>{t('forms.verification.item6')}</li>
+                    {/* <li>{t('forms.verification.item5')}</li> */}
+                    {/* <li>{t('forms.verification.item6')}</li> */}
                 </List>
             </BasicPopup>
             <BasicPopup

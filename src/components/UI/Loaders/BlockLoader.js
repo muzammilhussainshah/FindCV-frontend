@@ -1,10 +1,12 @@
 import styles from './BlockLoader.module.css';
 
-const BlockLoader = ({height, marginBottom, children, ...props}) => {
+const BlockLoader = ({width, height, marginBottom, marginRight, children, ...props}) => {
 
     const style = {
         height: height ? `${height}px` : '200px',
-        marginBottom: marginBottom ? `${marginBottom}px` : '0'
+        width: width ? `${width}px` : '100%',
+        marginBottom: marginBottom ? `${marginBottom}px` : '0',
+        marginRight: marginRight ? `${marginRight}px` : '0',
     };
 
     if (height > 200) {

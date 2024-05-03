@@ -1,6 +1,6 @@
 import LanguageLevelBar from '../LanguageLevelBar/LanguageLevelBar';
 
-function LanguageLevelList({ children, languages, onRemove, ...props }) {
+function LanguageLevelList({ children, isDark, languages, onRemove, ...props }) {
 
     return (
         <div {...props}>
@@ -8,6 +8,7 @@ function LanguageLevelList({ children, languages, onRemove, ...props }) {
                 <LanguageLevelBar
                     key={language.id}
                     id={language.id}
+                    isDark={isDark}
                     languageCode={language.languageCode}
                     level={language.level}
                     onRemove={onRemove}

@@ -19,6 +19,7 @@
 }
 
 .education .head span:nth-child(1) {
+    text-align: left;
     color: #0E2E47;
 }
 
@@ -32,6 +33,7 @@
 
 .education .bottom p {
     background-color: #0464B2;
+    color: #fff;
     border-radius: 5px;
     display: flex;
     justify-content: flex-start;
@@ -100,6 +102,10 @@
     opacity: 0.8;
 }
 
+.education.dark {
+    background-color: #EBF9FF;
+}
+
 :global(.fcv-rtl) .education.removable {
     padding-left: 40px;
     padding-right: 15px;
@@ -108,6 +114,10 @@
 :global(.fcv-rtl) .education {
     text-align: right;
     direction: rtl;
+}
+
+:global(.fcv-rtl) .education .head span:nth-child(1) {
+    text-align: right;
 }
 
 :global(.fcv-rtl) .education .removeButton {

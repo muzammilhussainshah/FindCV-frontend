@@ -1,11 +1,15 @@
 import styles from './SkillsBlock.module.css';
 
-function SkillsBlock({ name, onRemove, ...props }) {
+function SkillsBlock({ name, isDark, onRemove, ...props }) {
 
     let elementClasses = [styles.skill];
 
     if (onRemove) {
         elementClasses.push(styles.removable);
+    }
+
+    if (isDark) {
+        elementClasses.push(styles.dark);
     }
 
     return (

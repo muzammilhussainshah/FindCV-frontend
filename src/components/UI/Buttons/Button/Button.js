@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './Button.module.css';
 
-function Button({ className, icon, icon_position, outlined, children, ...props }) {
+function Button({ className, icon, icon_position, disabled = false, outlined, children, ...props }) {
     // console.log(props);
 
     const icon_class = icon ? `icon-${icon}` : '';
@@ -15,14 +15,14 @@ function Button({ className, icon, icon_position, outlined, children, ...props }
 
     if (props.href) {
         return (
-            <a className={buttonClass} {...props}>
+            <a className={buttonClass} disabled={disabled} {...props}>
                 <span>{children}</span>
             </a>
         );
     }
     else if (props.type) {
         return (
-            <button className={buttonClass} {...props}>
+            <button className={buttonClass} disabled={disabled} {...props}>
                 <span>{children}</span>
             </button>
         );
@@ -30,7 +30,7 @@ function Button({ className, icon, icon_position, outlined, children, ...props }
     }
     else {
         return (
-            <Link className={buttonClass} {...props}>
+            <Link className={buttonClass} disabled={disabled} {...props}>
                 <span>{children}</span>
             </Link>
         );

@@ -1,6 +1,6 @@
 import WorkExperienceBlock from '../WorkExperienceBlock/WorkExperienceBlock';
 
-function WorkExperienceList({ children, experience, onRemove, ...props }) {
+function WorkExperienceList({ children, isDark, experience, onRemove, ...props }) {
 
     return (
         <div {...props}>
@@ -8,6 +8,7 @@ function WorkExperienceList({ children, experience, onRemove, ...props }) {
                 <WorkExperienceBlock
                     key={single.id}
                     id={single.id}
+                    isDark={isDark}
                     country={single.country}
                     company={single.company}
                     position={single.position}

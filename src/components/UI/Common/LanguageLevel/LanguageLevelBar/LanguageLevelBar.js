@@ -5,7 +5,7 @@ import { formatLanguageCodeEmoji } from '../../../../../utils/formatHelpers';
 
 import styles from './LanguageLevelBar.module.css';
 
-function LanguageLevelBar({ languageCode, level, onRemove, ...props }) {
+function LanguageLevelBar({ isDark, languageCode, level, onRemove, ...props }) {
     const { t } = useTranslation();
 
     let levelBars = <div className={styles.languageLevel}>
@@ -16,6 +16,10 @@ function LanguageLevelBar({ languageCode, level, onRemove, ...props }) {
 
     if (onRemove) {
         elementClasses.push(styles.removable);
+    }
+
+    if (isDark) {
+        elementClasses.push(styles.dark);
     }
 
     return (

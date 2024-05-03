@@ -1,0 +1,113 @@
+.jobseeker_profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 890px;
+    margin: auto;
+}
+
+.jobseeker_profile_verified h1 {
+    position: relative;
+}
+
+.jobseeker_profile_verified h1:after {
+    position: relative;
+    top: 7px;
+    width: 45px;
+    height: 45px;
+    margin-left: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 60px;
+    background-image: url('../../../assets/images/icons/check_gold.svg');
+    display: inline-block;
+    content: '';
+}
+
+.jobseeker_profile_desc {
+    position: relative;
+}
+
+.jobseeker_profile_col:nth-child(1) {
+    width: 300px;
+}
+
+.jobseeker_profile_col:nth-child(2) {
+    width: calc(100% - 300px - 50px);
+}
+
+.jobseeker_profile_image {
+    width: 100%;
+    object-fit: cover;
+    height: 300px;
+    border-radius: 15px;
+    border: 2px solid #093559;
+}
+
+.jobseeker_profile_skills_placeholder {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.jobseeker_profile_list {
+    margin-bottom: 20px;
+}
+
+.jobseeker_profile_list li {
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    border-bottom: 1px solid #09355920;
+}
+
+.jobseeker_profile_list li:last-child {
+    border-bottom: none;
+}
+
+.jobseeker_profile_list li span {
+    font-weight: 700;
+    text-transform: capitalize;
+    font-size: 14px;
+    padding-left: 14px;
+    color: #0464B2;
+}
+
+.jobseeker_profile_buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.jobseeker_profile_buttons > a {
+    width: calc(50% - 10px);
+}
+
+.jobseeker_profile_hidden .jobseeker_profile_image {
+    filter: blur(15px);
+    user-select: none;
+}
+
+.blurred {
+    filter: blur(5px);
+    user-select: none;
+}
+
+.jobseeker_profile_hidden h1,
+.jobseeker_profile_hidden .jobseeker_profile_desc p {
+    filter: blur(10px);
+    user-select: none;
+}
+
+.jobseeker_profile_hidden .jobseeker_profile_desc > a {
+    position: absolute;
+    width: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
