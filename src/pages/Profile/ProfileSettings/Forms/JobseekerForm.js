@@ -19,6 +19,7 @@ import LanguageLevelList from '../../../../components/UI/Common/LanguageLevel/La
 import WorkExperienceList from '../../../../components/UI/Common/WorkExperience/WorkExperienceList/WorkExperienceList';
 import EducationList from '../../../../components/UI/Common/Education/EducationList/EducationList';
 import SkillsList from '../../../../components/UI/Common/Skills/SkillsList/SkillsList';
+import LogicTestBar from '../../../../components/UI/Common/LogicTestBar/LogicTestBar';
 
 import FormField from '../../../../components/UI/FormUI/FormField/FormField';
 import FormDateField from '../../../../components/UI/FormUI/FormDateField/FormDateField';
@@ -32,6 +33,7 @@ import Subtitle from '../../../../components/UI/Common/Subtitle/Subtitle'
 import styles from './Form.module.css';
 
 import user_image_placeholder from '../../../../assets/images/other/user_image_placeholder.svg';
+import user_verified_icon from '../../../../assets/images/icons/check_white.svg';
 
 function JobseekerForm({user}) {
     const { t } = useTranslation();
@@ -48,6 +50,7 @@ function JobseekerForm({user}) {
 
     const formik = useFormik({
         initialValues: {
+            profile_visibility: user.profile_visibility,
             email: user.email,
             gender: user.gender,
             birthdate: user.birth_date,
@@ -127,18 +130,31 @@ function JobseekerForm({user}) {
                     formData.append(`languages[${index}][level]`, language.level);
                 });
             }
+            else {
+                formData.append('languages', '');
+            }
 
             if (values.education.length > 0) {
                 values.education.forEach((education, index) => {
 
                     if (index < 5) {
-                        formData.append(`education[${index}][institution]`, education.institution);
-                        formData.append(`education[${index}][diploma]`, education.diploma);
-                        formData.append(`education[${index}][start]`, education.startDate);
-                        formData.append(`education[${index}][end]`, education.endDate);
-                        formData.append(`education[${index}][id]`, 0);
+
+                        if (education?.action === 'add_new') {
+                            formData.append(`education[${index}][institution]`, education.institution);
+                            formData.append(`education[${index}][diploma]`, education.diploma);
+                            formData.append(`education[${index}][start]`, education.startDate);
+                            formData.append(`education[${index}][end]`, education.endDate);
+                            formData.append(`education[${index}][id]`, 0);
+                        }
+                        else {
+                            formData.append(`education[${index}][id]`, education.id);
+                        }
+
                     }
                 });
+            }
+            else {
+                formData.append('education', '');
             }
 
             if (values.workExperience.length > 0) {
@@ -150,11 +166,17 @@ function JobseekerForm({user}) {
                     formData.append(`workExperience[${index}][end]`, experience.endDate);
                 });
             }
+            else {
+                formData.append('workExperience', '');
+            }
 
             if (values.skills.length > 0) {
                 values.skills.forEach((skill, index) => {
                     formData.append(`skills[${index}][code]`, skill.code);
                 });
+            }
+            else {
+                formData.append('skills', '');
             }
 
             if (values.password) {
@@ -241,7 +263,7 @@ function JobseekerForm({user}) {
     }
 
     const handleAddEducation = (values) => {
-        formik.setFieldValue('education', [...formik.values.education, { id: Date.now(), ...values }]);
+        formik.setFieldValue('education', [...formik.values.education, { id: Date.now(), action: 'add_new', ...values }]);
         handlePopupClose('education');
     }
 
@@ -271,6 +293,27 @@ function JobseekerForm({user}) {
                             placeholder={user.profile_image ? process.env.REACT_APP_UPLOADS_PATH + user.profile_image : user_image_placeholder}
                             value={formik.values.profile_image}
                             error={formik.touched.profile_image && formik.errors.profile_image}
+                        />
+                    </div>
+
+                    {user.verification_status && (
+                        <div className={styles.profile_verified}>
+                            <img src={user_verified_icon} alt="verified" />
+                            <span>Verified</span>
+                        </div>
+                    )}
+                    {/* ELSE PROPOSE TO DO VERIFICATION */}
+
+                    <div className={styles.profile_visibility}>
+                        <FormOptionField 
+                            name="profile_visibility"
+                            dark
+                            type="checkbox"
+                            options={[
+                                { value: 1, label: "Show profile in search results" },
+                            ]}
+                            onChange={formik.handleChange}
+                            value={formik.values.profile_visibility}
                         />
                     </div>
                 </div>
@@ -410,6 +453,18 @@ function JobseekerForm({user}) {
                     </Subtitle>
                     <div style={{marginBottom: 40}}>
                         <SkillsList isDark skills={formik.values.skills} onRemove={handleOptionRemove} />
+                    </div>
+
+                    <Subtitle 
+                        dark
+                        hasButton 
+                        buttonText="TRY AGAIN ->"
+                        // buttonOnClick={() => handlePopupOpen('skills')}
+                    >
+                        Work Proficiency Test
+                    </Subtitle>
+                    <div style={{marginBottom: 50}}>
+                        <LogicTestBar fill={user.logic_test_result} />
                     </div>
 
                     <Subtitle dark>Change Password</Subtitle>

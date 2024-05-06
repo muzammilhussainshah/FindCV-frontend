@@ -31,7 +31,8 @@
     margin-top: 10px;
 }
 
-.education .bottom p {
+.education .bottom p,
+.education .bottom a {
     background-color: #0464B2;
     color: #fff;
     border-radius: 5px;
@@ -48,9 +49,11 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-decoration: none;
 }
 
-.education .bottom p:after {
+.education .bottom p:after,
+.education .bottom a:after {
     background: -moz-linear-gradient(90deg, rgba(4,100,178,1) 60%, rgba(4,100,178,0) 100%);
     background: -webkit-linear-gradient(90deg, rgba(4,100,178,1) 60%, rgba(4,100,178,0) 100%);
     background: linear-gradient(90deg, rgba(4,100,178,1) 60%, rgba(4,100,178,0) 100%);
@@ -62,7 +65,8 @@
     content: '';
 }
 
-.education .bottom p:before {
+.education .bottom p:before,
+.education .bottom a:before {
     position: absolute;
     width: 20px;
     height: 20px;

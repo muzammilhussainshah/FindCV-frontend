@@ -1,6 +1,6 @@
 import EducationBlock from '../EducationBlock/EducationBlock';
 
-function EducationList({ children, isDark, education, onRemove, ...props }) {
+function EducationList({ children, isDark, enableLinks, education, onRemove, ...props }) {
 
     return (
         <div {...props}>
@@ -9,6 +9,7 @@ function EducationList({ children, isDark, education, onRemove, ...props }) {
                     key={single.id}
                     id={single.id}
                     isDark={isDark}
+                    enableLinks={enableLinks}
                     institution={single.institution}
                     startDate={single.startDate}
                     endDate={single.endDate}

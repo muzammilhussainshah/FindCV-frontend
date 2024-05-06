@@ -62,7 +62,7 @@ export const userReducer = createSlice({
 
               state.user.education = state.user.education.map((diploma) => {
                 return {
-                    id: state.user.id + diploma.institution + '-diploma',
+                    id: diploma.id,
                     diploma: {
                         name: diploma.diploma
                     },

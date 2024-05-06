@@ -1,6 +1,6 @@
 import styles from './EducationBlock.module.css';
 
-function EducationBlock({ institution, isDark, startDate, endDate, diploma, onRemove, ...props }) {
+function EducationBlock({ institution, isDark, enableLinks, startDate, endDate, diploma, onRemove, ...props }) {
 
     let elementClasses = [styles.education];
 
@@ -19,7 +19,8 @@ function EducationBlock({ institution, isDark, startDate, endDate, diploma, onRe
                 <span>{startDate} - {endDate}</span>
             </p>
             <div className={styles.bottom}>
-                <p>{diploma.name}</p>
+                {enableLinks && <a href={process.env.REACT_APP_UPLOADS_PATH + diploma.name} target="_blank" rel="noreferrer">{diploma.name}</a>}
+                {!enableLinks && <p>{diploma.name}</p>}
             </div>
             {onRemove && <span onClick={() => onRemove('education', props.id)} className={styles.removeButton}></span>}
         </div>

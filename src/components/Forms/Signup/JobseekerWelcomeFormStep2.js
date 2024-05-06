@@ -86,6 +86,7 @@ function JobseekerWelcomeFormStep2(props) {
                         formData.append(`education[${index}][end]`, education.endDate);
                         formData.append(`education[${index}][id]`, 0);
                     }
+
                 });
             }
             else {

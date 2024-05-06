@@ -48,7 +48,7 @@ function JobseekerProfile() {
 
                     response.education = response.education.map((diploma) => {
                         return {
-                            id: id + diploma.institution + '-diploma',
+                            id: diploma.id,
                             diploma: {
                                 name: diploma.diploma
                             },
@@ -180,7 +180,7 @@ function JobseekerProfile() {
                         {jobseeker.education && (
                             <>
                                 <h4>Education</h4>
-                                <EducationList className={blurredBoxClasses} isDark education={jobseeker.education} style={{marginBottom: 35}} />
+                                <EducationList className={blurredBoxClasses} enableLinks isDark education={jobseeker.education} style={{marginBottom: 35}} />
                             </>
                         )}
 
@@ -192,10 +192,10 @@ function JobseekerProfile() {
                         )}
 
                         {jobseeker.logic_test_result && (
-                            <>
+                            <div style={{marginBottom: 50}}>
                                 <h4>Work Proficiency Test</h4>
                                 <LogicTestBar fill={jobseeker.logic_test_result} />
-                            </>
+                            </div>
                         )}
 
                         {(jobseeker.cv_file || jobseeker.cv_ref_letter) && (

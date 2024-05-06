@@ -20,6 +20,7 @@
     position: relative;
     border-radius: 10px;
     overflow: hidden;
+    margin-bottom: 10px;
 }
 
 .form_wrapper .profile_image_wrapper:hover {
@@ -52,3 +53,21 @@
     height: 200px;
     margin-bottom: 0 !important;
 }
+
+.form_wrapper .profile_verified {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #34A853;
+    padding-right: 10px;
+    margin-bottom: 15px;
+}
+
+.form_wrapper .profile_verified span {
+    font-size: 14px;
+    color: #fff;
+    font-weight: 700;
+}
+
+.profile_visibility {}
