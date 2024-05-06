@@ -48,7 +48,7 @@ function JobseekerProfile() {
 
                     response.education = response.education.map((diploma) => {
                         return {
-                            id: id + '-diploma',
+                            id: id + diploma.institution + '-diploma',
                             diploma: {
                                 name: diploma.diploma
                             },

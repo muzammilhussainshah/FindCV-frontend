@@ -57,6 +57,10 @@
     background-image: url('../../../../assets/images/icons/cc.svg');
 }
 
+.wrapper.withIcon_verified::after {
+    background-image: url('../../../../assets/images/icons/check_green.svg');
+}
+
 .wrapper.password input,
 .wrapper.withIcon input {
     padding-right: 62px;
