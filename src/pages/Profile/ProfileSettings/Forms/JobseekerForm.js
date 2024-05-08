@@ -15,6 +15,7 @@ import LanguageForm from '../../../../components/Forms/Common/LanguageForm/Langu
 import WorkExperienceForm from '../../../../components/Forms/Common/WorkExperienceForm/WorkExperienceForm';
 import EducationForm from '../../../../components/Forms/Common/EducationForm/EducationForm';
 import SkillsForm from '../../../../components/Forms/Common/SkillsForm/SkillsForm';
+import VerificationProcess from '../../../../components/Verification/VerificationProcess/VerificationProcess';
 
 import LanguageLevelList from '../../../../components/UI/Common/LanguageLevel/LanguageLevelList/LanguageLevelList';
 import WorkExperienceList from '../../../../components/UI/Common/WorkExperience/WorkExperienceList/WorkExperienceList';
@@ -54,6 +55,7 @@ function JobseekerForm({user}) {
     const [isOpenEducationPopup, setIsOpenEducationPopup] = useState(false);
     const [isOpenSkillsPopup, setIsOpenSkillsPopup] = useState(false);
     const [isOpenLogicTestPopup, setIsOpenLogicTestPopup] = useState(false);
+    const [isOpenVerificationPopup, setIsOpenVerificationPopup] = useState(false);
 
     const [isTestLoading, setIsTestLoading] = useState(false);
     const [showTest, setShowTest] = useState(false);
@@ -259,6 +261,8 @@ function JobseekerForm({user}) {
             setIsOpenSkillsPopup(false);
         } else if (popupName === 'logicTest') {
             setIsOpenLogicTestPopup(false);
+        } else if (popupName === 'verification') {
+            setIsOpenVerificationPopup(false);
         }
     }
 
@@ -273,6 +277,8 @@ function JobseekerForm({user}) {
             setIsOpenSkillsPopup(true);
         } else if (popupName === 'logicTest') {
             setIsOpenLogicTestPopup(true);
+        } else if (popupName === 'verification') {
+            setIsOpenVerificationPopup(true);
         }
     }
 
@@ -385,13 +391,13 @@ function JobseekerForm({user}) {
                         />
                     </div>
 
-                    {user.verification_status ? (
+                    {user.verification_status === 'approved' ? (
                         <div className={styles.profile_verified}>
                             <img src={user_verified_icon} alt="verified" />
                             <span>Verified</span>
                         </div>
                     ) : (
-                        <BubbleButton style={{width: '100%', marginBottom: 15}}>Verify Profile</BubbleButton>
+                        <BubbleButton onClick={() => handlePopupOpen('verification')} style={{width: '100%', marginBottom: 15}}>Verify Profile</BubbleButton>
                     )}
 
                     <div className={styles.profile_visibility}>
@@ -408,6 +414,10 @@ function JobseekerForm({user}) {
                     </div>
                 </div>
                 <div className={styles.col}>
+
+                    {user.verification_status === 'declined' && <Notice warning>Your identity verification was denied. Please try again and ensure your photos are clear.</Notice>}
+                    {user.verification_status === 'submitted' && <Notice warning>Your identity verification is currently in progress. Please wait while we review your information.</Notice>}
+
                     <Subtitle dark>General Information</Subtitle>
                     <div>
                         <FormField 
@@ -657,6 +667,15 @@ function JobseekerForm({user}) {
                     ) : (
                         <h6 style={{textAlign: 'center', marginBottom: 0}}>Test can be taken only once every 30 days</h6>
                     )}
+                </BasicPopup>
+            }
+            {isOpenVerificationPopup && 
+                <BasicPopup
+                    className={styles.verification_popup}
+                    isOpen={isOpenVerificationPopup}
+                    closePopup={() => handlePopupClose('verification')}
+                >
+                    <VerificationProcess finish_callback={() => handlePopupClose('verification')} />
                 </BasicPopup>
             }
         </>

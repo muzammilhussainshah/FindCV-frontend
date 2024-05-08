@@ -28,7 +28,7 @@ function JobseekerWelcomeFormStep4() {
         if (user) {
 
             if (user.verification_payment_done) {
-                setIsVerificationProcessOpen(false);
+                setIsVerificationProcessOpen(true);
             }
             
             if (user.registration_process === 'completed') {
@@ -94,7 +94,7 @@ function JobseekerWelcomeFormStep4() {
                 isOpen={isVerificationProcessOpen}
                 closePopup={handleCloseProcessPopup}
             >
-                <VerificationProcess />
+                <VerificationProcess finish_callback={handleVerificationSkip} />
             </BasicPopup>
         </>
     );
