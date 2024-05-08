@@ -1,0 +1,60 @@
+.field {
+    margin-bottom: 20px;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.field :global(.ql-snow) {
+    border: 3px solid #fff;
+}
+
+.field .hasBorder :global(.ql-snow) {
+    border-width: 2px;
+    border-color: #093559;
+}
+
+.wrapper {
+    position: relative;
+}
+
+.wrapper :global(.ql-toolbar) {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.wrapper :global(.ql-container) {
+    min-height: 140px;
+    max-height: 250px;
+    overflow-y: auto;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.wrapper :global(.ql-editor) {
+    min-height: 140px;
+}
+
+.wrapper_error :global(.ql-snow) {
+    border-color: #C8102E;
+}
+
+.wrapper_error.hasBorder :global(.ql-snow) {
+    border-color: #C8102E;
+}
+
+.error {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    display: block;
+    background-color: #C8102E;
+    color: #fff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 5px 20px 7px 20px;
+}

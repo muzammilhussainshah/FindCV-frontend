@@ -90,6 +90,55 @@
     background-color: #093559;
 }
 
+.wrapper_checkbox .option span {
+    user-select: none;
+    padding-left: 45px;
+}
+
+.wrapper_checkbox .option span:before {
+    width: 28px;
+    height: 28px;
+    margin-top: -14px;
+    border: 2px solid #fff;
+    border-radius: 6px;
+}
+
+.wrapper_checkbox .option input:checked + span:before {
+    background-color: #fff;
+}
+
+.wrapper_checkbox .option span:after {
+    border-radius: 0;
+    width: 14px;
+    left: 7px;
+    top: 50%;
+    margin-top: -6px;
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../../../../assets/images/icons/tick_white.svg');
+}
+
+.wrapper_checkbox .option input:checked + span:after {
+    background-image: url('../../../../assets/images/icons/tick.svg');
+}
+
+.wrapper_checkbox.wrapper_dark .option span:before {
+    border-color: #093559;
+}
+
+.wrapper_checkbox.wrapper_dark .option input:checked + span:before {
+    background-color: #093559;
+}
+
+.wrapper_checkbox.wrapper_dark .option span:after {
+    background-image: url('../../../../assets/images/icons/tick.svg');
+}
+
+.wrapper_checkbox.wrapper_dark .option input:checked + span:after {
+    background-image: url('../../../../assets/images/icons/tick_white.svg');
+}
+
 .wrapper_error {}
 
 .error {

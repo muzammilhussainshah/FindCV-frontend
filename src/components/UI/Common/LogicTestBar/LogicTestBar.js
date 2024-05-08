@@ -2,6 +2,7 @@ import styles from './LogicTestBar.module.css';
 
 function LogicTestBar({fill, children, ...props}) {
 
+    let percentage_fill = fill * 10;
     let color = '';
     let desc = '';
 
@@ -10,21 +11,21 @@ function LogicTestBar({fill, children, ...props}) {
             color = '#B2B2B2';
             desc = 'Not Attempted';
             break;
-        case fill >= 80:
+        case percentage_fill >= 80:
             color = '#34A853';
-            desc = `Excellent - (${fill}%)`;
+            desc = `Excellent - (${percentage_fill}%)`;
             break;
-        case fill >= 60:
+        case percentage_fill >= 60:
             color = '#AEB930';
-            desc = `Good - (${fill}%)`;
+            desc = `Good - (${percentage_fill}%)`;
             break;
-        case fill >= 40:
+        case percentage_fill >= 40:
             color = '#F2C94C';
-            desc = `Average - (${fill}%)`;
+            desc = `Average - (${percentage_fill}%)`;
             break;
-        case fill >= 20:
+        case percentage_fill >= 20:
             color = '#F2884C';
-            desc = `Poor - (${fill}%)`;
+            desc = `Poor - (${percentage_fill}%)`;
             break;
         default:
             color = '#EA4335';
@@ -34,7 +35,7 @@ function LogicTestBar({fill, children, ...props}) {
 
     return (
         <div className={styles.bar} style={{borderColor: color}} {...props}>
-            <span style={{minWidth: fill + '%', backgroundColor: color}}>{desc}</span>
+            <span style={{minWidth: percentage_fill + '%', backgroundColor: color}}>{desc}</span>
             <svg width="610" height="36" viewBox="0 0 610 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="322.938" y="-10.4808" width="14" height="60" transform="rotate(30 322.938 -10.4808)" fill={color} fillOpacity="0.3"/>
                 <rect x="354.938" y="-10.4808" width="14" height="60" transform="rotate(30 354.938 -10.4808)" fill={color} fillOpacity="0.3"/>

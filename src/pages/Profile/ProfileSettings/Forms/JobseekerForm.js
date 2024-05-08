@@ -6,6 +6,7 @@ import Yup from '../../../../utils/yupExtensions';
 import toast from 'react-hot-toast';
 
 import { updateUser } from '../../../../services/userService';
+import { getQuestions } from '../../../../services/logicTestService';
 import { fetchUserByToken } from '../../../../app/features/userSlice';
 import { formatDateForMySQL } from '../../../../utils/formatHelpers';
 
@@ -20,14 +21,19 @@ import WorkExperienceList from '../../../../components/UI/Common/WorkExperience/
 import EducationList from '../../../../components/UI/Common/Education/EducationList/EducationList';
 import SkillsList from '../../../../components/UI/Common/Skills/SkillsList/SkillsList';
 import LogicTestBar from '../../../../components/UI/Common/LogicTestBar/LogicTestBar';
+import LogicTestForm from '../../../../components/Forms/Common/LogicTestForm/LogicTestForm';
 
 import FormField from '../../../../components/UI/FormUI/FormField/FormField';
+import FormRichTextField from '../../../../components/UI/FormUI/FormRichTextField/FormRichTextField';
 import FormDateField from '../../../../components/UI/FormUI/FormDateField/FormDateField';
 import FormFileField from '../../../../components/UI/FormUI/FormFileField/FormFileField';
 import FormSelectField from '../../../../components/UI/FormUI/FormSelectField/FormSelectField';
 import FormOptionField from '../../../../components/UI/FormUI/FormOptionField/FormOptionField';
 import FormImageField from '../../../../components/UI/FormUI/FormImageField/FormImageField';
+
+import Notice from '../../../../components/UI/Common/Notice/Notice';
 import Button from '../../../../components/UI/Buttons/Button/Button';
+import BubbleButton from '../../../../components/UI/Buttons/BubbleButton/BubbleButton';
 import Subtitle from '../../../../components/UI/Common/Subtitle/Subtitle'
 
 import styles from './Form.module.css';
@@ -38,19 +44,44 @@ import user_verified_icon from '../../../../assets/images/icons/check_white.svg'
 function JobseekerForm({user}) {
     const { t } = useTranslation();
     const dispatch = useDispatch();
+    const language = useSelector((state) => state.translation.language);
     const userToken = useSelector(state => state.user.token);
 
     const [formLoading, setFormLoading] = useState(false);
+
     const [isOpenLanguagePopup, setIsOpenLanguagePopup] = useState(false);
     const [isOpenWorkExperiencePopup, setIsOpenWorkExperiencePopup] = useState(false);
     const [isOpenEducationPopup, setIsOpenEducationPopup] = useState(false);
     const [isOpenSkillsPopup, setIsOpenSkillsPopup] = useState(false);
+    const [isOpenLogicTestPopup, setIsOpenLogicTestPopup] = useState(false);
+
+    const [isTestLoading, setIsTestLoading] = useState(false);
+    const [showTest, setShowTest] = useState(false);
+    const [testOptions, setTestOptions] = useState([]);
+    const [answersToken, setAnswersToken] = useState('');
+
+    const genderOptions = [
+        { value: 'male', label: t('forms.welcome_job_seeker.step_1.male') },
+        { value: 'female', label: t('forms.welcome_job_seeker.step_1.female') }
+    ];
+
+    let isLogicMoreThan30Days = true;
+
+    if (user.logic_test_request_date) {
+        const logicTestRequestDate = new Date(user.logic_test_request_date);
+  
+        const currentDate = new Date();
+        const thirtyDaysAgo = new Date(currentDate.setDate(currentDate.getDate() - 30));
+
+        isLogicMoreThan30Days = logicTestRequestDate < thirtyDaysAgo;
+    }
 
     console.log(user);
 
     const formik = useFormik({
         initialValues: {
             profile_visibility: user.profile_visibility,
+            description: user.description,
             email: user.email,
             gender: user.gender,
             birthdate: user.birth_date,
@@ -109,6 +140,10 @@ function JobseekerForm({user}) {
             const formData = new FormData();
             formData.append('token', userToken);
 
+            if (user.email !== values.email) {
+                formData.append('email', values.email);
+            }
+
             if (values.profile_image && values.profile_image !== '') {
                 formData.append('profile_image', values.profile_image);
             }
@@ -119,9 +154,11 @@ function JobseekerForm({user}) {
                 formData.append('cv_ref_letter', values.cv_ref_letter);
             }
 
+            formData.append('profile_visibility', values.profile_visibility);
             formData.append('gender', values.gender);
             formData.append('country', values.country);
             formData.append('nationality', values.nationality);
+            formData.append('description', values.description);
             formData.append('birth_date', formatDateForMySQL(values.birthdate));
 
             if (values.languages.length > 0) {
@@ -211,11 +248,6 @@ function JobseekerForm({user}) {
         },
     });
 
-    const genderOptions = [
-        { value: 'male', label: t('forms.welcome_job_seeker.step_1.male') },
-        { value: 'female', label: t('forms.welcome_job_seeker.step_1.female') }
-    ];
-
     const handlePopupClose = (popupName) => {
         if (popupName === 'language') {
             setIsOpenLanguagePopup(false);
@@ -225,6 +257,8 @@ function JobseekerForm({user}) {
             setIsOpenEducationPopup(false);
         } else if (popupName === 'skills') {
             setIsOpenSkillsPopup(false);
+        } else if (popupName === 'logicTest') {
+            setIsOpenLogicTestPopup(false);
         }
     }
 
@@ -237,6 +271,8 @@ function JobseekerForm({user}) {
             setIsOpenEducationPopup(true);
         } else if (popupName === 'skills') {
             setIsOpenSkillsPopup(true);
+        } else if (popupName === 'logicTest') {
+            setIsOpenLogicTestPopup(true);
         }
     }
 
@@ -278,6 +314,59 @@ function JobseekerForm({user}) {
         handlePopupClose('skills');
     }
 
+    const handleStartTest = () => {
+        setIsTestLoading(true);
+
+        toast.promise(getQuestions({ token: userToken, language: language }), {
+            loading: t('forms.welcome_job_seeker.step_3.generationg_test'),
+            success: <b>{t('forms.welcome_job_seeker.step_3.test_ready')}</b>,
+            error: (err) => {
+                return <b>{err.response.data.error}</b>;
+            },
+        })
+        .then((data) => {
+            let questions = [];
+            
+            if (data.questions) {
+
+                if (data.questions.questions) {
+                    questions = data.questions.questions.map((question, index) => {
+                        return {
+                            id: index,
+                            question: question.question,
+                            answers: Object.entries(question.answers).map(([key, value]) => {
+                                return { label: value, value: key };
+                            })
+                        }
+                    });
+                }
+                else {
+                    questions = data.questions.map((question, index) => {
+                        return {
+                            id: index,
+                            question: question.question,
+                            answers: Object.entries(question.answers).map(([key, value]) => {
+                                return { label: value, value: key };
+                            })
+                        }
+                    });
+                }
+
+                setAnswersToken(data.answers_token);
+                setTestOptions(questions);
+
+                setShowTest(true);
+                setIsTestLoading(false);
+            }
+
+        })
+        .catch((error) => {
+            toast.error(error.response.data.error);
+            setIsTestLoading(false);
+        });
+
+    }
+
     return (
         <>
             <form onSubmit={formik.handleSubmit} className={styles.form_wrapper}>
@@ -296,13 +385,14 @@ function JobseekerForm({user}) {
                         />
                     </div>
 
-                    {user.verification_status && (
+                    {user.verification_status ? (
                         <div className={styles.profile_verified}>
                             <img src={user_verified_icon} alt="verified" />
                             <span>Verified</span>
                         </div>
+                    ) : (
+                        <BubbleButton style={{width: '100%', marginBottom: 15}}>Verify Profile</BubbleButton>
                     )}
-                    {/* ELSE PROPOSE TO DO VERIFICATION */}
 
                     <div className={styles.profile_visibility}>
                         <FormOptionField 
@@ -310,7 +400,7 @@ function JobseekerForm({user}) {
                             dark
                             type="checkbox"
                             options={[
-                                { value: 1, label: "Show profile in search results" },
+                                { value: true, label: "Show profile in search results" },
                             ]}
                             onChange={formik.handleChange}
                             value={formik.values.profile_visibility}
@@ -330,6 +420,18 @@ function JobseekerForm({user}) {
                             onBlur={formik.handleBlur}
                             value={formik.values.email}
                             error={formik.touched.email && formik.errors.email}
+                        />
+                        
+                        {!user.email_verified && <Notice warning>A verification link has been sent to your email. Please check to verify email address.</Notice>}
+                    </div>
+                    <div>
+                        <FormRichTextField
+                            name="description"
+                            label="Profile Description"
+                            hasBorder
+                            onFormikChange={formik.handleChange}
+                            value={formik.values.description}
+                            error={formik.touched.description && formik.errors.description}
                         />
                     </div>
                     <div>
@@ -459,7 +561,7 @@ function JobseekerForm({user}) {
                         dark
                         hasButton 
                         buttonText="TRY AGAIN ->"
-                        // buttonOnClick={() => handlePopupOpen('skills')}
+                        buttonOnClick={() => handlePopupOpen('logicTest')}
                     >
                         Work Proficiency Test
                     </Subtitle>
@@ -531,6 +633,30 @@ function JobseekerForm({user}) {
                     closePopup={() => handlePopupClose('skills')}
                 >
                     <SkillsForm onSubmit={handleAddSkills} excludeSkills={formik.values.skills.map(option => option.code)} />
+                </BasicPopup>
+            }
+            {isOpenLogicTestPopup && 
+                <BasicPopup 
+                    isOpen={isOpenLogicTestPopup}
+                    closePopup={() => handlePopupClose('logicTest')}
+                    style={{maxHeight: '80vh', overflowY: 'auto'}}
+                >
+                    {isLogicMoreThan30Days ? (
+
+                        showTest ? (
+                            <LogicTestForm isDark questions={testOptions} answersToken={answersToken} callback={() => handlePopupClose('logicTest')} />
+                        ) : (
+                            <div style={{textAlign: 'center'}}>
+                                <h6 style={{marginBottom: 15}}>Work Proficiency Test</h6>
+                                <Button type="button" onClick={handleStartTest}>
+                                    {isTestLoading ? t('general.UI.loading') : t('forms.welcome_job_seeker.step_3.take_test')}
+                                </Button>
+                            </div>
+                        )
+
+                    ) : (
+                        <h6 style={{textAlign: 'center', marginBottom: 0}}>Test can be taken only once every 30 days</h6>
+                    )}
                 </BasicPopup>
             }
         </>

@@ -1,3 +1,4 @@
+import i18n from 'i18next';
 import axios from 'axios';
 
 export const updateUser = async (data) => {
@@ -12,7 +13,16 @@ export const updateUser = async (data) => {
         }
         return response.data.token;
     } catch (error) {
-        throw error.response.data;
+        
+        if (error.response.data.error === 'USER_EMAIL_EXISTS') {
+            error.response.data.error = i18n.t('general.errors.USER_EMAIL_EXISTS');
+            error.response.data['field'] = 'email';
+            throw error;
+        }
+        else {
+            throw error.response.data;
+        }
+
     }
 };
 

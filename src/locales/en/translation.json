@@ -1313,6 +1313,9 @@
             "skip": "Skip",
             "required": "Required",
             "something_went_wrong": "Opps, Something went wrong."
+        },
+        "errors": {
+            "USER_EMAIL_EXISTS": "User with this email already exists."
         }
     }
 }

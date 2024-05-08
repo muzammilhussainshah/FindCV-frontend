@@ -16,6 +16,10 @@ function FormOptionField({ options, error, label, dark, onePerLine, children, ..
         wrapper_class += ' ' + styles.wrapper_dark;
     }
 
+    if (props.type === 'checkbox') {
+        wrapper_class += ' ' + styles.wrapper_checkbox;
+    }
+
     return (
         <div className={styles.field}>
             {label && <p className={styles.label}>{label}</p>}

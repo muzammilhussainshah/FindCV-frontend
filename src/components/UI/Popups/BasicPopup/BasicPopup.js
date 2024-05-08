@@ -20,7 +20,7 @@ function BasicPopup({ className, isOpen, closePopup, children, ...props }) {
 
     return ReactDOM.createPortal(
         <div className={`${styles.popupOverlay} ${className} fcv-${tDirection}`} onMouseDown={handlePopupClose} onTouchEnd={handlePopupClose}>
-            <div className={styles.popup}>
+            <div className={styles.popup} {...props}>
                 {children}
             </div>
         </div>,

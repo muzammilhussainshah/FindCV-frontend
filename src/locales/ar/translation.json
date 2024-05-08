@@ -1313,6 +1313,9 @@
             "skip": "يتخطى",
             "required": "مطلوب",
             "something_went_wrong": "حدث خطأ ما"
+        },
+        "errors": {
+            "USER_EMAIL_EXISTS": "البريد الإلكتروني موجود بالفعل"
         }
     }
 }

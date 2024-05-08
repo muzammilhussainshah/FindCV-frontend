@@ -14,7 +14,7 @@ import Notice from '../../../UI/Common/Notice/Notice';
 
 // import styles from './LogicTestForm.module.css';
 
-function LogicTestForm({questions, answersToken, props}) {
+function LogicTestForm({isDark, callback, questions, answersToken, props}) {
     const userToken = useSelector(state => state.user.token);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const { t } = useTranslation();
@@ -53,6 +53,11 @@ function LogicTestForm({questions, answersToken, props}) {
             .then((data) => {
                 dispatch(fetchUserByToken(userToken));
             })
+            .then((data) => {
+                if (callback) {
+                    callback();
+                }
+            })
             .catch((err) => {
                 toast.error(t('general.UI.something_went_wrong'));
                 setIsSubmitting(false);
@@ -73,6 +78,7 @@ function LogicTestForm({questions, answersToken, props}) {
                             label={(index+1) + '. ' + question.question}
                             type="radio"
                             onePerLine
+                            dark={isDark}
                             onChange={formik.handleChange}
                             options={question.answers}
                             value={formik.values['question_' + index]}

@@ -5,6 +5,7 @@ import SimpleLink from '../UI/Buttons/SimpleLink/SimpleLink';
 import Button from '../UI/Buttons/Button/Button';
 
 import { logoutUser } from '../../app/features/userSlice';
+import { setShowLogoutButton } from '../../app/features/headerUISlice';
 
 import styles from './defaultHeader.module.css';
 
@@ -57,6 +58,7 @@ function DefaultHeader() {
 
     const handleLogout = () => {
         dispatch(logoutUser());
+        dispatch(setShowLogoutButton(false));
         navigate('/login');
     }
     
