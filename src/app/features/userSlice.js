@@ -52,32 +52,38 @@ export const userReducer = createSlice({
 
               state.user = action.payload;
 
-              state.user.languages = state.user.languages.map((language) => {
-                return {
-                    id: state.user.id + '-' + language.languageCode,
-                    languageCode: language.languageCode,
-                    level: language.level
-                };
-              });
+              if (state.user.languages) {
+                state.user.languages = state.user.languages.map((language) => {
+                  return {
+                      id: state.user.id + '-' + language.languageCode,
+                      languageCode: language.languageCode,
+                      level: language.level
+                  };
+                });
+              }
 
-              state.user.education = state.user.education.map((diploma) => {
-                return {
-                    id: diploma.id,
-                    diploma: {
-                        name: diploma.diploma
-                    },
-                    institution: diploma.institution,
-                    startDate: diploma.start,
-                    endDate: diploma.end
-                };
-              });
+              if (state.user.education) {
+                state.user.education = state.user.education.map((diploma) => {
+                  return {
+                      id: diploma.id,
+                      diploma: {
+                          name: diploma.diploma
+                      },
+                      institution: diploma.institution,
+                      startDate: diploma.start,
+                      endDate: diploma.end
+                  };
+                });
+              }
 
-              state.user.skills = state.user.skills.map((skill) => {
-                return {
-                    id: state.user.id + '-skill-' + skill.skill_code,
-                    code: skill.skill_code
-                };
-              });
+              if (state.user.skills) {
+                state.user.skills = state.user.skills.map((skill) => {
+                  return {
+                      id: state.user.id + '-skill-' + skill.skill_code,
+                      code: skill.skill_code
+                  };
+                });
+              }
 
             }
 
