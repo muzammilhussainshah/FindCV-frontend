@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './Button.module.css';
 
-function Button({ className, icon, icon_position, disabled = false, outlined, children, ...props }) {
+function Button({ className, color, icon, icon_position, disabled = false, outlined, children, ...props }) {
     // console.log(props);
 
     const icon_class = icon ? `icon-${icon}` : '';
@@ -11,6 +11,10 @@ function Button({ className, icon, icon_position, disabled = false, outlined, ch
 
     if (outlined) {
         buttonClass += ` ${styles.buttonOutline}`;
+    }
+
+    if (color) {
+        buttonClass += ` ${styles[color]}`;
     }
 
     if (props.href) {

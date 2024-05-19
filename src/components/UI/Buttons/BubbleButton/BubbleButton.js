@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './BubbleButton.module.css';
 
-function BubbleButton({ className, small, icon, icon_position, iconOnlyOnMobile, children, ...props }) {
+function BubbleButton({ className, small, dark, icon, icon_position, iconOnlyOnMobile, children, ...props }) {
     // console.log(props);
 
     const icon_class = icon ? `icon-${icon}` : '';
@@ -12,6 +12,10 @@ function BubbleButton({ className, small, icon, icon_position, iconOnlyOnMobile,
     if (small) {
         buttonClass += ` ${styles.small}`;
     }
+
+    if (dark) {
+        buttonClass += ` ${styles.dark}`;
+    }
     
     if (iconOnlyOnMobile) {
         buttonClass += ` ${styles.iconOnlyOnMobile}`;
@@ -19,7 +23,14 @@ function BubbleButton({ className, small, icon, icon_position, iconOnlyOnMobile,
 
     const href = props.href ? props.href : false;
 
-    if (href) {
+    if (props.type) {
+        return (
+            <button className={buttonClass} {...props}>
+                <span>{children}</span>
+            </button>
+        );
+    }
+    else if (href) {
         return (
             <a className={buttonClass} {...props}>
                 <span>{children}</span>

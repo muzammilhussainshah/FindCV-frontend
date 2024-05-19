@@ -15,6 +15,11 @@
     color: #fff;
 }
 
+.button.red {
+    background-color: #C8102E;
+    border-color: #C8102E;
+}
+
 .button:hover {
     opacity: 0.7;
 }

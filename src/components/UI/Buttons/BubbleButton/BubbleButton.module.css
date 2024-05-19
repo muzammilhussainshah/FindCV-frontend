@@ -8,6 +8,11 @@
     cursor: pointer;
     position: relative;
     text-decoration: none;
+    border-width: 0;
+}
+
+.button.dark {
+    background-color: #0464B2;
 }
 
 .button span {
@@ -15,6 +20,17 @@
     line-height: 1;
     font-weight: 600;
     color: #fff;
+}
+
+.button.small {
+    text-align: center;
+    padding: 5px 15px;
+    min-width: 90px;
+}
+
+.button.small span {
+    font-size: 14px;
+    line-height: 1.2;
 }
 
 .button:global(.icon-left) {
@@ -57,17 +73,6 @@
 .button:hover {
     /* background-color: #0464B2; */
     opacity: 0.7;
-}
-
-.button.small {
-    text-align: center;
-    padding: 5px 15px;
-    min-width: 90px;
-}
-
-.button.small span {
-    font-size: 14px;
-    line-height: 1.2;
 }
 
 @media screen and (max-width: 1024px) {

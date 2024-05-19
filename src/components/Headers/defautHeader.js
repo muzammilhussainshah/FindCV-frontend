@@ -85,6 +85,9 @@ function DefaultHeader() {
                                 <div className={`${styles.header_user_drop} ${isOpenDropdown ? styles.open : ''}`}>
                                     <SimpleLink onClick={toggleDropdown} to={`${user.account_type}s/${user.id}`}>Profile</SimpleLink>
                                     <SimpleLink onClick={toggleDropdown} to="/profile/settings">Settings</SimpleLink>
+                                    {(user.account_type === 'employer') && (
+                                        <SimpleLink onClick={toggleDropdown} to="/profile/subscription">Subscription</SimpleLink>
+                                    )}
                                     <SimpleLink onClick={handleLogout}>Logout</SimpleLink>
                                 </div>
                             </div>

@@ -82,7 +82,7 @@ function VerificationProcess({finish_callback, ...props}) {
         content = <div id="veriff-root"></div>;
     }
     else {
-        content = <PaymentForm />;
+        content = <PaymentForm actionType='pay_for_verification' />;
     }
 
     return (

@@ -156,9 +156,18 @@
     background-image: url('../../assets/images/icons/settings-white.svg');
 }
 
-.header_user_drop > span:nth-child(3):after {
+.header_user_drop > a:nth-child(3):after {
+    background-image: url('../../assets/images/icons/card.svg');
+}
+.header_user_drop > a:nth-child(3):hover:after {
+    background-image: url('../../assets/images/icons/card-white.svg');
+}
+
+.header_user_drop > span:nth-child(3):after,
+.header_user_drop > span:nth-child(4):after {
     background-image: url('../../assets/images/icons/logout.svg');
 }
-.header_user_drop > span:nth-child(3):hover:after {
+.header_user_drop > span:nth-child(3):hover:after,
+.header_user_drop > span:nth-child(4):hover:after {
     background-image: url('../../assets/images/icons/logout-white.svg');
 }

@@ -18,6 +18,7 @@ import Welcome from '../pages/Welcome/Welcome';
 import EmployerProfile from '../pages/Employer/Profile/EmployerProfile';
 import JobseekerProfile from '../pages/Jobseeker/Profile/JobseekerProfile';
 import ProfileSettings from '../pages/Profile/ProfileSettings/ProfileSettings';
+import ProfileEmployerSubscription from '../pages/Profile/ProfileEmployerSubscription/ProfileEmployerSubscription';
 
 import i18n from './i18n';
 
@@ -73,7 +74,11 @@ function App() {
           <Route path="profile/settings" element={
             <ProtectedRoute userStatus="loggedIn">
               <ProfileSettings />
-            </ProtectedRoute>}  />
+            </ProtectedRoute>} />
+            <Route path="profile/subscription" element={
+            <ProtectedRoute userStatus="loggedIn">
+              <ProfileEmployerSubscription />
+            </ProtectedRoute>} />
         </Route>
       </Routes>
     </Router>

@@ -35,15 +35,15 @@ const CARD_ELEMENT_OPTIONS = {
     }
   };
 
-function PaymentForm() {
+function PaymentForm({ actionType, ...props}) {
     return (
         <Elements stripe={stripePromise}>
-            <StripeForm />
+            <StripeForm actionType={actionType} />
         </Elements>
     );
 }
 
-function StripeForm({ props }) {
+function StripeForm({ actionType, ...props }) {
     const stripe = useStripe();
     const elements = useElements();
     const dispatch = useDispatch();
@@ -77,7 +77,7 @@ function StripeForm({ props }) {
             setError(error.message);
         } else {
             
-            toast.promise(requestTransaction({ token: userToken, paymentMethod }), {
+            toast.promise(requestTransaction({ token: userToken, paymentMethod, actionType }), {
                 loading: t('general.UI.loading'),
                 success: <b>{t('general.UI.success')}</b>,
                 error: (err) => {
@@ -86,6 +86,7 @@ function StripeForm({ props }) {
             })
             .then((data) => {
                 dispatch(fetchUserByToken(userToken));
+                setLoading(false);
             })
             .catch((err) => {
                 toast.error(t('general.UI.something_went_wrong'));
@@ -93,8 +94,6 @@ function StripeForm({ props }) {
             });
 
         }
-
-        setLoading(false);
 
     }
 
