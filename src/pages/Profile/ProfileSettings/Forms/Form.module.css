@@ -71,3 +71,25 @@
 }
 
 .profile_visibility {}
+
+@media screen and (max-width: 1024px) {
+    .form_wrapper {
+        flex-direction: column;
+    }
+    .form_wrapper .col:nth-child(1),
+    .form_wrapper .col:nth-child(2) {
+        max-width: 500px;
+        width: 100%;
+        margin: auto;
+    }
+    .form_wrapper .profile_image > div {
+        width: auto;
+        height: 400px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .form_wrapper .profile_image > div {
+        height: calc(100vw - 40px);
+    }
+}

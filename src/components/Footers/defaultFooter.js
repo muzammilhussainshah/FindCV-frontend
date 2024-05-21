@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import LanguageSwitch from '../UI/LanguageSwitch/LanguageSwitch';
 import SimpleLink from '../UI/Buttons/SimpleLink/SimpleLink';
 
@@ -14,6 +16,8 @@ import instagram_icon from '../../assets/images/icons/instagram.svg';
 import instagram_icon_white from '../../assets/images/icons/instagram-white.svg';
 
 function DefaultFooter() {
+    const { t } = useTranslation();
+
     return (
         <footer className={styles.footer}>
             <div className="fcv-content">
@@ -22,7 +26,7 @@ function DefaultFooter() {
                     <div className={styles.footer_main}>
                         <div className={styles.col}>
                             <img src={logoImage} alt="FindCV logo" />
-                            <p>Empowering Connections, Shaping Futures.</p>
+                            <p>{t('defaultFooter.moto')}</p>
                             <LanguageSwitch />
 
                             <nav>
@@ -47,38 +51,38 @@ function DefaultFooter() {
 
                         <div className={styles.col}>
                             <nav>
-                                <h6>For Employer</h6>
-                                <SimpleLink to="/talents">Talents</SimpleLink>
-                                <SimpleLink href="https://findcv.com/about">About</SimpleLink>
-                                <SimpleLink href="https://findcv.com/about#faq">FAQs</SimpleLink>
+                                <h6>{t('defaultFooter.menu_title_1')}</h6>
+                                <SimpleLink to="/talents">{t('defaultFooter.talents')}</SimpleLink>
+                                <SimpleLink href="https://findcv.com/about">{t('defaultFooter.about')}</SimpleLink>
+                                <SimpleLink href="https://findcv.com/about#faq">{t('defaultFooter.faqs')}</SimpleLink>
                             </nav>
                             <nav>
-                                <h6>For Job Seeker</h6>
-                                <SimpleLink to="/talents">Jobs</SimpleLink>
-                                <SimpleLink href="https://findcv.com/about">About</SimpleLink>
-                                <SimpleLink href="https://findcv.com/about#faq">FAQs</SimpleLink>
+                                <h6>{t('defaultFooter.menu_title_2')}</h6>
+                                <SimpleLink to="/jobs">{t('defaultFooter.jobs')}</SimpleLink>
+                                <SimpleLink href="https://findcv.com/about">{t('defaultFooter.about')}</SimpleLink>
+                                <SimpleLink href="https://findcv.com/about#faq">{t('defaultFooter.faqs')}</SimpleLink>
                             </nav>
                             <nav>
-                                <h6>Other</h6>
-                                <SimpleLink href="https://findcv.com/">Homepage</SimpleLink>
-                                <SimpleLink href="https://findcv.com/about">About</SimpleLink>
-                                <SimpleLink href="https://findcv.com/contact-us">Contact Us</SimpleLink>
-                                <SimpleLink href="https://findcv.com/blog">Blog</SimpleLink>
+                                <h6>{t('defaultFooter.menu_title_3')}</h6>
+                                <SimpleLink href="https://findcv.com/">{t('defaultFooter.homepage')}</SimpleLink>
+                                <SimpleLink href="https://findcv.com/about">{t('defaultFooter.about')}</SimpleLink>
+                                <SimpleLink href="https://findcv.com/contact-us">{t('defaultFooter.contact_us')}</SimpleLink>
+                                <SimpleLink href="https://findcv.com/blog">{t('defaultFooter.blog')}</SimpleLink>
                             </nav>
                         </div>
                     </div>
                     <div className={styles.footer_second}>
                         <div className={styles.col}>
-                            <SimpleLink href="https://findcv.com/terms-of-use">Terms of use</SimpleLink>
-                            <SimpleLink href="https://findcv.com/privacy-policy">Privacy Policy</SimpleLink>
+                            <SimpleLink href="https://findcv.com/terms-of-use">{t('defaultFooter.terms_of_use')}</SimpleLink>
+                            <SimpleLink href="https://findcv.com/privacy-policy">{t('defaultFooter.privacy_policy')}</SimpleLink>
                         </div>
 
                         <div className={styles.col}>
-                            <p>© 2024 FindCV. All rights reserved.</p>
+                            <p>{t('defaultFooter.privacy_text')}</p>
                         </div>
 
                         <div className={styles.col}>
-                            <p>Made by <a href="https://zenith.team/">Zenith</a></p>
+                            <p>Made by <a href="https://zenith.team/" rel='nofollow'>Zenith</a></p>
                         </div>
                     </div>
 

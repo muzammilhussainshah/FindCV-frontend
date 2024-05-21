@@ -18,16 +18,15 @@ export const useGetSkillsHook = () => {
 }
 
 export const useGetCompanyIndustriesHook = () => {
-    // const { t } = useTranslation();
+    const { t } = useTranslation();
 
-    const industry_codes = ["Agriculture", "Automotive", "Banking", "Biotechnology", "Chemical", "Construction", "Consulting", "Education", "Electronics", "Energy", "Engineering", "Entertainment", "Environmental", "Finance", "Food and Beverage", "government", "Healthcare", "Hospitality", "Insurance", "Legal", "Manufacturing", "Media", "Nonprofit", "Pharmaceutical", "Real Estate", "Retail", "Telecommunications", "Transportation", "Travel", "Utilities"];
+    const industry_codes = ["agriculture", "automotive", "banking", "biotechnology", "chemicals", "construction", "consulting", "consumer_goods", "education", "energy", "engineering", "entertainment", "financial_services", "food_beverage", "healthcare", "hospitality", "insurance", "internet", "logistics", "manufacturing", "marketing", "media", "non_profit", "pharmaceutical", "real_estate", "retail", "software", "telecommunications", "transportation", "utilities"];
     const industries = [];
 
     industry_codes.forEach(industry => {
         industries.push({
             value: industry,
-            label: industry
-            // label: t(`general.industry.${industry}`)
+            label: t(`general.company_industries.${industry}`)
         });
     });
 

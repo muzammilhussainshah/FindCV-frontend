@@ -26,3 +26,13 @@
 .infoBlock span:nth-child(3) {
     color: #0464B2;
 }
+
+:global(.fcv-rtl) .infoBlock {
+    padding: 12px 50px 12px 15px;
+    flex-direction: row-reverse;
+}
+
+:global(.fcv-rtl) .infoBlock img {
+    left: auto;
+    right: 15px;
+}

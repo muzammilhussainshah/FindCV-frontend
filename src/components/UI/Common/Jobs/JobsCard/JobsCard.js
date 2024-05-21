@@ -1,5 +1,6 @@
 import Flag from 'react-flags';
 import BubbleButton from '../../../Buttons/BubbleButton/BubbleButton';
+import Button from '../../../Buttons/Button/Button';
 
 import category_icon from '../../../../../assets/images/icons/job_categories/construction.svg';
 import money_icon from '../../../../../assets/images/icons/money-alt.svg';
@@ -65,6 +66,7 @@ function JobsCard({ test, ...props }) {
                     <img src={suitcase_icon} alt="Jobtype Icon" />
                     <span>Full-time</span>
                 </p>
+                <Button>View</Button>
             </div>
         </div>
     );

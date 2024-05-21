@@ -171,3 +171,123 @@
 .header_user_drop > span:nth-child(4):hover:after {
     background-image: url('../../assets/images/icons/logout-white.svg');
 }
+
+.trigger {
+    display: none;
+    width: 30px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+    margin-left: 20px;
+    top: 5px;
+    z-index: 2;
+}
+
+.trigger i {
+    transition: all 0.3s ease;
+    transform: rotate(0deg);
+    width: 30px;
+    height: 2px;
+    background-color: #09AEEF;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    margin-left: -15px;
+}
+
+.trigger i:nth-child(1) {
+    top: 0;
+}
+
+.trigger i:nth-child(2) {
+    top: 50%;
+    margin-top: -1px;
+}
+
+.trigger i:nth-child(3) {
+    bottom: 0;
+}
+
+.trigger_open i:nth-child(1),
+.trigger_open i:nth-child(2) {
+    top: 50%;
+    margin-top: -1px;
+    transform: rotate(45deg);
+}
+
+.trigger_open i:nth-child(3) {
+    top: 50%;
+    margin-top: -1px;
+    transform: rotate(-45deg);
+}
+
+.mobile_menu {
+    transition: all 0.7s ease;
+    position: fixed;
+    right: -350px;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    background-color: #fff;
+    width: 300px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    padding-top: 75px;
+    display: none;
+}
+
+.mobile_menu_open {
+    right: 0;
+}
+
+.mobile_menu a:nth-child(1) {
+    border-top: 2px solid #EBF9FF;
+}
+
+.mobile_menu > a,
+.mobile_menu > span {
+    display: block;
+    padding: 15px 20px;
+    font-weight: 600;
+    color: #093559;
+    border-bottom: 2px solid #EBF9FF;
+}
+
+:global(.fcv-rtl) .header_user_drop > a,
+:global(.fcv-rtl) .header_user_drop > span {
+    text-align: right;
+}
+
+:global(.fcv-rtl) .header_user_drop > a:after,
+:global(.fcv-rtl) .header_user_drop > span:after {
+    right: auto;
+    left: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+    .header {
+        position: fixed;
+        background-color: #fff;
+    }
+    .header .col:nth-child(1) nav {
+        display: none;
+    }
+    .header_user {
+        display: none;
+    }
+    .trigger {
+        display: inline-block;
+    }
+    .mobile_menu {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .header img {
+        max-width: 130px;
+    }
+    .header .col:nth-child(2) > a {
+        padding: 8px 15px;
+        min-width: 0;
+    }
+}

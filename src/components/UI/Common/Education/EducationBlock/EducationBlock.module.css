@@ -9,7 +9,7 @@
 .education .head {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .education .head span {
@@ -24,6 +24,7 @@
 }
 
 .education .head span:nth-child(2) {
+    width: 90px;
     color: #0464B2;
 }
 
@@ -122,6 +123,10 @@
 
 :global(.fcv-rtl) .education .head span:nth-child(1) {
     text-align: right;
+}
+
+:global(.fcv-rtl) .education .head span:nth-child(2) {
+    text-align: left;
 }
 
 :global(.fcv-rtl) .education .removeButton {

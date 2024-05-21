@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import SimpleLink from '../UI/Buttons/SimpleLink/SimpleLink';
 import Button from '../UI/Buttons/Button/Button';
 
@@ -15,23 +16,34 @@ import userAvatarPlaceholder from '../../assets/images/other/user_avatar_placeho
 function DefaultHeader() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { t } = useTranslation();
 
     const user = useSelector((state) => state.user.user);
     const [isOpenDropdown, setIsOpenDropdown] = useState(false);
+    const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
     
     let displayName = '';
     let menuItems = <>
-        <SimpleLink to="/jobs">Jobs List</SimpleLink>
-        <SimpleLink to="/jobseekers">Discover Employees</SimpleLink>
+        <SimpleLink to="/jobs">{t('defaultHeader.jobs')}</SimpleLink>
+        <SimpleLink to="/jobseekers">{t('defaultHeader.jobseekers')}</SimpleLink>
     </>;
+    
+
+    let triggerClass = styles.trigger;
+    let mobileMenuClass = styles.mobile_menu;
+
+    if (isOpenMobileMenu) {
+        triggerClass += ` ${styles.trigger_open}`;
+        mobileMenuClass += ` ${styles.mobile_menu_open}`;
+    }
 
     if (user) {
         
         if (user.account_type === 'employer') {
             menuItems = <>
-                <SimpleLink to="/my-jobs">My Jobs</SimpleLink>
-                <SimpleLink to="/post-a-jobs">Post a Job</SimpleLink>
-                <SimpleLink to="/jobseekers">Discover Employees</SimpleLink>
+                <SimpleLink to="/my-jobs">{t('defaultHeader.my_jobs')}</SimpleLink>
+                <SimpleLink to="/post-a-jobs">{t('defaultHeader.post_a_jobs')}</SimpleLink>
+                <SimpleLink to="/jobseekers">{t('defaultHeader.jobseekers')}</SimpleLink>
             </>;
 
             if (user.employer_status === 'business') {
@@ -44,7 +56,7 @@ function DefaultHeader() {
         }
         else {
             menuItems = <>
-                <SimpleLink to="/jobs">Jobs List</SimpleLink>
+                <SimpleLink to="/jobs">{t('defaultHeader.jobs')}</SimpleLink>
             </>;
 
             displayName = user.full_name;
@@ -54,6 +66,10 @@ function DefaultHeader() {
 
     const toggleDropdown = () => {
         setIsOpenDropdown(!isOpenDropdown);
+    }
+
+    const handleMobileMenu = () => {
+        setIsOpenMobileMenu(!isOpenMobileMenu);
     }
 
     const handleLogout = () => {
@@ -83,17 +99,34 @@ function DefaultHeader() {
                                     <span>{displayName.length > 10 ? `${displayName.substring(0, 10)}...` : displayName}</span>
                                 </div>
                                 <div className={`${styles.header_user_drop} ${isOpenDropdown ? styles.open : ''}`}>
-                                    <SimpleLink onClick={toggleDropdown} to={`${user.account_type}s/${user.id}`}>Profile</SimpleLink>
-                                    <SimpleLink onClick={toggleDropdown} to="/profile/settings">Settings</SimpleLink>
+                                    <SimpleLink onClick={toggleDropdown} to={`${user.account_type}s/${user.id}`}>{t('defaultHeader.profile')}</SimpleLink>
+                                    <SimpleLink onClick={toggleDropdown} to="/profile/settings">{t('defaultHeader.settings')}</SimpleLink>
                                     {(user.account_type === 'employer') && (
-                                        <SimpleLink onClick={toggleDropdown} to="/profile/subscription">Subscription</SimpleLink>
+                                        <SimpleLink onClick={toggleDropdown} to="/profile/subscription">{t('defaultHeader.subscription')}</SimpleLink>
                                     )}
-                                    <SimpleLink onClick={handleLogout}>Logout</SimpleLink>
+                                    <SimpleLink onClick={handleLogout}>{t('defaultHeader.logout')}</SimpleLink>
                                 </div>
                             </div>
                         ) : (
-                            <Button to="/login">Login</Button>
+                            <Button to="/login">{t('defaultHeader.login')}</Button>
                         )}
+
+                        <div className={triggerClass} onClick={handleMobileMenu}>
+                            <i></i><i></i><i></i>
+                        </div>
+                        <div className={mobileMenuClass}>
+                            {menuItems}
+                            {user && (
+                                <>
+                                    <SimpleLink onClick={handleMobileMenu} to={`${user.account_type}s/${user.id}`}>{t('defaultHeader.profile')}</SimpleLink>
+                                    <SimpleLink onClick={handleMobileMenu} to="/profile/settings">{t('defaultHeader.settings')}</SimpleLink>
+                                    {(user.account_type === 'employer') && (
+                                        <SimpleLink onClick={handleMobileMenu} to="/profile/subscription">{t('defaultHeader.subscription')}</SimpleLink>
+                                    )}
+                                    <SimpleLink onClick={handleMobileMenu}>{t('defaultHeader.logout')}</SimpleLink>
+                                </>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

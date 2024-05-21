@@ -19,3 +19,21 @@
     border-radius: 15px;
     border: 2px solid #093559;
 }
+
+@media screen and (max-width: 1024px) {
+    .employer_profile {
+        flex-direction: column;
+        align-items: center;
+        max-width: 600px;
+    }
+    .employer_profile_col:nth-child(1) {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .employer_profile_col:nth-child(2) {
+        width: 100%;
+    }
+    .employer_profile_image {
+        width: 100%;
+    }
+}

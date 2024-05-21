@@ -107,8 +107,8 @@ function EmployerForm({user}) {
             }
 
             toast.promise(updateUser(formData), {
-                loading: "Updating profile...",
-                success: <b>Profile updated!</b>,
+                loading: t('edit_profile.updating_profile'),
+                success: <b>{t('edit_profile.profile_updated')}</b>,
                 error: (err) => {
                     return <b>{err.response.data.error}</b>;
                 },
@@ -139,8 +139,8 @@ function EmployerForm({user}) {
     }
 
     const employerStatusOptions = [
-        { value: 'business', label: "Business" },
-        { value: 'individual', label: "Individual" }
+        { value: 'business', label: t('edit_profile.employer.business') },
+        { value: 'individual', label: t('edit_profile.employer.individual') }
     ];
     const companySizeOptions = [
         { value: '1 - 10', label: '1 - 10' },
@@ -160,7 +160,7 @@ function EmployerForm({user}) {
                     <FormField 
                         name="company_name" 
                         type="text" 
-                        label="Company Name*"
+                        label={t('edit_profile.employer.company_name')}
                         hasBorder
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -172,7 +172,7 @@ function EmployerForm({user}) {
                     <FormField 
                         name="company_website" 
                         type="text" 
-                        label="Company Website"
+                        label={t('edit_profile.employer.company_website')}
                         hasBorder
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -183,7 +183,7 @@ function EmployerForm({user}) {
                 <div>
                     <FormSelectField
                         name="company_industries"
-                        label="Company Industries"
+                        label={t('edit_profile.employer.company_industries')}
                         type="default"
                         hasBorder
                         isMulti
@@ -196,7 +196,7 @@ function EmployerForm({user}) {
                 <div>
                     <FormSelectField
                         name="company_size"
-                        label="Company Size"
+                        label={t('edit_profile.employer.company_size')}
                         type="default"
                         hasBorder
                         options={companySizeOptions}
@@ -214,7 +214,7 @@ function EmployerForm({user}) {
                 <FormSelectField
                     name="nationality" 
                     type="nationality" 
-                    label="Nationality*"
+                    label={t('edit_profile.employer.nationality')}
                     hasBorder
                     onFormikChange={formik.handleChange}
                     value={formik.values.nationality}
@@ -242,12 +242,12 @@ function EmployerForm({user}) {
                 </div>
             </div>
             <div className={styles.col}>
-                <Subtitle dark>Employer Information</Subtitle>
+                <Subtitle dark>{t('edit_profile.employer.employer_information_title')}</Subtitle>
                 <div>
                     <FormField 
                         name="name" 
                         type="text" 
-                        label="Name*"
+                        label={t('edit_profile.employer.name')}
                         hasBorder
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -259,7 +259,7 @@ function EmployerForm({user}) {
                     <FormField 
                         name="email" 
                         type="email" 
-                        label="Email*"
+                        label={t('edit_profile.employer.email')}
                         hasBorder
                         // {user.email_verified && }
                         onChange={formik.handleChange}
@@ -271,7 +271,7 @@ function EmployerForm({user}) {
                 <div>
                     <FormOptionField
                         name="employer_status"
-                        label="You are:"
+                        label={t('edit_profile.employer.you_are')}
                         type="radio"
                         dark
                         onChange={formik.handleChange}
@@ -286,7 +286,7 @@ function EmployerForm({user}) {
                     <FormSelectField
                         name="country" 
                         type="country" 
-                        label="Country*"
+                        label={t('edit_profile.employer.country')}
                         hasBorder
                         onFormikChange={formik.handleChange}
                         value={formik.values.country}
@@ -297,7 +297,7 @@ function EmployerForm({user}) {
                     <FormField 
                         name="city" 
                         type="text" 
-                        label="City*"
+                        label={t('edit_profile.employer.city')}
                         hasBorder
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -307,12 +307,12 @@ function EmployerForm({user}) {
                 </div>
                 <br />
 
-                <Subtitle dark>Change Password</Subtitle>
+                <Subtitle dark>{t('edit_profile.employer.change_password_title')}</Subtitle>
                 <div>
                     <FormField 
                         name="password" 
                         type="password" 
-                        label="New Password"
+                        label={t('edit_profile.employer.new_password')}
                         hasBorder
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -324,7 +324,7 @@ function EmployerForm({user}) {
                     <FormField 
                         name="password_repeat" 
                         type="password" 
-                        label="Repeat Password"
+                        label={t('edit_profile.employer.repeat_password')}
                         hasBorder
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}

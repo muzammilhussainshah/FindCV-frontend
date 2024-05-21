@@ -78,7 +78,7 @@ function JobseekerForm({user}) {
         isLogicMoreThan30Days = logicTestRequestDate < thirtyDaysAgo;
     }
 
-    console.log(user);
+    // console.log(user);
 
     const formik = useFormik({
         initialValues: {
@@ -223,8 +223,8 @@ function JobseekerForm({user}) {
             }
 
             toast.promise(updateUser(formData), {
-                loading: "Updating profile...",
-                success: <b>Profile updated!</b>,
+                loading: t('edit_profile.updating_profile'),
+                success: <b>{t('edit_profile.profile_updated')}</b>,
                 error: (err) => {
                     return <b>{err.response.data.error}</b>;
                 },
@@ -394,10 +394,10 @@ function JobseekerForm({user}) {
                     {user.verification_status === 'approved' ? (
                         <div className={styles.profile_verified}>
                             <img src={user_verified_icon} alt="verified" />
-                            <span>Verified</span>
+                            <span>{t('edit_profile.job_seeker.verified')}</span>
                         </div>
                     ) : (
-                        <BubbleButton onClick={() => handlePopupOpen('verification')} style={{width: '100%', marginBottom: 15}}>Verify Profile</BubbleButton>
+                        <BubbleButton onClick={() => handlePopupOpen('verification')} style={{width: '100%', marginBottom: 15}}>{t('edit_profile.job_seeker.verify_profile')}</BubbleButton>
                     )}
 
                     <div className={styles.profile_visibility}>
@@ -406,7 +406,7 @@ function JobseekerForm({user}) {
                             dark
                             type="checkbox"
                             options={[
-                                { value: true, label: "Show profile in search results" },
+                                { value: true, label: t('edit_profile.job_seeker.show_profile_in_results') },
                             ]}
                             onChange={formik.handleChange}
                             value={formik.values.profile_visibility}
@@ -415,15 +415,15 @@ function JobseekerForm({user}) {
                 </div>
                 <div className={styles.col}>
 
-                    {user.verification_status === 'declined' && <Notice warning>Your identity verification was denied. Please try again and ensure your photos are clear.</Notice>}
-                    {user.verification_status === 'submitted' && <Notice warning>Your identity verification is currently in progress. Please wait while we review your information.</Notice>}
+                    {user.verification_status === 'declined' && <Notice warning>{t('edit_profile.job_seeker.profile_verification_denied')}</Notice>}
+                    {user.verification_status === 'submitted' && <Notice warning>{t('edit_profile.job_seeker.profile_verification_pending')}</Notice>}
 
-                    <Subtitle dark>General Information</Subtitle>
+                    <Subtitle dark>{t('edit_profile.job_seeker.general_information_title')}</Subtitle>
                     <div>
                         <FormField 
                             name="email" 
                             type="email" 
-                            label="Email*"
+                            label={t('edit_profile.job_seeker.email')}
                             hasBorder
                             icon={user.email_verified && 'verified'}
                             onChange={formik.handleChange}
@@ -432,12 +432,12 @@ function JobseekerForm({user}) {
                             error={formik.touched.email && formik.errors.email}
                         />
                         
-                        {!user.email_verified && <Notice warning>A verification link has been sent to your email. Please check to verify email address.</Notice>}
+                        {!user.email_verified && <Notice warning>{t('edit_profile.job_seeker.email_notice')}</Notice>}
                     </div>
                     <div>
                         <FormRichTextField
                             name="description"
-                            label="Profile Description"
+                            label={t('edit_profile.job_seeker.description')}
                             hasBorder
                             onFormikChange={formik.handleChange}
                             value={formik.values.description}
@@ -447,7 +447,7 @@ function JobseekerForm({user}) {
                     <div>
                         <FormOptionField
                             name="gender"
-                            label={t('forms.welcome_job_seeker.step_1.gender')}
+                            label={t('edit_profile.job_seeker.gender')}
                             type="radio"
                             dark
                             options={genderOptions}
@@ -460,7 +460,7 @@ function JobseekerForm({user}) {
                         <FormDateField
                             name="birthdate" 
                             type="date" 
-                            label="Birth Date*"
+                            label={t('edit_profile.job_seeker.birthdate')}
                             hasBorder
                             onChange={formik.handleChange}
                             value={formik.values.birthdate}
@@ -471,7 +471,7 @@ function JobseekerForm({user}) {
                         <FormSelectField
                             name="country" 
                             type="country" 
-                            label="Country of current residence*"
+                            label={t('edit_profile.job_seeker.country')}
                             hasBorder
                             onFormikChange={formik.handleChange}
                             value={formik.values.country}
@@ -482,7 +482,7 @@ function JobseekerForm({user}) {
                         <FormSelectField
                             name="nationality" 
                             type="nationality" 
-                            label="Nationality*"
+                            label={t('edit_profile.job_seeker.nationality')}
                             hasBorder
                             onFormikChange={formik.handleChange}
                             value={formik.values.nationality}
@@ -493,7 +493,7 @@ function JobseekerForm({user}) {
                         <FormFileField 
                             name="cv_file" 
                             type="file" 
-                            label="Resume (CV)"
+                            label={t('edit_profile.job_seeker.cv_file')}
                             hasBorder
                             accept=".pdf,.doc,.docx,.odt"
                             onChange={formik.handleChange}
@@ -507,7 +507,7 @@ function JobseekerForm({user}) {
                         <FormFileField 
                             name="cv_ref_letter" 
                             type="file" 
-                            label="Reference letter"
+                            label={t('edit_profile.job_seeker.cv_ref_letter')}
                             hasBorder
                             accept=".pdf,.doc,.docx,.odt"
                             onChange={formik.handleChange}
@@ -570,21 +570,21 @@ function JobseekerForm({user}) {
                     <Subtitle 
                         dark
                         hasButton 
-                        buttonText="TRY AGAIN ->"
+                        buttonText={t('general.UI.try_again')}
                         buttonOnClick={() => handlePopupOpen('logicTest')}
                     >
-                        Work Proficiency Test
+                        {t('edit_profile.job_seeker.work_proficiency_test_title')}
                     </Subtitle>
                     <div style={{marginBottom: 50}}>
                         <LogicTestBar fill={user.logic_test_result} />
                     </div>
 
-                    <Subtitle dark>Change Password</Subtitle>
+                    <Subtitle dark>{t('edit_profile.job_seeker.change_password_title')}</Subtitle>
                     <div>
                         <FormField 
                             name="password" 
                             type="password" 
-                            label="New Password"
+                            label={t('edit_profile.job_seeker.password')}
                             hasBorder
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
@@ -596,7 +596,7 @@ function JobseekerForm({user}) {
                         <FormField 
                             name="password_repeat" 
                             type="password" 
-                            label="Repeat Password"
+                            label={t('edit_profile.job_seeker.password_repeat')}
                             hasBorder
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
@@ -657,7 +657,7 @@ function JobseekerForm({user}) {
                             <LogicTestForm isDark questions={testOptions} answersToken={answersToken} callback={() => handlePopupClose('logicTest')} />
                         ) : (
                             <div style={{textAlign: 'center'}}>
-                                <h6 style={{marginBottom: 15}}>Work Proficiency Test</h6>
+                                <h6 style={{marginBottom: 15}}>{t('edit_profile.job_seeker.work_proficiency_test_title')}</h6>
                                 <Button type="button" onClick={handleStartTest}>
                                     {isTestLoading ? t('general.UI.loading') : t('forms.welcome_job_seeker.step_3.take_test')}
                                 </Button>
@@ -665,7 +665,7 @@ function JobseekerForm({user}) {
                         )
 
                     ) : (
-                        <h6 style={{textAlign: 'center', marginBottom: 0}}>Test can be taken only once every 30 days</h6>
+                        <h6 style={{textAlign: 'center', marginBottom: 0}}>{t('forms.welcome_job_seeker.step_3.test_frequency')}</h6>
                     )}
                 </BasicPopup>
             }

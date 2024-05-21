@@ -72,11 +72,13 @@ function VerificationProcess({finish_callback, ...props}) {
                 vendorData: ' '
             });
 
-            veriff.mount();
+            veriff.mount({
+                submitBtnText: t('forms.verification.get_verified')
+            });
 
         }
 
-    }, [user, language, userToken, memoizedFinishCallback]);
+    }, [user, language, userToken, t, memoizedFinishCallback]);
 
     if (user.verification_payment_done) {
         content = <div id="veriff-root"></div>;

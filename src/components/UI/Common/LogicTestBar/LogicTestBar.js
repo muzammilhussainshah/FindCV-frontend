@@ -1,6 +1,9 @@
+import { useTranslation } from 'react-i18next';
+
 import styles from './LogicTestBar.module.css';
 
 function LogicTestBar({fill, children, ...props}) {
+    const { t } = useTranslation();
 
     let percentage_fill = fill * 10;
     let color = '';
@@ -9,27 +12,27 @@ function LogicTestBar({fill, children, ...props}) {
     switch (true) {
         case fill === null:
             color = '#B2B2B2';
-            desc = 'Not Attempted';
+            desc = t('general.logic_test_bar.not_attempted');
             break;
         case percentage_fill >= 80:
             color = '#34A853';
-            desc = `Excellent - (${percentage_fill}%)`;
+            desc = `${t('general.logic_test_bar.excellent')} - (${percentage_fill}%)`;
             break;
         case percentage_fill >= 60:
             color = '#AEB930';
-            desc = `Good - (${percentage_fill}%)`;
+            desc = `${t('general.logic_test_bar.good')} - (${percentage_fill}%)`;
             break;
         case percentage_fill >= 40:
             color = '#F2C94C';
-            desc = `Average - (${percentage_fill}%)`;
+            desc = `${t('general.logic_test_bar.average')} - (${percentage_fill}%)`;
             break;
         case percentage_fill >= 20:
             color = '#F2884C';
-            desc = `Poor - (${percentage_fill}%)`;
+            desc = `${t('general.logic_test_bar.poor')} - (${percentage_fill}%)`;
             break;
         default:
             color = '#EA4335';
-            desc = `Very Poor - (${fill}%)`;
+            desc = `${t('general.logic_test_bar.very_poor')} - (${fill}%)`;
             break;
     }
 

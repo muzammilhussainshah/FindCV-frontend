@@ -18,6 +18,83 @@
         "step_3": "الخطوه 3",
         "step_4": "الخطوه 4"
     },
+    "edit_profile": {
+        "edit_profile": "تعديل الملف الشخصي",
+        "updating_profile": "جارٍ تحديث الملف الشخصي...",
+        "profile_updated": "تحديث الملف الشخصي!",
+        "employer": {
+            "individual": "فردي",
+            "business": "عمل",
+            "company_name": "اسم الشركة*",
+            "company_website": "موقع الشركة",
+            "company_industries": "صناعات الشركة",
+            "company_size": "حجم الشركة",
+            "nationality": "جنسية*",
+            "name": "اسم*",
+            "email": "بريد إلكتروني*",
+            "you_are": "أنت:",
+            "country": "دولة*",
+            "city": "مدينة*",
+            "new_password": "كلمة المرور الجديدة",
+            "repeat_password": "اعد كلمة السر",
+            "employer_information_title": "معلومات صاحب العمل",
+            "change_password_title": "تغيير كلمة المرور"
+        },
+        "job_seeker": {
+            "verified": "تم التحقق",
+            "verify_profile": "التحقق من الملف الشخصي",
+            "show_profile_in_results": "إظهار الملف الشخصي في نتائج البحث",
+            "profile_verification_denied": "تم رفض التحقق من هويتك. يرجى المحاولة مرة أخرى والتأكد من أن صورك واضحة.",
+            "profile_verification_pending": "التحقق من هويتك قيد التقدم حاليًا. يرجى الانتظار بينما نقوم بمراجعة المعلومات الخاصة بك.",
+            "general_information_title": "معلومات عامة",
+            "work_proficiency_test_title": "اختبار الكفاءة في العمل",
+            "change_password_title": "تغيير كلمة المرور",
+            "email": "بريد إلكتروني*",
+            "email_notice": "تم إرسال رابط التحقق إلى بريدك الإلكتروني. يرجى التحقق للتحقق من عنوان البريد الإلكتروني.",
+            "description": "الملف الشخصي الوصف",
+            "gender": "جنس*",
+            "birthdate": "تاريخ الميلاد*",
+            "country": "بلد الإقامة الحالية*",
+            "nationality": "جنسية*",
+            "cv_file": "السيرة الذاتية (السيرة الذاتية)",
+            "cv_ref_letter": "رسالة مرجعية",
+            "password": "كلمة المرور الجديدة",
+            "password_repeat": "اعد كلمة السر"
+        }
+    },
+    "job_seeker": {
+        "years_old": "سنوات من العمر",
+        "create_account_for_access": "إنشاء حساب للوصول",
+        "upgrade_subscription_plan": "ترقية خطة الاشتراك",
+        "working_experience": "خبرة العمل",
+        "languages": "اللغات",
+        "education": "تعليم",
+        "skills": "مهارات",
+        "work_proficiency_test": "اختبار الكفاءة في العمل",
+        "download_cv": "تحميل السيرة الذاتية",
+        "download_resume": "تحميل السيرة الذاتية",
+        "download_reference_letter": "تحميل الرسالة المرجعية"
+    },
+    "employer": {
+        "company_size": "حجم الشركة",
+        "website": "موقع إلكتروني",
+        "industry": "صناعة",
+        "nationality": "جنسية",
+        "location": "موقع",
+        "jobs": "وظائف",
+        "subscription_form": {
+            "subscription_status": "حالة الاشتراك",
+            "active": "نشيط",
+            "cancelled": "ألغيت",
+            "past_due": "تاريخ الاستحقاق الماضي",
+            "unpaid": "غير مدفوعة الأجر",
+            "active_due": "مستحق نشط",
+            "title": "اشتراك صاحب العمل",
+            "initial_month": "الشهر الأولي",
+            "each_next_month": "كل شهر قادم",
+            "benefits_1": "الوصول إلى أفضل المواهب لدينا"
+        }
+    },
     "forms": {
         "login": {
             "email": "بريد إلكتروني",
@@ -171,12 +248,40 @@
             "identity_verification": "التحقق من الهوية",
             "one_time_payment": "دفعة لمرة واحدة",
             "passport_input_placeholder": "صورة جواز السفر*",
-            "passport_input_label": "يرجى إرفاق صورة واضحة لبطاقة الهوية / جواز السفر"
+            "passport_input_label": "يرجى إرفاق صورة واضحة لبطاقة الهوية / جواز السفر",
+            "get_verified": "الحصول على التحقق"
         }
     },
     "signupHeader": {
         "back": "خلف",
         "logout": "تسجيل خروج"
+    },
+    "defaultHeader": {
+        "jobs": "قائمة الوظائف",
+        "jobseekers": "اكتشف الموظفين",
+        "my_jobs": "وظائفي",
+        "post_a_jobs": "انشر وظيفة",
+        "profile": "حساب تعريفي",
+        "settings": "إعدادات",
+        "subscription": "الاشتراك",
+        "logout": "تسجيل خروج",
+        "login": "تسجيل الدخول"
+    },
+    "defaultFooter": {
+        "moto": "تمكين الاتصالات وتشكيل المستقبل.",
+        "menu_title_1": "لصاحب العمل",
+        "menu_title_2": "للباحثين عن عمل",
+        "menu_title_3": "آخر",
+        "talents": "المواهب",
+        "about": "عن",
+        "jobs": "وظائف",
+        "homepage": "الصفحة الرئيسية",
+        "contact_us": "اتصل بنا",
+        "blog": "مدونة",
+        "faqs": "مدونة",
+        "terms_of_use": "شروط الاستخدام",
+        "privacy_policy": "سياسة الخصوصية",
+        "privacy_text": "© 2024 فايند سي في. كل الحقوق محفوظة."
     },
     "general": {
         "country": {
@@ -1297,8 +1402,41 @@
             "insurance_broker": "وسيط تأمين",
             "actuary": "إكتواري"
         },
+        "company_industries": {
+            "agriculture": "الزراعة",
+            "automotive": "السيارات",
+            "banking": "الخدمات المصرفية",
+            "biotechnology": "التكنولوجيا الحيوية",
+            "chemicals": "الكيميائيات",
+            "construction": "البناء",
+            "consulting": "الاستشارات",
+            "consumer_goods": "السلع الاستهلاكية",
+            "education": "التعليم",
+            "energy": "الطاقة",
+            "engineering": "الهندسة",
+            "entertainment": "الترفيه",
+            "financial_services": "الخدمات المالية",
+            "food_beverage": "الأطعمة والمشروبات",
+            "healthcare": "الرعاية الصحية",
+            "hospitality": "الضيافة",
+            "insurance": "التأمين",
+            "internet": "الإنترنت",
+            "logistics": "اللوجستيات",
+            "manufacturing": "التصنيع",
+            "marketing": "التسويق",
+            "media": "الإعلام",
+            "non_profit": "غير هادف للربح",
+            "pharmaceutical": "الأدوية",
+            "real_estate": "العقارات",
+            "retail": "التجزئة",
+            "software": "البرمجيات",
+            "telecommunications": "الاتصالات",
+            "transportation": "النقل",
+            "utilities": "المرافق"
+        },
         "UI": {
             "add": "إضافة +",
+            "try_again": "حاول مرة أخرى",
             "languages": "اللغات",
             "work_experience": "خبرة في العمل",
             "education": "تعليم",
@@ -1308,11 +1446,23 @@
             "save": "يحفظ",
             "submit": "يقدم",
             "loading": "تحميل...",
+            "cancel": "يلغي",
             "purchase": "شراء",
             "success": "نجاح",
+            "back": "خلف",
             "skip": "يتخطى",
             "required": "مطلوب",
-            "something_went_wrong": "حدث خطأ ما"
+            "something_went_wrong": "حدث خطأ ما",
+            "male": "ذكر",
+            "female": "أنثى"
+        },
+        "logic_test_bar": {
+            "not_attempted": "لم تحاول",
+            "excellent": "ممتاز",
+            "good": "جيد",
+            "average": "متوسط",
+            "poor": "فقير",
+            "very_poor": "فقير جدا"
         },
         "errors": {
             "USER_EMAIL_EXISTS": "البريد الإلكتروني موجود بالفعل"

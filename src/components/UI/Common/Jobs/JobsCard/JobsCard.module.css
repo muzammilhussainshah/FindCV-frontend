@@ -1,4 +1,5 @@
 .job_card {
+    position: relative;
     background-color: #EBF9FF;
     border-radius: 6px;
     padding: 30px;
@@ -105,4 +106,32 @@
     top: 50%;
     margin-top: -14px;
     left: 0;
+}
+
+.job_card_footer a {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .job_card {
+        padding: 25px 25px 60px 25px;
+    }
+    .job_card_head > div:nth-child(2) {
+        display: none;
+    }
+    .job_card_footer {
+        flex-wrap: wrap;
+    }
+    .job_card_footer p {
+        margin-bottom: 10px;
+    }
+    .job_card_footer a {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
 }

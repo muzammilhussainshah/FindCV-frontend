@@ -33,6 +33,18 @@ function EmployerProfile() {
             });
     }, [id]);
 
+    let industry_text = '';
+
+    if (employer && employer.company_industries) {
+        employer.company_industries.split(';').forEach((industry, index) => {
+            if (index === 0) {
+                industry_text += t('general.company_industries.' + industry);
+            } else {
+                industry_text += ', ' + t('general.company_industries.' + industry);
+            }
+        });
+    }
+
     return (
         <>
             {employer ? (
@@ -47,13 +59,13 @@ function EmployerProfile() {
                     <div className={styles.employer_profile_col}>
                         <h1>{employer.company_name ? employer.company_name : employer.name}</h1>
 
-                        {employer.company_size && <InfoBlock icon={company_size_icon} label="Company Size" text={employer.company_size} />}
-                        {employer.company_website && <InfoBlock icon={website_icon} label="Website" text={employer.company_website} />}
-                        {employer.company_industries && <InfoBlock icon={industry_icon} label="Industry" text={employer.company_industries.replaceAll(';', ', ')} />}
-                        {employer.nationality && <InfoBlock icon={nationality_icon} label="Nationality" text={t('general.nationality.' + employer.nationality)} />}
-                        <InfoBlock icon={location_icon} label="Location" text={`${t('general.country.' + employer.country)}, ${employer.city}`} style={{marginBottom: 30}} />
+                        {employer.company_size && <InfoBlock icon={company_size_icon} label={t('employer.company_size')} text={employer.company_size} />}
+                        {employer.company_website && <InfoBlock icon={website_icon} label={t('employer.website')} text={employer.company_website} />}
+                        {employer.company_industries && <InfoBlock icon={industry_icon} label={t('employer.industry')} text={industry_text} />}
+                        {employer.nationality && <InfoBlock icon={nationality_icon} label={t('employer.nationality')} text={t('general.nationality.' + employer.nationality)} />}
+                        <InfoBlock icon={location_icon} label={t('employer.location')} text={`${t('general.country.' + employer.country)}, ${employer.city}`} style={{marginBottom: 30}} />
 
-                        <h4>Jobs</h4>
+                        <h4>{t('employer.jobs')}</h4>
                         <JobsList />
                     </div>
                 </div>

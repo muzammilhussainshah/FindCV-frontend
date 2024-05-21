@@ -38,9 +38,12 @@
 
 :global(.fcv-rtl) .skill {
     text-align: right;
+    direction: rtl;
+}
+
+:global(.fcv-rtl) .skill.removable {
     padding-left: 35px;
     padding-right: 15px;
-    direction: rtl;
 }
 
 :global(.fcv-rtl) .skill .removeButton {

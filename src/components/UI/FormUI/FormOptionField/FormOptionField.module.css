@@ -170,7 +170,7 @@
 
 :global(.fcv-rtl) .option span {
     padding-left: 0;
-    padding-right: 30px;
+    padding-right: 35px;
 }
 
 :global(.fcv-rtl) .option span:before {
@@ -181,4 +181,12 @@
 :global(.fcv-rtl) .option span:after {
     left: auto;
     right: 4px;
+}
+
+:global(.fcv-rtl) .wrapper_checkbox {
+    margin-left: 0;
+}
+
+:global(.fcv-rtl) .wrapper_checkbox .option span:after {
+    right: 7px;
 }

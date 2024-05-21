@@ -75,6 +75,7 @@ function StripeForm({ actionType, ...props }) {
             // console.log('[error]', error);
             // translate error messages
             setError(error.message);
+            setLoading(false);
         } else {
             
             toast.promise(requestTransaction({ token: userToken, paymentMethod, actionType }), {
