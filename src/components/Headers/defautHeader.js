@@ -123,7 +123,10 @@ function DefaultHeader() {
                                     {(user.account_type === 'employer') && (
                                         <SimpleLink onClick={handleMobileMenu} to="/profile/subscription">{t('defaultHeader.subscription')}</SimpleLink>
                                     )}
-                                    <SimpleLink onClick={handleMobileMenu}>{t('defaultHeader.logout')}</SimpleLink>
+                                    <SimpleLink onClick={() => {
+                                        handleMobileMenu();
+                                        handleLogout();
+                                    }}>{t('defaultHeader.logout')}</SimpleLink>
                                 </>
                             )}
                         </div>
