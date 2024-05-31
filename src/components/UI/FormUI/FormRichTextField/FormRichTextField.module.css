@@ -21,11 +21,13 @@
 }
 
 .wrapper :global(.ql-toolbar) {
+    background-color: #fff;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
 
 .wrapper :global(.ql-container) {
+    background-color: #fff;
     min-height: 140px;
     max-height: 250px;
     overflow-y: auto;
@@ -34,6 +36,7 @@
 }
 
 .wrapper :global(.ql-editor) {
+    background-color: #fff;
     min-height: 140px;
 }
 

@@ -85,6 +85,7 @@
 
 .wrapper_dark .option span:before {
     border-color: #093559;
+    background-color: #fff;
 }
 .wrapper_dark .option span:after {
     background-color: #093559;

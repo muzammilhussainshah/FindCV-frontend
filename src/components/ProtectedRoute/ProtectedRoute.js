@@ -12,6 +12,9 @@ const ProtectedRoute = ({ children, ...props }) => {
     if (props.userStatus === 'notLoggedIn' && (user || token) && !loading) {
         return <Navigate to="/welcome" />;
     }
+    if (props.userRole && user.account_type !== props.userRole && !loading) {
+        return <Navigate to="/welcome" />;
+    }
 
     return children;
 };

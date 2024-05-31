@@ -15,10 +15,13 @@ import Login from '../pages/Login/Login';
 import ResetPassword from '../pages/ResetPassword/ResetPassword';
 import CreateAccount from '../pages/CreateAccount/CreateAccount';
 import Welcome from '../pages/Welcome/Welcome';
+
 import EmployerProfile from '../pages/Employer/Profile/EmployerProfile';
 import JobseekerProfile from '../pages/Jobseeker/Profile/JobseekerProfile';
 import ProfileSettings from '../pages/Profile/ProfileSettings/ProfileSettings';
 import ProfileEmployerSubscription from '../pages/Profile/ProfileEmployerSubscription/ProfileEmployerSubscription';
+
+import ManageJob from '../pages/ManageJob/ManageJob';
 
 import i18n from './i18n';
 
@@ -76,8 +79,12 @@ function App() {
               <ProfileSettings />
             </ProtectedRoute>} />
             <Route path="profile/subscription" element={
-            <ProtectedRoute userStatus="loggedIn">
+            <ProtectedRoute userStatus="loggedIn" userRole="employer">
               <ProfileEmployerSubscription />
+            </ProtectedRoute>} />
+            <Route path="create-job" element={
+              <ProtectedRoute userStatus="loggedIn" userRole="employer">
+              <ManageJob />
             </ProtectedRoute>} />
         </Route>
       </Routes>

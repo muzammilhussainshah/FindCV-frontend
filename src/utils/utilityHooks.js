@@ -15,7 +15,7 @@ export const useGetSkillsHook = () => {
     });
 
     return skills;
-}
+};
 
 export const useGetCompanyIndustriesHook = () => {
     const { t } = useTranslation();
@@ -31,7 +31,115 @@ export const useGetCompanyIndustriesHook = () => {
     });
 
     return industries;
-}
+};
+
+export const useGetJobCategoriesHook = () => {
+    const { t } = useTranslation();
+
+    const job_category_codes = ["accounting", "administrative", "advertising", "agriculture", "architecture", "automotive", "banking", "biotechnology", "business_development", "business_strategy", "charity", "chemical_engineering", "civil_engineering", "communications", "community_services", "construction", "consulting", "content", "creative", "customer_service", "data", "design", "distribution", "education", "engineering", "environmental", "executive", "facilities", "finance", "food_services", "fundraising", "general_business", "government", "graphic_design", "healthcare", "hospitality", "human_resources", "information_technology", "insurance", "internet", "journalism", "law", "logistics", "management", "manufacturing", "marketing", "media", "medical", "nonprofit", "nursing", "operations", "pharmaceutical", "product_management", "project_management", "public_relations", "quality_assurance", "real_estate", "research", "retail", "sales", "science", "security", "social_media", "software_development", "sports", "strategy", "supply_chain", "technical_support", "technology", "telecommunications", "training", "transportation", "travel", "web_design"];
+    const job_categories = [];
+
+    job_category_codes.forEach(job_category => {
+        job_categories.push({
+            value: job_category,
+            label: t(`general.job_category.${job_category}`)
+        });
+    });
+
+    return job_categories;
+};
+
+export const useGetCurrenciesHook = () => {
+
+    const currencies_list = [
+        { code: "usd", name: "USD", symbol: "$" },
+        { code: "eur", name: "EUR", symbol: "€" },
+        { code: "gbp", name: "GBP", symbol: "£" },
+        { code: "jpy", name: "JPY", symbol: "¥" },
+        { code: "cny", name: "CNY", symbol: "¥" },
+        { code: "cad", name: "CAD", symbol: "$" },
+        { code: "aud", name: "AUD", symbol: "$" },
+        { code: "chf", name: "CHF", symbol: "CHF" },
+        { code: "sek", name: "SEK", symbol: "kr" },
+        { code: "nok", name: "NOK", symbol: "kr" },
+        { code: "dkk", name: "DKK", symbol: "kr" },
+        { code: "rub", name: "RUB", symbol: "₽" },
+        { code: "inr", name: "INR", symbol: "₹" },
+        { code: "brl", name: "BRL", symbol: "R$" },
+        { code: "zar", name: "ZAR", symbol: "R" },
+        { code: "hkd", name: "HKD", symbol: "$" },
+        { code: "sgd", name: "SGD", symbol: "$" },
+        { code: "nzd", name: "NZD", symbol: "$" },
+        { code: "thb", name: "THB", symbol: "฿" },
+        { code: "php", name: "PHP", symbol: "₱" },
+        { code: "idr", name: "IDR", symbol: "Rp" },
+        { code: "myr", name: "MYR", symbol: "RM" },
+        { code: "vnd", name: "VND", symbol: "₫" },
+        { code: "krw", name: "KRW", symbol: "₩" },
+        { code: "try", name: "TRY", symbol: "₺" },
+        { code: "mxn", name: "MXN", symbol: "$" },
+        { code: "ars", name: "ARS", symbol: "$" },
+        { code: "cop", name: "COP", symbol: "$" },
+        { code: "clp", name: "CLP", symbol: "$" },
+        { code: "pen", name: "PEN", symbol: "S/." },
+        { code: "aed", name: "AED", symbol: "د.إ" },
+        { code: "sar", name: "SAR", symbol: "ر.س" },
+        { code: "qar", name: "QAR", symbol: "ر.ق" },
+        { code: "omr", name: "OMR", symbol: "ر.ع." },
+        { code: "kwd", name: "KWD", symbol: "د.ك" },
+        { code: "bhd", name: "BHD", symbol: "د.ب" },
+        { code: "jod", name: "JOD", symbol: "د.ا" },
+        { code: "ils", name: "ILS", symbol: "₪" },
+        { code: "pln", name: "PLN", symbol: "zł" },
+        { code: "czk", name: "CZK", symbol: "Kč" },
+        { code: "huf", name: "HUF", symbol: "Ft" },
+        { code: "ron", name: "RON", symbol: "lei" },
+        { code: "sek", name: "SEK", symbol: "kr" },
+        { code: "nok", name: "NOK", symbol: "kr" },
+        { code: "dkk", name: "DKK", symbol: "kr" },
+        { code: "rub", name: "RUB", symbol: "₽" },
+        { code: "inr", name: "INR", symbol: "₹" },
+        { code: "brl", name: "BRL", symbol: "R$" },
+        { code: "zar", name: "ZAR", symbol: "R" },
+        { code: "hkd", name: "HKD", symbol: "$" },
+        { code: "sgd", name: "SGD", symbol: "$" },
+        { code: "nzd", name: "NZD", symbol: "$" },
+        { code: "thb", name: "THB", symbol: "฿" },
+        { code: "php", name: "PHP", symbol: "₱" },
+        { code: "idr", name: "IDR", symbol: "Rp" },
+        { code: "myr", name: "MYR", symbol: "RM" },
+        { code: "vnd", name: "VND", symbol: "₫" },
+        { code: "krw", name: "KRW", symbol: "₩" },
+        { code: "try", name: "TRY", symbol: "₺" },
+        { code: "mxn", name: "MXN", symbol: "$" },
+        { code: "ars", name: "ARS", symbol: "$" },
+        { code: "cop", name: "COP", symbol: "$" },
+        { code: "clp", name: "CLP", symbol: "$" },
+        { code: "pen", name: "PEN", symbol: "S/." },
+        { code: "aed", name: "AED", symbol: "د.إ" },
+        { code: "sar", name: "SAR", symbol: "ر.س" },
+        { code: "qar", name: "QAR", symbol: "ر.ق" },
+        { code: "omr", name: "OMR", symbol: "ر.ع." },
+        { code: "kwd", name: "KWD", symbol: "د.ك" },
+        { code: "bhd", name: "BHD", symbol: "د.ب" },
+        { code: "jod", name: "JOD", symbol: "د.ا" },
+        { code: "ils", name: "ILS", symbol: "₪" },
+        { code: "pln", name: "PLN", symbol: "zł" },
+        { code: "czk", name: "CZK", symbol: "Kč" },
+        { code: "huf", name: "HUF", symbol: "Ft" }
+    ];
+    const currencies = [];
+
+    currencies_list.forEach(currency => {
+        currencies.push({
+            value: currency.code,
+            label: currency.name + " (" + currency.symbol + ")"
+        });
+    });
+
+    return currencies;
+
+};
 
 export const useGetQueryParam = (param) => {
     const location = useLocation();

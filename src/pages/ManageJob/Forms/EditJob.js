@@ -1,0 +1,356 @@
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { useFormik } from 'formik';
+import Yup from '../../../utils/yupExtensions';
+import toast from 'react-hot-toast';
+
+import { useGetJobCategoriesHook, useGetCurrenciesHook } from '../../../utils/utilityHooks';
+
+import BasicPopup from '../../../components/UI/Popups/BasicPopup/BasicPopup';
+import LanguageForm from '../../../components/Forms/Common/LanguageForm/LanguageForm';
+import SkillsForm from '../../../components/Forms/Common/SkillsForm/SkillsForm';
+
+import LanguageLevelList from '../../../components/UI/Common/LanguageLevel/LanguageLevelList/LanguageLevelList';
+import SkillsList from '../../../components/UI/Common/Skills/SkillsList/SkillsList';
+
+import Subtitle from '../../../components/UI/Common/Subtitle/Subtitle'
+import FormField from '../../../components/UI/FormUI/FormField/FormField';
+import FormNumberField from '../../../components/UI/FormUI/FormNumberField/FormNumberField';
+import FormOptionField from '../../../components/UI/FormUI/FormOptionField/FormOptionField';
+import FormSelectField from '../../../components/UI/FormUI/FormSelectField/FormSelectField';
+import FormRichTextField from '../../../components/UI/FormUI/FormRichTextField/FormRichTextField';
+
+import styles from './EditJob.module.css';
+
+function EditJob() {
+    const { t } = useTranslation();
+    const userToken = useSelector(state => state.user.token);
+
+    const [formLoading, setFormLoading] = useState(false);
+    const [isOpenLanguagePopup, setIsOpenLanguagePopup] = useState(false);
+    const [isOpenSkillsPopup, setIsOpenSkillsPopup] = useState(false);
+
+    const formik = useFormik({
+        initialValues: {
+            title: '',
+            description: '',
+            country: '',
+            category: '',
+            city: '',
+            languages: [],
+            skills: [],
+            payment_type: 'monthly',
+            job_type: 'full_time',
+            hours_low: 30,
+            hours_high: 40,
+            salary_low: 300,
+            salary_high: 500,
+            currency: 'usd'
+        },
+        validationSchema: Yup.object({
+            title: Yup.string().required(t('general.UI.required')),
+            description: Yup.string().required(t('general.UI.required')),
+            country: Yup.string().required(t('general.UI.required')),
+            category: Yup.string().required(t('general.UI.required')),
+            city: Yup.string().required(t('general.UI.required')),
+            payment_type: Yup.string().required(t('general.UI.required')),
+            job_type: Yup.string().required(t('general.UI.required')),
+            hours_low: Yup.number().min(1, 'Minimum possible value is 1').max(168, 'Maximum possible value is 168').required(t('general.UI.required')),
+            hours_high: Yup.number().min(1, 'Minimum possible value is 1').max(168, 'Maximum possible value is 168').required(t('general.UI.required')),
+            salary_low: Yup.number().min(1, 'Minimum possible value is 1').required(t('general.UI.required')),
+            salary_high: Yup.number().min(1, 'Minimum possible value is 1').required(t('general.UI.required')),
+            currency: Yup.string().required(t('general.UI.required'))
+        }),
+        onSubmit: values => {
+
+            if (formLoading) {
+                return;
+            }
+
+            setFormLoading(true);
+
+            setFormLoading(false);
+
+        },
+    });
+
+    const handlePopupClose = (popupName) => {
+        if (popupName === 'language') {
+            setIsOpenLanguagePopup(false);
+        } else if (popupName === 'skills') {
+            setIsOpenSkillsPopup(false);
+        }
+    }
+
+    const handlePopupOpen = (popupName) => {
+        if (popupName === 'language') {
+            setIsOpenLanguagePopup(true);
+        } else if (popupName === 'skills') {
+            setIsOpenSkillsPopup(true);
+        }
+    }
+
+    const handleAddLanguage = (values) => {
+
+        // check if language already exists
+        const languageExists = formik.values.languages.find((language) => language.languageCode === values.languageCode);
+
+        if (!languageExists) {
+            formik.setFieldValue('languages', [...formik.values.languages, { id: Date.now(), ...values }]);
+            handlePopupClose('language');
+        }
+
+    }
+
+    const handleAddSkills = (values) => {
+        formik.setFieldValue('skills', [...formik.values.skills, ...values.skills.map((skill) => {
+            return {
+                id: Date.now() + '-' + skill,
+                code: skill,
+                name: t('general.skill.' + skill)
+            }
+        })]);
+        handlePopupClose('skills');
+    }
+
+    const handleOptionRemove = (field, id) => {
+        const filteredField = formik.values[field].filter((option) => option.id !== id);
+        formik.setFieldValue(field, filteredField);
+    }
+
+    const categoryOptions = useGetJobCategoriesHook();
+    const currencyOptions = useGetCurrenciesHook();
+    const paymentTypeOptions = [
+        { value: 'monthly', label: 'Monthly' },
+        { value: 'hourly', label: 'Hourly' }
+    ];
+    const jobTypeOptions = [
+        { value: 'full_time', label: 'Full-time' },
+        { value: 'part_time', label: 'Part-time' },
+        { value: 'remote', label: 'Remote' }
+    ];
+
+    return (
+        <>
+            <div className={styles.create_job_wrapper}>
+                <h1>Post a Job</h1>
+
+                <div className={styles.create_job_block}>
+                    <Subtitle dark>General Information</Subtitle>
+                    <div>
+                        <FormField 
+                            name="title" 
+                            type="text" 
+                            label="Job Title"
+                            hasBorder
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.title}
+                            error={formik.touched.title && formik.errors.title}
+                        />
+                    </div>
+                    <div>
+                        <FormSelectField
+                            name="category"
+                            label="Job Category"
+                            type="default"
+                            hasBorder
+                            options={categoryOptions}
+                            onFormikChange={formik.handleChange}
+                            value={formik.values.category}
+                            error={formik.touched.category && formik.errors.category}
+                        />
+                    </div>
+                    <div>
+                        <FormSelectField
+                            name="country" 
+                            type="country" 
+                            label="Job Location - Country"
+                            hasBorder
+                            onFormikChange={formik.handleChange}
+                            value={formik.values.country}
+                            error={formik.touched.country && formik.errors.country}
+                        />
+                    </div>
+                    <div>
+                        <FormField 
+                            name="city" 
+                            type="text" 
+                            label="Job Location - City"
+                            hasBorder
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.city}
+                            error={formik.touched.city && formik.errors.city}
+                        />
+                    </div>
+                </div>
+
+                <div className={styles.create_job_block}>
+                    <Subtitle dark>Salary and Job Type</Subtitle>
+                    <div className={styles.create_job_salary}>
+                        <label>Salary</label>
+                        <div>
+                            <div>
+                                <FormSelectField 
+                                    name="currency"
+                                    type="default"
+                                    hasBorder
+                                    options={currencyOptions}
+                                    onFormikChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    value={formik.values.currency}
+                                    error={formik.touched.currency && formik.errors.currency}
+                                />
+                            </div>
+                            <div>
+                                <FormNumberField 
+                                    name="salary_low"
+                                    hasBorder
+                                    min={1}
+                                    step={0.1}
+                                    prefix="From:"
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    value={formik.values.salary_low}
+                                    error={formik.touched.salary_low && formik.errors.salary_low}
+                                />
+                            </div>
+                            <div>
+                                <FormNumberField 
+                                    name="salary_high"
+                                    hasBorder
+                                    min={1}
+                                    step={0.1}
+                                    prefix="To:"
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    value={formik.values.salary_high}
+                                    error={formik.touched.salary_high && formik.errors.salary_high}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <FormOptionField
+                            name="payment_type"
+                            label="Payment Type"
+                            type="radio"
+                            dark
+                            options={paymentTypeOptions}
+                            onChange={formik.handleChange}
+                            value={formik.values.payment_type}
+                            error={formik.touched.payment_type && formik.errors.payment_type}
+                        />
+                    </div>
+                    <div>
+                        <FormOptionField
+                            name="job_type"
+                            label="Job Type"
+                            type="radio"
+                            dark
+                            options={jobTypeOptions}
+                            onChange={formik.handleChange}
+                            value={formik.values.job_type}
+                            error={formik.touched.job_type && formik.errors.job_type}
+                        />
+                    </div>
+                    <div className={styles.create_job_working_hours}>
+                        <label>Working hours per week</label>
+                        <div>
+                            <div>
+                                <FormNumberField 
+                                    name="hours_low"
+                                    hasBorder
+                                    min={1}
+                                    max={168}
+                                    step={1}
+                                    prefix="From:"
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    value={formik.values.hours_low}
+                                    error={formik.touched.hours_low && formik.errors.hours_low}
+                                />
+                            </div>
+                            <div>
+                                <FormNumberField 
+                                    name="hours_high"
+                                    hasBorder
+                                    min={1}
+                                    max={168}
+                                    step={1}
+                                    prefix="To:"
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    value={formik.values.hours_high}
+                                    error={formik.touched.hours_high && formik.errors.hours_high}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={styles.create_job_block}>
+                    <Subtitle dark>Job Description</Subtitle>
+                    <div>
+                        <FormRichTextField
+                            name="description"
+                            label="Description"
+                            hasBorder
+                            onFormikChange={formik.handleChange}
+                            value={formik.values.description}
+                            error={formik.touched.description && formik.errors.description}
+                        />
+                    </div>
+                </div>
+
+                <div className={styles.create_job_block}>
+                    <Subtitle 
+                        dark
+                        hasButton 
+                        buttonText={t('general.UI.add')}
+                        buttonOnClick={() => handlePopupOpen('language')}
+                    >
+                        Language Requirements
+                    </Subtitle>
+                    <div style={{marginBottom: 20}}>
+                        <LanguageLevelList languages={formik.values.languages} onRemove={handleOptionRemove} />
+                    </div>
+                </div>
+
+                <div className={styles.create_job_block}>
+                    <Subtitle 
+                        dark
+                        hasButton 
+                        buttonText={t('general.UI.add')}
+                        buttonOnClick={() => handlePopupOpen('skills')}
+                    >
+                        Skills
+                    </Subtitle>
+                    <div style={{marginBottom: 10}}>
+                        <SkillsList skills={formik.values.skills} onRemove={handleOptionRemove} />
+                    </div>
+                </div>
+            </div>
+            {isOpenLanguagePopup && 
+                <BasicPopup 
+                    isOpen={isOpenLanguagePopup}
+                    closePopup={() => handlePopupClose('language')}
+                >
+                    <LanguageForm onSubmit={handleAddLanguage} />
+                </BasicPopup>
+            }
+            {isOpenSkillsPopup && 
+                <BasicPopup 
+                    isOpen={isOpenSkillsPopup}
+                    closePopup={() => handlePopupClose('skills')}
+                >
+                    <SkillsForm onSubmit={handleAddSkills} excludeSkills={formik.values.skills.map(option => option.code)} />
+                </BasicPopup>
+            }
+        </>
+    );
+}
+    
+export default EditJob;
