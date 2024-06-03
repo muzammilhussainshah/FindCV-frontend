@@ -1,6 +1,10 @@
+import { useTranslation } from 'react-i18next';
 import Flag from 'react-flags';
 import BubbleButton from '../../../Buttons/BubbleButton/BubbleButton';
+import SimpleLink from '../../../Buttons/SimpleLink/SimpleLink';
 import Button from '../../../Buttons/Button/Button';
+
+import { useGetCurrencySymbol } from '../../../../../utils/utilityHooks';
 
 import category_icon from '../../../../../assets/images/icons/job_categories/construction.svg';
 import money_icon from '../../../../../assets/images/icons/money-alt.svg';
@@ -9,9 +13,34 @@ import suitcase_icon from '../../../../../assets/images/icons/suitcase-alt.svg';
 
 import styles from './JobsCard.module.css';
 
-function JobsCard({ test, ...props }) {
+function JobsCard({ job, ...props }) {
+    const { t } = useTranslation();
 
-    const desc = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+    const desc = job.description;
+    const currency = useGetCurrencySymbol(job.currency);
+
+    let salary = '';
+    let date = '';
+
+    if (job.salary_from !== job.salary_to) {
+        salary = currency + job.salary_from + ' - ' + currency + job.salary_to;
+    }
+    else {
+        salary = currency + job.salary_from;
+    }
+
+    if (job.createdAt) {
+        const date_info = timeAgo(new Date(job.createdAt));
+        date = t('general.UI.posted') + ' ';
+
+        if (date_info.unit_plural === 'second' || date_info.unit_plural === 'seconds') {
+            date += t('general.UI.just_now');
+        }
+        else {
+            date += date_info.count + ' ' + t('general.UI.' + date_info.unit_plural) + ' ' + t('general.UI.ago');
+        }
+
+    }
 
     return (
         <div className={styles.job_card} {...props}>
@@ -23,40 +52,40 @@ function JobsCard({ test, ...props }) {
                     </div>
 
                     <div className={styles.job_card_head_info_main}>
-                        <h5>Pool cleaner</h5>
+                        <h5>{job.title}</h5>
                         <div>
                             <Flag 
-                                name={"IN"}
+                                name={job.country}
                                 format="svg"
                                 shiny={false}
                                 basePath="/vendor/flags"
                             />
-                            <p>India, Delhi - Microsoft</p>
+                            <p>{t('general.country.' + job.country)}, {job.city}</p>
                         </div>
                     </div>
 
                 </div>
                 <div>
-                    <BubbleButton small>View</BubbleButton>
+                    <BubbleButton small to={`/job/${job.id}`}>{t('general.UI.view')}</BubbleButton>
                 </div>
             </div>
             <div className={styles.job_card_body}>
-                <p className={styles.job_card_body_date}>Posted 3 days ago</p>
+                <p className={styles.job_card_body_date}>{date}</p>
                 <div className={styles.job_card_body_main}>
                     {desc.length > 240 ? (
-                        <p>
-                            {desc.slice(0, 240) + '... '}
-                            <span>Show More</span>
-                        </p>
+                        <>
+                            <div dangerouslySetInnerHTML={{__html: desc.slice(0, 240) + '... '}}></div>
+                            <SimpleLink to={`/job/${job.id}`}>{t('general.UI.show_more')}</SimpleLink>
+                        </>
                     ) : (
-                        <p>{desc}</p>
+                        <div dangerouslySetInnerHTML={{__html: desc}}></div>
                     )}
                 </div>
             </div>
             <div className={styles.job_card_footer}>
                 <p>
                     <img src={money_icon} alt="Salary Icon" />
-                    <span>$4.300 <span>/ month</span></span>
+                    <span>{salary} <span>/ {t('general.UI.month')}</span></span>
                 </p>
                 <p>
                     <img src={users_icon} alt="Applications Icon" />
@@ -64,12 +93,45 @@ function JobsCard({ test, ...props }) {
                 </p>
                 <p>
                     <img src={suitcase_icon} alt="Jobtype Icon" />
-                    <span>Full-time</span>
+                    <span>{t('general.UI.' + job.job_type)}</span>
                 </p>
-                <Button>View</Button>
+                <Button to={`/job/${job.id}`}>{t('general.UI.view')}</Button>
             </div>
         </div>
     );
 }
 
 export default JobsCard;
+
+const timeAgo = (date) => {
+    const now = new Date();
+    const seconds = Math.floor((now - date) / 1000);
+  
+    const intervals = {
+        year: 31536000,
+        month: 2592000,
+        week: 604800,
+        day: 86400,
+        hour: 3600,
+        minute: 60,
+    };
+  
+    let unit = 'second';
+    let count = seconds;
+  
+    for (const [key, value] of Object.entries(intervals)) {
+        if (seconds >= value) {
+            unit = key;
+            count = Math.floor(seconds / value);
+            break;
+        }
+    }
+  
+    const unit_plural = count > 1 ? unit + 's' : unit;
+
+    return {
+        count,
+        unit,
+        unit_plural
+    };
+}

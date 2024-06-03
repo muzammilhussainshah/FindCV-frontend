@@ -112,3 +112,8 @@
     right: auto;
     left: 17px;
 }
+
+:global(.fcv-rtl) .field label {
+    text-align: right;
+    direction: rtl;
+}

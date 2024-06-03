@@ -66,7 +66,10 @@ function EmployerProfile() {
                         <InfoBlock icon={location_icon} label={t('employer.location')} text={`${t('general.country.' + employer.country)}, ${employer.city}`} style={{marginBottom: 30}} />
 
                         <h4>{t('employer.jobs')}</h4>
-                        <JobsList />
+                        <JobsList 
+                            per_page={1}
+                            filters={{employer_id: employer.id}}
+                        />
                     </div>
                 </div>
             ) : (
@@ -81,11 +84,6 @@ function EmployerProfile() {
                         <BlockLoader height={40} marginBottom={10} />
                         <BlockLoader height={40} marginBottom={10} />
                         <BlockLoader height={40} marginBottom={35} />
-
-                        <h4>Jobs</h4>
-                        <BlockLoader height={320} marginBottom={20} />
-                        <BlockLoader height={320} marginBottom={20} />
-                        <BlockLoader height={320} />
                     </div>
                 </div>
             )}

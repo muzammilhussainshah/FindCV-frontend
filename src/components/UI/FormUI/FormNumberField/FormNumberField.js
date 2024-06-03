@@ -29,15 +29,19 @@ function FormNumberField({ error, label, prefix, hasBorder, children, ...props }
         });
     }
 
+    const triggerFocus = () => {
+        document.querySelector(`input[name="${props.name}"]`).focus();
+    }
+
     return (
         <div className={styles.field}>
             {label && <label htmlFor={props.name}>{label}</label>}
             <div className={wrapper_class}>
-                {prefix && <span className={styles.prefix}>{prefix}</span>}
+                {prefix && <span onClick={triggerFocus} className={styles.prefix}>{prefix}</span>}
                 <input type="number" {...props} />
                 <div className={styles.buttons}>
-                    <button onClick={handlePlus}></button>
-                    <button onClick={handleMinus}></button>
+                    <span onClick={handlePlus}></span>
+                    <span onClick={handleMinus}></span>
                 </div>
             </div>
             {error && <p className={styles.error}>{error}</p>}

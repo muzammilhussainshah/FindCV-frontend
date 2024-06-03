@@ -22,6 +22,7 @@ import ProfileSettings from '../pages/Profile/ProfileSettings/ProfileSettings';
 import ProfileEmployerSubscription from '../pages/Profile/ProfileEmployerSubscription/ProfileEmployerSubscription';
 
 import ManageJob from '../pages/ManageJob/ManageJob';
+import MyJobs from '../pages/MyJobs/MyJobs';
 
 import i18n from './i18n';
 
@@ -74,18 +75,35 @@ function App() {
         <Route path="/" element={<DefaultLayout />} >
           <Route path="employers/:id" element={<EmployerProfile />} />
           <Route path="jobseekers/:id" element={<JobseekerProfile />} />
+
           <Route path="profile/settings" element={
             <ProtectedRoute userStatus="loggedIn">
               <ProfileSettings />
-            </ProtectedRoute>} />
-            <Route path="profile/subscription" element={
+            </ProtectedRoute>} 
+          />
+          <Route path="profile/subscription" element={
             <ProtectedRoute userStatus="loggedIn" userRole="employer">
               <ProfileEmployerSubscription />
-            </ProtectedRoute>} />
-            <Route path="create-job" element={
-              <ProtectedRoute userStatus="loggedIn" userRole="employer">
+            </ProtectedRoute>} 
+          />
+
+          <Route path="create-job" element={
+            <ProtectedRoute userStatus="loggedIn" userRole="employer">
               <ManageJob />
-            </ProtectedRoute>} />
+            </ProtectedRoute>} 
+          />
+          <Route path="edit-job/:id" element={
+            <ProtectedRoute userStatus="loggedIn" userRole="employer">
+              <ManageJob />
+            </ProtectedRoute>} 
+          />
+
+          <Route path="my-jobs" element={
+            <ProtectedRoute userStatus="loggedIn" userRole="employer">
+              <MyJobs />
+            </ProtectedRoute>} 
+          />
+
         </Route>
       </Routes>
     </Router>

@@ -2,7 +2,7 @@
     position: relative;
     background-color: #EBF9FF;
     border-radius: 6px;
-    padding: 30px;
+    padding: 30px 30px 15px 30px;
     margin-bottom: 20px;
 }
 
@@ -68,12 +68,19 @@
 
 .job_card_body_main {}
 
-.job_card_body_main p span {
-    cursor: pointer;
-    font-weight: 700;
+.job_card_body_main div ul,
+.job_card_body_main div ol {
+    padding-left: 20px;
 }
 
-.job_card_body_main p span:hover {
+.job_card_body_main div + a {
+    color: #0E2E47;
+    cursor: pointer;
+    font-weight: 700;
+    margin-top: 5px;
+}
+
+.job_card_body_main div + a:hover {
     text-decoration: underline;
 }
 
@@ -81,6 +88,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    flex-wrap: wrap;
     padding-top: 20px;
 }
 
@@ -89,6 +97,7 @@
     position: relative;
     padding-left: 38px;
     margin-right: 20px;
+    margin-bottom: 15px;
 }
 
 .job_card_footer p:last-child {

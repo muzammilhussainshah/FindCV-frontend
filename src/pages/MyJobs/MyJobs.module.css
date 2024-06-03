@@ -1,0 +1,40 @@
+.wrapper {
+    width: 100%;
+    max-width: 750px;
+    margin: auto;
+}
+
+.wrapper h1 {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #EBF9FF;
+    padding: 10px 10px 10px 20px;
+    border-radius: 6px;
+    margin-bottom: 30px;
+}
+
+.head > div {
+    flex: 1;
+}
+
+.head > div:nth-child(1) span {
+    display: inline-block;
+    font-weight: 500;
+    margin-right: 25px;
+}
+
+.head > div:nth-child(2) {
+    text-align: right;
+}
+
+.head > div:nth-child(2) a {
+    padding: 7px 25px;
+    max-width: 200px;
+    width: 100%;
+}

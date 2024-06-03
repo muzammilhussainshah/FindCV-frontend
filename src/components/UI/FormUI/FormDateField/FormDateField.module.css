@@ -232,6 +232,11 @@
     background-color: #175384;
 }
 
+:global(.fcv-rtl) .field label {
+    text-align: right;
+    direction: rtl;
+}
+
 :global(.fcv-rtl) .wrapper input {
     padding: 12px 20px 12px 62px;
     direction: rtl;

@@ -27,21 +27,6 @@
     align-items: stretch;
 }
 
-.create_job_working_hours > div > div {
-    flex: 1;
-}
-
-.create_job_working_hours > div > div:nth-child(1) > div > div,
-.create_job_working_hours > div > div:nth-child(1) > div > div > div {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.create_job_working_hours > div > div:nth-child(2) > div > div {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
 .create_job_salary label {
     display: block;
     margin-bottom: 5px;
@@ -53,27 +38,70 @@
     align-items: stretch;
 }
 
-.create_job_salary > div > div:nth-child(1) {
-    flex: 1.3;
+:global(.fcv-rtl) .create_job_salary label,
+:global(.fcv-rtl) .create_job_working_hours label {
+    text-align: right;
+    direction: rtl;
 }
 
-.create_job_salary > div > div:nth-child(2),
-.create_job_salary > div > div:nth-child(3) {
-    flex: 2;
+@media screen and (min-width: 600px) {
+    .create_job_salary > div > div:nth-child(1) {
+        flex: 1.3;
+    }
+    
+    .create_job_salary > div > div:nth-child(2),
+    .create_job_salary > div > div:nth-child(3) {
+        flex: 2;
+    }
+    
+    .create_job_salary > div > div:nth-child(1) > div :global(.react-select__control) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    
+    .create_job_salary > div > div:nth-child(2) > div > div {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right-width: 0;
+    }
+    
+    .create_job_salary > div > div:nth-child(2) > div > div,
+    .create_job_salary > div > div:nth-child(3) > div > div {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    
+    .create_job_salary > div > div:nth-child(2) > div > div {
+        border-left-width: 0;
+    }
+
+    .create_job_working_hours > div > div {
+        flex: 1;
+    }
+    
+    .create_job_working_hours > div > div:nth-child(1) > div > div,
+    .create_job_working_hours > div > div:nth-child(1) > div > div > div {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    
+    .create_job_working_hours > div > div:nth-child(2) > div > div {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    
+    .create_job_working_hours > div > div:nth-child(2) > div > div {
+        border-left-width: 0;
+    }
 }
 
-.create_job_salary > div > div:nth-child(1) > div :global(.react-select__control) {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.create_job_salary > div > div:nth-child(2) > div > div {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.create_job_salary > div > div:nth-child(2) > div > div,
-.create_job_salary > div > div:nth-child(3) > div > div {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+@media screen and (max-width: 600px) {
+    .create_job_block {
+        padding: 14px 20px 1px 20px;
+        margin-bottom: 30px;
+    }
+    .create_job_salary > div,
+    .create_job_working_hours > div {
+        flex-direction: column;
+    }
 }

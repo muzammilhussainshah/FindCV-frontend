@@ -20,3 +20,8 @@
 .field :global(.rc-slider-dot) {
     border-color: #09AEEF;
 }
+
+:global(.fcv-rtl) .field label {
+    text-align: right;
+    direction: rtl;
+}
