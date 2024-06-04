@@ -6,6 +6,52 @@
     margin-bottom: 20px;
 }
 
+.job_card.active {}
+
+.job_card.paused {
+    border: 2px solid #FFCC00;
+    padding-top: 80px;
+}
+
+.job_card.closed {
+    opacity: 0.5;
+    border: 2px solid #EA4335;
+    padding-top: 80px;
+}
+
+.job_card.closed .job_card_status {
+    background-color: #EA4335;
+}
+
+.job_card.paused .job_card_status {
+    background-color: #FFCC00;
+}
+
+.job_card.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.job_card_status {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.job_card_status span {
+    font-size: 26px;
+    line-height: 1.2;
+    letter-spacing: 10px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
 .job_card_head {
     display: flex;
     justify-content: space-between;

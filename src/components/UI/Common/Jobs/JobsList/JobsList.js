@@ -8,26 +8,37 @@ import { getJobsList } from '../../../../../services/jobService';
 
 import styles from './JobsList.module.css';
 
-function JobsList({ per_page, filters, children, ...props }) {
+function JobsList({ per_page, filters, onFetchJobs, children, ...props }) {
     const [loading, setLoading] = useState(true);
     const [paginationLoading, setPaginationLoading] = useState(false);
+    const [listFilters] = useState(filters);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [jobs, setJobs] = useState([]);
 
     useEffect(() => {
-        getJobsList(page, per_page, filters)
+        getJobsList(page, per_page, listFilters)
             .then((response) => {
                 // console.log(response);
                 setJobs(response.jobs);
                 setTotalPages(response.totalPages);
                 setLoading(false);
                 setPaginationLoading(false);
+
+                if (onFetchJobs) {
+                    onFetchJobs({
+                        total: response.total,
+                        active: response.active,
+                        paused: response.paused,
+                        closed: response.closed
+                    });
+                }
             })
             .catch((error) => {
                 console.log(error);
             });
-    }, [page, paginationLoading, per_page, filters]);
+    // eslint-disable-next-line
+    }, [page, listFilters, per_page]);
 
     const handlePageChange = (page) => {
         setPage(page);

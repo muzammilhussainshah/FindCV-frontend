@@ -3,6 +3,10 @@ import styles from './Pagination.module.css';
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   const pages = [...Array(totalPages).keys()].map(num => num + 1);
 
+  if (totalPages === 1) {
+    return null;
+  }
+
   return (
     <div className={styles.wrapper}>
       {pages.map(page => (

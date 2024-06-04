@@ -269,7 +269,8 @@
             "job_title": "مسمى وظيفي",
             "job_category": "تصنيف الوظيفة",
             "job_location_country": "مكان الوظيفة – الدولة",
-            "job_location_city": "مكان العمل – المدينة"
+            "job_location_city": "مكان العمل – المدينة",
+            "job_status": "الحالة الوظيفية"
         }
     },
     "signupHeader": {
@@ -1576,7 +1577,10 @@
             "full_time": "وقت كامل",
             "part_time": "دوام جزئى",
             "remote": "بعيد",
-            "select": "يختار..."
+            "select": "يختار...",
+            "paused": "متوقف مؤقتًا",
+            "closed": "مغلق",
+            "active": "نشيط"
         },
         "logic_test_bar": {
             "not_attempted": "لم تحاول",

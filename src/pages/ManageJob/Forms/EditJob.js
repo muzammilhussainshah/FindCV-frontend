@@ -52,38 +52,6 @@ function EditJob() {
         currency: 'usd'
     });
 
-    useEffect(() => {
-        if (id) {
-
-            getJob(id)
-                .then((response) => {
-                    delete response.id;
-
-                    response.languages = response.languages.map((language) => {
-                        return {
-                            id: id + '-' + language.languageCode,
-                            languageCode: language.languageCode,
-                            level: language.level
-                        };
-                    });
-
-                    response.skills = response.skills.map((skill) => {
-                        return {
-                            id: id + '-skill-' + skill.skill_code,
-                            code: skill.skill_code
-                        };
-                    });
-
-                    setFormInitialValues({...response});
-                    formik.setValues({...response});
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-
-        }
-    }, [id]);
-
     const formik = useFormik({
         initialValues: formInitialValues,
         validationSchema: Yup.object({
@@ -123,6 +91,10 @@ function EditJob() {
             formData.append('salary_to', values.salary_high);
             formData.append('hours_from', values.hours_low);
             formData.append('hours_to', values.hours_high);
+
+            if (values.status) {
+                formData.append('status', values.status);
+            }
 
             if (values.languages.length > 0) {
                 values.languages.forEach((language, index) => {
@@ -176,6 +148,38 @@ function EditJob() {
 
         },
     });
+
+    useEffect(() => {
+        if (id) {
+
+            getJob(id)
+                .then((response) => {
+                    delete response.id;
+
+                    response.languages = response.languages.map((language) => {
+                        return {
+                            id: id + '-' + language.languageCode,
+                            languageCode: language.languageCode,
+                            level: language.level
+                        };
+                    });
+
+                    response.skills = response.skills.map((skill) => {
+                        return {
+                            id: id + '-skill-' + skill.skill_code,
+                            code: skill.skill_code
+                        };
+                    });
+
+                    setFormInitialValues({...response});
+                    formik.setValues({...response});
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+
+        }
+    }, [id]);
 
     const handlePopupClose = (popupName) => {
         if (popupName === 'language') {
@@ -231,6 +235,11 @@ function EditJob() {
         { value: 'full_time', label: t('general.UI.full_time') },
         { value: 'part_time', label: t('general.UI.part_time') },
         { value: 'remote', label: t('general.UI.remote') }
+    ];
+    const statusOptions = [
+        { value: 'active', label: t('general.UI.active') },
+        { value: 'paused', label: t('general.UI.paused') },
+        { value: 'closed', label: t('general.UI.closed') }
     ];
 
     return (
@@ -290,6 +299,21 @@ function EditJob() {
                                 error={formik.touched.city && formik.errors.city}
                             />
                         </div>
+                        {id && (
+                            <div>
+                                <FormSelectField
+                                    name="status"
+                                    label={t('forms.manage_job.job_status')}
+                                    placeholder={t('general.UI.select')}
+                                    type="default"
+                                    hasBorder
+                                    options={statusOptions}
+                                    onFormikChange={formik.handleChange}
+                                    value={formik.values.status}
+                                    error={formik.touched.status && formik.errors.status}
+                                />
+                            </div>
+                        )}
                     </div>
 
                     <div className={styles.create_job_block}>

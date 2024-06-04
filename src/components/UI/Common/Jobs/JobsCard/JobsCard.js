@@ -13,7 +13,7 @@ import suitcase_icon from '../../../../../assets/images/icons/suitcase-alt.svg';
 
 import styles from './JobsCard.module.css';
 
-function JobsCard({ job, ...props }) {
+function JobsCard({ disabled, job, ...props }) {
     const { t } = useTranslation();
 
     const desc = job.description;
@@ -42,8 +42,18 @@ function JobsCard({ job, ...props }) {
 
     }
 
+    let additional_card_classes = '';
+    if (disabled) {
+        additional_card_classes = styles.disabled;
+    }
+
     return (
-        <div className={styles.job_card} {...props}>
+        <div className={`${styles.job_card} ${styles[job.status]} ${additional_card_classes}`} {...props}>
+            {(job.status === 'paused' || job.status === 'closed') && (
+                <div className={styles.job_card_status}>
+                    <span>{job.status}</span>
+                </div>
+            )}
             <div className={styles.job_card_head}>
                 <div className={styles.job_card_head_info}>
 

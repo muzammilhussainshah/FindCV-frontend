@@ -269,7 +269,8 @@
             "job_title": "Job Title",
             "job_category": "Job Category",
             "job_location_country": "Job Location - Country",
-            "job_location_city": "Job Location - City"
+            "job_location_city": "Job Location - City",
+            "job_status": "Job Status"
         }
     },
     "signupHeader": {
@@ -1576,7 +1577,10 @@
             "full_time": "Full-time",
             "part_time": "Part-time",
             "remote": "Remote",
-            "select": "Select..."
+            "select": "Select...",
+            "paused": "Paused",
+            "closed": "Closed",
+            "active": "Active"
         },
         "logic_test_bar": {
             "not_attempted": "Not Attempted",
