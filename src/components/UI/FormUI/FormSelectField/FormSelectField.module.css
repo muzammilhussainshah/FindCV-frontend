@@ -115,6 +115,10 @@
     background-color: #093559;
 }
 
+.field :global(.react-select__multi-value) img {
+    display: none;
+}
+
 .field :global(.react-select__multi-value__label) div {
     padding-right: 5px;
     font-size: 14px;

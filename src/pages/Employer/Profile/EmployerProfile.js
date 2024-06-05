@@ -67,8 +67,11 @@ function EmployerProfile() {
 
                         <h4>{t('employer.jobs')}</h4>
                         <JobsList 
-                            per_page={1}
-                            filters={{employer_id: employer.id}}
+                            per_page={5}
+                            filters={{
+                                employer_id: employer.id,
+                                status: 'active'
+                            }}
                         />
                     </div>
                 </div>

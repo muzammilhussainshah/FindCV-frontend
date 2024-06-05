@@ -95,6 +95,25 @@
             "benefits_1": "الوصول إلى أفضل المواهب لدينا"
         }
     },
+    "my_jobs": {
+        "title": "وظائفي",
+        "my_jobs": "وظائفي",
+        "post_new_job": "نشر وظيفة جديدة"
+    },
+    "jobs": {
+        "title": "ديسيبل",
+        "filters": "المرشحات",
+        "jobs_found": "صندوق دي بي إس:",
+        "sort_by": "الدرجة ستكون:",
+        "relevance": "ملاءمة",
+        "newest": "زوجة",
+        "oldest": "الأقدم",
+        "salary": "مرتب",
+        "job_type": "وظيفة توب",
+        "category": "فئات",
+        "country": "دولة",
+        "language": "لغة"
+    },
     "forms": {
         "login": {
             "email": "بريد إلكتروني",
@@ -1580,7 +1599,8 @@
             "select": "يختار...",
             "paused": "متوقف مؤقتًا",
             "closed": "مغلق",
-            "active": "نشيط"
+            "active": "نشيط",
+            "all": "آل"
         },
         "logic_test_bar": {
             "not_attempted": "لم تحاول",

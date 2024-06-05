@@ -20,6 +20,7 @@ function JobsCard({ disabled, job, ...props }) {
     const currency = useGetCurrencySymbol(job.currency);
 
     let salary = '';
+    let salary_period = t('general.UI.month');
     let date = '';
 
     if (job.salary_from !== job.salary_to) {
@@ -27,6 +28,10 @@ function JobsCard({ disabled, job, ...props }) {
     }
     else {
         salary = currency + job.salary_from;
+    }
+
+    if (job.payment_type === 'hourly') {
+        salary_period = t('general.UI.hour');
     }
 
     if (job.createdAt) {
@@ -51,7 +56,7 @@ function JobsCard({ disabled, job, ...props }) {
         <div className={`${styles.job_card} ${styles[job.status]} ${additional_card_classes}`} {...props}>
             {(job.status === 'paused' || job.status === 'closed') && (
                 <div className={styles.job_card_status}>
-                    <span>{job.status}</span>
+                    <span>{t('general.UI.' + job.status)}</span>
                 </div>
             )}
             <div className={styles.job_card_head}>
@@ -95,7 +100,7 @@ function JobsCard({ disabled, job, ...props }) {
             <div className={styles.job_card_footer}>
                 <p>
                     <img src={money_icon} alt="Salary Icon" />
-                    <span>{salary} <span>/ {t('general.UI.month')}</span></span>
+                    <span>{salary} <span>/ {salary_period}</span></span>
                 </p>
                 <p>
                     <img src={users_icon} alt="Applications Icon" />

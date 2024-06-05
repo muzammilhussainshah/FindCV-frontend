@@ -31,6 +31,7 @@ function EditJob() {
     const { id } = useParams();
     const navigate = useNavigate();
     const userToken = useSelector(state => state.user.token);
+    const user = useSelector(state => state.user.user);
 
     const [formLoading, setFormLoading] = useState(false);
     const [isOpenLanguagePopup, setIsOpenLanguagePopup] = useState(false);
@@ -123,7 +124,7 @@ function EditJob() {
                 loading: t('general.UI.loading'),
                 success: <b>{t('general.UI.success')}</b>,
                 error: (err) => {
-                    return <b>{err.response.data.error}</b>;
+                    return <b>{err.error}</b>;
                 },
             })
             .then((response) => {
@@ -135,8 +136,8 @@ function EditJob() {
                 setFormLoading(false);
             })
             .catch((error) => {
-                
-                if (error.response.data.field) {
+
+                if (error?.response?.data?.field) {
                     formik.setErrors({
                         [error.response.data.field]: error.response.data.error
                     });
@@ -155,6 +156,10 @@ function EditJob() {
             getJob(id)
                 .then((response) => {
                     delete response.id;
+
+                    if (user.id !== response.employer_id) {
+                        navigate('/my-jobs');
+                    }
 
                     response.languages = response.languages.map((language) => {
                         return {
@@ -179,7 +184,42 @@ function EditJob() {
                 });
 
         }
-    }, [id]);
+        else {
+            setFormInitialValues({
+                title: '',
+                description: '',
+                country: '',
+                category: '',
+                city: '',
+                languages: [],
+                skills: [],
+                payment_type: 'monthly',
+                job_type: 'full_time',
+                hours_low: 30,
+                hours_high: 40,
+                salary_low: 300,
+                salary_high: 500,
+                currency: 'usd'
+            });
+            formik.setValues({
+                title: '',
+                description: '',
+                country: '',
+                category: '',
+                city: '',
+                languages: [],
+                skills: [],
+                payment_type: 'monthly',
+                job_type: 'full_time',
+                hours_low: 30,
+                hours_high: 40,
+                salary_low: 300,
+                salary_high: 500,
+                currency: 'usd'
+            });
+        }
+    // eslint-disable-next-line
+    }, [id, user.id, navigate]);
 
     const handlePopupClose = (popupName) => {
         if (popupName === 'language') {

@@ -1,5 +1,6 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import JobsList from '../../components/UI/Common/Jobs/JobsList/JobsList';
 import Button from '../../components/UI/Buttons/Button/Button'
@@ -14,26 +15,33 @@ function MyJobs() {
         closed: 0
     });
     const user = useSelector(state => state.user.user);
+    const { t } = useTranslation();
 
-    const handleUpdateJobsCounters = useCallback((jobs) => {
+    const handleUpdateJobsCounters = (jobs) => {
+
+        if (jobsCounters.total === jobs.total) {
+            return;
+        }
+
         setJobsCounters({
             ...jobs
         });
-    }, [jobsCounters]);
+
+    };
 
     return (
         <div className={styles.wrapper}>
-            <h1>My Jobs</h1>
+            <h1>{t('my_jobs.title')}</h1>
 
             <div className={styles.head}>
                 <div>
-                    <span>My Jobs: {jobsCounters.total}</span>
-                    <span>Active: {jobsCounters.active}</span>
-                    <span>Paused: {jobsCounters.paused}</span>
-                    <span>Closed: {jobsCounters.closed}</span>
+                    <span>{t('my_jobs.my_jobs')}: {jobsCounters.total}</span>
+                    <span>{t('general.UI.active')}: {jobsCounters.active}</span>
+                    <span>{t('general.UI.paused')}: {jobsCounters.paused}</span>
+                    <span>{t('general.UI.closed')}: {jobsCounters.closed}</span>
                 </div>
                 <div>
-                    <Button to="/create-job">Post New Job</Button>
+                    <Button to="/create-job">{t('my_jobs.post_new_job')}</Button>
                 </div>
             </div>
 

@@ -23,6 +23,7 @@ import ProfileEmployerSubscription from '../pages/Profile/ProfileEmployerSubscri
 
 import ManageJob from '../pages/ManageJob/ManageJob';
 import MyJobs from '../pages/MyJobs/MyJobs';
+import Jobs from '../pages/Jobs/Jobs';
 
 import i18n from './i18n';
 
@@ -101,6 +102,12 @@ function App() {
           <Route path="my-jobs" element={
             <ProtectedRoute userStatus="loggedIn" userRole="employer">
               <MyJobs />
+            </ProtectedRoute>} 
+          />
+
+          <Route path="jobs" element={
+            <ProtectedRoute>
+              <Jobs />
             </ProtectedRoute>} 
           />
 

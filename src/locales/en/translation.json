@@ -95,6 +95,25 @@
             "benefits_1": "Get access to our best talents"
         }
     },
+    "my_jobs": {
+        "title": "My Jobs",
+        "my_jobs": "My Jobs",
+        "post_new_job": "Post New Job"
+    },
+    "jobs": {
+        "title": "Jobs",
+        "filters": "Filters",
+        "jobs_found": "Jobs found:",
+        "sort_by": "Sort by:",
+        "relevance": "Relevance",
+        "newest": "Newest",
+        "oldest": "Oldest",
+        "salary": "Salary",
+        "job_type": "Job Type",
+        "category": "Category",
+        "country": "Country",
+        "language": "Language"
+    },
     "forms": {
         "login": {
             "email": "Email",
@@ -1580,7 +1599,8 @@
             "select": "Select...",
             "paused": "Paused",
             "closed": "Closed",
-            "active": "Active"
+            "active": "Active",
+            "all": "All"
         },
         "logic_test_bar": {
             "not_attempted": "Not Attempted",

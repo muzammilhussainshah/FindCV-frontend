@@ -96,12 +96,24 @@ function FormSelectField({ hasBorder, error, label, type, value, options, onForm
     const handleChange = (selectedOption) => {
 
         if (onFormikChange) {
-            onFormikChange({
-                target: {
-                    name: props.name,
-                    value: selectedOption ? selectedOption.value : '',
-                }
-            });
+
+            if (Array.isArray(selectedOption)) {
+                onFormikChange({
+                    target: {
+                        name: props.name,
+                        value: selectedOption.map(option => option.value),
+                    }
+                });
+            }
+            else {
+                onFormikChange({
+                    target: {
+                        name: props.name,
+                        value: selectedOption ? selectedOption.value : '',
+                    }
+                });
+            }
+
         }
         else if (onChange) {
 

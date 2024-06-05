@@ -11,13 +11,12 @@ import styles from './JobsList.module.css';
 function JobsList({ per_page, filters, onFetchJobs, children, ...props }) {
     const [loading, setLoading] = useState(true);
     const [paginationLoading, setPaginationLoading] = useState(false);
-    const [listFilters] = useState(filters);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [jobs, setJobs] = useState([]);
 
     useEffect(() => {
-        getJobsList(page, per_page, listFilters)
+        getJobsList(page, per_page, filters)
             .then((response) => {
                 // console.log(response);
                 setJobs(response.jobs);
@@ -38,7 +37,7 @@ function JobsList({ per_page, filters, onFetchJobs, children, ...props }) {
                 console.log(error);
             });
     // eslint-disable-next-line
-    }, [page, listFilters, per_page]);
+    }, [page, filters, per_page]);
 
     const handlePageChange = (page) => {
         setPage(page);
@@ -55,7 +54,7 @@ function JobsList({ per_page, filters, onFetchJobs, children, ...props }) {
                 return <BlockLoader key={index} height={320} marginBottom={20} />;
             }))}
 
-            {totalPages && <Pagination totalPages={totalPages} currentPage={page} onPageChange={handlePageChange} />}
+            {totalPages > 0 && <Pagination totalPages={totalPages} currentPage={page} onPageChange={handlePageChange} />}
         </div>
     );
 }

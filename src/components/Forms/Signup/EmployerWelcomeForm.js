@@ -99,7 +99,7 @@ function EmployerWelcomeForm(props) {
             })
             .catch((error) => {
                 
-                if (error.response.data.field) {
+                if (error?.response?.data?.field) {
                     formik.setErrors({
                         [error.response.data.field]: error.response.data.error
                     });
