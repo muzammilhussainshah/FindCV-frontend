@@ -551,3 +551,119 @@ export const getLanguageLevelCode = (level) => {
 
     return code;
 }
+
+export const getCurrencySymbol = (currency_code) => {
+    const currencies_list = [
+        { code: "usd", name: "USD", symbol: "$" },
+        { code: "eur", name: "EUR", symbol: "€" },
+        { code: "gbp", name: "GBP", symbol: "£" },
+        { code: "jpy", name: "JPY", symbol: "¥" },
+        { code: "cny", name: "CNY", symbol: "¥" },
+        { code: "cad", name: "CAD", symbol: "$" },
+        { code: "aud", name: "AUD", symbol: "$" },
+        { code: "chf", name: "CHF", symbol: "CHF" },
+        { code: "sek", name: "SEK", symbol: "kr" },
+        { code: "nok", name: "NOK", symbol: "kr" },
+        { code: "dkk", name: "DKK", symbol: "kr" },
+        { code: "rub", name: "RUB", symbol: "₽" },
+        { code: "inr", name: "INR", symbol: "₹" },
+        { code: "brl", name: "BRL", symbol: "R$" },
+        { code: "zar", name: "ZAR", symbol: "R" },
+        { code: "hkd", name: "HKD", symbol: "$" },
+        { code: "sgd", name: "SGD", symbol: "$" },
+        { code: "nzd", name: "NZD", symbol: "$" },
+        { code: "thb", name: "THB", symbol: "฿" },
+        { code: "php", name: "PHP", symbol: "₱" },
+        { code: "idr", name: "IDR", symbol: "Rp" },
+        { code: "myr", name: "MYR", symbol: "RM" },
+        { code: "vnd", name: "VND", symbol: "₫" },
+        { code: "krw", name: "KRW", symbol: "₩" },
+        { code: "try", name: "TRY", symbol: "₺" },
+        { code: "mxn", name: "MXN", symbol: "$" },
+        { code: "ars", name: "ARS", symbol: "$" },
+        { code: "cop", name: "COP", symbol: "$" },
+        { code: "clp", name: "CLP", symbol: "$" },
+        { code: "pen", name: "PEN", symbol: "S/." },
+        { code: "aed", name: "AED", symbol: "د.إ" },
+        { code: "sar", name: "SAR", symbol: "ر.س" },
+        { code: "qar", name: "QAR", symbol: "ر.ق" },
+        { code: "omr", name: "OMR", symbol: "ر.ع." },
+        { code: "kwd", name: "KWD", symbol: "د.ك" },
+        { code: "bhd", name: "BHD", symbol: "د.ب" },
+        { code: "jod", name: "JOD", symbol: "د.ا" },
+        { code: "ils", name: "ILS", symbol: "₪" },
+        { code: "pln", name: "PLN", symbol: "zł" },
+        { code: "czk", name: "CZK", symbol: "Kč" },
+        { code: "huf", name: "HUF", symbol: "Ft" },
+        { code: "ron", name: "RON", symbol: "lei" },
+        { code: "sek", name: "SEK", symbol: "kr" },
+        { code: "nok", name: "NOK", symbol: "kr" },
+        { code: "dkk", name: "DKK", symbol: "kr" },
+        { code: "rub", name: "RUB", symbol: "₽" },
+        { code: "inr", name: "INR", symbol: "₹" },
+        { code: "brl", name: "BRL", symbol: "R$" },
+        { code: "zar", name: "ZAR", symbol: "R" },
+        { code: "hkd", name: "HKD", symbol: "$" },
+        { code: "sgd", name: "SGD", symbol: "$" },
+        { code: "nzd", name: "NZD", symbol: "$" },
+        { code: "thb", name: "THB", symbol: "฿" },
+        { code: "php", name: "PHP", symbol: "₱" },
+        { code: "idr", name: "IDR", symbol: "Rp" },
+        { code: "myr", name: "MYR", symbol: "RM" },
+        { code: "vnd", name: "VND", symbol: "₫" },
+        { code: "krw", name: "KRW", symbol: "₩" },
+        { code: "try", name: "TRY", symbol: "₺" },
+        { code: "mxn", name: "MXN", symbol: "$" },
+        { code: "ars", name: "ARS", symbol: "$" },
+        { code: "cop", name: "COP", symbol: "$" },
+        { code: "clp", name: "CLP", symbol: "$" },
+        { code: "pen", name: "PEN", symbol: "S/." },
+        { code: "aed", name: "AED", symbol: "د.إ" },
+        { code: "sar", name: "SAR", symbol: "ر.س" },
+        { code: "qar", name: "QAR", symbol: "ر.ق" },
+        { code: "omr", name: "OMR", symbol: "ر.ع." },
+        { code: "kwd", name: "KWD", symbol: "د.ك" },
+        { code: "bhd", name: "BHD", symbol: "د.ب" },
+        { code: "jod", name: "JOD", symbol: "د.ا" },
+        { code: "ils", name: "ILS", symbol: "₪" },
+        { code: "pln", name: "PLN", symbol: "zł" },
+        { code: "czk", name: "CZK", symbol: "Kč" },
+        { code: "huf", name: "HUF", symbol: "Ft" }
+    ];
+    const currency = currencies_list.find(currency => currency.code === currency_code);
+
+    return currency.symbol;
+}
+
+export const getTimeAgo = (date) => {
+    const now = new Date();
+    const seconds = Math.floor((now - date) / 1000);
+  
+    const intervals = {
+        year: 31536000,
+        month: 2592000,
+        week: 604800,
+        day: 86400,
+        hour: 3600,
+        minute: 60,
+    };
+  
+    let unit = 'second';
+    let count = seconds;
+  
+    for (const [key, value] of Object.entries(intervals)) {
+        if (seconds >= value) {
+            unit = key;
+            count = Math.floor(seconds / value);
+            break;
+        }
+    }
+  
+    const unit_plural = count > 1 ? unit + 's' : unit;
+
+    return {
+        count,
+        unit,
+        unit_plural
+    };
+}

@@ -4,7 +4,7 @@ import BubbleButton from '../../../Buttons/BubbleButton/BubbleButton';
 import SimpleLink from '../../../Buttons/SimpleLink/SimpleLink';
 import Button from '../../../Buttons/Button/Button';
 
-import { useGetCurrencySymbol } from '../../../../../utils/utilityHooks';
+import { getTimeAgo, getCurrencySymbol } from '../../../../../utils/formatHelpers';
 
 import category_icon from '../../../../../assets/images/icons/job_categories/construction.svg';
 import money_icon from '../../../../../assets/images/icons/money-alt.svg';
@@ -17,7 +17,7 @@ function JobsCard({ disabled, job, ...props }) {
     const { t } = useTranslation();
 
     const desc = job.description;
-    const currency = useGetCurrencySymbol(job.currency);
+    const currency = getCurrencySymbol(job.currency);
 
     let salary = '';
     let salary_period = t('general.UI.month');
@@ -35,7 +35,7 @@ function JobsCard({ disabled, job, ...props }) {
     }
 
     if (job.createdAt) {
-        const date_info = timeAgo(new Date(job.createdAt));
+        const date_info = getTimeAgo(new Date(job.createdAt));
         date = t('general.UI.posted') + ' ';
 
         if (date_info.unit_plural === 'second' || date_info.unit_plural === 'seconds') {
@@ -117,36 +117,3 @@ function JobsCard({ disabled, job, ...props }) {
 }
 
 export default JobsCard;
-
-const timeAgo = (date) => {
-    const now = new Date();
-    const seconds = Math.floor((now - date) / 1000);
-  
-    const intervals = {
-        year: 31536000,
-        month: 2592000,
-        week: 604800,
-        day: 86400,
-        hour: 3600,
-        minute: 60,
-    };
-  
-    let unit = 'second';
-    let count = seconds;
-  
-    for (const [key, value] of Object.entries(intervals)) {
-        if (seconds >= value) {
-            unit = key;
-            count = Math.floor(seconds / value);
-            break;
-        }
-    }
-  
-    const unit_plural = count > 1 ? unit + 's' : unit;
-
-    return {
-        count,
-        unit,
-        unit_plural
-    };
-}
