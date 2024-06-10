@@ -98,7 +98,8 @@
     "my_jobs": {
         "title": "وظائفي",
         "my_jobs": "وظائفي",
-        "post_new_job": "نشر وظيفة جديدة"
+        "post_new_job": "نشر وظيفة جديدة",
+        "favourites_title": "الوظائف المحفوظة"
     },
     "jobs": {
         "title": "ديسيبل",
@@ -113,6 +114,21 @@
         "category": "فئات",
         "country": "دولة",
         "language": "لغة"
+    },
+    "job": {
+        "must_be_at_least_100_characters": "يجب أن لا يقل طوله عن 100 حرف",
+        "job_added_to_favorites": "تمت إضافة الوظيفة إلى المفضلة",
+        "country": "دولة",
+        "city_town_village": "قرية مدينة مدينة",
+        "job_type": "نوع الوظيفة",
+        "salary": "مرتب",
+        "working_hours_per_week": "ساعات العمل اسبوعيا",
+        "description": "وصف",
+        "valuable_information": "معلومات قيمة",
+        "language_requirements": "متطلبات اللغة",
+        "required_skills": "المهارات المطلوبة",
+        "similar_jobs": "وظائف مماثلة",
+        "proposal_message": "رسالة الاقتراح"
     },
     "forms": {
         "login": {
@@ -300,6 +316,7 @@
         "jobs": "قائمة الوظائف",
         "jobseekers": "اكتشف الموظفين",
         "my_jobs": "وظائفي",
+        "saved_jobs": "الوظائف المحفوظة",
         "post_a_jobs": "انشر وظيفة",
         "profile": "حساب تعريفي",
         "settings": "إعدادات",
@@ -1562,6 +1579,8 @@
             "publish": "ينشر",
             "save": "يحفظ",
             "submit": "يقدم",
+            "apply": "يتقدم",
+            "applied": "مُطبَّق",
             "loading": "تحميل...",
             "cancel": "يلغي",
             "purchase": "شراء",

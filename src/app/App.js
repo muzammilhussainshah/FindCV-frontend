@@ -106,6 +106,12 @@ function App() {
             </ProtectedRoute>} 
           />
 
+          <Route path="jobs/saved" element={
+            <ProtectedRoute userStatus="loggedIn" userRole="jobseeker">
+              <MyJobs />
+            </ProtectedRoute>} 
+          />
+
           <Route path="jobs" element={<Jobs />} />
           <Route path="job/:id" element={<Job />} />
 

@@ -75,6 +75,12 @@
         margin-right: 15px;
         margin-bottom: 5px;
     }
+    .head_favourites > div:nth-child(1) {
+        padding-bottom: 0;
+    }
+    .head_favourites > div:nth-child(1) span {
+        margin-bottom: 0;
+    }
     :global(.fcv-rtl) .head > div:nth-child(1) {
         text-align: right;
     }

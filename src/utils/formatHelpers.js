@@ -667,3 +667,18 @@ export const getTimeAgo = (date) => {
         unit_plural
     };
 }
+
+export const getTrimmedName = (fullName) => {
+    if (!fullName) return '';
+  
+    const nameParts = fullName.trim().split(' ');
+  
+    if (nameParts.length === 1) {
+      return nameParts[0];
+    }
+  
+    const firstName = nameParts[0];
+    const lastNameInitial = nameParts[1].charAt(0).toUpperCase();
+  
+    return `${firstName} ${lastNameInitial}.`;
+}

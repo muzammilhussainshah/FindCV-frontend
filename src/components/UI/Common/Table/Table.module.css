@@ -47,3 +47,44 @@
     max-width: 26px;
     margin-right: 10px;
 }
+
+:global(.fcv-rtl) .table tr {
+    direction: rtl;
+}
+
+:global(.fcv-rtl) .table td img {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+:global(.fcv-rtl) .table th {
+    text-align: right;
+}
+
+@media screen and (max-width: 600px) {
+    .table td {
+        flex: auto;
+        display: block;
+        text-align: right;
+    }
+    .table tr {
+        flex: auto;
+        min-height: 40px;
+        padding: 10px;
+    }
+    .table tr * {
+        font-size: 14px;
+    }
+    .table td img {
+        position: relative;
+        top: 2px;
+        margin-right: 5px;
+        max-width: 18px;
+    }
+    :global(.fcv-rtl) .table th {
+        text-align: right;
+    }
+    :global(.fcv-rtl) .table td {
+        text-align: left;
+    }
+}

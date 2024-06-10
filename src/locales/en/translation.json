@@ -98,7 +98,8 @@
     "my_jobs": {
         "title": "My Jobs",
         "my_jobs": "My Jobs",
-        "post_new_job": "Post New Job"
+        "post_new_job": "Post New Job",
+        "favourites_title": "Saved Jobs"
     },
     "jobs": {
         "title": "Jobs",
@@ -113,6 +114,21 @@
         "category": "Category",
         "country": "Country",
         "language": "Language"
+    },
+    "job": {
+        "must_be_at_least_100_characters": "Must be at least 100 characters long",
+        "job_added_to_favorites": "Job added to favorites",
+        "country": "Country",
+        "city_town_village": "City/Town/Village",
+        "job_type": "Job Type",
+        "salary": "Salary",
+        "working_hours_per_week": "Working hours per week",
+        "description": "Description",
+        "valuable_information": "Valuable Information",
+        "language_requirements": "Language Requirements",
+        "required_skills": "Required Skills",
+        "similar_jobs": "Similar Jobs",
+        "proposal_message": "Proposal Message"
     },
     "forms": {
         "login": {
@@ -300,6 +316,7 @@
         "jobs": "Jobs List",
         "jobseekers": "Discover Employees",
         "my_jobs": "My Jobs",
+        "saved_jobs": "Saved Jobs",
         "post_a_jobs": "Post a Job",
         "profile": "Profile",
         "settings": "Settings",
@@ -1562,6 +1579,8 @@
             "publish": "Publish",
             "save": "Save",
             "submit": "Submit",
+            "apply": "Apply",
+            "applied": "Applied",
             "loading": "Loading...",
             "cancel": "Cancel",
             "purchase": "Purchase",

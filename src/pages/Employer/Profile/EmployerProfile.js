@@ -68,6 +68,7 @@ function EmployerProfile() {
                         <h4>{t('employer.jobs')}</h4>
                         <JobsList 
                             per_page={5}
+                            hide_url_params={true}
                             filters={{
                                 employer_id: employer.id,
                                 status: 'active'

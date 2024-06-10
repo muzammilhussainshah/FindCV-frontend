@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import deepEqual from 'deep-equal';
+import { useEffect, useState, useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import JobsCard from '../JobsCard/JobsCard';
 import Pagination from '../../Pagination/Pagination';
@@ -8,15 +10,45 @@ import { getJobsList } from '../../../../../services/jobService';
 
 import styles from './JobsList.module.css';
 
-function JobsList({ per_page, filters, onFetchJobs, children, ...props }) {
+function JobsList({ per_page, max_pages, hide_url_params = false, filters, onPageChange, onFetchJobs, children, ...props }) {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const query = new URLSearchParams(location.search);
+    const initialPage = parseInt(query.get('page')) || 1;
+
     const [loading, setLoading] = useState(true);
     const [paginationLoading, setPaginationLoading] = useState(false);
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(initialPage);
+    const [filtersList, setFiltersList] = useState(filters);
     const [totalPages, setTotalPages] = useState(0);
     const [jobs, setJobs] = useState([]);
 
+    const updateURL = useCallback((params) => {
+        delete params.employer_id;
+        delete params.include_ids;
+        delete params.exclude_ids;
+        delete params.status;
+
+        const searchParams = new URLSearchParams(params);
+        navigate(`?${searchParams.toString()}`);
+    }, [navigate]);
+
     useEffect(() => {
-        getJobsList(page, per_page, filters)
+
+        if (!deepEqual(filters, filtersList)) {
+            setFiltersList(filters);
+            setPage(1);
+
+            if (!hide_url_params) {
+                updateURL({ page: 1, ...filters });
+            }
+        }
+
+    }, [filters, hide_url_params, filtersList, page, updateURL]);
+
+    useEffect(() => {
+        getJobsList(page, per_page, max_pages, filters)
             .then((response) => {
                 // console.log(response);
                 setJobs(response.jobs);
@@ -37,11 +69,15 @@ function JobsList({ per_page, filters, onFetchJobs, children, ...props }) {
                 console.log(error);
             });
     // eslint-disable-next-line
-    }, [page, filters, per_page]);
+    }, [page, filtersList, per_page]);
 
-    const handlePageChange = (page) => {
-        setPage(page);
+    const handlePageChange = (value) => {
+        setPage(value);
         setPaginationLoading(true);
+
+        if (!hide_url_params) {
+            updateURL({ page: value, ...filtersList });
+        }
     };
 
     return (

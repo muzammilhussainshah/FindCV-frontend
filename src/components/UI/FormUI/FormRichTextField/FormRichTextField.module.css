@@ -48,6 +48,11 @@
     border-color: #C8102E;
 }
 
+.wrapper_error :global(.ql-container) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
 .error {
     text-align: center;
     text-transform: uppercase;

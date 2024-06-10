@@ -14,6 +14,7 @@
     "axios": "^1.6.8",
     "country-list": "^2.3.0",
     "dotenv": "^16.4.5",
+    "fast-deep-equal": "^3.1.3",
     "formik": "^2.4.5",
     "i18next": "^23.10.1",
     "language-list": "0.0.3",

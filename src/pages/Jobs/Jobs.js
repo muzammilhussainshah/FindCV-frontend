@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 
 import { useGetJobCategoriesHook } from '../../utils/utilityHooks';
 
@@ -10,13 +11,29 @@ import styles from './Jobs.module.css';
 
 function Jobs() {
     const { t } = useTranslation();
+    const location = useLocation();
+
+    const query = new URLSearchParams(location.search);
+    const initialSortby = query.get('sortby') || 'relevance';
+    const initialJobType = query.get('job_type') || 'all';
+    const initialJobCategory = query.get('category') || 'all';
+    let initialJobCountry = query.getAll('country') || [];
+    let initialJobLanguage = query.getAll('language') || [];
+
+    if (initialJobCountry.length) {
+        initialJobCountry = initialJobCountry[0].split(',');
+    }
+
+    if (initialJobLanguage.length) {
+        initialJobLanguage = initialJobLanguage[0].split(',');
+    }
 
     const [jobsFoundTotal, setJobsFoundTotal] = useState(0);
-    const [sortby, setSortby] = useState('relevance');
-    const [jobType, setJobType] = useState('all');
-    const [jobCategory, setJobCategory] = useState('all');
-    const [jobCountry, setJobCountry] = useState([]);
-    const [jobLanguage, setJobLanguage] = useState([]);
+    const [sortby, setSortby] = useState(initialSortby);
+    const [jobType, setJobType] = useState(initialJobType);
+    const [jobCategory, setJobCategory] = useState(initialJobCategory);
+    const [jobCountry, setJobCountry] = useState(initialJobCountry);
+    const [jobLanguage, setJobLanguage] = useState(initialJobLanguage);
 
     const handleUpdateJobsCounters = useCallback((jobs) => {
         setJobsFoundTotal(jobs.total);
@@ -60,6 +77,24 @@ function Jobs() {
         { value: 'part_time', label: t('general.UI.part_time') },
         { value: 'remote', label: t('general.UI.remote') }
     ];
+
+    const filters = {};
+
+    if (sortby !== 'relevance') {
+        filters.sortby = sortby;
+    }
+    if (jobType !== 'all') {
+        filters.job_type = jobType;
+    }
+    if (jobCategory !== 'all') {
+        filters.category = jobCategory;
+    }
+    if (jobCountry.length > 0) {
+        filters.country = jobCountry;
+    }
+    if (jobLanguage.length > 0) {
+        filters.language = jobLanguage;
+    }
 
     return (
         <div className={styles.wrapper}>
@@ -144,13 +179,7 @@ function Jobs() {
 
                     <JobsList 
                         per_page={10}
-                        filters={{
-                            sortby: sortby,
-                            job_type: jobType,
-                            category: jobCategory,
-                            country: jobCountry,
-                            language: jobLanguage
-                        }}
+                        filters={filters}
                         onFetchJobs={handleUpdateJobsCounters}
                     />
                 </div>

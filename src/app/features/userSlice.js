@@ -31,6 +31,12 @@ export const userReducer = createSlice({
     },
     setLoading: (state, action) => {
       state.loading = action.payload;
+    },
+    updateApplications: (state, action) => {
+      state.user.applications = action.payload;
+    },
+    updateFavourites: (state, action) => {
+      state.user.favourites = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -97,6 +103,6 @@ export const userReducer = createSlice({
   }
 });
 
-export const { logoutUser, setLoading } = userReducer.actions;
+export const { logoutUser, setLoading, updateApplications, updateFavourites } = userReducer.actions;
 
 export default userReducer.reducer;

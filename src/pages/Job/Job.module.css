@@ -23,7 +23,14 @@
 }
 
 .head > div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     text-align: right;
+}
+
+.head > div:nth-child(2) > div {
+    margin-left: 15px;
 }
 
 .body {
@@ -62,9 +69,13 @@
     margin-bottom: 3px !important;
 }
 
-.job_head p {
+.job_head p, .job_head p a {
     font-size: 14px;
     color: #0464B2;
+}
+
+.job_head p a:hover {
+    color: #09AEEF;
 }
 
 .job_date {
@@ -84,4 +95,87 @@
 .job_apply {
     text-align: center;
     margin-top: 20px;
+}
+
+.jobs_head {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #EBF9FF;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    padding: 13px 20px;
+    min-height: 60px;
+    font-weight: 500;
+}
+
+:global(.fcv-rtl) .head {
+    direction: rtl;
+}
+
+:global(.fcv-rtl) .head div:nth-child(1) {
+    text-align: right;
+}
+
+:global(.fcv-rtl) .head div:nth-child(2) > div {
+    margin-left: 0;
+    margin-right: 15px;
+}
+
+:global(.fcv-rtl) .job_head {
+    direction: rtl;
+}
+
+:global(.fcv-rtl) .job_head_icon {
+    margin-right: 0;
+    margin-left: 20px;
+}
+
+:global(.fcv-rtl) .job_head > div:nth-child(2) {
+    text-align: right;
+}
+
+:global(.fcv-rtl) .job_date {
+    text-align: right;
+}
+
+:global(.fcv-rtl) .job_description {
+    text-align: right;
+    direction: rtl;
+}
+
+:global(.fcv-rtl) .job_description ul, :global(.fcv-rtl) .job_description ol {
+    margin-left: 0;
+    margin-right: 20px;
+}
+
+:global(.fcv-rtl) .jobs_head {
+    direction: rtl;
+}
+
+@media screen and (max-width: 600px) {
+    .body {
+        padding: 20px;
+    }
+    .job_head_icon {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+    }
+    .job_head_icon img {
+        width: 24px;
+    }
+    .job_head {
+        margin-bottom: 10px;
+    }
+    .job_head h1 {
+        font-size: 20px;
+    }
+    .job_head p, .job_head p a {
+        font-size: 12px;
+    }
+    .job_date {
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
 }

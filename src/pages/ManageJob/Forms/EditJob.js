@@ -180,6 +180,11 @@ function EditJob() {
                     formik.setValues({...response});
                 })
                 .catch((error) => {
+
+                    if (error?.error === 'Job not found') {
+                        navigate('/my-jobs');
+                    }
+
                     console.log(error);
                 });
 

@@ -57,6 +57,7 @@ function DefaultHeader() {
         else {
             menuItems = <>
                 <SimpleLink to="/jobs">{t('defaultHeader.jobs')}</SimpleLink>
+                <SimpleLink to="/jobs/saved">{t('defaultHeader.saved_jobs')}</SimpleLink>
             </>;
 
             displayName = user.full_name;

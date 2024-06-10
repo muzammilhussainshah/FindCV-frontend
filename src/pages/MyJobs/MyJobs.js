@@ -31,27 +31,50 @@ function MyJobs() {
 
     return (
         <div className={styles.wrapper}>
-            <h1>{t('my_jobs.title')}</h1>
+            {user.account_type === 'employer' ? (
+                <>
+                    <h1>{t('my_jobs.title')}</h1>
 
-            <div className={styles.head}>
-                <div>
-                    <span>{t('my_jobs.my_jobs')}: {jobsCounters.total}</span>
-                    <span>{t('general.UI.active')}: {jobsCounters.active}</span>
-                    <span>{t('general.UI.paused')}: {jobsCounters.paused}</span>
-                    <span>{t('general.UI.closed')}: {jobsCounters.closed}</span>
-                </div>
-                <div>
-                    <Button to="/create-job">{t('my_jobs.post_new_job')}</Button>
-                </div>
-            </div>
+                    <div className={styles.head}>
+                        <div>
+                            <span>{t('my_jobs.my_jobs')}: {jobsCounters.total}</span>
+                            <span>{t('general.UI.active')}: {jobsCounters.active}</span>
+                            <span>{t('general.UI.paused')}: {jobsCounters.paused}</span>
+                            <span>{t('general.UI.closed')}: {jobsCounters.closed}</span>
+                        </div>
+                        <div>
+                            <Button to="/create-job">{t('my_jobs.post_new_job')}</Button>
+                        </div>
+                    </div>
 
-            <JobsList 
-                per_page={10}
-                filters={{
-                    employer_id: user.id
-                }}
-                onFetchJobs={handleUpdateJobsCounters}
-            />
+                    <JobsList 
+                        per_page={10}
+                        filters={{
+                            employer_id: user.id
+                        }}
+                        onFetchJobs={handleUpdateJobsCounters}
+                    />
+                </>
+            ) : (
+                <>
+                    <h1>{t('my_jobs.favourites_title')}</h1>
+
+                    <div className={`${styles.head} ${styles.head_favourites}`}>
+                        <div>
+                            <span>{t('my_jobs.favourites_title')}: {jobsCounters.total}</span>
+                        </div>
+                        <div></div>
+                    </div>
+
+                    <JobsList 
+                        per_page={10}
+                        filters={{
+                            include_ids: user.favourites
+                        }}
+                        onFetchJobs={handleUpdateJobsCounters}
+                    />
+                </>
+            )}
         </div>
     );
 }
