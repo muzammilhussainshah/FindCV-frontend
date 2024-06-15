@@ -13,6 +13,30 @@ export const updateJob = async (data) => {
     }
 };
 
+export const updateJobField = async (data) => {
+    try {
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}job/updateField`, data);
+        if (response.data) {
+            // console.log(response.data);
+        }
+        return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};
+
+export const updateApplicationField = async (data) => {
+    try {
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}job/updateApplicationField`, data);
+        if (response.data) {
+            // console.log(response.data);
+        }
+        return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};
+
 export const getJob = async (job_id) => {
     try {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}job/getJobById/${job_id}`);
@@ -38,6 +62,22 @@ export const getJobsList = async (page, per_page, max_pages, filters = {}) => {
     }
 };
 
+export const getJobApplicationsList = async (id, token, page, per_page, filters = {}) => {
+    try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}job/getJobApplicationsList/${id}`, {
+            params: {
+                token: token,
+                page: page,
+                per_page: per_page,
+                filters: filters
+            }
+        });
+        return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};
+
 export const sendJobProposal = async (data) => {
     try {
         const response = await axios.post(`${process.env.REACT_APP_API_URL}job/sendProposal`, data);
@@ -50,6 +90,15 @@ export const sendJobProposal = async (data) => {
 export const addJobToFavourites = async (data) => {
     try {
         const response = await axios.post(`${process.env.REACT_APP_API_URL}job/addToFavourites`, data);
+        return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+}
+
+export const removeJobFromFavourites = async (data) => {
+    try {
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}job/removeFromFavourites`, data);
         return response.data;
     } catch (error) {
         throw error.response.data;

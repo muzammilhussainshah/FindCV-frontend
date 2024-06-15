@@ -41,7 +41,7 @@ function DefaultHeader() {
         
         if (user.account_type === 'employer') {
             menuItems = <>
-                <SimpleLink to="/my-jobs">{t('defaultHeader.my_jobs')}</SimpleLink>
+                <SimpleLink to="/profile/my-jobs">{t('defaultHeader.my_jobs')}</SimpleLink>
                 <SimpleLink to="/create-job">{t('defaultHeader.post_a_jobs')}</SimpleLink>
                 <SimpleLink to="/jobseekers">{t('defaultHeader.jobseekers')}</SimpleLink>
             </>;

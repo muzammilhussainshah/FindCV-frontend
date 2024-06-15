@@ -33,6 +33,16 @@
     margin-left: 15px;
 }
 
+.head_actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.head_actions > a, .head_actions > div {
+    margin-left: 10px;
+}
+
 .body {
     background-color: #EBF9FF;
     border-radius: 6px;

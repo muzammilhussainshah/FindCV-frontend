@@ -1,0 +1,167 @@
+.card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #EBF9FF;
+    border-radius: 6px;
+    padding: 20px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.card.good_fit {
+    background-color: #ddefdf;
+}
+
+.card.possible_fit {
+    background-color: #fcf5e0;
+}
+
+.card.rejected {
+    background-color: #f8d6d9;
+}
+
+.card.hidden .card_image img,
+.card.hidden .card_body_head h5,
+.card.hidden .card_body_text {
+    filter: blur(10px);
+    pointer-events: none;
+    user-select: none;
+}
+
+.card_image {
+    flex: 1;
+    width: 140px;
+}
+
+.card_image img {
+    pointer-events: none;
+    object-fit: cover;
+    width: 140px;
+    height: 140px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.card_body {
+    width: 100%;
+    padding-left: 15px;
+    padding-top: 2px;
+}
+
+.card_body_head {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.card_body_head h5 {
+    margin-bottom: 0;
+}
+
+.card.verified h5 {
+    position: relative;
+    /* padding-right: 25px; */
+}
+
+.card.verified h5:after {
+    position: relative;
+    line-height: 44px;
+    top: 1px;
+    width: 24px;
+    height: 14px;
+    margin-left: 2px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 24px;
+    background-image: url('../../../../../assets/images/icons/check_gold.svg');
+    display: inline-block;
+    content: '';
+}
+
+.card_body_head img {
+    width: 22px;
+    margin-left: 10px;
+}
+
+.card_body_head span {
+    display: inline-block;
+    color: #83A3AD;
+    margin-left: 10px;
+}
+
+.card_body_text * {
+    font-size: 14px;
+}
+
+.card_body_text > span span {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.card_actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.card_actions > div {
+    width: 24px;
+    height: 24px;
+    margin-left: 10px;
+}
+
+.card_actions > div img {
+    transform: scale(0.7);
+    transform-origin: center;
+}
+
+.card:hover .card_actions {
+    opacity: 1;
+    pointer-events: unset;
+}
+
+@media screen and (max-width: 600px) {
+    .card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .card_image {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .card_image img {
+        width: calc(100vw - 80px);
+        height: calc(100vw - 80px);
+    }
+    .card_body {
+        padding-left: 0;
+    }
+    .card_actions {
+        background-color: #EBF9FF;
+        top: 10px;
+        right: 5px;
+        opacity: 1;
+        pointer-events: unset;
+        padding: 0 15px 10px 15px;
+        border-bottom-left-radius: 15px;
+    }
+    .card_actions > div:nth-child(1) {
+        margin-left: 0;
+    }
+    .card.good_fit .card_actions {
+        background-color: #ddefdf;
+    }
+    .card.possible_fit .card_actions {
+        background-color: #fcf5e0;
+    }
+    .card.rejected .card_actions {
+        background-color: #f8d6d9;
+    }
+}

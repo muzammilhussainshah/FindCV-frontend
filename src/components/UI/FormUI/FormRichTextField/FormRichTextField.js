@@ -1,6 +1,6 @@
 import ReactQuill from 'react-quill';
+import "quill-paste-smart";
 import 'react-quill/dist/quill.snow.css';
-
 import styles from './FormRichTextField.module.css';
 
 function FormRichTextField({ error, label, hasBorder, onChange, onFormikChange, children, ...props }) {
@@ -22,12 +22,7 @@ function FormRichTextField({ error, label, hasBorder, onChange, onFormikChange, 
         wrapper_class += ' ' + styles.hasBorder;
     }
 
-    if (hasBorder) {
-        wrapper_class += ' ' + styles.hasBorder;
-    }
-
     const handleChange = (value) => {
-
         if (onFormikChange) {
             onFormikChange({
                 target: {
@@ -39,14 +34,18 @@ function FormRichTextField({ error, label, hasBorder, onChange, onFormikChange, 
         else if (onChange) {
             onChange(value);
         }
-
     }
 
     return (
         <div className={styles.field}>
             {label && <label htmlFor={props.name}>{label}</label>}
             <div className={wrapper_class}>
-                <ReactQuill theme="snow" modules={modules} onChange={handleChange} {...props} />
+                <ReactQuill 
+                    theme="snow" 
+                    modules={modules} 
+                    onChange={handleChange} 
+                    {...props} 
+                />
             </div>
             {error && <p className={styles.error}>{error}</p>}
         </div>

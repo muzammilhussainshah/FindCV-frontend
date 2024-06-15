@@ -7,11 +7,12 @@ import Yup from '../../utils/yupExtensions';
 import toast from 'react-hot-toast';
 
 import { updateFavourites, updateApplications } from '../../app/features/userSlice';
-import { getJob, sendJobProposal, addJobToFavourites } from '../../services/jobService';
+import { getJob, sendJobProposal, addJobToFavourites, removeJobFromFavourites, updateJobField } from '../../services/jobService';
 import { getTimeAgo, getCurrencySymbol, getTrimmedName } from '../../utils/formatHelpers';
 
 import Flag from 'react-flags';
 import Subtitle from '../../components/UI/Common/Subtitle/Subtitle'
+import Applications from '../../components/UI/Common/Applications/Applications';
 import JobsList from '../../components/UI/Common/Jobs/JobsList/JobsList';
 import LanguageLevelList from '../../components/UI/Common/LanguageLevel/LanguageLevelList/LanguageLevelList';
 import SkillsList from '../../components/UI/Common/Skills/SkillsList/SkillsList';
@@ -27,6 +28,10 @@ import styles from './Job.module.css';
 
 import category_icon from '../../assets/images/icons/job_categories/construction.svg';
 import star_icon from '../../assets/images/icons/star-white.svg';
+import pen_icon from '../../assets/images/icons/pen-white.svg';
+import pause_icon from '../../assets/images/icons/pause-white.svg';
+import play_icon from '../../assets/images/icons/play-white.svg';
+import close_icon from '../../assets/images/icons/close-white.svg';
 
 function Job() {
     const { id } = useParams();
@@ -125,7 +130,7 @@ function Job() {
 
     const handlePopupClose = () => {
         setIsApplyPopupOpen(false);
-    }
+    };
 
     const handleAddToFavourites = () => {
         addJobToFavourites({
@@ -143,7 +148,69 @@ function Job() {
             }
 
         });
-    }
+    };
+
+    const handleRemoveFromFavourites = () => {
+        removeJobFromFavourites({
+            job_id: id, 
+            token: userToken
+        })
+        .then((response) => {
+            dispatch(updateFavourites(user.favourites.filter(item => item !== parseInt(id, 10))));
+            toast.success(t('job.job_removed_from_favorites'));
+        })
+        .catch((error) => {
+            
+            if (error?.response?.data?.error) {
+                toast.error(error.response.data.error);
+            }
+
+        });
+    };
+
+    const handlePauseClick = () => {
+        updateJobField({
+            job_id: id, 
+            token: userToken,
+            field: 'status',
+            value: (job.status === 'paused' || job.status === 'closed') ? 'active' : 'paused'
+        })
+        .then((response) => {
+            setJob((prevState) => ({
+                ...prevState,
+                status: (prevState.status === 'paused' || prevState.status === 'closed') ? 'active' : 'paused'
+            }));
+        })
+        .catch((error) => {
+            
+            if (error?.response?.data?.error) {
+                toast.error(error.response.data.error);
+            }
+
+        });
+    };
+
+    const handleCloseClick = () => {
+        updateJobField({
+            job_id: id, 
+            token: userToken,
+            field: 'status',
+            value: 'closed'
+        })
+        .then((response) => {
+            setJob((prevState) => ({
+                ...prevState,
+                status: 'closed'
+            }));
+        })
+        .catch((error) => {
+            
+            if (error?.response?.data?.error) {
+                toast.error(error.response.data.error);
+            }
+
+        });
+    };
 
     const infoTableData = [];
     let date = '';
@@ -272,12 +339,49 @@ function Job() {
                                 )}
                                 {user?.applications?.includes(parseInt(id, 10)) && <strong style={{color: '#34A853'}}>{t('general.UI.applied')}</strong>}
 
-                                {(user?.account_type === 'jobseeker' && !user?.favourites?.includes(parseInt(id, 10))) && (
-                                    <IconButton
-                                        color="green"
-                                        icon={star_icon}
-                                        onClick={handleAddToFavourites}
-                                    ></IconButton>
+                                {user?.account_type === 'jobseeker' && (
+                                    user?.favourites?.includes(parseInt(id, 10)) ? (
+                                        <IconButton
+                                            color="red"
+                                            icon={star_icon}
+                                            onClick={handleRemoveFromFavourites}
+                                        ></IconButton>
+                                    ) : (
+                                        <IconButton
+                                            color="green"
+                                            icon={star_icon}
+                                            onClick={handleAddToFavourites}
+                                        ></IconButton>
+                                    )
+                                
+                                )}
+
+                                {user?.account_type === 'employer' && (
+                                    
+                                    user?.jobs?.includes(parseInt(id, 10)) && (
+
+                                        <div className={styles.head_actions}>
+                                            <IconButton
+                                                icon={pen_icon}
+                                                to={`/jobs/${id}/edit`}
+                                            ></IconButton>
+                                            <IconButton
+                                                color={(job.status === 'paused' || job.status === 'closed') ? 'green' : 'yellow'}
+                                                icon={(job.status === 'paused' || job.status === 'closed') ? play_icon : pause_icon}
+                                                onClick={handlePauseClick}
+                                            ></IconButton>
+
+                                            {job.status !== 'closed' && (
+                                                <IconButton
+                                                    color="red"
+                                                    icon={close_icon}
+                                                    onClick={handleCloseClick}
+                                                ></IconButton>
+                                            )}
+                                        </div>
+
+                                    )
+                                    
                                 )}
                             </div>
                         </div>
@@ -316,18 +420,25 @@ function Job() {
 
                         </div>
 
-                        <div className={styles.jobs_head}>
-                            <p>{t('job.similar_jobs')}</p>
-                        </div>
-                        <JobsList 
-                            per_page={4}
-                            max_pages={4}
-                            hide_url_params={true}
-                            filters={{
-                                exclude_ids: [job.id],
-                                related_to: job.id
-                            }}
-                        />
+                        {(user?.account_type === 'employer' && user?.jobs?.includes(parseInt(id, 10))) ? (
+                            <Applications job_id={id} />
+                        ) : (
+                            <>
+                                <div className={styles.jobs_head}>
+                                    <p>{t('job.similar_jobs')}</p>
+                                </div>
+                                <JobsList 
+                                    per_page={4}
+                                    max_pages={4}
+                                    hide_url_params={true}
+                                    filters={{
+                                        exclude_ids: [job.id],
+                                        related_to: job.id
+                                    }}
+                                />
+                            </>
+                        )}
+                        
                     </div>
                     <BasicPopup isOpen={isApplyPopupOpen} closePopup={handlePopupClose}>
                         <form onSubmit={formik.handleSubmit}>

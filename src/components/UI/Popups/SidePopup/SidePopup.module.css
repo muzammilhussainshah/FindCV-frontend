@@ -1,0 +1,85 @@
+.popupOverlay {
+    transition: all 0.5s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #093559c8;
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+    opacity: 0;
+    z-index: 999;
+}
+
+.popupOverlay.popupOverlayActive {
+    opacity: 1;
+}
+
+.popup {
+    transition: all 0.5s ease;
+    transform: translateX(800px);
+    max-width: 750px;
+    width: 100%;
+    background-color: #EBF9FF;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    padding-right: 15px;
+}
+
+.popup_content {
+    padding: 30px 15px 30px 30px;
+    overflow: auto;
+    height: calc(100% - 0px);
+    /* margin-right: -20px; */
+    /* padding-right: 50px; */
+}
+
+/* Chrome, Edge and Safari */
+.popup *::-webkit-scrollbar {
+    height: 4px;
+    width: 4px;
+}
+.popup *::-webkit-scrollbar-track {
+    border-radius: 4px;
+    background-color: #CCDFE6;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.popup *::-webkit-scrollbar-track:hover {
+    background-color: #B8C0C2;
+}
+
+.popup *::-webkit-scrollbar-track:active {
+    background-color: #B8C0C2;
+}
+
+.popup *::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #093559;
+}
+
+.popup *::-webkit-scrollbar-thumb:hover {
+    background-color: #0F5996;
+}
+
+.popup *::-webkit-scrollbar-thumb:active {
+    background-color: #0F5996;
+}
+
+.popupOverlay.popupOverlayActive .popup {
+    transform: translateX(0);
+}
+
+:global(.fcv-rtl) .popup {
+    direction: rtl;
+}
+
+@media (max-width: 600px) {
+    .popup {
+        padding: 20px;
+        max-width: calc(100% - 40px);
+    }
+}

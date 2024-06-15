@@ -48,6 +48,7 @@
     object-fit: cover;
     height: 300px;
     border-radius: 15px;
+    pointer-events: none;
     border: 2px solid #093559;
 }
 

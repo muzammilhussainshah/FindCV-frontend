@@ -81,7 +81,7 @@ function JobsCard({ disabled, job, ...props }) {
 
                 </div>
                 <div>
-                    <BubbleButton small to={`/job/${job.id}`}>{t('general.UI.view')}</BubbleButton>
+                    <BubbleButton small to={`/jobs/${job.id}`}>{t('general.UI.view')}</BubbleButton>
                 </div>
             </div>
             <div className={styles.job_card_body}>
@@ -90,7 +90,7 @@ function JobsCard({ disabled, job, ...props }) {
                     {desc.length > 240 ? (
                         <>
                             <div dangerouslySetInnerHTML={{__html: desc.slice(0, 240) + '... '}}></div>
-                            <SimpleLink to={`/job/${job.id}`}>{t('general.UI.show_more')}</SimpleLink>
+                            <SimpleLink to={`/jobs/${job.id}`}>{t('general.UI.show_more')}</SimpleLink>
                         </>
                     ) : (
                         <div dangerouslySetInnerHTML={{__html: desc}}></div>
@@ -102,15 +102,19 @@ function JobsCard({ disabled, job, ...props }) {
                     <img src={money_icon} alt="Salary Icon" />
                     <span>{salary} <span>/ {salary_period}</span></span>
                 </p>
-                <p>
-                    <img src={users_icon} alt="Applications Icon" />
-                    <span>162 Applications</span>
-                </p>
+
+                {job.applications_count > 0 && (
+                    <p>
+                        <img src={users_icon} alt="Applications Icon" />
+                        <span>{job.applications_count} {t('general.UI.applications')}</span>
+                    </p>
+                )}
+
                 <p>
                     <img src={suitcase_icon} alt="Jobtype Icon" />
                     <span>{t('general.UI.' + job.job_type)}</span>
                 </p>
-                <Button to={`/job/${job.id}`}>{t('general.UI.view')}</Button>
+                <Button to={`/jobs/${job.id}`}>{t('general.UI.view')}</Button>
             </div>
         </div>
     );

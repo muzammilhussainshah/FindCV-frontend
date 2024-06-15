@@ -88,21 +88,20 @@ function App() {
               <ProfileEmployerSubscription />
             </ProtectedRoute>} 
           />
+          <Route path="profile/my-jobs" element={
+            <ProtectedRoute userStatus="loggedIn" userRole="employer">
+              <MyJobs />
+            </ProtectedRoute>} 
+          />
 
           <Route path="create-job" element={
             <ProtectedRoute userStatus="loggedIn" userRole="employer">
               <ManageJob />
             </ProtectedRoute>} 
           />
-          <Route path="edit-job/:id" element={
+          <Route path="jobs/:id/edit" element={
             <ProtectedRoute userStatus="loggedIn" userRole="employer">
               <ManageJob />
-            </ProtectedRoute>} 
-          />
-
-          <Route path="my-jobs" element={
-            <ProtectedRoute userStatus="loggedIn" userRole="employer">
-              <MyJobs />
             </ProtectedRoute>} 
           />
 
@@ -113,7 +112,7 @@ function App() {
           />
 
           <Route path="jobs" element={<Jobs />} />
-          <Route path="job/:id" element={<Job />} />
+          <Route path="jobs/:id" element={<Job />} />
 
         </Route>
       </Routes>

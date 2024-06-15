@@ -118,6 +118,7 @@
     "job": {
         "must_be_at_least_100_characters": "Must be at least 100 characters long",
         "job_added_to_favorites": "Job added to favorites",
+        "job_removed_from_favorites": "Job removed from favorites",
         "country": "Country",
         "city_town_village": "City/Town/Village",
         "job_type": "Job Type",
@@ -1615,6 +1616,7 @@
             "full_time": "Full-time",
             "part_time": "Part-time",
             "remote": "Remote",
+            "applications": "Applications",
             "select": "Select...",
             "paused": "Paused",
             "closed": "Closed",

@@ -33,6 +33,7 @@
     background-color: #fff;
     color: #093559;
     width: 100%;
+    min-height: 50px;
     padding: 12px 20px;
     border-radius: 5px;
     border: 3px solid #fff;

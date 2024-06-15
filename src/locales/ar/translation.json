@@ -118,6 +118,7 @@
     "job": {
         "must_be_at_least_100_characters": "يجب أن لا يقل طوله عن 100 حرف",
         "job_added_to_favorites": "تمت إضافة الوظيفة إلى المفضلة",
+        "job_removed_from_favorites": "تمت إزالة الوظيفة من المفضلة",
         "country": "دولة",
         "city_town_village": "قرية مدينة مدينة",
         "job_type": "نوع الوظيفة",
@@ -1615,6 +1616,7 @@
             "full_time": "وقت كامل",
             "part_time": "دوام جزئى",
             "remote": "بعيد",
+            "applications": "التطبيقات",
             "select": "يختار...",
             "paused": "متوقف مؤقتًا",
             "closed": "مغلق",

@@ -1,0 +1,83 @@
+.wrapper {}
+
+.wrapper input {
+    display: none;
+}
+
+.wrapper label {
+    display: inline-block;
+    padding: 6px 15px 6px 35px;
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: 700;
+    border-radius: 15px;
+    cursor: pointer;
+    color: #fff;
+    position: relative;
+    user-select: none;
+}
+
+.wrapper label:before {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    margin-top: -8px;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #fff;
+    background-color: #ffffff40;
+    border-radius: 3px;
+    content: '';
+}
+
+.wrapper input:checked + label:before {
+    background-color: #fff;
+}
+
+.wrapper label:after {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    margin-top: -4px;
+    width: 10px;
+    height: 8px;
+    opacity: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url('../../../../assets/images/icons/checkmark-blue.svg');
+    content: '';
+}
+
+.wrapper input:checked + label:after {
+    opacity: 1;
+}
+
+.wrapper label.blue {
+    background-color: #0464B2;
+}
+
+.wrapper label.green {
+    background-color: #34A853;
+}
+.wrapper label.green:after {
+    background-image: url('../../../../assets/images/icons/checkmark-green.svg');
+}
+
+.wrapper label.yellow {
+    background-color: #F2C94C;
+}
+.wrapper label.yellow:after {
+    background-image: url('../../../../assets/images/icons/checkmark-yellow.svg');
+}
+
+.wrapper label.red {
+    background-color: #C8102E;
+}
+.wrapper label.red:after {
+    background-image: url('../../../../assets/images/icons/checkmark-red.svg');
+}
+
+.wrapper label:hover {
+    opacity: 0.7;
+}
