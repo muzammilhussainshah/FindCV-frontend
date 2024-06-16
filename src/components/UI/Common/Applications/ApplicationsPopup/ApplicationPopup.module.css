@@ -112,3 +112,50 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+:global(.fcv-rtl) .jobseeker_profile_head > div {
+    padding-left: 0;
+    padding-right: 35px;
+}
+
+:global(.fcv-rtl) .jobseeker_profile_list li span {
+    padding-left: 0;
+    padding-right: 14px;
+}
+
+@media screen and (max-width: 1024px) {
+    .jobseeker_profile_image {
+        width: 50%;
+    }
+    .jobseeker_profile_head > div {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .jobseeker_profile_head {
+        flex-direction: column;
+    }
+    .jobseeker_profile_image {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .jobseeker_profile_head > div {
+        padding-left: 0;
+        width: 100%;
+    }
+    .jobseeker_profile_buttons {
+        flex-direction: column;
+    }
+    .jobseeker_profile_buttons > a {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .jobseeker_profile_buttons > a:last-child {
+        margin-bottom: 0;
+    }
+
+    :global(.fcv-rtl) .jobseeker_profile_head > div {
+        padding-right: 0;
+    }
+}

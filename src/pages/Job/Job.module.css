@@ -132,6 +132,12 @@
     margin-right: 15px;
 }
 
+:global(.fcv-rtl) .head_actions > a,
+:global(.fcv-rtl) .head_actions > div {
+    margin-left: 0;
+    margin-right: 10px;
+}
+
 :global(.fcv-rtl) .job_head {
     direction: rtl;
 }

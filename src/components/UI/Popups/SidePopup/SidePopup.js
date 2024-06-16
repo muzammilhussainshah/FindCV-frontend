@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next'; 
+
+import Button from '../../Buttons/Button/Button';
 
 import ReactDOM from 'react-dom';
 import styles from './SidePopup.module.css';
 
 function SidePopup({ className, isOpen, closePopup, children, ...props }) {
+    const { t } = useTranslation();
     const tDirection = useSelector((state) => state.translation.textDirection);
     const [isAnimating, setIsAnimating] = useState(false);
 
@@ -41,6 +45,9 @@ function SidePopup({ className, isOpen, closePopup, children, ...props }) {
             <div className={styles.popup} {...props}>
                 <div className={styles.popup_content}>
                     {children}
+                    <div className={styles.popup_content_buttons}>
+                        <Button onClick={closePopup} type="default">{t('general.UI.close')}</Button>
+                    </div>
                 </div>
             </div>
         </div>,

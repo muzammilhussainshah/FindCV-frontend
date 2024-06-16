@@ -36,6 +36,10 @@
     /* padding-right: 50px; */
 }
 
+.popup_content_buttons {
+    display: none;
+}
+
 /* Chrome, Edge and Safari */
 .popup *::-webkit-scrollbar {
     height: 4px;
@@ -73,13 +77,66 @@
     transform: translateX(0);
 }
 
-:global(.fcv-rtl) .popup {
+:global(.fcv-rtl) .popup_content > div {
     direction: rtl;
+}
+
+@media (max-width: 1024px) {
+    .popup {
+        max-width: calc(100vw - 80px);
+    }
+    .popup:before {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        top: 20px;
+        left: -60px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-image: url('../../../../assets/images/icons/close-white.svg');
+        pointer-events: none;
+        content: '';
+    }
 }
 
 @media (max-width: 600px) {
     .popup {
-        padding: 20px;
-        max-width: calc(100% - 40px);
+        max-width: none;
+        border-radius: 0 !important;
+    }
+    .popup_content {
+        padding: 15px 15px 90px 15px;
+    }
+    .popup *::-webkit-scrollbar-track {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    .popup_content_buttons {
+        display: block;
+        position: fixed;
+        left: 3px;
+        right: 23px;
+        bottom: 0;
+        z-index: 10;
+        padding: 10px;
+    }
+    .popup_content_buttons:before {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: -40px;
+        background: rgb(235,249,255);
+        background: -moz-linear-gradient(0deg, rgba(235,249,255,1) 0%, rgba(235,249,255,1) 60%, rgba(235,249,255,0.7469581582633054) 80%, rgba(235,249,255,0) 100%);
+        background: -webkit-linear-gradient(0deg, rgba(235,249,255,1) 0%, rgba(235,249,255,1) 60%, rgba(235,249,255,0.7469581582633054) 80%, rgba(235,249,255,0) 100%);
+        background: linear-gradient(0deg, rgba(235,249,255,1) 0%, rgba(235,249,255,1) 60%, rgba(235,249,255,0.7469581582633054) 80%, rgba(235,249,255,0) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ebf9ff",endColorstr="#ebf9ff",GradientType=1);
+        pointer-events: none;
+        z-index: -1;
+        content: '';
+    }
+    .popup_content_buttons > button {
+        width: 100%;
     }
 }

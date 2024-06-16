@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import BubbleCheckbox from '../BubbleCheckbox/BubbleCheckbox';
 import ApplicationsCard from './ApplicationsCard/ApplicationsCard';
@@ -10,8 +11,11 @@ import { getJobApplicationsList } from '../../../../services/jobService';
 import styles from './Applications.module.css';
 
 function Applications({ job_id, ...props }) {
+    const { t } = useTranslation();
+
     const userToken = useSelector(state => state.user.token);
     const user = useSelector(state => state.user.user);
+
     const [jobId] = useState(job_id);
     const [page, setPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
@@ -83,26 +87,26 @@ function Applications({ job_id, ...props }) {
     return (
         <>
             <div className={styles.head}>
-                <p>Applications: {applicationsTotal}</p>
+                <p>{t('general.UI.applications')}: {applicationsTotal}</p>
                 <div>
                     <BubbleCheckbox 
                         name="good_fit"
                         color="green"
-                        label="Good fit"
+                        label={t('job.good_fit')}
                         value={showGoodFit}
                         onChange={() => handleFilterChange('good_fit')}
                     />
                     <BubbleCheckbox 
                         name="possible_fit"
                         color="yellow"
-                        label="Possible fit"
+                        label={t('job.possible_fit')}
                         value={showPossibleFit}
                         onChange={() => handleFilterChange('possible_fit')}
                     />
                     <BubbleCheckbox 
                         name="rejected"
                         color="red"
-                        label="Rejected"
+                        label={t('job.rejected')}
                         value={showRejected}
                         onChange={() => handleFilterChange('rejected')}
                     />

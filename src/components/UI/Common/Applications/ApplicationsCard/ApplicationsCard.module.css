@@ -53,6 +53,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    padding-right: 100px;
     margin-bottom: 10px;
 }
 
@@ -127,6 +128,11 @@
     pointer-events: unset;
 }
 
+:global(.fcv-rtl) .card_body_text {
+    direction: rtl;
+    text-align: right;
+}
+
 @media screen and (max-width: 600px) {
     .card {
         flex-direction: column;
@@ -163,5 +169,12 @@
     }
     .card.rejected .card_actions {
         background-color: #f8d6d9;
+    }
+    :global(.fcv-rtl) .card_body_head {
+        padding-right: 0;
+        direction: rtl;
+    }
+    :global(.fcv-rtl) .card_body_head h5 {
+        margin-left: 10px;
     }
 }

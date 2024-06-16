@@ -129,7 +129,10 @@
         "language_requirements": "متطلبات اللغة",
         "required_skills": "المهارات المطلوبة",
         "similar_jobs": "وظائف مماثلة",
-        "proposal_message": "رسالة الاقتراح"
+        "proposal_message": "رسالة الاقتراح",
+        "good_fit": "لياقه جيده",
+        "possible_fit": "تناسب ممكن",
+        "rejected": "مرفوض"
     },
     "forms": {
         "login": {
@@ -1584,12 +1587,14 @@
             "applied": "مُطبَّق",
             "loading": "تحميل...",
             "cancel": "يلغي",
+            "close": "يغلق",
             "purchase": "شراء",
             "success": "نجاح",
             "back": "خلف",
             "skip": "يتخطى",
             "view": "منظر",
             "show_more": "أظهر المزيد",
+            "show_less": "عرض أقل",
             "required": "مطلوب",
             "something_went_wrong": "حدث خطأ ما",
             "male": "ذكر",

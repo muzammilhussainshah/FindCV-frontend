@@ -129,7 +129,10 @@
         "language_requirements": "Language Requirements",
         "required_skills": "Required Skills",
         "similar_jobs": "Similar Jobs",
-        "proposal_message": "Proposal Message"
+        "proposal_message": "Proposal Message",
+        "good_fit": "Good fit",
+        "possible_fit": "Possible fit",
+        "rejected": "Rejected"
     },
     "forms": {
         "login": {
@@ -1584,12 +1587,14 @@
             "applied": "Applied",
             "loading": "Loading...",
             "cancel": "Cancel",
+            "close": "Close",
             "purchase": "Purchase",
             "success": "Success!",
             "back": "Back",
             "skip": "Skip",
             "view": "View",
             "show_more": "Show More",
+            "show_less": "Show Less",
             "required": "Required",
             "something_went_wrong": "Opps, Something went wrong.",
             "male": "Male",

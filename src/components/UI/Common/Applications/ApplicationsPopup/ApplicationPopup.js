@@ -122,7 +122,7 @@ function ApplicationPopup({ jobseeker, ...props }) {
                             <ul className={styles.jobseeker_profile_list}>
                                 <li>
                                     <img src={email_icon} alt="Email" />
-                                    <span>{jobseekerData.email}</span>
+                                    <span style={{textTransform: 'none'}}>{jobseekerData.email}</span>
                                 </li>
                                 <li>
                                     <img src={location_icon} alt="Country" />

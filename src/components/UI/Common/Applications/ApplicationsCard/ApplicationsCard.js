@@ -21,6 +21,7 @@ import close_icon from '../../../../../assets/images/icons/close-white.svg';
 function ApplicationsCard({ application, ...props }) {
     const { t } = useTranslation();
     const userToken = useSelector(state => state.user.token);
+
     const [applicationData, setApplicationData] = useState(application);
     const [showFullText, setShowFullText] = useState(false);
     const [popupOpen, setPopupOpen] = useState(false);
@@ -74,7 +75,7 @@ function ApplicationsCard({ application, ...props }) {
                         style={{width: '100%', padding: 4, minWidth: 0}}
                         onClick={() => setPopupOpen(true)}
                     >
-                        View
+                        {t('general.UI.view')}
                     </Button>
                 </div>
                 <div className={styles.card_body}>
@@ -96,7 +97,7 @@ function ApplicationsCard({ application, ...props }) {
                                 <SimpleLink 
                                     onClick={() => setShowFullText(false)}
                                 >
-                                    Show Less
+                                    {t('general.UI.show_less')}
                                 </SimpleLink>
                             </>
                         ) : (
@@ -107,7 +108,7 @@ function ApplicationsCard({ application, ...props }) {
                                     <SimpleLink 
                                         onClick={() => setShowFullText(true)}
                                     >
-                                        Show More
+                                        {t('general.UI.show_more')}
                                     </SimpleLink>
                                 </>
                             ) : (
