@@ -39,6 +39,8 @@
 :global(.fcv-rtl) .skill {
     text-align: right;
     direction: rtl;
+    margin-right: 0;
+    margin-left: 10px;
 }
 
 :global(.fcv-rtl) .skill.removable {

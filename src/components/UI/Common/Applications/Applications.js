@@ -60,7 +60,7 @@ function Applications({ job_id, ...props }) {
             console.log(error);
         });
 
-    }, [jobId, userToken, page, showGoodFit, showPossibleFit, showRejected]);
+    }, [jobId, user, userToken, page, showGoodFit, showPossibleFit, showRejected]);
 
     const handlePageChange = (newPage) => {
         setPage(newPage);

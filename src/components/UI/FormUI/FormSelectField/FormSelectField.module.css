@@ -123,6 +123,7 @@
     padding-right: 5px;
     font-size: 14px;
     color: #fff;
+    text-wrap: pretty;
 }
 
 .field :global(.react-select__multi-value__remove) {

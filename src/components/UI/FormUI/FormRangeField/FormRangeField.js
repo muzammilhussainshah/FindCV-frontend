@@ -1,9 +1,12 @@
 import Slider from 'rc-slider';
+import { useSelector } from 'react-redux';
+import { handleRender } from './HandleTooltip';
 
 import 'rc-slider/assets/index.css';
 import styles from './FormRangeField.module.css';
 
-function FormRangeField({ label, onFormikChange, onChange, ...props}) {
+function FormRangeField({ showTooltip = false, label, onFormikChange, onChange, ...props}) {
+    const tDirection = useSelector((state) => state.translation.textDirection);
 
     const handleChange = (value) => {
 
@@ -25,7 +28,12 @@ function FormRangeField({ label, onFormikChange, onChange, ...props}) {
         <div className={styles.field}>
             {label && <label htmlFor={props.name}>{label}</label>}
             <div className={styles.wrapper_class}>
-                <Slider onChange={handleChange} {...props} />
+                <Slider 
+                    onChange={handleChange} 
+                    handleRender={showTooltip && handleRender}
+                    reverse={tDirection === 'rtl'}
+                    {...props} 
+                />
             </div>
         </div>
     );

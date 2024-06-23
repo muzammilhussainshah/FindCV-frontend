@@ -49,6 +49,34 @@ export const useGetJobCategoriesHook = () => {
     return job_categories;
 };
 
+export const useGetEducationLevelsHook = () => {
+    const { t } = useTranslation();
+
+    const education_levels_codes = [
+        "no_formal_education",
+        "primary_education",
+        "lower_secondary_education",
+        "upper_secondary_education",
+        "vocational_education_and_training",
+        "associate_degree",
+        "bachelors_degree",
+        "masters_degree",
+        "doctoral_degree",
+        "postdoctoral_research",
+        "professional_certification"
+    ];
+    const education_levels = [];
+
+    education_levels_codes.forEach(education_level => {
+        education_levels.push({
+            value: education_level,
+            label: t(`general.education_levels.${education_level}`)
+        });
+    });
+
+    return education_levels;
+};
+
 export const useGetCurrenciesHook = () => {
 
     const currencies_list = [
@@ -147,3 +175,11 @@ export const useGetQueryParam = (param) => {
     const urlParams = new URLSearchParams(location.search);
     return urlParams.get(param);
 };
+
+export const useDebounce = (func, wait) => {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+}

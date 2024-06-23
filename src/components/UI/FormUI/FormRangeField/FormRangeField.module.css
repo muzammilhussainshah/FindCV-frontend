@@ -2,6 +2,27 @@
     margin-bottom: 20px;
 }
 
+.field label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+:global(.rc-tooltip-arrow) {
+    border-top-color: #09AEEF !important;
+    bottom: 4px !important;
+}
+
+:global(.rc-tooltip-inner) {
+    background-color: #09AEEF;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 4px;
+    padding: 5px 10px;
+    min-width: 75px;
+    text-align: center;
+    box-shadow: none;
+}
+
 .field :global(.rc-slider-handle) {
     z-index: auto;
     background-color: #09AEEF;

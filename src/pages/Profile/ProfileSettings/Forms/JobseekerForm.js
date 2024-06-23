@@ -180,6 +180,7 @@ function JobseekerForm({user}) {
 
                         if (education?.action === 'add_new') {
                             formData.append(`education[${index}][institution]`, education.institution);
+                            formData.append(`education[${index}][education_level]`, education.education_level);
                             formData.append(`education[${index}][diploma]`, education.diploma);
                             formData.append(`education[${index}][start]`, education.startDate);
                             formData.append(`education[${index}][end]`, education.endDate);

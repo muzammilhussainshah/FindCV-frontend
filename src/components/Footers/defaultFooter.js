@@ -52,7 +52,7 @@ function DefaultFooter() {
                         <div className={styles.col}>
                             <nav>
                                 <h6>{t('defaultFooter.menu_title_1')}</h6>
-                                <SimpleLink to="/talents">{t('defaultFooter.talents')}</SimpleLink>
+                                <SimpleLink to="/jobseekers">{t('defaultFooter.talents')}</SimpleLink>
                                 <SimpleLink href="https://findcv.com/about">{t('defaultFooter.about')}</SimpleLink>
                                 <SimpleLink href="https://findcv.com/about#faq">{t('defaultFooter.faqs')}</SimpleLink>
                             </nav>

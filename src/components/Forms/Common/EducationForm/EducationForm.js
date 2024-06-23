@@ -2,7 +2,10 @@ import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
 import Yup from '../../../../utils/yupExtensions';
 
+import { useGetEducationLevelsHook } from '../../../../utils/utilityHooks';
+
 import FormField from '../../../UI/FormUI/FormField/FormField';
+import FormSelectField from '../../../UI/FormUI/FormSelectField/FormSelectField';
 import FormDateField from '../../../UI/FormUI/FormDateField/FormDateField';
 import FormFileField from '../../../UI/FormUI/FormFileField/FormFileField';
 import Button from '../../../UI/Buttons/Button/Button';
@@ -15,12 +18,14 @@ function EducationForm({ onSubmit, ...props }) {
     const formik = useFormik({
         initialValues: {
             institution: '',
+            education_level: '',
             startDate: '',
             endDate: '',
             diploma: ''
         },
         validationSchema: Yup.object({
             institution: Yup.string().required(t('forms.education.required')),
+            education_level: Yup.string().required(t('forms.education.required')),
             startDate: Yup.string().required(t('forms.education.required')),
             endDate: Yup.string().required(t('forms.education.required')),
             diploma: Yup.mixed()
@@ -42,6 +47,8 @@ function EducationForm({ onSubmit, ...props }) {
         },
     });
 
+    const educationLevels = useGetEducationLevelsHook();
+
     return (
         <form onSubmit={formik.handleSubmit} {...props}>
             <div>
@@ -53,6 +60,18 @@ function EducationForm({ onSubmit, ...props }) {
                     onChange={formik.handleChange}
                     value={formik.values.institution}
                     error={formik.touched.institution && formik.errors.institution}
+                />
+            </div>
+            <div>
+                <FormSelectField 
+                    name="education_level" 
+                    type="default" 
+                    placeholder={t('forms.education.education_level')}
+                    hasBorder
+                    options={educationLevels}
+                    onFormikChange={formik.handleChange}
+                    value={formik.values.education_level}
+                    error={formik.touched.education_level && formik.errors.education_level}
                 />
             </div>
             <div>

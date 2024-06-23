@@ -25,6 +25,7 @@ import ManageJob from '../pages/ManageJob/ManageJob';
 import MyJobs from '../pages/MyJobs/MyJobs';
 import Jobs from '../pages/Jobs/Jobs';
 import Job from '../pages/Job/Job';
+import Jobseekers from '../pages/Jobseekers/Jobseekers';
 
 import i18n from './i18n';
 
@@ -113,6 +114,8 @@ function App() {
 
           <Route path="jobs" element={<Jobs />} />
           <Route path="jobs/:id" element={<Job />} />
+
+          <Route path="jobseekers" element={<Jobseekers />} />
 
         </Route>
       </Routes>

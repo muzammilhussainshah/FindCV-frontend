@@ -116,6 +116,7 @@ function Jobs() {
                                     placeholder={t('general.UI.select')}
                                     label={t('jobs.job_type')}
                                     type="default"
+                                    hasBorder
                                     options={jobTypeOptions}
                                     onFormikChange={handleFilterChange}
                                     value={jobType}
@@ -127,6 +128,7 @@ function Jobs() {
                                     placeholder={t('general.UI.select')}
                                     label={t('jobs.category')}
                                     type="default"
+                                    hasBorder
                                     options={categoryOptions}
                                     onFormikChange={handleFilterChange}
                                     value={jobCategory}
@@ -139,6 +141,7 @@ function Jobs() {
                                     label={t('jobs.country')}
                                     type="country"
                                     isMulti
+                                    hasBorder
                                     onFormikChange={handleFilterChange}
                                     value={jobCountry}
                                 />
@@ -150,6 +153,7 @@ function Jobs() {
                                     label={t('jobs.language')}
                                     type="language"
                                     isMulti
+                                    hasBorder
                                     onFormikChange={handleFilterChange}
                                     value={jobLanguage}
                                 />

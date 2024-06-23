@@ -134,6 +134,17 @@
         "possible_fit": "تناسب ممكن",
         "rejected": "مرفوض"
     },
+    "talents": {
+        "title": "اكتشف الموظفين",
+        "filters": "المرشحات",
+        "search": "يبحث",
+        "country_of_current_residence": "بلد الإقامة الحالية",
+        "nationality": "جنسية",
+        "education_level": "مستوى التعليم",
+        "language": "لغة",
+        "gender": "جنس",
+        "experience": "سنوات من الخبرة في العمل"
+    },
     "forms": {
         "login": {
             "email": "بريد إلكتروني",
@@ -266,7 +277,8 @@
             "name_of_university_or_college": "اسم الجامعة أو الكلية*",
             "date_of_enrollment": "تاريخ التسجيل*",
             "date_of_graduation": "تاريخ التخرج*",
-            "upload_diploma": "تحميل الدبلوم*"
+            "upload_diploma": "تحميل الدبلوم*",
+            "education_level": "مستوى التعليم*"
         },
         "skills": {
             "add": "يضيف",
@@ -345,6 +357,19 @@
         "privacy_text": "© 2024 فايند سي في. كل الحقوق محفوظة."
     },
     "general": {
+        "education_levels": {
+            "no_formal_education": "بدون تعليم رسمي",
+            "primary_education": "التعليم الابتدائي",
+            "lower_secondary_education": "التعليم الثانوي الأدنى",
+            "upper_secondary_education": "التعليم الثانوي الأعلى",
+            "vocational_education_and_training": "التعليم والتدريب المهني",
+            "associate_degree": "درجة الزمالة",
+            "bachelors_degree": "درجة البكالوريوس",
+            "masters_degree": "درجة الماجستير",
+            "doctoral_degree": "درجة الدكتوراه",
+            "postdoctoral_research": "البحث بعد الدكتوراه",
+            "professional_certification": "الشهادات المهنية"
+        },
         "country": {
             "AD": "أندورا",
             "AE": "الإمارات العربية المتحدة",
@@ -1635,6 +1660,12 @@
             "average": "متوسط",
             "poor": "فقير",
             "very_poor": "فقير جدا"
+        },
+        "talent_card": {
+            "work_proficiency_test": "اختبار الكفاءة في العمل",
+            "about": "عن",
+            "languages_knowledge": "معرفة اللغات",
+            "skills": "مهارات"
         },
         "errors": {
             "USER_EMAIL_EXISTS": "البريد الإلكتروني موجود بالفعل"

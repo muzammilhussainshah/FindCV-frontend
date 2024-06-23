@@ -134,6 +134,17 @@
         "possible_fit": "Possible fit",
         "rejected": "Rejected"
     },
+    "talents": {
+        "title": "Discover Employees",
+        "filters": "Filters",
+        "search": "Search",
+        "country_of_current_residence": "Country of current residence",
+        "nationality": "Nationality",
+        "education_level": "Education Level",
+        "language": "Language",
+        "gender": "Gender",
+        "experience": "Years of work experience"
+    },
     "forms": {
         "login": {
             "email": "Email",
@@ -266,7 +277,8 @@
             "name_of_university_or_college": "Name of University or College*",
             "date_of_enrollment": "Date of Enrollment*",
             "date_of_graduation": "Date of Graduation*",
-            "upload_diploma": "Upload Diploma*"
+            "upload_diploma": "Upload Diploma*",
+            "education_level": "Education Level*"
         },
         "skills": {
             "add": "Add",
@@ -345,6 +357,19 @@
         "privacy_text": "© 2024 FindCV. All rights reserved."
     },
     "general": {
+        "education_levels": {
+            "no_formal_education": "No Formal Education",
+            "primary_education": "Primary Education",
+            "lower_secondary_education": "Lower Secondary Education",
+            "upper_secondary_education": "Upper Secondary Education",
+            "vocational_education_and_training": "Vocational Education and Training",
+            "associate_degree": "Associate Degree",
+            "bachelors_degree": "Bachelor's Degree",
+            "masters_degree": "Master's Degree",
+            "doctoral_degree": "Doctoral Degree",
+            "postdoctoral_research": "Postdoctoral Research",
+            "professional_certification": "Professional Certification"
+        },
         "country": {
             "AD": "Andorra",
             "AE": "United Arab Emirates",
@@ -1635,6 +1660,12 @@
             "average": "Average",
             "poor": "Poor",
             "very_poor": "Very Poor"
+        },
+        "talent_card": {
+            "work_proficiency_test": "Work Proficiency Test",
+            "about": "About",
+            "languages_knowledge": "Languages Knowledge",
+            "skills": "Skills"
         },
         "errors": {
             "USER_EMAIL_EXISTS": "User with this email already exists."
