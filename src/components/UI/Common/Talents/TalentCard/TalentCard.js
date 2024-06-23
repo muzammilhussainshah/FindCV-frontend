@@ -20,6 +20,14 @@ function TalentCard({ disabled, talent, ...props }) {
         additional_card_classes = styles.disabled;
     }
 
+    if (talent.hidden) {
+        additional_card_classes += ' ' + styles.hidden;
+    }
+
+    if (talent.verification_status) {
+        additional_card_classes += ' ' + styles.verified;
+    }
+
     let logic_test_bar_color = '';
 
     switch (true) {

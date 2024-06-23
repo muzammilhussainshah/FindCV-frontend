@@ -1,5 +1,6 @@
 import deepEqual from 'deep-equal';
 import { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import TalentCard from './TalentCard/TalentCard';
@@ -13,6 +14,9 @@ import styles from './Talents.module.css';
 function Talents({ per_page, max_pages, hide_url_params = false, filters = {}, onPageChange, ...props }) {
     const navigate = useNavigate();
     const location = useLocation();
+
+    const userToken = useSelector(state => state.user.token);
+    const user = useSelector(state => state.user.user);
 
     const query = new URLSearchParams(location.search);
     const initialPage = parseInt(query.get('page')) || 1;
@@ -69,6 +73,15 @@ function Talents({ per_page, max_pages, hide_url_params = false, filters = {}, o
                                 id: skill.user_id + '-' + skill.skill_code
                             };
                         });
+                    }
+
+                    if (user && user.account_type === 'employer' && user.active_subscription) {
+                        //
+                    }
+                    else {
+                        talent.hidden = true;
+                        talent.full_name = 'John Doe';
+                        talent.description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
                     }
 
                     return talent;
