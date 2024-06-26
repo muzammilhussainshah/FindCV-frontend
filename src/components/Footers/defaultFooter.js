@@ -53,14 +53,14 @@ function DefaultFooter() {
                             <nav>
                                 <h6>{t('defaultFooter.menu_title_1')}</h6>
                                 <SimpleLink to="/jobseekers">{t('defaultFooter.talents')}</SimpleLink>
-                                <SimpleLink href="https://findcv.com/about">{t('defaultFooter.about')}</SimpleLink>
-                                <SimpleLink href="https://findcv.com/about#faq">{t('defaultFooter.faqs')}</SimpleLink>
+                                <SimpleLink href="https://findcv.com/for-employers/">{t('defaultFooter.about')}</SimpleLink>
+                                <SimpleLink href="https://findcv.com/for-employers#so-faq">{t('defaultFooter.faqs')}</SimpleLink>
                             </nav>
                             <nav>
                                 <h6>{t('defaultFooter.menu_title_2')}</h6>
                                 <SimpleLink to="/jobs">{t('defaultFooter.jobs')}</SimpleLink>
-                                <SimpleLink href="https://findcv.com/about">{t('defaultFooter.about')}</SimpleLink>
-                                <SimpleLink href="https://findcv.com/about#faq">{t('defaultFooter.faqs')}</SimpleLink>
+                                <SimpleLink href="https://findcv.com/for-talents/">{t('defaultFooter.about')}</SimpleLink>
+                                <SimpleLink href="https://findcv.com/for-talents#so-faq">{t('defaultFooter.faqs')}</SimpleLink>
                             </nav>
                             <nav>
                                 <h6>{t('defaultFooter.menu_title_3')}</h6>
@@ -73,8 +73,8 @@ function DefaultFooter() {
                     </div>
                     <div className={styles.footer_second}>
                         <div className={styles.col}>
-                            <SimpleLink href="https://findcv.com/terms-of-use">{t('defaultFooter.terms_of_use')}</SimpleLink>
                             <SimpleLink href="https://findcv.com/privacy-policy">{t('defaultFooter.privacy_policy')}</SimpleLink>
+                            <SimpleLink href="https://findcv.com/terms-of-use">{t('defaultFooter.terms_of_use')}</SimpleLink>
                         </div>
 
                         <div className={styles.col}>
