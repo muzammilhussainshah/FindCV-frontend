@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import LinkWrapper from '../../../wrappers/LinkWrapper';
 import styles from './Button.module.css';
 
 function Button({ className, color, icon, icon_position, disabled = false, outlined, children, ...props }) {
@@ -34,9 +34,9 @@ function Button({ className, color, icon, icon_position, disabled = false, outli
     }
     else {
         return (
-            <Link className={buttonClass} disabled={disabled} {...props}>
+            <LinkWrapper className={buttonClass} disabled={disabled} {...props}>
                 <span>{children}</span>
-            </Link>
+            </LinkWrapper>
         );
     
     }

@@ -25,6 +25,7 @@
     "react-datepicker": "^6.6.0",
     "react-dom": "^18.2.0",
     "react-flags": "^0.1.18",
+    "react-helmet": "^6.1.0",
     "react-hot-toast": "^2.4.1",
     "react-i18next": "^14.1.0",
     "react-quill": "^2.0.0",
@@ -41,7 +42,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "generate-sitemap": "node sitemap-generator.js"
   },
   "eslintConfig": {
     "extends": [
@@ -60,5 +62,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.7",
+    "@babel/node": "^7.24.7",
+    "@babel/preset-env": "^7.24.7"
   }
 }

@@ -64,6 +64,11 @@ function Applications({ job_id, ...props }) {
 
     const handlePageChange = (newPage) => {
         setPage(newPage);
+        
+        const target = document.querySelector('.pagination_scroll_target');
+        if (target) {
+            window.scrollTo(0, target.offsetTop);
+        }
     }
 
     const handleFilterChange = (filter) => {
@@ -86,7 +91,7 @@ function Applications({ job_id, ...props }) {
 
     return (
         <>
-            <div className={styles.head}>
+            <div className={`${styles.head} pagination_scroll_target`}>
                 <p>{t('general.UI.applications')}: {applicationsTotal}</p>
                 <div>
                     <BubbleCheckbox 

@@ -41,7 +41,9 @@
     font-weight: 700;
 }
 
-.VerificationProcessHead > span {}
+.VerificationProcessHead > span {
+    text-align: right;
+}
 
 .VerificationProcessHead > span > span {
     opacity: 0.3;

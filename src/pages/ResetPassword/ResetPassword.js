@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { Helmet } from 'react-helmet';
 
 import { setBackButtonLink } from '../../app/features/headerUISlice';
 import { useGetQueryParam } from '../../utils/utilityHooks';
@@ -25,6 +26,9 @@ function ResetPassword() {
 
     return (
         <>
+            <Helmet>
+                <title>FindCV - Reset Password</title>
+            </Helmet>
             <h1>{t('reset_password.reset_password')}</h1>
             {!passwordToken && <RequestResetPasswordForm />}
             {passwordToken && <ResetPasswordForm passwordToken={passwordToken} />}

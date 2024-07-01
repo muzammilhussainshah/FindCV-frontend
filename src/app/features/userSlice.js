@@ -56,6 +56,8 @@ export const userReducer = createSlice({
               state.loading = false;
               state.token = action.meta.arg;
 
+              // console.log(action.payload);
+
               state.user = action.payload;
 
               if (state.user.languages) {

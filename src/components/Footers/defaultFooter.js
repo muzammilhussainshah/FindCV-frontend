@@ -6,12 +6,12 @@ import SimpleLink from '../UI/Buttons/SimpleLink/SimpleLink';
 import styles from './defaultFooter.module.css';
 
 import logoImage from '../../assets/images/logo.png';
-import twitter_icon from '../../assets/images/icons/twitter.svg';
-import twitter_icon_white from '../../assets/images/icons/twitter-white.svg';
+// import twitter_icon from '../../assets/images/icons/twitter.svg';
+// import twitter_icon_white from '../../assets/images/icons/twitter-white.svg';
 import facebook_icon from '../../assets/images/icons/facebook.svg';
 import facebook_icon_white from '../../assets/images/icons/facebook-white.svg';
-import google_icon from '../../assets/images/icons/google.svg';
-import google_icon_white from '../../assets/images/icons/google-white.svg';
+// import google_icon from '../../assets/images/icons/google.svg';
+// import google_icon_white from '../../assets/images/icons/google-white.svg';
 import instagram_icon from '../../assets/images/icons/instagram.svg';
 import instagram_icon_white from '../../assets/images/icons/instagram-white.svg';
 
@@ -30,19 +30,19 @@ function DefaultFooter() {
                             <LanguageSwitch />
 
                             <nav>
-                                <a href="https://twitter.com/" target="_blank" rel="noreferrer">
+                                {/* <a href="https://twitter.com/" target="_blank" rel="noreferrer">
                                     <img src={twitter_icon} alt="Twitter" />
                                     <img src={twitter_icon_white} alt="Twitter" />
-                                </a>
-                                <a href="https://facebook.com/" target="_blank" rel="noreferrer">
+                                </a> */}
+                                <a href="https://www.facebook.com/people/Findcvcom/61555972312508/?mibextid=LQQJ4d&rdid=vbYHHM8HONcHB6Zs&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2FNPjtUhqVN7XHFZ1N%2F%3Fmibextid%3DLQQJ4d" target="_blank" rel="noreferrer">
                                     <img src={facebook_icon} alt="Facebook" />
                                     <img src={facebook_icon_white} alt="Facebook" />
                                 </a>
-                                <a href="https://google.com/" target="_blank" rel="noreferrer">
+                                {/* <a href="https://google.com/" target="_blank" rel="noreferrer">
                                     <img src={google_icon} alt="Google" />
                                     <img src={google_icon_white} alt="Google" />
-                                </a>
-                                <a href="https://instagram.com/" target="_blank" rel="noreferrer">
+                                </a> */}
+                                <a href="https://www.instagram.com/findcvcom/" target="_blank" rel="noreferrer">
                                     <img src={instagram_icon} alt="Instagram" />
                                     <img src={instagram_icon_white} alt="Instagram" />
                                 </a>

@@ -51,7 +51,7 @@ function ApplicationPopup({ jobseeker, ...props }) {
             });
 
             _jobseeker.skills = _jobseeker.skills.map((skill) => {
-                console.log(skill);
+                // console.log(skill);
                 return {
                     id: _jobseeker.id + '-skill-' + skill.skill_code,
                     code: skill.skill_code

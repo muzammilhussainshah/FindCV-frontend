@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import LinkWrapper from '../../components/wrappers/LinkWrapper';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
+import { Helmet } from 'react-helmet';
 import Yup from '../../utils/yupExtensions'; 
 import toast from 'react-hot-toast';
 
@@ -315,6 +317,12 @@ function Job() {
         <>
             {job ? (
                 <>
+
+                    <Helmet>
+                        <title>FindCV - {job.title}</title>
+                        <meta name="description" content={job.description} />
+                    </Helmet>
+
                     <div className={styles.wrapper}>
                         <div className={styles.head}>
                             <div>
@@ -332,6 +340,7 @@ function Job() {
                                 {(user?.account_type !== 'employer' && !user?.applications?.includes(parseInt(id, 10))) && (
                                     <BubbleButton 
                                         onClick={handleApplyClick}
+                                        type="default"
                                         small
                                     >
                                         {t('general.UI.apply')}
@@ -394,7 +403,7 @@ function Job() {
                                 </div>
                                 <div>
                                     <h1>{job.title}</h1>
-                                    <p>{t('general.job_category.' + job.category)} - <Link to={`/employers/${job.employer.id}`}>{job.employer.company_name ? job.employer.company_name : getTrimmedName(job.employer.name)}</Link></p>
+                                    <p>{t('general.job_category.' + job.category)} - <LinkWrapper to={`/employers/${job.employer.id}`}>{job.employer.company_name ? job.employer.company_name : getTrimmedName(job.employer.name)}</LinkWrapper></p>
                                 </div>
                             </div>
 
@@ -412,9 +421,9 @@ function Job() {
                             <Subtitle dark>{t('job.required_skills')}</Subtitle>
                             <SkillsList skills={job.skills} />
 
-                            {(user?.account_type !== 'employer' && !user?.applications?.includes(id)) && (
+                            {(user?.account_type !== 'employer' && !user?.applications?.includes(parseInt(id, 10))) && (
                                 <div className={styles.job_apply}>
-                                    <Button onClick={handleApplyClick}>{t('general.UI.apply')}</Button>
+                                    <Button onClick={handleApplyClick} type="default">{t('general.UI.apply')}</Button>
                                 </div>
                             )}
 
@@ -424,7 +433,7 @@ function Job() {
                             <Applications job_id={id} />
                         ) : (
                             <>
-                                <div className={styles.jobs_head}>
+                                <div className={`${styles.jobs_head} pagination_scroll_target`}>
                                     <p>{t('job.similar_jobs')}</p>
                                 </div>
                                 <JobsList 
@@ -461,10 +470,15 @@ function Job() {
                     </BasicPopup>
                 </>
             ) : (
-                <div className={styles.wrapper}>
-                    <BlockLoader height={60} marginBottom={20}/>
-                    <BlockLoader height={800} marginBottom={50}/>
-                </div>
+                <>
+                    <Helmet>
+                        <title>FindCV - Job Posting</title>
+                    </Helmet>
+                    <div className={styles.wrapper}>
+                        <BlockLoader height={60} marginBottom={20}/>
+                        <BlockLoader height={800} marginBottom={50}/>
+                    </div>
+                </>
             )}
         </>
     );

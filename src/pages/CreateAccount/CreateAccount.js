@@ -1,7 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { Helmet } from 'react-helmet';
+
 import { setBackButtonLink } from '../../app/features/headerUISlice';
+
 import CreateAccountForm from '../../components/Forms/Signup/CreateAccountForm';
 
 function ResetPassword() {
@@ -19,6 +22,9 @@ function ResetPassword() {
 
     return (
         <>
+            <Helmet>
+                <title>FindCV - Create Account</title>
+            </Helmet>
             <h1>{t('create_account.create_account')}</h1>
             <CreateAccountForm />
         </>

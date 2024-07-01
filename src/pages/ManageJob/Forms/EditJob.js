@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
+import { Helmet } from 'react-helmet';
 import Yup from '../../../utils/yupExtensions';
 import toast from 'react-hot-toast';
 
@@ -289,6 +290,15 @@ function EditJob() {
 
     return (
         <>
+            {id ? (
+                <Helmet>
+                    <title>FindCV - Edit Job</title>
+                </Helmet>
+            ) : (
+                <Helmet>
+                    <title>FindCV - Create Job</title>
+                </Helmet>
+            )}
             <div className={styles.create_job_wrapper}>
                 {id ? (<h1>{t('forms.manage_job.title_edit')}</h1>) : (<h1>{t('forms.manage_job.title_create')}</h1>)}
 

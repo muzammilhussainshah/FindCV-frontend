@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import LinkWrapper from '../../../../wrappers/LinkWrapper';
 import { useTranslation } from 'react-i18next';
 import Flag from 'react-flags';
 
@@ -55,19 +55,19 @@ function TalentCard({ disabled, talent, ...props }) {
                 
                 <div className={styles.col}>
                     {talent.profile_image ? (
-                        <Link to={`/jobseekers/${talent.id}`}>
+                        <LinkWrapper to={`/jobseekers/${talent.id}`}>
                             <img src={process.env.REACT_APP_UPLOADS_PATH + talent.profile_image} alt={talent.full_name} />
-                        </Link>
+                        </LinkWrapper>
                     ) : (
-                        <Link to={`/jobseekers/${talent.id}`}>
+                        <LinkWrapper to={`/jobseekers/${talent.id}`}>
                             <img src={user_image_placeholder} alt={talent.full_name} />
-                        </Link>
+                        </LinkWrapper>
                     )}
 
                     <div className={styles.card_head_info}>
-                        <Link to={`/jobseekers/${talent.id}`}>
+                        <LinkWrapper to={`/jobseekers/${talent.id}`}>
                             <h5>{talent.full_name}</h5>
-                        </Link>
+                        </LinkWrapper>
                         <div>
                             <Flag 
                                 name={talent.country}

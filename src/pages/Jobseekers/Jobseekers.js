@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import { useDebounce, useGetEducationLevelsHook } from '../../utils/utilityHooks';
 
@@ -106,6 +107,9 @@ function Jobseekers() {
 
     return (
         <div className={styles.wrapper}>
+            <Helmet>
+                <title>FindCV - Discover Employees</title>
+            </Helmet>
             <h1>{t('talents.title')}</h1>
 
             <div className={styles.content}>
@@ -123,7 +127,6 @@ function Jobseekers() {
                                     name="filter_search"
                                     label={t('talents.search')}
                                     type="text"
-                                    isDark
                                     hasBorder
                                     icon="search"
                                     onChange={handleFilterSearchChange}
@@ -210,7 +213,7 @@ function Jobseekers() {
 
                 </div>
 
-                <div className={styles.col}>
+                <div className={`${styles.col} pagination_scroll_target`}>
                     <Talents 
                         per_page={10} 
                         filters={filters}

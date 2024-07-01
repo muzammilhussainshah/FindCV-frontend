@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import LinkWrapper from '../../../wrappers/LinkWrapper';
 import styles from './FlatButton.module.css';
 
 function FlatButton({ icon, disabled = false, children, ...props }) {
@@ -22,10 +22,10 @@ function FlatButton({ icon, disabled = false, children, ...props }) {
     }
     else {
         return (
-            <Link className={styles.button} disabled={disabled} {...props}>
+            <LinkWrapper className={styles.button} disabled={disabled} {...props}>
                 {icon && <img src={icon} alt={children} />}
                 <span>{children}</span>
-            </Link>
+            </LinkWrapper>
         );
     
     }

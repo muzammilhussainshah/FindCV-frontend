@@ -15,7 +15,7 @@ function Talents({ per_page, max_pages, hide_url_params = false, filters = {}, o
     const navigate = useNavigate();
     const location = useLocation();
 
-    const userToken = useSelector(state => state.user.token);
+    // const userToken = useSelector(state => state.user.token);
     const user = useSelector(state => state.user.user);
 
     const query = new URLSearchParams(location.search);
@@ -100,6 +100,12 @@ function Talents({ per_page, max_pages, hide_url_params = false, filters = {}, o
     const handlePageChange = (value) => {
         setPage(value);
         setPaginationLoading(true);
+
+        // Scroll to first card
+        const target = document.querySelector('.pagination_scroll_target');
+        if (target) {
+            window.scrollTo(0, target.offsetTop);
+        }
 
         if (!hide_url_params) {
             updateURL({ page: value, ...filtersList });

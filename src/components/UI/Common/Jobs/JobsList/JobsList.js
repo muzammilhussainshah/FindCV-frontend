@@ -75,6 +75,12 @@ function JobsList({ per_page, max_pages, hide_url_params = false, filters, onPag
         setPage(value);
         setPaginationLoading(true);
 
+        // Scroll to first card
+        const target = document.querySelector('.pagination_scroll_target');
+        if (target) {
+            window.scrollTo(0, target.offsetTop);
+        }
+
         if (!hide_url_params) {
             updateURL({ page: value, ...filtersList });
         }

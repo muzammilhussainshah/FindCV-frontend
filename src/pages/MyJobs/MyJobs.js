@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet';
 
 import JobsList from '../../components/UI/Common/Jobs/JobsList/JobsList';
 import Button from '../../components/UI/Buttons/Button/Button'
@@ -31,6 +32,10 @@ function MyJobs() {
 
     return (
         <div className={styles.wrapper}>
+            <Helmet>
+                <title>FindCV - My Jobs</title>
+            </Helmet>
+
             {user.account_type === 'employer' ? (
                 <>
                     <h1>{t('my_jobs.title')}</h1>

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import LinkWrapper from '../../../wrappers/LinkWrapper';
 import styles from './BubbleButton.module.css';
 
 function BubbleButton({ className, small, dark, icon, icon_position, iconOnlyOnMobile, children, ...props }) {
@@ -39,9 +39,9 @@ function BubbleButton({ className, small, dark, icon, icon_position, iconOnlyOnM
     }
     else {
         return (
-            <Link className={buttonClass} {...props}>
+            <LinkWrapper className={buttonClass} {...props}>
                 <span>{children}</span>
-            </Link>
+            </LinkWrapper>
         );
     }
 }

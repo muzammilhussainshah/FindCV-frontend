@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet';
 
 import EmployerWelcomeForm from '../../components/Forms/Signup/EmployerWelcomeForm';
 import JobseekerWelcomeFormStep1 from '../../components/Forms/Signup/JobseekerWelcomeFormStep1';
@@ -110,6 +111,9 @@ function Welcome() {
 
     return (
         <>
+            <Helmet>
+                <title>FindCV - Welcome</title>
+            </Helmet>
             {content}
         </>
     );

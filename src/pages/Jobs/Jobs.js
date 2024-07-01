@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import { useGetJobCategoriesHook } from '../../utils/utilityHooks';
 
@@ -98,6 +99,9 @@ function Jobs() {
 
     return (
         <div className={styles.wrapper}>
+            <Helmet>
+                <title>FindCV - Jobs</title>
+            </Helmet>
             <h1>{t('jobs.title')}</h1>
 
             <div className={styles.content}>
@@ -163,7 +167,7 @@ function Jobs() {
 
                 </div>
 
-                <div className={styles.col}>
+                <div className={`${styles.col} pagination_scroll_target`}>
                     <div className={styles.head}>
                         <div>
                             <p>{t('jobs.jobs_found')} <span>{jobsFoundTotal}</span></p>

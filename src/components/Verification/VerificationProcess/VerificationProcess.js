@@ -87,11 +87,23 @@ function VerificationProcess({finish_callback, ...props}) {
         content = <PaymentForm actionType='pay_for_verification' />;
     }
 
+    let price = '$10';
+
+    if (user.currency === 'AED') {
+        price = '37د.إ(AED)';
+    }
+    else if (user.currency === 'QAR') {
+        price = '37درهم(QAR)';
+    }
+    else if (user.currency === 'SAR') {
+        price = '37ر.س(SAR)';
+    }
+
     return (
         <div className={styles.VerificationProcess}>
             <div className={styles.VerificationProcessHead}>
                 <h5>{t('forms.verification.identity_verification')}</h5>
-                <span>$5 <span>/ {t('forms.verification.one_time_payment')}</span></span>
+                <span>{price} <span>/ {t('forms.verification.one_time_payment')}</span></span>
             </div>
             <hr/>
             {content}

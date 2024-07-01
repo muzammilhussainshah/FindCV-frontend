@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import LinkWrapper from '../../../wrappers/LinkWrapper';
 import styles from './IconButton.module.css';
 
 function IconButton({ color, icon, ...props }) {
@@ -11,9 +11,9 @@ function IconButton({ color, icon, ...props }) {
 
     if (props.to) {
         return (
-            <Link className={classes} {...props} >
+            <LinkWrapper className={classes} {...props}>
                 <img src={icon} alt="" />
-            </Link>
+            </LinkWrapper>
         );
     }
     else {

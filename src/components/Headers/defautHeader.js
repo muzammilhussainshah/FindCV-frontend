@@ -67,9 +67,13 @@ function DefaultHeader() {
 
     const toggleDropdown = () => {
         setIsOpenDropdown(!isOpenDropdown);
+        window.scrollTo(0, 0);
     }
 
     const handleMobileMenu = () => {
+        if (isOpenMobileMenu) {
+            window.scrollTo(0, 0);
+        }
         setIsOpenMobileMenu(!isOpenMobileMenu);
     }
 
