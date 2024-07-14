@@ -82,7 +82,7 @@ function JobseekerForm({user}) {
 
     const formik = useFormik({
         initialValues: {
-            profile_visibility: user.profile_visibility,
+            profile_visibility: user.profile_visibility ? true : false,
             description: user.description,
             email: user.email,
             gender: user.gender,
