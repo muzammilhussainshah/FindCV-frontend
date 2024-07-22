@@ -52,6 +52,12 @@ function JobsCard({ disabled, job, ...props }) {
         additional_card_classes = styles.disabled;
     }
 
+    let city = job.city;
+
+    if (t('general.city.' + city) !== 'general.city.' + city) {
+        city = t('general.city.' + city);
+    }
+
     return (
         <div className={`${styles.job_card} ${styles[job.status]} ${additional_card_classes}`} {...props}>
             {(job.status === 'paused' || job.status === 'closed') && (
@@ -75,7 +81,7 @@ function JobsCard({ disabled, job, ...props }) {
                                 shiny={false}
                                 basePath="/vendor/flags"
                             />
-                            <p>{t('general.country.' + job.country)}, {job.city}</p>
+                            <p>{t('general.country.' + job.country)}, {city}</p>
                         </div>
                     </div>
 

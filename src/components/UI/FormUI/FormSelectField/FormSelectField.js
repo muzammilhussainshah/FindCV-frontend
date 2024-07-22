@@ -17,11 +17,24 @@ function FormSelectField({ hasBorder, error, label, type, value, options, onForm
     let selectOptions = [];
 
     if (type === 'country' || type === 'nationality') {
-        selectOptions = countries.map(country => ({
+
+        if (options?.length) {
+            selectOptions = countries
+            .filter(country => options.includes(country.code))
+            .map(country => ({
                 label: `${t('general.' + type + '.' + country.code)}`,
                 value: country.code,
                 flag: country.code
             }));
+        }
+        else {
+            selectOptions = countries.map(country => ({
+                label: `${t('general.' + type + '.' + country.code)}`,
+                value: country.code,
+                flag: country.code
+            }));
+        }
+
     }
 
     if (type === 'language') {
@@ -50,10 +63,12 @@ function FormSelectField({ hasBorder, error, label, type, value, options, onForm
     }
 
     if (type === 'default') {
+
         selectOptions = options.map(option => ({
             label: option.label,
             value: option.value
         }));
+
     }
 
     let wrapper_class = styles.wrapper;

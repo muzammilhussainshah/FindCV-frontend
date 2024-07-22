@@ -144,6 +144,7 @@ function Jobs() {
                                     placeholder={t('general.UI.select')}
                                     label={t('jobs.country')}
                                     type="country"
+                                    options={['QA', 'AE', 'SA', 'BH', 'KW', 'OM']}
                                     isMulti
                                     hasBorder
                                     onFormikChange={handleFilterChange}

@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 
 import { updateUser } from '../../../../services/userService';
 import { fetchUserByToken } from '../../../../app/features/userSlice';
-import { useGetCompanyIndustriesHook } from '../../../../utils/utilityHooks';
+import { useGetCompanyIndustriesHook, useGetCities } from '../../../../utils/utilityHooks';
 
 import FormField from '../../../../components/UI/FormUI/FormField/FormField';
 import FormSelectField from '../../../../components/UI/FormUI/FormSelectField/FormSelectField';
@@ -149,6 +149,7 @@ function EmployerForm({user}) {
         { value: '1000+', label: '1000+' },
     ];
     const companyIndustriesOptions = useGetCompanyIndustriesHook();
+    const citiesOptions = useGetCities(formik.values.country);
 
     let conditionalFields = '';
 
@@ -288,23 +289,26 @@ function EmployerForm({user}) {
                         type="country" 
                         label={t('edit_profile.employer.country')}
                         hasBorder
+                        options={['QA', 'AE', 'SA', 'BH', 'KW', 'OM']}
                         onFormikChange={formik.handleChange}
                         value={formik.values.country}
                         error={formik.touched.country && formik.errors.country}
                     />
                 </div>
-                <div>
-                    <FormField 
-                        name="city" 
-                        type="text" 
-                        label={t('edit_profile.employer.city')}
-                        hasBorder
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.city}
-                        error={formik.touched.city && formik.errors.city}
-                    />
-                </div>
+                {formik.values.country &&
+                    <div>
+                        <FormSelectField 
+                            name="city" 
+                            type="default"
+                            label={t('edit_profile.employer.city')}
+                            options={citiesOptions}
+                            hasBorder
+                            onFormikChange={formik.handleChange}
+                            value={formik.values.city}
+                            error={formik.touched.city && formik.errors.city}
+                        />
+                    </div>
+                }
                 <br />
 
                 <Subtitle dark>{t('edit_profile.employer.change_password_title')}</Subtitle>

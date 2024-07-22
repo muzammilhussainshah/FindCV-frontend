@@ -77,7 +77,7 @@ export const useGetEducationLevelsHook = () => {
     return education_levels;
 };
 
-export const useGetCurrenciesHook = () => {
+export const useGetCurrenciesHook = (includeCurrencies = []) => {
 
     const currencies_list = [
         { code: "usd", name: "USD", symbol: "$" },
@@ -159,13 +159,37 @@ export const useGetCurrenciesHook = () => {
     const currencies = [];
 
     currencies_list.forEach(currency => {
-        currencies.push({
-            value: currency.code,
-            label: currency.name + " (" + currency.symbol + ")"
-        });
+
+        if (includeCurrencies.length > 0) {
+            
+            if (includeCurrencies.includes(currency.code)) {
+                currencies.push({
+                    value: currency.code,
+                    label: currency.name + " (" + currency.symbol + ")"
+                });
+            }
+
+        }
+        else {
+            currencies.push({
+                value: currency.code,
+                label: currency.name + " (" + currency.symbol + ")"
+            });
+        }
+
     });
 
-    return currencies;
+    const uniqueCurrencyValues = new Set();
+    const uniqueCurrencies = currencies.filter(currency => {
+        if (uniqueCurrencyValues.has(currency.value)) {
+            return false;
+        } else {
+            uniqueCurrencyValues.add(currency.value);
+            return true;
+        }
+    });
+
+    return uniqueCurrencies;
 
 };
 
@@ -183,3 +207,114 @@ export const useDebounce = (func, wait) => {
         timeout = setTimeout(() => func.apply(this, args), wait);
     };
 }
+
+export const useGetCities = (includeCountry = []) => {
+    const { t } = useTranslation();
+
+    const city_codes_sar = ["riyadh","jeddah","mecca","medina","dammam","khobar","dhahran","tabuk","qatif","al_hasa","hofuf","jubail","abha","khamis_mushait","najran","jizan","taif","al_khafji","yanbu","al_kharj","buraidah","al_jouf","hail","arar","sakaka","al_mubarraz","unaizah","ras_tanura","rabigh","al_lith"];
+    const city_codes_oman = ["muscat","salalah","sohar","nizwa","sur","ibra","barka","rustaq","buraimi","ibri","khasab","matrah","seeb","samail","al_ashkharah","bidiyah","badiyah","bahla","al_kamil_wal_wafi","adam","al_mudhaibi","al_suwaiq","al_awabi","al_buraimi","al_hamra","duqm","dank","shinas","liwa","mahwit","masirah"];
+    const city_codes_kuwait = ["kuwait_city","hawalli","salmiya","farwaniya","jleeb_al_shuyoukh","fahaheel","mangaf","abu_halifa","mahboula","al_jahra","sabah_al_salem","sulaibikhat","raqai","mishref","jabriya","shalim","al_zour","wafra","abdali","al_ardiyah"];
+    const city_codes_bahrein = ["manama","muharraq","riffa","hamad_town","isa_town","sitra","jidhafs","zallaq","duraz","budaiya","bilad_al_qadeem","ain_adari","seef","saar","janabiyah","busaiteen","jasra","karzakan","malikiya","diraz","maameer","buri","hidd","al_dar"];
+    const city_codes_qatar = ["doha","al_rayyan","al_wakrah","umm_said","madinat_ash_shamal","al_khor","al_shahaniya","dukhan","mesaieed","ras_laffan","al_wukair","al_thakhira","al_ghuwariyah","al_jumaliyah","fuwayrit","al_karanaah","ash_shihaniyah","simaismah"];
+    const city_codes_uae = ["abu_dhabi","dubai","sharjah","al_ain","ajman","ras_al_khaimah","fujairah","umm_al_quwain","khor_fakkan","dibba_al_fujairah","kalba","al_dhaid","al_madam","al_jazirah_al_hamra","masafi","hili","al_qua"];
+
+    const cities = [];
+
+    if (includeCountry.length > 0) {
+        
+        if (includeCountry.includes("SA")) {
+            city_codes_sar.forEach(city_code => {
+                cities.push({
+                    value: city_code,
+                    label: t(`general.city.${city_code}`)
+                });
+            });
+        }
+
+        if (includeCountry.includes("OM")) {
+            city_codes_oman.forEach(city_code => {
+                cities.push({
+                    value: city_code,
+                    label: t(`general.city.${city_code}`)
+                });
+            });
+        }
+
+        if (includeCountry.includes("BH")) {
+            city_codes_bahrein.forEach(city_code => {
+                cities.push({
+                    value: city_code,
+                    label: t(`general.city.${city_code}`)
+                });
+            });
+        }
+        
+        if (includeCountry.includes("KW")) {
+            city_codes_kuwait.forEach(city_code => {
+                cities.push({
+                    value: city_code,
+                    label: t(`general.city.${city_code}`)
+                });
+            });
+        }
+
+        if (includeCountry.includes("AE")) {
+            city_codes_uae.forEach(city_code => {
+                cities.push({
+                    value: city_code,
+                    label: t(`general.city.${city_code}`)
+                });
+            });
+        }
+
+        if (includeCountry.includes("QA")) {
+            city_codes_qatar.forEach(city_code => {
+                cities.push({
+                    value: city_code,
+                    label: t(`general.city.${city_code}`)
+                });
+            });
+        }
+
+    }
+    else {
+        city_codes_sar.forEach(city_code => {
+            cities.push({
+                value: city_code,
+                label: t(`general.city.${city_code}`)
+            });
+        });
+        city_codes_oman.forEach(city_code => {
+            cities.push({
+                value: city_code,
+                label: t(`general.city.${city_code}`)
+            });
+        });
+        city_codes_kuwait.forEach(city_code => {
+            cities.push({
+                value: city_code,
+                label: t(`general.city.${city_code}`)
+            });
+        });
+        city_codes_bahrein.forEach(city_code => {
+            cities.push({
+                value: city_code,
+                label: t(`general.city.${city_code}`)
+            });
+        });
+        city_codes_qatar.forEach(city_code => {
+            cities.push({
+                value: city_code,
+                label: t(`general.city.${city_code}`)
+            });
+        });
+        city_codes_uae.forEach(city_code => {
+            cities.push({
+                value: city_code,
+                label: t(`general.city.${city_code}`)
+            });
+        });
+    }
+
+    return cities;
+};

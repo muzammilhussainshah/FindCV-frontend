@@ -250,11 +250,19 @@ function Job() {
         }
 
         if (job?.city) {
+
+            let city = job.city;
+
+            if (t('general.city.' + city) !== 'general.city.' + city) {
+                city = t('general.city.' + city);
+            }
+
             infoTableData.push({
                 key: 'city',
                 label: t('job.city_town_village'),
-                value: job.city
+                value: city
             });
+
         }
 
         if (job?.job_type) {

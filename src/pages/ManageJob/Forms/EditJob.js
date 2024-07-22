@@ -8,7 +8,7 @@ import Yup from '../../../utils/yupExtensions';
 import toast from 'react-hot-toast';
 
 import { updateJob, getJob } from '../../../services/jobService';
-import { useGetJobCategoriesHook, useGetCurrenciesHook } from '../../../utils/utilityHooks';
+import { useGetJobCategoriesHook, useGetCurrenciesHook, useGetCities } from '../../../utils/utilityHooks';
 
 import BasicPopup from '../../../components/UI/Popups/BasicPopup/BasicPopup';
 import LanguageForm from '../../../components/Forms/Common/LanguageForm/LanguageForm';
@@ -131,7 +131,7 @@ function EditJob() {
             .then((response) => {
 
                 if (!id) {
-                    navigate('/job/' + response.job_id);
+                    navigate('/jobs/' + response.job_id);
                 }
 
                 setFormLoading(false);
@@ -272,7 +272,9 @@ function EditJob() {
     }
 
     const categoryOptions = useGetJobCategoriesHook();
-    const currencyOptions = useGetCurrenciesHook();
+    const currencyOptions = useGetCurrenciesHook(['aed', 'sar', 'qar', 'omr', 'kwd', 'bhd']);
+    const citiesOptions = useGetCities(formik.values.country);
+
     const paymentTypeOptions = [
         { value: 'monthly', label: t('general.UI.monthly') },
         { value: 'hourly', label: t('general.UI.hourly') }
@@ -337,23 +339,26 @@ function EditJob() {
                                 label={t('forms.manage_job.job_location_country')}
                                 placeholder={t('general.UI.select')}
                                 hasBorder
+                                options={['QA', 'AE', 'SA', 'BH', 'KW', 'OM']}
                                 onFormikChange={formik.handleChange}
                                 value={formik.values.country}
                                 error={formik.touched.country && formik.errors.country}
                             />
                         </div>
+                        {formik.values.country && 
                         <div>
-                            <FormField 
-                                name="city" 
-                                type="text" 
+                            <FormSelectField 
+                                name="city"
+                                type="default"
                                 label={t('forms.manage_job.job_location_city')}
                                 hasBorder
-                                onChange={formik.handleChange}
+                                options={citiesOptions}
+                                onFormikChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.city}
                                 error={formik.touched.city && formik.errors.city}
                             />
-                        </div>
+                        </div>}
                         {id && (
                             <div>
                                 <FormSelectField
