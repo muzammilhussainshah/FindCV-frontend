@@ -15,12 +15,14 @@ import LanguageForm from '../../../../components/Forms/Common/LanguageForm/Langu
 import WorkExperienceForm from '../../../../components/Forms/Common/WorkExperienceForm/WorkExperienceForm';
 import EducationForm from '../../../../components/Forms/Common/EducationForm/EducationForm';
 import SkillsForm from '../../../../components/Forms/Common/SkillsForm/SkillsForm';
+import OccupationsForm from '../../../../components/Forms/Common/OccupationsForm/OccupationsForm';
 import VerificationProcess from '../../../../components/Verification/VerificationProcess/VerificationProcess';
 
 import LanguageLevelList from '../../../../components/UI/Common/LanguageLevel/LanguageLevelList/LanguageLevelList';
 import WorkExperienceList from '../../../../components/UI/Common/WorkExperience/WorkExperienceList/WorkExperienceList';
 import EducationList from '../../../../components/UI/Common/Education/EducationList/EducationList';
 import SkillsList from '../../../../components/UI/Common/Skills/SkillsList/SkillsList';
+import OccupationsList from '../../../../components/UI/Common/Occupations/OccupationsList/OccupationsList';
 import LogicTestBar from '../../../../components/UI/Common/LogicTestBar/LogicTestBar';
 import LogicTestForm from '../../../../components/Forms/Common/LogicTestForm/LogicTestForm';
 
@@ -54,6 +56,7 @@ function JobseekerForm({user}) {
     const [isOpenWorkExperiencePopup, setIsOpenWorkExperiencePopup] = useState(false);
     const [isOpenEducationPopup, setIsOpenEducationPopup] = useState(false);
     const [isOpenSkillsPopup, setIsOpenSkillsPopup] = useState(false);
+    const [isOpenOccupationsPopup, setIsOpenOccupationsPopup] = useState(false);
     const [isOpenLogicTestPopup, setIsOpenLogicTestPopup] = useState(false);
     const [isOpenVerificationPopup, setIsOpenVerificationPopup] = useState(false);
 
@@ -78,8 +81,6 @@ function JobseekerForm({user}) {
         isLogicMoreThan30Days = logicTestRequestDate < thirtyDaysAgo;
     }
 
-    // console.log(user);
-
     const formik = useFormik({
         initialValues: {
             profile_visibility: user.profile_visibility ? true : false,
@@ -97,7 +98,8 @@ function JobseekerForm({user}) {
             languages: user.languages,
             workExperience: user.work_experiences,
             education: user.education,
-            skills: user.skills
+            skills: user.skills,
+            occupations: user.occupations,
         },
         validationSchema: Yup.object({
             country: Yup.string().required(t('general.UI.required')),
@@ -219,6 +221,15 @@ function JobseekerForm({user}) {
                 formData.append('skills', '');
             }
 
+            if (values.occupations.length > 0) {
+                values.occupations.forEach((occupation, index) => {
+                    formData.append(`occupations[${index}][code]`, occupation.occupation_code);
+                });
+            }
+            else {
+                formData.append('occupations', '');
+            }
+
             if (values.password) {
                 formData.append('password', values.password);
             }
@@ -260,6 +271,8 @@ function JobseekerForm({user}) {
             setIsOpenEducationPopup(false);
         } else if (popupName === 'skills') {
             setIsOpenSkillsPopup(false);
+        } else if (popupName === 'occupations') {
+            setIsOpenOccupationsPopup(false);
         } else if (popupName === 'logicTest') {
             setIsOpenLogicTestPopup(false);
         } else if (popupName === 'verification') {
@@ -276,6 +289,8 @@ function JobseekerForm({user}) {
             setIsOpenEducationPopup(true);
         } else if (popupName === 'skills') {
             setIsOpenSkillsPopup(true);
+        } else if (popupName === 'occupations') {
+            setIsOpenOccupationsPopup(true);
         } else if (popupName === 'logicTest') {
             setIsOpenLogicTestPopup(true);
         } else if (popupName === 'verification') {
@@ -319,6 +334,18 @@ function JobseekerForm({user}) {
             }
         })]);
         handlePopupClose('skills');
+    }
+
+    const handleAddOccupations = (values) => {
+        formik.setFieldValue('occupations', [...formik.values.occupations, ...values.occupations.map((occupation) => {
+            return {
+                id: Date.now() + '-' + occupation,
+                occupation_code: occupation,
+                name: t('general.job_category.' + occupation)
+            }
+        })]);
+        console.log(formik.values.occupations);
+        handlePopupClose('occupations');
     }
 
     const handleStartTest = () => {
@@ -548,6 +575,18 @@ function JobseekerForm({user}) {
                         dark
                         hasButton 
                         buttonText={t('general.UI.add')}
+                        buttonOnClick={() => handlePopupOpen('occupations')}
+                    >
+                        {t('general.UI.occupations')}
+                    </Subtitle>
+                    <div style={{marginBottom: 40}}>
+                        <OccupationsList isDark occupations={formik.values.occupations} onRemove={handleOptionRemove} />
+                    </div>
+
+                    <Subtitle 
+                        dark
+                        hasButton 
+                        buttonText={t('general.UI.add')}
                         buttonOnClick={() => handlePopupOpen('education')}
                     >
                         {t('general.UI.education')}
@@ -644,6 +683,14 @@ function JobseekerForm({user}) {
                     closePopup={() => handlePopupClose('skills')}
                 >
                     <SkillsForm onSubmit={handleAddSkills} excludeSkills={formik.values.skills.map(option => option.code)} />
+                </BasicPopup>
+            }
+            {isOpenOccupationsPopup && 
+                <BasicPopup 
+                    isOpen={isOpenOccupationsPopup}
+                    closePopup={() => handlePopupClose('occupations')}
+                >
+                    <OccupationsForm onSubmit={handleAddOccupations} excludeOccupations={formik.values.occupations.map(option => option.code)} />
                 </BasicPopup>
             }
             {isOpenLogicTestPopup && 

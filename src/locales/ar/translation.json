@@ -286,6 +286,11 @@
             "required": "مطلوب",
             "your_skills": "مهاراتك*"
         },
+        "occupations": {
+            "add": "يضيف",
+            "required": "مطلوب",
+            "your_occupations": "مهنك*"
+        },
         "logic_test": {
             "notice": "لا تغلق/تعيد تحميل الصفحة حتى ترسل إجاباتك، وإلا ستفقد النتيجة."
         },
@@ -1746,6 +1751,7 @@
             "work_experience": "خبرة في العمل",
             "education": "تعليم",
             "skills": "مهارات",
+            "occupations": "المهن",
             "proceed": "يتابع",
             "please_wait": "انتظر من فضلك...",
             "publish": "ينشر",

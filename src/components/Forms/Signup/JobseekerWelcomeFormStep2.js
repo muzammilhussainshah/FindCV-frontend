@@ -12,11 +12,13 @@ import LanguageForm from '../Common/LanguageForm/LanguageForm';
 import WorkExperienceForm from '../Common/WorkExperienceForm/WorkExperienceForm';
 import EducationForm from '../Common/EducationForm/EducationForm';
 import SkillsForm from '../Common/SkillsForm/SkillsForm';
+import OccupationsForm from '../Common/OccupationsForm/OccupationsForm';
 
 import LanguageLevelList from '../../UI/Common/LanguageLevel/LanguageLevelList/LanguageLevelList';
 import WorkExperienceList from '../../UI/Common/WorkExperience/WorkExperienceList/WorkExperienceList';
 import EducationList from '../../UI/Common/Education/EducationList/EducationList';
 import SkillsList from '../../UI/Common/Skills/SkillsList/SkillsList';
+import OccupationsList from '../../UI/Common/Occupations/OccupationsList/OccupationsList';
 import Subtitle from '../../UI/Common/Subtitle/Subtitle';
 import Button from '../../UI/Buttons/Button/Button';
 
@@ -30,13 +32,15 @@ function JobseekerWelcomeFormStep2(props) {
     const [isOpenWorkExperiencePopup, setIsOpenWorkExperiencePopup] = useState(false);
     const [isOpenEducationPopup, setIsOpenEducationPopup] = useState(false);
     const [isOpenSkillsPopup, setIsOpenSkillsPopup] = useState(false);
+    const [isOpenOccupationsPopup, setIsOpenOccupationsPopup] = useState(false);
 
     const formik = useFormik({
         initialValues: {
             languages: [],
             workExperience: [],
             education: [],
-            skills: []
+            skills: [],
+            occupations: []
         },
         onSubmit: values => {
 
@@ -104,6 +108,16 @@ function JobseekerWelcomeFormStep2(props) {
                 formData.append('skills', '');
             }
 
+            // occupations
+            if (values.occupations.length > 0) {
+                values.occupations.forEach((occupation, index) => {
+                    formData.append(`occupations[${index}][code]`, occupation.occupation_code);
+                });
+            }
+            else {
+                formData.append('occupations', '');
+            }
+
             toast.promise(updateUser(formData), {
                 loading: t('forms.welcome_job_seeker.step_2.updating_profile'),
                 success: <b>{t('forms.welcome_job_seeker.step_2.profile_updated')}</b>,
@@ -149,6 +163,8 @@ function JobseekerWelcomeFormStep2(props) {
             setIsOpenEducationPopup(false);
         } else if (popupName === 'skills') {
             setIsOpenSkillsPopup(false);
+        } else if (popupName === 'occupations') {
+            setIsOpenOccupationsPopup(false);
         }
     }
 
@@ -161,6 +177,8 @@ function JobseekerWelcomeFormStep2(props) {
             setIsOpenEducationPopup(true);
         } else if (popupName === 'skills') {
             setIsOpenSkillsPopup(true);
+        } else if (popupName === 'occupations') {
+            setIsOpenOccupationsPopup(true);
         }
     }
 
@@ -195,6 +213,17 @@ function JobseekerWelcomeFormStep2(props) {
             }
         })]);
         handlePopupClose('skills');
+    }
+
+    const handleAddOccupations = (values) => {
+        formik.setFieldValue('occupations', [...formik.values.occupations, ...values.occupations.map((occupation) => {
+            return {
+                id: Date.now() + '-' + occupation,
+                occupation_code: occupation,
+                name: t('general.job_category.' + occupation)
+            }
+        })]);
+        handlePopupClose('occupations');
     }
 
     return (
@@ -240,6 +269,16 @@ function JobseekerWelcomeFormStep2(props) {
                     </Subtitle>
                     <SkillsList skills={formik.values.skills} onRemove={handleOptionRemove} />
                 </div>
+                <div style={{marginBottom: 20}}>
+                    <Subtitle 
+                        hasButton 
+                        buttonText={t('general.UI.add')}
+                        buttonOnClick={() => handlePopupOpen('occupations')}
+                    >
+                        {t('general.UI.occupations')}
+                    </Subtitle>
+                    <OccupationsList occupations={formik.values.occupations} onRemove={handleOptionRemove} />
+                </div>
                 <div>
                     <Button type="submit" style={{display: 'block'}}>
                         {formLoading ? t('general.UI.please_wait') : t('general.UI.proceed')}
@@ -277,6 +316,14 @@ function JobseekerWelcomeFormStep2(props) {
                     closePopup={() => handlePopupClose('skills')}
                 >
                     <SkillsForm onSubmit={handleAddSkills} excludeSkills={formik.values.skills.map(option => option.code)} />
+                </BasicPopup>
+            }
+            {isOpenOccupationsPopup && 
+                <BasicPopup 
+                    isOpen={isOpenOccupationsPopup}
+                    closePopup={() => handlePopupClose('occupations')}
+                >
+                    <OccupationsForm onSubmit={handleAddOccupations} excludeOccupations={formik.values.occupations.map(option => option.code)} />
                 </BasicPopup>
             }
         </>

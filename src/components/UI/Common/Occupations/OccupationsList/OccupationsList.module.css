@@ -1,0 +1,10 @@
+.list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+:global(.fcv-rtl) .list {
+    direction: rtl;
+}

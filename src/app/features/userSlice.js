@@ -93,6 +93,15 @@ export const userReducer = createSlice({
                 });
               }
 
+              if (state.user.occupations) {
+                state.user.occupations = state.user.occupations.map((occupation) => {
+                  return {
+                      id: state.user.id + '-occupation-' + occupation.occupation_code,
+                      occupation_code: occupation.occupation_code
+                  };
+                });
+              }
+
             }
 
         })

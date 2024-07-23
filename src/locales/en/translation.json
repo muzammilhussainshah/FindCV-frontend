@@ -286,6 +286,11 @@
             "required": "Required",
             "your_skills": "Your Skills*"
         },
+        "occupations": {
+            "add": "Add",
+            "required": "Required",
+            "your_occupations": "Your Occupations*"
+        },
         "logic_test": {
             "notice": "Do not close/reload the page until submitting your answers, otherwise result will be lost."
         },
@@ -1746,6 +1751,7 @@
             "work_experience": "Work Experience",
             "education": "Education",
             "skills": "Skills",
+            "occupations": "Occupations",
             "proceed": "Proceed",
             "please_wait": "Please wait...",
             "publish": "Publish",
