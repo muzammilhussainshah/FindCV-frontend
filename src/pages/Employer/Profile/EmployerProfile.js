@@ -35,6 +35,7 @@ function EmployerProfile() {
     }, [id]);
 
     let industry_text = '';
+    let city = '';
 
     if (employer && employer.company_industries) {
         employer.company_industries.split(';').forEach((industry, index) => {
@@ -44,6 +45,17 @@ function EmployerProfile() {
                 industry_text += ', ' + t('general.company_industries.' + industry);
             }
         });
+    }
+
+    if (employer && employer.city) {
+
+        if (t('general.city.' + employer.city) !== 'general.city.' + employer.city) {
+            city = t('general.city.' + employer.city);
+        }
+        else {
+            city = employer.city;
+        }
+
     }
 
     return (
@@ -68,7 +80,7 @@ function EmployerProfile() {
                             {employer.company_website && <InfoBlock icon={website_icon} label={t('employer.website')} text={employer.company_website} />}
                             {employer.company_industries && <InfoBlock icon={industry_icon} label={t('employer.industry')} text={industry_text} />}
                             {employer.nationality && <InfoBlock icon={nationality_icon} label={t('employer.nationality')} text={t('general.nationality.' + employer.nationality)} />}
-                            <InfoBlock icon={location_icon} label={t('employer.location')} text={`${t('general.country.' + employer.country)}, ${employer.city}`} style={{marginBottom: 30}} />
+                            <InfoBlock icon={location_icon} label={t('employer.location')} text={`${t('general.country.' + employer.country)}, ${city}`} style={{marginBottom: 30}} />
 
                             <h4 className='pagination_scroll_target'>{t('employer.jobs')}</h4>
                             <JobsList 

@@ -17,7 +17,7 @@ function Jobs() {
     const query = new URLSearchParams(location.search);
     const initialSortby = query.get('sortby') || 'relevance';
     const initialJobType = query.get('job_type') || 'all';
-    const initialJobCategory = query.get('category') || 'all';
+    const initialJobCategory = query.get('category') || '';
     let initialJobCountry = query.getAll('country') || [];
     let initialJobLanguage = query.getAll('language') || [];
 
@@ -65,7 +65,7 @@ function Jobs() {
 
     }
 
-    const categoryOptions = [{ value: 'all', label: t('general.UI.all') }, ...useGetJobCategoriesHook()];
+    const categoryOptions = [...useGetJobCategoriesHook()];
     const sortbyOptions = [
         { value: 'relevance', label: t('jobs.relevance') },
         { value: 'newest', label: t('jobs.newest') },
@@ -87,7 +87,7 @@ function Jobs() {
     if (jobType !== 'all') {
         filters.job_type = jobType;
     }
-    if (jobCategory !== 'all') {
+    if (jobCategory !== '') {
         filters.category = jobCategory;
     }
     if (jobCountry.length > 0) {
@@ -132,6 +132,7 @@ function Jobs() {
                                     placeholder={t('general.UI.select')}
                                     label={t('jobs.category')}
                                     type="default"
+                                    isMulti
                                     hasBorder
                                     options={categoryOptions}
                                     onFormikChange={handleFilterChange}
