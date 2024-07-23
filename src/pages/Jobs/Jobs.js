@@ -7,6 +7,7 @@ import { useGetJobCategoriesHook } from '../../utils/utilityHooks';
 
 import JobsList from '../../components/UI/Common/Jobs/JobsList/JobsList';
 import FormSelectField from '../../components/UI/FormUI/FormSelectField/FormSelectField';
+import FormField from '../../components/UI/FormUI/FormField/FormField';
 
 import styles from './Jobs.module.css';
 
@@ -17,9 +18,14 @@ function Jobs() {
     const query = new URLSearchParams(location.search);
     const initialSortby = query.get('sortby') || 'relevance';
     const initialJobType = query.get('job_type') || 'all';
-    const initialJobCategory = query.get('category') || '';
+    const initialSearch = query.get('search') || '';
+    let initialJobCategory = query.getAll('category') || [];
     let initialJobCountry = query.getAll('country') || [];
     let initialJobLanguage = query.getAll('language') || [];
+
+    if (initialJobCategory.length) {
+        initialJobCategory = initialJobCategory[0].split(',');
+    }
 
     if (initialJobCountry.length) {
         initialJobCountry = initialJobCountry[0].split(',');
@@ -32,6 +38,7 @@ function Jobs() {
     const [jobsFoundTotal, setJobsFoundTotal] = useState(0);
     const [sortby, setSortby] = useState(initialSortby);
     const [jobType, setJobType] = useState(initialJobType);
+    const [search, setSearch] = useState(initialSearch);
     const [jobCategory, setJobCategory] = useState(initialJobCategory);
     const [jobCountry, setJobCountry] = useState(initialJobCountry);
     const [jobLanguage, setJobLanguage] = useState(initialJobLanguage);
@@ -42,6 +49,10 @@ function Jobs() {
 
     const handleSortbyChange = (value) => {
         setSortby(value);
+    }
+
+    const handleFilterSearchChange = (value) => {
+        setSearch(value.target.value);
     }
 
     const handleFilterChange = (value) => {
@@ -87,7 +98,10 @@ function Jobs() {
     if (jobType !== 'all') {
         filters.job_type = jobType;
     }
-    if (jobCategory !== '') {
+    if (search !== '') {
+        filters.search = search;
+    }
+    if (jobCategory.length > 0) {
         filters.category = jobCategory;
     }
     if (jobCountry.length > 0) {
@@ -114,6 +128,17 @@ function Jobs() {
                             <h5>{t('jobs.filters')}</h5>
                         </div>
                         <form>
+                            <div>
+                                <FormField
+                                    name="filter_search"
+                                    label={t('jobs.search')}
+                                    type="text"
+                                    hasBorder
+                                    icon="search"
+                                    onChange={handleFilterSearchChange}
+                                    value={search}
+                                />
+                            </div>
                             <div>
                                 <FormSelectField
                                     name="filter_job_type"
