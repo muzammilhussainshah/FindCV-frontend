@@ -26,7 +26,7 @@ import gender_icon from '../../../assets/images/icons/gender.svg';
 
 function JobseekerProfile() {
     const { t } = useTranslation();
-    const { id } = useParams();
+    const { slug } = useParams();
     const user = useSelector(state => state.user);
 
     const [jobseeker, setJobseeker] = useState(null);
@@ -35,13 +35,13 @@ function JobseekerProfile() {
 
         if (!user.loading) {
 
-            getUser('jobseeker', id)
+            getUser('jobseeker', slug)
                 .then((response) => {
                     // console.log(response);
 
                     response.languages = response.languages.map((language) => {
                         return {
-                            id: id + '-' + language.languageCode,
+                            id: slug + '-' + language.languageCode,
                             languageCode: language.languageCode,
                             level: language.level
                         };
@@ -61,25 +61,26 @@ function JobseekerProfile() {
 
                     response.skills = response.skills.map((skill) => {
                         return {
-                            id: id + '-skill-' + skill.skill_code,
+                            id: slug + '-skill-' + skill.skill_code,
                             code: skill.skill_code
                         };
                     });
 
                     response.age = new Date().getFullYear() - new Date(response.birth_date).getFullYear();
 
-                    if (user.user && ((parseInt(user.user.id, 10) === parseInt(id, 10) && user.user.account_type === 'jobseeker') || (user.user.account_type === 'employer' && user.user.active_subscription))) {
+                    if (user.user && ((user.slug === slug && user.user.account_type === 'jobseeker') || (user.user.account_type === 'employer' && user.user.active_subscription))) {
                         response.hidden = false;
                     }
                     else {
                         response.hidden = true;
-                        response.full_name = 'Anonymous';
+                        response.first_name = 'John';
+                        response.last_name = 'Doe';
                         response.cv_file = '404/';
                         response.cv_ref_letter = '404/';
 
                         response.education = response.education.map((diploma) => {
                             return {
-                                id: id + '-diploma' + Math.random(),
+                                id: slug + '-diploma' + Math.random(),
                                 diploma: {
                                     name: 'Diploma Name.pdf'
                                 },
@@ -98,7 +99,7 @@ function JobseekerProfile() {
 
         }
 
-    }, [id, user]);
+    }, [slug, user]);
 
     let containerClasses = [styles.jobseeker_profile];
     let blurredBoxClasses = [];
@@ -125,19 +126,19 @@ function JobseekerProfile() {
                         </Helmet>
                     ) : (
                         <Helmet>
-                            <title>FindCV - {jobseeker.full_name}</title>
+                            <title>FindCV - {jobseeker.first_name} {jobseeker.last_name}</title>
                         </Helmet>
                     )}
 
                     <div className={containerClasses.join(' ')}>
                         <div className={styles.jobseeker_profile_col}>
                             {jobseeker.profile_image ? (
-                                <img className={styles.jobseeker_profile_image} src={process.env.REACT_APP_UPLOADS_PATH + jobseeker.profile_image} alt={jobseeker.full_name} style={{marginBottom: 10}} />
+                                <img className={styles.jobseeker_profile_image} src={process.env.REACT_APP_UPLOADS_PATH + jobseeker.profile_image} alt={`${jobseeker.first_name} ${jobseeker.last_name}`} style={{marginBottom: 10}} />
                             ) : (
-                                <img className={styles.jobseeker_profile_image} src={user_image_placeholder} alt={jobseeker.full_name} style={{marginBottom: 10}} />
+                                <img className={styles.jobseeker_profile_image} src={user_image_placeholder} alt={`${jobseeker.first_name} ${jobseeker.last_name}`} style={{marginBottom: 10}} />
                             )}
 
-                            <h2>{jobseeker.full_name}</h2>
+                            <h2>{jobseeker.first_name} {jobseeker.last_name}</h2>
 
                             <ul className={styles.jobseeker_profile_list}>
                                 <li>
@@ -171,7 +172,7 @@ function JobseekerProfile() {
                             {(jobseeker.hidden && !user.user) && <Button to="/login" style={{width: '100%'}}>{t('job_seeker.create_account_for_access')}</Button>}
                         </div>
                         <div className={styles.jobseeker_profile_col}>
-                            <h1>{jobseeker.full_name}</h1>
+                            <h1>{jobseeker.first_name} {jobseeker.last_name}</h1>
                             <div className={styles.jobseeker_profile_desc}>
                                 {jobseeker.hidden && <p style={{marginBottom: 45}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>}
                                 {(!jobseeker.hidden && jobseeker.description) && <div style={{marginBottom: 45}} dangerouslySetInnerHTML={{__html: jobseeker.description}} />}

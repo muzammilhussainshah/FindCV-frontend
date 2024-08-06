@@ -17,8 +17,8 @@ function Jobs() {
 
     const query = new URLSearchParams(location.search);
     const initialSortby = query.get('sortby') || 'relevance';
-    const initialJobType = query.get('job_type') || 'all';
     const initialSearch = query.get('search') || '';
+    let initialJobType = query.getAll('job_type') || [];
     let initialJobCategory = query.getAll('category') || [];
     let initialJobCountry = query.getAll('country') || [];
     let initialJobLanguage = query.getAll('language') || [];
@@ -35,10 +35,14 @@ function Jobs() {
         initialJobLanguage = initialJobLanguage[0].split(',');
     }
 
+    if (initialJobType.length) {
+        initialJobType = initialJobType[0].split(',');
+    }
+
     const [jobsFoundTotal, setJobsFoundTotal] = useState(0);
     const [sortby, setSortby] = useState(initialSortby);
-    const [jobType, setJobType] = useState(initialJobType);
     const [search, setSearch] = useState(initialSearch);
+    const [jobType, setJobType] = useState(initialJobType);
     const [jobCategory, setJobCategory] = useState(initialJobCategory);
     const [jobCountry, setJobCountry] = useState(initialJobCountry);
     const [jobLanguage, setJobLanguage] = useState(initialJobLanguage);
@@ -84,7 +88,6 @@ function Jobs() {
         { value: 'salary', label: t('jobs.salary') }
     ];
     const jobTypeOptions = [
-        { value: 'all', label: t('general.UI.all') },
         { value: 'full_time', label: t('general.UI.full_time') },
         { value: 'part_time', label: t('general.UI.part_time') },
         { value: 'remote', label: t('general.UI.remote') }
@@ -145,6 +148,7 @@ function Jobs() {
                                     placeholder={t('general.UI.select')}
                                     label={t('jobs.job_type')}
                                     type="default"
+                                    isMulti
                                     hasBorder
                                     options={jobTypeOptions}
                                     onFormikChange={handleFilterChange}

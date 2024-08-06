@@ -74,7 +74,7 @@ function MyJobs() {
                     <JobsList 
                         per_page={10}
                         filters={{
-                            include_ids: user.favourites
+                            include_ids: user.favourites.length ? user.favourites : [-1]
                         }}
                         onFetchJobs={handleUpdateJobsCounters}
                     />

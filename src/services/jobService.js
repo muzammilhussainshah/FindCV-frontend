@@ -37,7 +37,16 @@ export const updateApplicationField = async (data) => {
     }
 };
 
-export const getJob = async (job_id) => {
+export const getJob = async (job_slug) => {
+    try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}job/getJobBySlug/${job_slug}`);
+        return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};
+
+export const getJobByID = async (job_id) => {
     try {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}job/getJobById/${job_id}`);
         return response.data;

@@ -66,7 +66,8 @@ function ApplicationPopup({ jobseeker, ...props }) {
             else {
                 _jobseeker.hidden = true;
                 _jobseeker.email = 'example@gmail.com';
-                _jobseeker.full_name = 'Anonymous';
+                _jobseeker.first_name = 'John';
+                _jobseeker.last_name = 'Doe';
                 _jobseeker.cv_file = '404/';
                 _jobseeker.cv_ref_letter = '404/';
 
@@ -111,13 +112,13 @@ function ApplicationPopup({ jobseeker, ...props }) {
                     <div className={styles.jobseeker_profile_head}>
 
                         {jobseekerData.profile_image ? (
-                            <img className={styles.jobseeker_profile_image} src={process.env.REACT_APP_UPLOADS_PATH + jobseekerData.profile_image} alt={jobseekerData.full_name} />
+                            <img className={styles.jobseeker_profile_image} src={process.env.REACT_APP_UPLOADS_PATH + jobseekerData.profile_image} alt={`${jobseekerData.first_name} ${jobseekerData.last_name}`} />
                         ) : (
-                            <img className={styles.jobseeker_profile_image} src={user_image_placeholder} alt={jobseekerData.full_name} />
+                            <img className={styles.jobseeker_profile_image} src={user_image_placeholder} alt={`${jobseekerData.first_name} ${jobseekerData.last_name}`} />
                         )}
 
                         <div>
-                            <h4>{jobseekerData.full_name}</h4>
+                            <h4>${jobseekerData.first_name} ${jobseekerData.last_name}</h4>
 
                             <ul className={styles.jobseeker_profile_list}>
                                 <li>

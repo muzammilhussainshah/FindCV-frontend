@@ -67,9 +67,9 @@ function ApplicationsCard({ application, ...props }) {
             <div className={card_classes} {...props}>
                 <div className={styles.card_image}>
                     {applicationData.jobseeker.profile_image ? (
-                        <img src={process.env.REACT_APP_UPLOADS_PATH + applicationData.jobseeker.profile_image} alt={applicationData.jobseeker.full_name} />
+                        <img src={process.env.REACT_APP_UPLOADS_PATH + applicationData.jobseeker.profile_image} alt={`${applicationData.jobseeker.first_name} ${applicationData.jobseeker.last_name}`} />
                     ) : (
-                        <img src={user_image_placeholder} alt={applicationData.jobseeker.full_name} />
+                        <img src={user_image_placeholder} alt={`${applicationData.jobseeker.first_name} ${applicationData.jobseeker.last_name}`} />
                     )}
                     <Button 
                         style={{width: '100%', padding: 4, minWidth: 0}}
@@ -80,7 +80,7 @@ function ApplicationsCard({ application, ...props }) {
                 </div>
                 <div className={styles.card_body}>
                     <div className={styles.card_body_head}>
-                        <h5>{applicationData.jobseeker.full_name}</h5>
+                        <h5>{applicationData.jobseeker.first_name} {applicationData.jobseeker.last_name}</h5>
                         <Flag 
                             name={applicationData.jobseeker.country}
                             format="svg"

@@ -24,7 +24,8 @@ function JobseekerWelcomeFormStep1(props) {
 
     const formik = useFormik({
         initialValues: {
-            full_name: '',
+            first_name: '',
+            last_name: '',
             nationality: '',
             country: '',
             gender: '',
@@ -34,7 +35,8 @@ function JobseekerWelcomeFormStep1(props) {
             profile_image: '',
         },
         validationSchema: Yup.object({
-            full_name: Yup.string().required(t('forms.welcome_job_seeker.step_1.required')),
+            first_name: Yup.string().required(t('forms.welcome_job_seeker.step_1.required')),
+            last_name: Yup.string().required(t('forms.welcome_job_seeker.step_1.required')),
             nationality: Yup.string().required(t('forms.welcome_job_seeker.step_1.required')),
             country: Yup.string().required(t('forms.welcome_job_seeker.step_1.required')),
             gender: Yup.string().required(t('forms.welcome_job_seeker.step_1.required')),
@@ -70,7 +72,8 @@ function JobseekerWelcomeFormStep1(props) {
             const formData = new FormData();
             formData.append('token', userToken);
             formData.append('step', 1);
-            formData.append('full_name', values.full_name);
+            formData.append('first_name', values.first_name);
+            formData.append('last_name', values.last_name);
             formData.append('nationality', values.nationality);
             formData.append('country', values.country);
             formData.append('gender', values.gender);
@@ -126,13 +129,24 @@ function JobseekerWelcomeFormStep1(props) {
         <form onSubmit={formik.handleSubmit} {...props}>
             <div>
                 <FormField 
-                    name="full_name" 
+                    name="first_name" 
                     type="text" 
-                    placeholder={t('forms.welcome_job_seeker.step_1.full_name')}
+                    placeholder={t('forms.welcome_job_seeker.step_1.first_name')}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.full_name}
-                    error={formik.touched.full_name && formik.errors.full_name}
+                    value={formik.values.first_name}
+                    error={formik.touched.first_name && formik.errors.first_name}
+                />
+            </div>
+            <div>
+                <FormField 
+                    name="last_name" 
+                    type="text" 
+                    placeholder={t('forms.welcome_job_seeker.step_1.last_name')}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.last_name}
+                    error={formik.touched.last_name && formik.errors.last_name}
                 />
             </div>
             <div>

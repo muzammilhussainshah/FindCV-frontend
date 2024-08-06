@@ -28,7 +28,8 @@ function EmployerForm({user}) {
 
     const formik = useFormik({
         initialValues: {
-            name: user.name,
+            first_name: user.first_name,
+            last_name: user.last_name,
             email: user.email,
             country: user.country,
             city: user.city,
@@ -43,7 +44,8 @@ function EmployerForm({user}) {
             profile_image: ''
         },
         validationSchema: Yup.object({
-            name: Yup.string().required(t('general.UI.required')),
+            first_name: Yup.string().required(t('general.UI.required')),
+            last_name: Yup.string().required(t('general.UI.required')),
             country: Yup.string().required(t('general.UI.required')),
             city: Yup.string().required(t('general.UI.required')),
             email: Yup.string().email(t('forms.create_account.invalid_email_address')).required(t('general.UI.required')),
@@ -82,7 +84,8 @@ function EmployerForm({user}) {
                 formData.append('profile_image', values.profile_image);
             }
 
-            formData.append('name', values.name);
+            formData.append('first_name', values.first_name);
+            formData.append('last_name', values.last_name);
             formData.append('city', values.city);
             formData.append('country', values.country);
             formData.append('employer_status', values.employer_status);
@@ -246,14 +249,26 @@ function EmployerForm({user}) {
                 <Subtitle dark>{t('edit_profile.employer.employer_information_title')}</Subtitle>
                 <div>
                     <FormField 
-                        name="name" 
+                        name="first_name" 
                         type="text" 
-                        label={t('edit_profile.employer.name')}
+                        label={t('edit_profile.employer.first_name')}
                         hasBorder
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.name}
-                        error={formik.touched.name && formik.errors.name}
+                        value={formik.values.first_name}
+                        error={formik.touched.first_name && formik.errors.first_name}
+                    />
+                </div>
+                <div>
+                    <FormField 
+                        name="last_name" 
+                        type="text" 
+                        label={t('edit_profile.employer.last_name')}
+                        hasBorder
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.last_name}
+                        error={formik.touched.last_name && formik.errors.last_name}
                     />
                 </div>
                 <div>

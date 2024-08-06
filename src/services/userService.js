@@ -26,7 +26,16 @@ export const updateUser = async (data) => {
     }
 };
 
-export const getUser = async (account_type, user_id) => {
+export const getUser = async (account_type, slug) => {
+    try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}user/getUserBySlug/${account_type}/${slug}`);
+        return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};
+
+export const getUserById = async (account_type, user_id) => {
     try {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}user/getUserById/${account_type}/${user_id}`);
         return response.data;
@@ -41,7 +50,7 @@ export const userVerifyEmail = async (token, emailToken) => {
         if (response.data) {
             // console.log(response.data);
         }
-        return response.data.token;
+        return response.data;
     } catch (error) {
         throw error.response.data;
     }

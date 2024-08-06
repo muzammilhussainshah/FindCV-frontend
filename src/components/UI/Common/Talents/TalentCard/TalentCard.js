@@ -55,18 +55,18 @@ function TalentCard({ disabled, talent, ...props }) {
                 
                 <div className={styles.col}>
                     {talent.profile_image ? (
-                        <LinkWrapper to={`/jobseekers/${talent.id}`}>
-                            <img src={process.env.REACT_APP_UPLOADS_PATH + talent.profile_image} alt={talent.full_name} />
+                        <LinkWrapper to={`/jobseekers/${talent.slug}`}>
+                            <img src={process.env.REACT_APP_UPLOADS_PATH + talent.profile_image} alt={`${talent.first_name} ${talent.last_name}`} />
                         </LinkWrapper>
                     ) : (
-                        <LinkWrapper to={`/jobseekers/${talent.id}`}>
-                            <img src={user_image_placeholder} alt={talent.full_name} />
+                        <LinkWrapper to={`/jobseekers/${talent.slug}`}>
+                            <img src={user_image_placeholder} alt={`${talent.first_name} ${talent.last_name}`} />
                         </LinkWrapper>
                     )}
 
                     <div className={styles.card_head_info}>
-                        <LinkWrapper to={`/jobseekers/${talent.id}`}>
-                            <h5>{talent.full_name}</h5>
+                        <LinkWrapper to={`/jobseekers/${talent.slug}`}>
+                            <h5>{talent.first_name} {talent.last_name}</h5>
                         </LinkWrapper>
                         <div>
                             <Flag 
@@ -93,7 +93,7 @@ function TalentCard({ disabled, talent, ...props }) {
             </div>
 
             <div className={styles.card_body}>
-                {talent.description && <p style={{fontWeight: 600, marginBottom: 10}}>{t('general.talent_card.about')} {talent.full_name}</p>}
+                {talent.description && <p style={{fontWeight: 600, marginBottom: 10}}>{t('general.talent_card.about')} {talent.first_name} {talent.last_name}</p>}
 
                 {(showMore) ? (
                     <>

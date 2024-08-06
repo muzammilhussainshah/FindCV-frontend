@@ -20,19 +20,19 @@ import industry_icon from '../../../assets/images/icons/building.svg';
 
 function EmployerProfile() {
     const { t } = useTranslation();
-    const { id } = useParams();
+    const { slug } = useParams();
 
     const [employer, setEmployer] = useState(null);
 
     useEffect(() => {
-        getUser('employer', id)
+        getUser('employer', slug)
             .then((response) => {
                 setEmployer(response);
             })
             .catch((error) => {
                 console.log(error);
             });
-    }, [id]);
+    }, [slug]);
 
     let industry_text = '';
     let city = '';
@@ -63,18 +63,18 @@ function EmployerProfile() {
             {employer ? (
                 <>
                     <Helmet>
-                        <title>FindCV - {employer.company_name ? employer.company_name : employer.name}</title>
+                        <title>FindCV - {employer.company_name ? employer.company_name : `${employer.first_name} ${employer.last_name}`}</title>
                     </Helmet>
                     <div className={styles.employer_profile}>
                         <div className={styles.employer_profile_col}>
                             {employer.profile_image ? (
-                                <img className={styles.employer_profile_image} src={process.env.REACT_APP_UPLOADS_PATH + employer.profile_image} alt={employer.company_name ? employer.company_name : employer.name} />
+                                <img className={styles.employer_profile_image} src={process.env.REACT_APP_UPLOADS_PATH + employer.profile_image} alt={employer.company_name ? employer.company_name : `${employer.first_name} ${employer.last_name}`} />
                             ) : (
-                                <img className={styles.employer_profile_image} src={user_image_placeholder} alt={employer.company_name ? employer.company_name : employer.name} />
+                                <img className={styles.employer_profile_image} src={user_image_placeholder} alt={employer.company_name ? employer.company_name : `${employer.first_name} ${employer.last_name}`} />
                             )}
                         </div>
                         <div className={styles.employer_profile_col}>
-                            <h1>{employer.company_name ? employer.company_name : employer.name}</h1>
+                            <h1>{employer.company_name ? employer.company_name : `${employer.first_name} ${employer.last_name}`}</h1>
 
                             {employer.company_size && <InfoBlock icon={company_size_icon} label={t('employer.company_size')} text={employer.company_size} />}
                             {employer.company_website && <InfoBlock icon={website_icon} label={t('employer.website')} text={employer.company_website} />}

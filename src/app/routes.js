@@ -49,8 +49,8 @@ function RoutesSetup() {
                 />
                 </Route>
                 <Route path="/" element={<DefaultLayout />} >
-                <Route path="employers/:id" element={<EmployerProfile />} />
-                <Route path="jobseekers/:id" element={<JobseekerProfile />} />
+                <Route path="employers/:slug" element={<EmployerProfile />} />
+                <Route path="jobseekers/:slug" element={<JobseekerProfile />} />
 
                 <Route path="profile/settings" element={
                     <ProtectedRoute userStatus="loggedIn">
@@ -86,7 +86,7 @@ function RoutesSetup() {
                 />
 
                 <Route path="jobs" element={<Jobs />} />
-                <Route path="jobs/:id" element={<Job />} />
+                <Route path="jobs/:slug" element={<Job />} />
 
                 <Route path="jobseekers" element={<Jobseekers />} />
 

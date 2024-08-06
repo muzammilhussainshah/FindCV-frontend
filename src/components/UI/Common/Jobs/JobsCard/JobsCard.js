@@ -87,7 +87,7 @@ function JobsCard({ disabled, job, ...props }) {
 
                 </div>
                 <div>
-                    <BubbleButton small to={`/jobs/${job.id}`}>{t('general.UI.view')}</BubbleButton>
+                    <BubbleButton small to={`/jobs/${job.slug}`}>{t('general.UI.view')}</BubbleButton>
                 </div>
             </div>
             <div className={styles.job_card_body}>
@@ -96,7 +96,7 @@ function JobsCard({ disabled, job, ...props }) {
                     {desc.length > 240 ? (
                         <>
                             <div dangerouslySetInnerHTML={{__html: desc.slice(0, 240) + '... '}}></div>
-                            <SimpleLink to={`/jobs/${job.id}`}>{t('general.UI.show_more')}</SimpleLink>
+                            <SimpleLink to={`/jobs/${job.slug}`}>{t('general.UI.show_more')}</SimpleLink>
                         </>
                     ) : (
                         <div dangerouslySetInnerHTML={{__html: desc}}></div>

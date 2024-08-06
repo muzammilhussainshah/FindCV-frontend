@@ -36,7 +36,7 @@ import play_icon from '../../assets/images/icons/play-white.svg';
 import close_icon from '../../assets/images/icons/close-white.svg';
 
 function Job() {
-    const { id } = useParams();
+    const { slug } = useParams();
     const { t } = useTranslation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -63,7 +63,7 @@ function Job() {
             setFormLoading(true);
 
             toast.promise(sendJobProposal({
-                    job_id: id, 
+                    job_id: job.id, 
                     token: userToken, 
                     proposal_text: values.proposal_text
                 }), {
@@ -74,7 +74,7 @@ function Job() {
                 },
             })
             .then((response) => {
-                dispatch(updateApplications([...user.applications, parseInt(id, 10)]));
+                dispatch(updateApplications([...user.applications, parseInt(job.id, 10)]));
                 setFormLoading(false);
                 setIsApplyPopupOpen(false);
             })
@@ -95,7 +95,7 @@ function Job() {
 
     useEffect(() => {
 
-        getJob(id)
+        getJob(slug)
             .then((response) => {
                 response.skills = response.skills.map(skill => {
                     return {
@@ -112,7 +112,7 @@ function Job() {
                 console.log(error);
             });
 
-    }, [id]);
+    }, [slug]);
 
     const handleBackClick = () => {
         navigate(-1);
@@ -136,11 +136,11 @@ function Job() {
 
     const handleAddToFavourites = () => {
         addJobToFavourites({
-            job_id: id, 
+            job_id: job.id, 
             token: userToken
         })
         .then((response) => {
-            dispatch(updateFavourites([...user.favourites, parseInt(id, 10)]));
+            dispatch(updateFavourites([...user.favourites, parseInt(job.id, 10)]));
             toast.success(t('job.job_added_to_favorites'));
         })
         .catch((error) => {
@@ -154,11 +154,11 @@ function Job() {
 
     const handleRemoveFromFavourites = () => {
         removeJobFromFavourites({
-            job_id: id, 
+            job_id: job.id, 
             token: userToken
         })
         .then((response) => {
-            dispatch(updateFavourites(user.favourites.filter(item => item !== parseInt(id, 10))));
+            dispatch(updateFavourites(user.favourites.filter(item => item !== parseInt(job.id, 10))));
             toast.success(t('job.job_removed_from_favorites'));
         })
         .catch((error) => {
@@ -172,7 +172,7 @@ function Job() {
 
     const handlePauseClick = () => {
         updateJobField({
-            job_id: id, 
+            job_id: job.id, 
             token: userToken,
             field: 'status',
             value: (job.status === 'paused' || job.status === 'closed') ? 'active' : 'paused'
@@ -194,7 +194,7 @@ function Job() {
 
     const handleCloseClick = () => {
         updateJobField({
-            job_id: id, 
+            job_id: job.id, 
             token: userToken,
             field: 'status',
             value: 'closed'
@@ -345,7 +345,7 @@ function Job() {
                                 </BubbleButton>
                             </div>
                             <div>
-                                {(user?.account_type !== 'employer' && !user?.applications?.includes(parseInt(id, 10))) && (
+                                {(user?.account_type !== 'employer' && !user?.applications?.includes(parseInt(job.id, 10))) && (
                                     <BubbleButton 
                                         onClick={handleApplyClick}
                                         type="default"
@@ -354,10 +354,10 @@ function Job() {
                                         {t('general.UI.apply')}
                                     </BubbleButton>
                                 )}
-                                {user?.applications?.includes(parseInt(id, 10)) && <strong style={{color: '#34A853'}}>{t('general.UI.applied')}</strong>}
+                                {user?.applications?.includes(parseInt(job.id, 10)) && <strong style={{color: '#34A853'}}>{t('general.UI.applied')}</strong>}
 
                                 {user?.account_type === 'jobseeker' && (
-                                    user?.favourites?.includes(parseInt(id, 10)) ? (
+                                    user?.favourites?.includes(parseInt(job.id, 10)) ? (
                                         <IconButton
                                             color="red"
                                             icon={star_icon}
@@ -375,12 +375,12 @@ function Job() {
 
                                 {user?.account_type === 'employer' && (
                                     
-                                    user?.jobs?.includes(parseInt(id, 10)) && (
+                                    user?.jobs?.includes(parseInt(job.id, 10)) && (
 
                                         <div className={styles.head_actions}>
                                             <IconButton
                                                 icon={pen_icon}
-                                                to={`/jobs/${id}/edit`}
+                                                to={`/jobs/${job.id}/edit`}
                                             ></IconButton>
                                             <IconButton
                                                 color={(job.status === 'paused' || job.status === 'closed') ? 'green' : 'yellow'}
@@ -411,7 +411,7 @@ function Job() {
                                 </div>
                                 <div>
                                     <h1>{job.title}</h1>
-                                    <p>{t('general.job_category.' + job.category)} - <LinkWrapper to={`/employers/${job.employer.id}`}>{job.employer.company_name ? job.employer.company_name : getTrimmedName(job.employer.name)}</LinkWrapper></p>
+                                    <p>{t('general.job_category.' + job.category)} - <LinkWrapper to={`/employers/${job.employer.id}`}>{job.employer.company_name ? job.employer.company_name : getTrimmedName(job.employer.first_name + ' ' + job.employer.last_name)}</LinkWrapper></p>
                                 </div>
                             </div>
 
@@ -429,7 +429,7 @@ function Job() {
                             <Subtitle dark>{t('job.required_skills')}</Subtitle>
                             <SkillsList skills={job.skills} />
 
-                            {(user?.account_type !== 'employer' && !user?.applications?.includes(parseInt(id, 10))) && (
+                            {(user?.account_type !== 'employer' && !user?.applications?.includes(parseInt(job.id, 10))) && (
                                 <div className={styles.job_apply}>
                                     <Button onClick={handleApplyClick} type="default">{t('general.UI.apply')}</Button>
                                 </div>
@@ -437,8 +437,8 @@ function Job() {
 
                         </div>
 
-                        {(user?.account_type === 'employer' && user?.jobs?.includes(parseInt(id, 10))) ? (
-                            <Applications job_id={id} />
+                        {(user?.account_type === 'employer' && user?.jobs?.includes(parseInt(job.id, 10))) ? (
+                            <Applications job_id={job.id} />
                         ) : (
                             <>
                                 <div className={`${styles.jobs_head} pagination_scroll_target`}>

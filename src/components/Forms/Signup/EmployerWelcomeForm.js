@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 
 import { fetchUserByToken } from '../../../app/features/userSlice';
 import { updateUser } from '../../../services/userService';
+import { useGetCities } from '../../../utils/utilityHooks';
 
 import FormField from '../../UI/FormUI/FormField/FormField';
 import FormOptionField from '../../UI/FormUI/FormOptionField/FormOptionField';
@@ -35,7 +36,8 @@ function EmployerWelcomeForm(props) {
 
     const formik = useFormik({
         initialValues: {
-            name: '',
+            first_name: '',
+            last_name: '',
             city: '',
             country: '',
             company_name: '',
@@ -43,7 +45,8 @@ function EmployerWelcomeForm(props) {
             employer_status: 'business'
         },
         validationSchema: Yup.object({
-            name: Yup.string().required(t('forms.welcome_employer.required')),
+            first_name: Yup.string().required(t('forms.welcome_employer.required')),
+            last_name: Yup.string().required(t('forms.welcome_employer.required')),
             city: Yup.string().required(t('forms.welcome_employer.required')),
             country: Yup.string().required(t('forms.welcome_employer.required')),
             company_name: Yup.string().when('employer_status', {
@@ -74,7 +77,8 @@ function EmployerWelcomeForm(props) {
 
             const formData = new FormData();
             formData.append('token', userToken);
-            formData.append('name', values.name);
+            formData.append('first_name', values.first_name);
+            formData.append('last_name', values.last_name);
             formData.append('city', values.city);
             formData.append('country', values.country);
             formData.append('nationality', values.nationality);
@@ -148,17 +152,30 @@ function EmployerWelcomeForm(props) {
         );
     }
 
+    const citiesOptions = useGetCities(formik.values.country);
+
     return (
         <form onSubmit={formik.handleSubmit} {...props}>
             <div>
                 <FormField 
-                    name="name" 
+                    name="first_name" 
                     type="text" 
-                    placeholder={t('forms.welcome_employer.name')}
+                    placeholder={t('forms.welcome_employer.first_name')}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.name}
-                    error={formik.touched.name && formik.errors.name}
+                    value={formik.values.first_name}
+                    error={formik.touched.first_name && formik.errors.first_name}
+                />
+            </div>
+            <div>
+                <FormField 
+                    name="last_name" 
+                    type="text" 
+                    placeholder={t('forms.welcome_employer.last_name')}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.last_name}
+                    error={formik.touched.last_name && formik.errors.last_name}
                 />
             </div>
             <div>
@@ -167,21 +184,24 @@ function EmployerWelcomeForm(props) {
                     type="country" 
                     placeholder={t('forms.welcome_employer.country')}
                     onFormikChange={formik.handleChange}
+                    options={['QA', 'AE', 'SA', 'BH', 'KW', 'OM']}
                     value={formik.values.country}
                     error={formik.touched.country && formik.errors.country}
                 />
             </div>
-            <div>
-                <FormField 
-                    name="city" 
-                    type="text" 
-                    placeholder={t('forms.welcome_employer.city')}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.city}
-                    error={formik.touched.city && formik.errors.city}
-                />
-            </div>
+            {formik.values.country &&
+                <div>
+                    <FormSelectField 
+                        name="city" 
+                        type="default"
+                        placeholder={t('forms.welcome_employer.city')}
+                        options={citiesOptions}
+                        onFormikChange={formik.handleChange}
+                        value={formik.values.city}
+                        error={formik.touched.city && formik.errors.city}
+                    />
+                </div>
+            }
             <div>
                 <FormOptionField
                     name="employer_status"

@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet';
 import Yup from '../../../utils/yupExtensions';
 import toast from 'react-hot-toast';
 
-import { updateJob, getJob } from '../../../services/jobService';
+import { updateJob, getJobByID } from '../../../services/jobService';
 import { useGetJobCategoriesHook, useGetCurrenciesHook, useGetCities } from '../../../utils/utilityHooks';
 
 import BasicPopup from '../../../components/UI/Popups/BasicPopup/BasicPopup';
@@ -131,7 +131,7 @@ function EditJob() {
             .then((response) => {
 
                 if (!id) {
-                    navigate('/jobs/' + response.job_id);
+                    navigate('/jobs/' + response.job_slug);
                 }
 
                 setFormLoading(false);
@@ -154,7 +154,7 @@ function EditJob() {
     useEffect(() => {
         if (id) {
 
-            getJob(id)
+            getJobByID(id)
                 .then((response) => {
                     delete response.id;
 
