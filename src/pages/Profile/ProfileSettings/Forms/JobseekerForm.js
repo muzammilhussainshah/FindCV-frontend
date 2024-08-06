@@ -90,6 +90,7 @@ function JobseekerForm({user}) {
             birthdate: user.birth_date,
             country: user.country,
             nationality: user.nationality,
+            working_title: user.working_title,
             password: '',
             password_repeat: '',
             profile_image: '',
@@ -158,6 +159,7 @@ function JobseekerForm({user}) {
                 formData.append('cv_ref_letter', values.cv_ref_letter);
             }
 
+            formData.append('working_title', values.working_title);
             formData.append('profile_visibility', values.profile_visibility);
             formData.append('gender', values.gender);
             formData.append('country', values.country);
@@ -461,6 +463,18 @@ function JobseekerForm({user}) {
                         />
                         
                         {!user.email_verified && <Notice warning>{t('edit_profile.job_seeker.email_notice')}</Notice>}
+                    </div>
+                    <div>
+                        <FormField 
+                            name="working_title" 
+                            type="text" 
+                            label={t('edit_profile.job_seeker.working_title')}
+                            hasBorder
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.working_title}
+                            error={formik.touched.working_title && formik.errors.working_title}
+                        />
                     </div>
                     <div>
                         <FormRichTextField

@@ -411,7 +411,7 @@ function Job() {
                                 </div>
                                 <div>
                                     <h1>{job.title}</h1>
-                                    <p>{t('general.job_category.' + job.category)} - <LinkWrapper to={`/employers/${job.employer.id}`}>{job.employer.company_name ? job.employer.company_name : getTrimmedName(job.employer.first_name + ' ' + job.employer.last_name)}</LinkWrapper></p>
+                                    <p>{t('general.job_category.' + job.category)} - <LinkWrapper to={`/employers/${job.employer.slug}`}>{job.employer.company_name ? job.employer.company_name : getTrimmedName(job.employer.first_name + ' ' + job.employer.last_name)}</LinkWrapper></p>
                                 </div>
                             </div>
 

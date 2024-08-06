@@ -134,8 +134,8 @@
     font-weight: 500;
 }
 
-.card.hidden .card_head + div > p + div,
-.card.hidden .card_head + div > p {
+.card.hidden .card_body > p + div,
+.card.hidden .card_body > p {
     filter: blur(8px);
     pointer-events: none;
     user-select: none;
@@ -160,6 +160,17 @@
     border-radius: 4px;
     height: 100%;
     width: 50%;
+}
+
+.working_title {
+    color: #fff;
+    font-weight: 400;
+    background-color: #093559;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 8px;
+    padding: 4px 10px;
+    margin-bottom: 15px;
 }
 
 :global(.fcv-rtl) .card_head + div {

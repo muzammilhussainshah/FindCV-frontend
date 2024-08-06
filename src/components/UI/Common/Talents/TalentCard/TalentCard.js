@@ -92,6 +92,8 @@ function TalentCard({ disabled, talent, ...props }) {
 
             </div>
 
+            {talent.working_title && <span className={styles.working_title}>{talent.working_title}</span>}
+
             <div className={styles.card_body}>
                 {talent.description && <p style={{fontWeight: 600, marginBottom: 10}}>{t('general.talent_card.about')} {talent.first_name} {talent.last_name}</p>}
 

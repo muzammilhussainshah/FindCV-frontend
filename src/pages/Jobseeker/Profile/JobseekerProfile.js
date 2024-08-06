@@ -68,7 +68,7 @@ function JobseekerProfile() {
 
                     response.age = new Date().getFullYear() - new Date(response.birth_date).getFullYear();
 
-                    if (user.user && ((user.slug === slug && user.user.account_type === 'jobseeker') || (user.user.account_type === 'employer' && user.user.active_subscription))) {
+                    if (user.user && ((user.user.slug === slug && user.user.account_type === 'jobseeker') || (user.user.account_type === 'employer' && user.user.active_subscription))) {
                         response.hidden = false;
                     }
                     else {
@@ -139,6 +139,7 @@ function JobseekerProfile() {
                             )}
 
                             <h2>{jobseeker.first_name} {jobseeker.last_name}</h2>
+                            <h5>{jobseeker.working_title}</h5>
 
                             <ul className={styles.jobseeker_profile_list}>
                                 <li>
@@ -173,6 +174,7 @@ function JobseekerProfile() {
                         </div>
                         <div className={styles.jobseeker_profile_col}>
                             <h1>{jobseeker.first_name} {jobseeker.last_name}</h1>
+                            <h5>{jobseeker.working_title}</h5>
                             <div className={styles.jobseeker_profile_desc}>
                                 {jobseeker.hidden && <p style={{marginBottom: 45}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>}
                                 {(!jobseeker.hidden && jobseeker.description) && <div style={{marginBottom: 45}} dangerouslySetInnerHTML={{__html: jobseeker.description}} />}

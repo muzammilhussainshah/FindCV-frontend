@@ -13,6 +13,20 @@
     display: none;
 }
 
+.jobseeker_profile_col:nth-child(1) h5,
+.jobseeker_profile_col:nth-child(2) h1 + h5 {
+    font-size: 14px;
+    color: #fff;
+    background-color: #093559;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
+.jobseeker_profile_col:nth-child(1) h5 {
+    display: none;
+}
+
 .jobseeker_profile_verified h1 {
     position: relative;
 }
@@ -135,7 +149,13 @@
     .jobseeker_profile_col:nth-child(1) h2 {
         display: block;
     }
+    .jobseeker_profile_col:nth-child(1) h5 {
+        display: inline-block;
+    }
     .jobseeker_profile_col:nth-child(2) h1 {
+        display: none;
+    }
+    .jobseeker_profile_col:nth-child(2) h1 + h5 {
         display: none;
     }
     .jobseeker_profile_image {

@@ -52,6 +52,7 @@
             "change_password_title": "Change Password",
             "email": "Email*",
             "email_notice": "A verification link has been sent to your email. Please check to verify email address.",
+            "working_title": "Working Title",
             "description": "Profile Description",
             "gender": "Gender*",
             "birthdate": "Birth Date*",
