@@ -23,9 +23,11 @@
         "updating_profile": "جارٍ تحديث الملف الشخصي...",
         "profile_updated": "تحديث الملف الشخصي!",
         "employer": {
+            "description": "وصف",
             "individual": "فردي",
             "business": "عمل",
             "company_name": "اسم الشركة*",
+            "company_description": "وصف الشركة",
             "company_website": "موقع الشركة",
             "company_industries": "صناعات الشركة",
             "company_size": "حجم الشركة",
@@ -1768,6 +1770,9 @@
             "web_design": "تصميم المواقع"
         },
         "UI": {
+            "online": "متصل",
+            "last_seen": "آخر ظهور",
+            "any": "أي",
             "add": "إضافة +",
             "try_again": "حاول مرة أخرى",
             "languages": "اللغات",

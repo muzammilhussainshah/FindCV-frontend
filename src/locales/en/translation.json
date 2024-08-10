@@ -23,9 +23,11 @@
         "updating_profile": "Updating profile...",
         "profile_updated": "Profile updated!",
         "employer": {
+            "description": "Description",
             "individual": "Individual",
             "business": "Business",
             "company_name": "Company Name*",
+            "company_description": "Company Description",
             "company_website": "Company Website",
             "company_industries": "Company Industries",
             "company_size": "Company Size",
@@ -1768,6 +1770,9 @@
             "web_design": "Web Design"
         },
         "UI": {
+            "online": "Online",
+            "last_seen": "Last Seen",
+            "any": "Any",
             "add": "ADD +",
             "try_again": "TRY AGAIN ->",
             "languages": "Languages",

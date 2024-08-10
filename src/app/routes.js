@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
+import TrackUserVisit from '../components/Other/TrackUserVisit';
+
 import SignupLayout from '../components/Layouts/signupLayout';
 import DefaultLayout from '../components/Layouts/defaultLayout';
 import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute';
@@ -24,6 +26,7 @@ import Jobseekers from '../pages/Jobseekers/Jobseekers';
 function RoutesSetup() {
     return (
         <Router>
+            <TrackUserVisit />
             <Toaster position="bottom-right" reverseOrder={false} />
             <Routes>
                 <Route path="/" element={<SignupLayout />} >

@@ -10,6 +10,7 @@ import { fetchUserByToken } from '../../../../app/features/userSlice';
 import { useGetCompanyIndustriesHook, useGetCities } from '../../../../utils/utilityHooks';
 
 import FormField from '../../../../components/UI/FormUI/FormField/FormField';
+import FormRichTextField from '../../../../components/UI/FormUI/FormRichTextField/FormRichTextField';
 import FormSelectField from '../../../../components/UI/FormUI/FormSelectField/FormSelectField';
 import FormOptionField from '../../../../components/UI/FormUI/FormOptionField/FormOptionField';
 import FormImageField from '../../../../components/UI/FormUI/FormImageField/FormImageField';
@@ -30,11 +31,13 @@ function EmployerForm({user}) {
         initialValues: {
             first_name: user.first_name,
             last_name: user.last_name,
+            description: user.description,
             email: user.email,
             country: user.country,
             city: user.city,
             employer_status: user.employer_status,
             company_name: user.company_name,
+            company_description: user.company_description,
             company_size: user.company_size,
             company_website: user.company_website,
             company_industries: user.company_industries ? user.company_industries.split(';').map(item => item.trim()) : [],
@@ -92,17 +95,21 @@ function EmployerForm({user}) {
 
             if (values.employer_status === 'individual') {
                 formData.append('nationality', values.nationality);
+                formData.append('description', values.description);
+                formData.append('company_description', '');
                 formData.append('company_name', '');
                 formData.append('company_size', '');
                 formData.append('company_website', '');
                 formData.append('company_industries', '');
             }
             else {
+                formData.append('company_description', values.company_description);
                 formData.append('company_name', values.company_name);
                 formData.append('company_size', values.company_size);
                 formData.append('company_website', values.company_website);
                 formData.append('company_industries', values.company_industries.join(';'));
                 formData.append('nationality', '');
+                formData.append('description', '');
             }
 
             if (values.password) {
@@ -173,6 +180,16 @@ function EmployerForm({user}) {
                     />
                 </div>
                 <div>
+                    <FormRichTextField
+                        name="company_description"
+                        label={t('edit_profile.employer.company_description')}
+                        hasBorder
+                        onFormikChange={formik.handleChange}
+                        value={formik.values.company_description}
+                        error={formik.touched.company_description && formik.errors.company_description}
+                    />
+                </div>
+                <div>
                     <FormField 
                         name="company_website" 
                         type="text" 
@@ -214,17 +231,29 @@ function EmployerForm({user}) {
     }
     else {
         conditionalFields = (
-            <div>
-                <FormSelectField
-                    name="nationality" 
-                    type="nationality" 
-                    label={t('edit_profile.employer.nationality')}
-                    hasBorder
-                    onFormikChange={formik.handleChange}
-                    value={formik.values.nationality}
-                    error={formik.touched.nationality && formik.errors.nationality}
-                />
-            </div>
+            <>
+                <div>
+                    <FormRichTextField
+                        name="description"
+                        label={t('edit_profile.employer.description')}
+                        hasBorder
+                        onFormikChange={formik.handleChange}
+                        value={formik.values.description}
+                        error={formik.touched.description && formik.errors.description}
+                    />
+                </div>
+                <div>
+                    <FormSelectField
+                        name="nationality" 
+                        type="nationality" 
+                        label={t('edit_profile.employer.nationality')}
+                        hasBorder
+                        onFormikChange={formik.handleChange}
+                        value={formik.values.nationality}
+                        error={formik.touched.nationality && formik.errors.nationality}
+                    />
+                </div>
+            </>
         );
     }
 

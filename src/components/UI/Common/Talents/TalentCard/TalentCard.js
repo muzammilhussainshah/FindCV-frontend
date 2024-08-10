@@ -1,10 +1,14 @@
 import { useState } from 'react';
-import LinkWrapper from '../../../../wrappers/LinkWrapper';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import LinkWrapper from '../../../../wrappers/LinkWrapper';
 import Flag from 'react-flags';
+
+import { getTimeAgo } from '../../../../../utils/formatHelpers';
 
 import LanguageLevelList from '../../LanguageLevel/LanguageLevelList/LanguageLevelList';
 import SkillsList from '../../Skills/SkillsList/SkillsList';
+import Button from '../../../Buttons/Button/Button';
 
 import styles from './TalentCard.module.css';
 
@@ -12,6 +16,7 @@ import user_image_placeholder from '../../../../../assets/images/other/user_imag
 
 function TalentCard({ disabled, talent, ...props }) {
     const { t } = useTranslation();
+    const user = useSelector(state => state.user.user);
 
     const [showMore, setShowMore] = useState(false);
 
@@ -46,6 +51,22 @@ function TalentCard({ disabled, talent, ...props }) {
         default:
             logic_test_bar_color = '#EA4335';
             break;
+    }
+
+    let last_seen = '';
+    let is_online = false;
+    const date_info = getTimeAgo(new Date(talent.last_visit));
+
+    if (date_info.unit_plural !== 'month' && date_info.unit_plural !== 'months' && date_info.unit_plural !== 'year' && date_info.unit_plural !== 'years') {
+
+        if (date_info.unit_plural === 'second' || date_info.unit_plural === 'seconds' || date_info.unit_plural === 'minute' || (date_info.unit_plural === 'minutes' && date_info.count < 5)) {
+            last_seen = t('general.UI.online');
+            is_online = true;
+        }
+        else {
+            last_seen = t('general.UI.last_seen') + ' ' + date_info.count + ' ' + t('general.UI.' + date_info.unit_plural) + ' ' + t('general.UI.ago');
+        }
+        
     }
 
     return (
@@ -92,6 +113,8 @@ function TalentCard({ disabled, talent, ...props }) {
 
             </div>
 
+            {last_seen && <span className={`${styles.last_seen} ${is_online && styles.online}`}>{last_seen}</span>}
+
             {talent.working_title && <span className={styles.working_title}>{talent.working_title}</span>}
 
             <div className={styles.card_body}>
@@ -126,6 +149,9 @@ function TalentCard({ disabled, talent, ...props }) {
                     )
 
                 )}
+
+                {(talent.hidden && user) && <Button className={styles.access_button} to="/profile/subscription">{t('job_seeker.upgrade_subscription_plan')}</Button>}
+                {(talent.hidden && !user) && <Button className={styles.access_button} to="/login">{t('job_seeker.create_account_for_access')}</Button>}
 
                 <button
                     onClick={() => setShowMore(!showMore)}

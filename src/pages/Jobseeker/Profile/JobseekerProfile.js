@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet';
 
 import { getUser } from '../../../services/userService';
+import { getTimeAgo } from '../../../utils/formatHelpers';
 
 import WorkExperienceList from '../../../components/UI/Common/WorkExperience/WorkExperienceList/WorkExperienceList';
 import LanguageLevelList from '../../../components/UI/Common/LanguageLevel/LanguageLevelList/LanguageLevelList';
@@ -103,6 +104,8 @@ function JobseekerProfile() {
 
     let containerClasses = [styles.jobseeker_profile];
     let blurredBoxClasses = [];
+    let last_seen = '';
+    let is_online = false;
 
     if (jobseeker) {
         if (jobseeker.verification_status) {
@@ -113,6 +116,21 @@ function JobseekerProfile() {
             containerClasses.push(styles.jobseeker_profile_hidden);
             blurredBoxClasses.push(styles.blurred);
         }
+
+        const date_info = getTimeAgo(new Date(jobseeker.last_visit));
+
+        if (date_info.unit_plural !== 'month' && date_info.unit_plural !== 'months' && date_info.unit_plural !== 'year' && date_info.unit_plural !== 'years') {
+
+            if (date_info.unit_plural === 'second' || date_info.unit_plural === 'seconds' || date_info.unit_plural === 'minute' || (date_info.unit_plural === 'minutes' && date_info.count < 5)) {
+                last_seen = t('general.UI.online');
+                is_online = true;
+            }
+            else {
+                last_seen = t('general.UI.last_seen') + ' ' + date_info.count + ' ' + t('general.UI.' + date_info.unit_plural) + ' ' + t('general.UI.ago');
+            }
+
+        }
+
     }
 
     return (
@@ -132,11 +150,15 @@ function JobseekerProfile() {
 
                     <div className={containerClasses.join(' ')}>
                         <div className={styles.jobseeker_profile_col}>
-                            {jobseeker.profile_image ? (
-                                <img className={styles.jobseeker_profile_image} src={process.env.REACT_APP_UPLOADS_PATH + jobseeker.profile_image} alt={`${jobseeker.first_name} ${jobseeker.last_name}`} style={{marginBottom: 10}} />
-                            ) : (
-                                <img className={styles.jobseeker_profile_image} src={user_image_placeholder} alt={`${jobseeker.first_name} ${jobseeker.last_name}`} style={{marginBottom: 10}} />
-                            )}
+                            <div className={styles.jobseeker_profile_image_wrapper}>
+                                {jobseeker.profile_image ? (
+                                    <img className={styles.jobseeker_profile_image} src={process.env.REACT_APP_UPLOADS_PATH + jobseeker.profile_image} alt={`${jobseeker.first_name} ${jobseeker.last_name}`} style={{marginBottom: 10}} />
+                                ) : (
+                                    <img className={styles.jobseeker_profile_image} src={user_image_placeholder} alt={`${jobseeker.first_name} ${jobseeker.last_name}`} style={{marginBottom: 10}} />
+                                )}
+
+                                {last_seen && <span className={is_online && styles.online}>{last_seen}</span>}
+                            </div>
 
                             <h2>{jobseeker.first_name} {jobseeker.last_name}</h2>
                             <h5>{jobseeker.working_title}</h5>

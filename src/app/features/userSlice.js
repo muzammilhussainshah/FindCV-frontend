@@ -20,6 +20,19 @@ export const fetchUserByToken = createAsyncThunk(
   }
 );
 
+export const userUpdateLastVisit = createAsyncThunk(
+  'user/userUpdateLastVisit',
+  async (token, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}user/updateLastVisit`, {token});
+      return response.data;
+    }
+    catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const userReducer = createSlice({
   name: 'user',
   initialState,

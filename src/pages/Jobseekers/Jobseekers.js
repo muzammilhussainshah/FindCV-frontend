@@ -22,7 +22,7 @@ function Jobseekers() {
     let initialTalentLanguage = query.getAll('language') || [];
     let initialTalentNationality = query.getAll('nationality') || [];
     let initialTalentEducation = query.getAll('education') || [];
-    let initialTalentGender = query.get('gender') || 'male';
+    let initialTalentGender = query.get('gender') || 'any';
     let initialTalentSearch = query.get('search') || '';
 
     if (initialTalentCountry.length) {
@@ -79,6 +79,7 @@ function Jobseekers() {
     }, 700);
 
     const genderOptions = [
+        { value: 'any', label: t('general.UI.any') },
         { value: 'male', label: t('forms.welcome_job_seeker.step_1.male') },
         { value: 'female', label: t('forms.welcome_job_seeker.step_1.female') }
     ];
@@ -195,7 +196,7 @@ function Jobseekers() {
                             <div>
                                 <FormRangeField
                                     name="filter_experience"
-                                    label={t('talents.experience')}
+                                    label={(talentExperience[0] > 0 || talentExperience[1] < 50) ? `${t('talents.experience')}: ${talentExperience[0]}-${talentExperience[1]}` : t('talents.experience')}
                                     type="radio"
                                     dark
                                     min={0}

@@ -57,6 +57,10 @@
     width: calc(100% - 300px - 50px);
 }
 
+.jobseeker_profile_image_wrapper {
+    position: relative;
+}
+
 .jobseeker_profile_image {
     width: 100%;
     object-fit: cover;
@@ -64,6 +68,37 @@
     border-radius: 15px;
     pointer-events: none;
     border: 2px solid #093559;
+}
+
+.jobseeker_profile_image_wrapper span {
+    position: absolute;
+    bottom: 3px;
+    right: 20px;
+    background-color: #09AEEF;
+    display: inline-block;
+    color: #fff;
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 14px;
+    z-index: 2;
+}
+
+.jobseeker_profile_image_wrapper span:before {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background-color: #09AEEF;
+    opacity: 0.3;
+    z-index: -1;
+    border-radius: 6px;
+    content: '';
+}
+
+.jobseeker_profile_image_wrapper span.online,
+.jobseeker_profile_image_wrapper span.online:before {
+    background-color: #34A853;
 }
 
 .jobseeker_profile_skills_placeholder {

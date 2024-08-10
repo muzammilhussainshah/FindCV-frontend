@@ -26,6 +26,7 @@ function Talents({ per_page, max_pages, hide_url_params = false, filters = {}, o
     const [page, setPage] = useState(initialPage);
     const [filtersList, setFiltersList] = useState(filters);
     const [totalPages, setTotalPages] = useState(0);
+    const [count, setCount] = useState(0);
     const [talents, setTalents] = useState([]);
 
     const updateURL = useCallback((params) => {
@@ -52,7 +53,7 @@ function Talents({ per_page, max_pages, hide_url_params = false, filters = {}, o
     useEffect(() => {
         getTalentsList(page, per_page, max_pages, filters)
             .then((response) => {
-                console.log(response);
+                // console.log(response);
 
                 setTalents(response.talents.map((talent) => {
 
@@ -88,6 +89,9 @@ function Talents({ per_page, max_pages, hide_url_params = false, filters = {}, o
                     return talent;
                 }));
 
+                // console.log(response);
+
+                setCount(response.total);
                 setTotalPages(response.totalPages);
                 setLoading(false);
                 setPaginationLoading(false);
@@ -122,6 +126,8 @@ function Talents({ per_page, max_pages, hide_url_params = false, filters = {}, o
             {loading && (Array.from({ length: per_page }, (_, index) => {
                 return <BlockLoader key={index} height={280} marginBottom={20} />;
             }))}
+
+            {count === 0 && !loading && <div className={styles.no_results}>No candidates found</div>}
 
             {totalPages > 0 && <Pagination totalPages={totalPages} currentPage={page} onPageChange={handlePageChange} />}
         </div>

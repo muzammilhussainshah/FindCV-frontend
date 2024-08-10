@@ -6,7 +6,7 @@
 .default_layout .content {
     min-height: 100vh;
     position: relative;
-    z-index: 2;
+    z-index: 3;
 }
 
 .default_layout :global(.fcv-row) {

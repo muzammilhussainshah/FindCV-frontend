@@ -82,6 +82,14 @@ function EmployerProfile() {
                             {employer.nationality && <InfoBlock icon={nationality_icon} label={t('employer.nationality')} text={t('general.nationality.' + employer.nationality)} />}
                             <InfoBlock icon={location_icon} label={t('employer.location')} text={`${t('general.country.' + employer.country)}, ${city}`} style={{marginBottom: 30}} />
 
+                            {(employer.description || employer.company_description) && (
+                                <>
+                                    <strong style={{marginBottom: 10, display: 'block'}}>About {employer.company_name ? employer.company_name : `${employer.first_name} ${employer.last_name}`}</strong>
+                                    {employer.description && <div style={{marginBottom: 30}} dangerouslySetInnerHTML={{__html: employer.description}} />}
+                                    {employer.company_description && <div style={{marginBottom: 30}} dangerouslySetInnerHTML={{__html: employer.company_description}} />}
+                                </>
+                            )}
+
                             <h4 className='pagination_scroll_target'>{t('employer.jobs')}</h4>
                             <JobsList 
                                 per_page={5}
