@@ -29,7 +29,7 @@ function SignupLayout() {
                         <div className={styles.row + ' fcv-row'}>
                             <div className={styles.col}>
                                 <main>
-                          asdasd
+                                    <Outlet />
                                 </main>
                             </div>
                             <div className={styles.col}>
