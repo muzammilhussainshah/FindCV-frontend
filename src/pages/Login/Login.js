@@ -12,37 +12,44 @@ import { useGetQueryParam } from '../../utils/utilityHooks';
 import { fetchUserByToken } from '../../app/features/userSlice';
 
 import styles from './Login.module.css';
+import SocialButton from '../../components/UI/Buttons/SocialButton/SocialButton';
 
 function Login() {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const emailToken = useGetQueryParam('token');
-    
+
     const verifyEmailToken = useCallback((emailToken) => {
         toast.promise(userVerifyEmail(false, emailToken), {
             loading: t('general.UI.loading'),
             success: t('general.UI.success'),
             error: t('general.UI.something_went_wrong'),
         })
-        .then((data) => {
-            
-            if (data?.token) {
-                dispatch(fetchUserByToken(data.token));
-            }
+            .then((data) => {
 
-        })
-        .catch((error) => {
-            toast.error(error.error);
-        });
+                if (data?.token) {
+                    dispatch(fetchUserByToken(data.token));
+                }
+
+            })
+            .catch((error) => {
+                toast.error(error.error);
+            });
     }, [dispatch, t]);
 
     useEffect(() => {
-        
+
         if (emailToken) {
             verifyEmailToken(emailToken);
         }
 
     }, [verifyEmailToken, emailToken]);
+
+
+    const responseFacebook = (response) => {
+        console.log(response);
+    }
+
 
     return (
         <>
@@ -51,11 +58,12 @@ function Login() {
             </Helmet>
             <h1>{t('login.sign_in')}</h1>
             <LoginForm className={styles.form} />
+            <SocialButton type={'facebook'} callBack={responseFacebook} />
             <SimpleLink className={`white ${styles.link}`} to="/create-account">{t('login.create_account')}</SimpleLink>
             <br />
             <SimpleLink className={`white ${styles.link}`} to="/reset-password">{t('login.forgot_password')}</SimpleLink>
         </>
     );
 }
-    
+
 export default Login;

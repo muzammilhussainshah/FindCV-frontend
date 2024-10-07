@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserByToken } from '../../../app/features/userSlice';
 import { useFormik } from 'formik';
-import Yup from '../../../utils/yupExtensions'; 
+import Yup from '../../../utils/yupExtensions';
 import toast from 'react-hot-toast';
 
 import FormField from '../../UI/FormUI/FormField/FormField';
@@ -22,7 +22,7 @@ function LoginForm(props) {
 
     useEffect(() => {
         if (user) {
-            
+
             if (user.registration_process === 'completed') {
                 navigate('/' + user.account_type + 's/' + user.slug);
             }
@@ -58,34 +58,33 @@ function LoginForm(props) {
                     return <b>{err.response.data.error}</b>;
                 },
             })
-            .then((response) => {
-                dispatch(fetchUserByToken(response));
-            })
-            .then(() => {
-                setFormLoading(false);
-            })
-            .catch((error) => {
-                
-                if (error?.response?.data?.field) {
-                    formik.setErrors({
-                        [error.response.data.field]: error.response.data.error
-                    });
-                }
+                .then((response) => {
+                    dispatch(fetchUserByToken(response));
+                })
+                .then(() => {
+                    setFormLoading(false);
+                })
+                .catch((error) => {
 
-                setFormLoading(false);
+                    if (error?.response?.data?.field) {
+                        formik.setErrors({
+                            [error.response.data.field]: error.response.data.error
+                        });
+                    }
 
-            });
+                    setFormLoading(false);
 
+                });
         },
     });
 
     return (
         <form onSubmit={formik.handleSubmit} {...props}>
             <div>
-                <FormField 
-                    name="email" 
-                    type="email" 
-                    placeholder={t('forms.login.email')} 
+                <FormField
+                    name="email"
+                    type="email"
+                    placeholder={t('forms.login.email')}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.email}
@@ -93,10 +92,10 @@ function LoginForm(props) {
                 />
             </div>
             <div>
-                <FormField 
-                    name="password" 
-                    type="password" 
-                    placeholder={t('forms.login.password')} 
+                <FormField
+                    name="password"
+                    type="password"
+                    placeholder={t('forms.login.password')}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.password}
