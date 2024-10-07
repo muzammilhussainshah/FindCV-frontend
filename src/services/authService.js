@@ -77,6 +77,6 @@ export const facebookLogin = async (data) => {
         }
         return response.data.token;
     } catch (error) {
-        console.log(error, 'error')
+        // console.log(error, 'facebookLogin error')
     }
 };
