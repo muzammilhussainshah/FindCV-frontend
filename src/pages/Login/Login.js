@@ -13,7 +13,6 @@ import { fetchUserByToken } from '../../app/features/userSlice';
 
 import styles from './Login.module.css';
 import SocialButton from '../../components/UI/Buttons/SocialButton/SocialButton';
-
 function Login() {
     const { t } = useTranslation();
     const dispatch = useDispatch();
@@ -46,9 +45,7 @@ function Login() {
     }, [verifyEmailToken, emailToken]);
 
 
-    const responseFacebook = (response) => {
-        console.log(response);
-    }
+
 
 
     return (
@@ -58,7 +55,7 @@ function Login() {
             </Helmet>
             <h1>{t('login.sign_in')}</h1>
             <LoginForm className={styles.form} />
-            <SocialButton type={'facebook'} callBack={responseFacebook} />
+            <SocialButton type={'facebook'} />
             <SimpleLink className={`white ${styles.link}`} to="/create-account">{t('login.create_account')}</SimpleLink>
             <br />
             <SimpleLink className={`white ${styles.link}`} to="/reset-password">{t('login.forgot_password')}</SimpleLink>

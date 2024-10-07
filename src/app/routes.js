@@ -30,68 +30,68 @@ function RoutesSetup() {
             <Toaster position="bottom-right" reverseOrder={false} />
             <Routes>
                 <Route path="/" element={<SignupLayout />} >
-                <Route path="login" element={
-                    <ProtectedRoute userStatus="notLoggedIn">
-                    <Login />
-                    </ProtectedRoute>} 
-                />
-                <Route path="reset-password" element={
-                    <ProtectedRoute userStatus="notLoggedIn">
-                    <ResetPassword />
-                    </ProtectedRoute>} 
-                />
-                <Route path="create-account" element={
-                    <ProtectedRoute userStatus="notLoggedIn">
-                    <CreateAccount />
-                    </ProtectedRoute>} 
-                />
-                <Route path="welcome" element={
-                    <ProtectedRoute userStatus="loggedIn">
-                    <Welcome />
-                    </ProtectedRoute>} 
-                />
+                    <Route path="login" element={
+                        <ProtectedRoute userStatus="notLoggedIn">
+                            <Login />
+                        </ProtectedRoute>}
+                    />
+                    <Route path="reset-password" element={
+                        <ProtectedRoute userStatus="notLoggedIn">
+                            <ResetPassword />
+                        </ProtectedRoute>}
+                    />
+                    <Route path="create-account" element={
+                        <ProtectedRoute userStatus="notLoggedIn">
+                            <CreateAccount />
+                        </ProtectedRoute>}
+                    />
+                    <Route path="welcome" element={
+                        <ProtectedRoute userStatus="loggedIn">
+                            <Welcome />
+                        </ProtectedRoute>}
+                    />
                 </Route>
                 <Route path="/" element={<DefaultLayout />} >
-                <Route path="employers/:slug" element={<EmployerProfile />} />
-                <Route path="jobseekers/:slug" element={<JobseekerProfile />} />
+                    <Route path="employers/:slug" element={<EmployerProfile />} />
+                    <Route path="jobseekers/:slug" element={<JobseekerProfile />} />
 
-                <Route path="profile/settings" element={
-                    <ProtectedRoute userStatus="loggedIn">
-                    <ProfileSettings />
-                    </ProtectedRoute>} 
-                />
-                <Route path="profile/subscription" element={
-                    <ProtectedRoute userStatus="loggedIn" userRole="employer">
-                    <ProfileEmployerSubscription />
-                    </ProtectedRoute>} 
-                />
-                <Route path="profile/my-jobs" element={
-                    <ProtectedRoute userStatus="loggedIn" userRole="employer">
-                    <MyJobs />
-                    </ProtectedRoute>} 
-                />
+                    <Route path="profile/settings" element={
+                        <ProtectedRoute userStatus="loggedIn">
+                            <ProfileSettings />
+                        </ProtectedRoute>}
+                    />
+                    <Route path="profile/subscription" element={
+                        <ProtectedRoute userStatus="loggedIn" userRole="employer">
+                            <ProfileEmployerSubscription />
+                        </ProtectedRoute>}
+                    />
+                    <Route path="profile/my-jobs" element={
+                        <ProtectedRoute userStatus="loggedIn" userRole="employer">
+                            <MyJobs />
+                        </ProtectedRoute>}
+                    />
 
-                <Route path="create-job" element={
-                    <ProtectedRoute userStatus="loggedIn" userRole="employer">
-                    <ManageJob />
-                    </ProtectedRoute>} 
-                />
-                <Route path="jobs/:id/edit" element={
-                    <ProtectedRoute userStatus="loggedIn" userRole="employer">
-                    <ManageJob />
-                    </ProtectedRoute>} 
-                />
+                    <Route path="create-job" element={
+                        <ProtectedRoute userStatus="loggedIn" userRole="employer">
+                            <ManageJob />
+                        </ProtectedRoute>}
+                    />
+                    <Route path="jobs/:id/edit" element={
+                        <ProtectedRoute userStatus="loggedIn" userRole="employer">
+                            <ManageJob />
+                        </ProtectedRoute>}
+                    />
 
-                <Route path="jobs/saved" element={
-                    <ProtectedRoute userStatus="loggedIn" userRole="jobseeker">
-                    <MyJobs />
-                    </ProtectedRoute>} 
-                />
+                    <Route path="jobs/saved" element={
+                        <ProtectedRoute userStatus="loggedIn" userRole="jobseeker">
+                            <MyJobs />
+                        </ProtectedRoute>}
+                    />
 
-                <Route path="jobs" element={<Jobs />} />
-                <Route path="jobs/:slug" element={<Job />} />
+                    <Route path="jobs" element={<Jobs />} />
+                    <Route path="jobs/:slug" element={<Job />} />
 
-                <Route path="jobseekers" element={<Jobseekers />} />
+                    <Route path="jobseekers" element={<Jobseekers />} />
 
                 </Route>
             </Routes>

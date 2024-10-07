@@ -59,7 +59,7 @@ function LoginForm(props) {
                 },
             })
                 .then((response) => {
-                    dispatch(fetchUserByToken(response));
+                     dispatch(fetchUserByToken(response));
                 })
                 .then(() => {
                     setFormLoading(false);
