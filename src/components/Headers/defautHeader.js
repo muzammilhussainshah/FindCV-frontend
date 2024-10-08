@@ -22,7 +22,7 @@ function DefaultHeader() {
     const user = useSelector((state) => state.user.user);
     const [isOpenDropdown, setIsOpenDropdown] = useState(false);
     const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
-    
+
     let displayName = '';
     let menuItems = <>
         <SimpleLink href="https://findcv.com/">{t('defaultHeader.home')}</SimpleLink>
@@ -30,7 +30,7 @@ function DefaultHeader() {
         <SimpleLink href="https://findcv.com/for-jobseekers/">{t('defaultHeader.for_job_seekers')}</SimpleLink>
         <SimpleLink href="https://findcv.com/about/">{t('defaultHeader.about')}</SimpleLink>
     </>;
-    
+
 
     let triggerClass = styles.trigger;
     let mobileMenuClass = styles.mobile_menu;
@@ -41,7 +41,7 @@ function DefaultHeader() {
     }
 
     if (user) {
-        
+
         if (user.account_type === 'employer') {
 
             if (user.employer_status === 'business') {
@@ -71,11 +71,14 @@ function DefaultHeader() {
     }
 
     const handleLogout = () => {
+        if (window?.FB?.logout) {
+            window.FB.logout(() => { });
+        }
         dispatch(logoutUser());
         dispatch(setShowLogoutButton(false));
         navigate('/login');
     }
-    
+
     return (
         <header className={styles.header}>
             <div className="fcv-content">
@@ -84,7 +87,7 @@ function DefaultHeader() {
                         <a href="https://findcv.com">
                             <img src={logoImage} alt="FindCV logo" />
                         </a>
-                        
+
                         <nav>{menuItems}</nav>
 
                         <div className={styles.buttons}>
@@ -111,7 +114,7 @@ function DefaultHeader() {
                                 </>
 
                             )}
-                            
+
                         </div>
 
                     </div>

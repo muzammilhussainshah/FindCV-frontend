@@ -68,15 +68,25 @@ export const submitPasswordReset = async (passwordToken, password) => {
 
 export const facebookLogin = async (data) => {
     try {
-        // const response = await axios.post(`${process.env.REACT_APP_API_URL}auth/signup`, { email, password, account_type });
-
-        const response = await axios.post(`${process.env.REACT_APP_API_URL}auth/facebookAuth`, { accountType: "employer", accessToken: data.accessToken });
-        if (response.data) {
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}auth/facebookSignin`, { accessToken: data.accessToken });
+        console.log(response, 'response')
+        if (response.data.token) {
             // save token
+            setItemWithExpiration('findcv_user', response.data.token, 3600000 * 24); // 1 hour
+        }
+        return response.data;
+    } catch (error) {
+        // console.log(error, 'facebookLogin error')
+    }
+};
+export const facebookSignup = async (data) => {
+    try {
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}auth/facebookSignup`, { accountType: "employer", accessToken: data.accessToken });
+        if (response.data.token) {
             setItemWithExpiration('findcv_user', response.data.token, 3600000 * 24); // 1 hour
         }
         return response.data.token;
     } catch (error) {
-        // console.log(error, 'facebookLogin error')
+        console.log(error, 'facebookSignup error')
     }
 };

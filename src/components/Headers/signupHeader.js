@@ -20,10 +20,14 @@ function SignupHeader() {
 
     const handleLogout = () => {
         dispatch(logoutUser());
+        if (window?.FB?.logout) {
+            window.FB.logout(() => { });
+        }
+
         dispatch(setShowLogoutButton(false));
         navigate('/login');
     };
-    
+
     return (
         <header className={styles.header}>
             <div className="fcv-content">
@@ -33,23 +37,23 @@ function SignupHeader() {
                     </div>
                     <div className={styles.col}>
                         <LanguageSwitch />
-                        {backButtonLink && <BubbleButton 
-                                                icon={'arrow-back'} 
-                                                icon_position={'left'} 
-                                                iconOnlyOnMobile
-                                                to={backButtonLink} 
-                                                style={{ marginLeft: 20 }}>
-                                                    {t('signupHeader.back')}
-                                            </BubbleButton>}
-                        {showLogoutButton && <BubbleButton 
-                                                icon={'logout-white'}
-                                                icon_position={'left'}
-                                                iconOnlyOnMobile
-                                                onClick={handleLogout} 
-                                                style={{ marginLeft: 20 }}
-                                            >
-                                                {t('signupHeader.logout')}
-                                            </BubbleButton>}
+                        {backButtonLink && <BubbleButton
+                            icon={'arrow-back'}
+                            icon_position={'left'}
+                            iconOnlyOnMobile
+                            to={backButtonLink}
+                            style={{ marginLeft: 20 }}>
+                            {t('signupHeader.back')}
+                        </BubbleButton>}
+                        {showLogoutButton && <BubbleButton
+                            icon={'logout-white'}
+                            icon_position={'left'}
+                            iconOnlyOnMobile
+                            onClick={handleLogout}
+                            style={{ marginLeft: 20 }}
+                        >
+                            {t('signupHeader.logout')}
+                        </BubbleButton>}
                     </div>
                 </div>
             </div>
