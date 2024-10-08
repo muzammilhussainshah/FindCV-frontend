@@ -40,7 +40,7 @@ export const userReducer = createSlice({
     logoutUser: (state) => {
       state.token = null;
       state.user = null;
-      delete state.fbUser
+      delete state.userData
       localStorage.removeItem('findcv_user');
     },
     setLoading: (state, action) => {
@@ -53,8 +53,7 @@ export const userReducer = createSlice({
       state.user.favourites = action.payload;
     },
     setUser: (state, action) => {
-      console.log(action.payload, 'state setUser')
-      state.fbUser = action.payload;
+       state.userData = action.payload;
       // Set user and token data directly from the Facebook login response
     }
   },

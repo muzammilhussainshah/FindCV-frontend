@@ -11,11 +11,30 @@
      width: 40px;
  }
 
+ .googleButtonContainer {
+     border-radius: 50%;
+     background-color: white;
+     height: 40px;
+     overflow: hidden;
+     border-width: 0px;
+     display: flex;
+     justify-content: center;
+     cursor: pointer;
+     align-items: center;
+     width: 40px;
+ }
+
  .fbButtonContainerStyle {
      display: flex;
-     gap: 15px;
+     gap: 20px;
      align-self: center;
      justify-content: center;
      align-items: center;
      margin-bottom: 20px;
+ }
+
+ .googleIcon {
+     height: 15px;
+     width: 15px;
+     background-color: red;
  }

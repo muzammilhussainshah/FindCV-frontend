@@ -55,7 +55,7 @@ function Login() {
             </Helmet>
             <h1>{t('login.sign_in')}</h1>
             <LoginForm className={styles.form} />
-            <SocialButton type={'facebook'} />
+            <SocialButton />
             <SimpleLink className={`white ${styles.link}`} to="/create-account">{t('login.create_account')}</SimpleLink>
             <br />
             <SimpleLink className={`white ${styles.link}`} to="/reset-password">{t('login.forgot_password')}</SimpleLink>

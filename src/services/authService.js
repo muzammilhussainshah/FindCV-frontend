@@ -66,27 +66,37 @@ export const submitPasswordReset = async (passwordToken, password) => {
     }
 };
 
-export const facebookLogin = async (data) => {
+export const socialLogin = async (data, socialAccType) => {
     try {
-        const response = await axios.post(`${process.env.REACT_APP_API_URL}auth/facebookSignin`, { accessToken: data.accessToken });
-        console.log(response, 'response')
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}auth/socialSignin`, {
+            socialAccType: socialAccType,
+            accessToken: socialAccType === 'facebook' ? data.accessToken : data.access_token
+        });
+        console.log(response, 'socialLogin')
         if (response.data.token) {
             // save token
             setItemWithExpiration('findcv_user', response.data.token, 3600000 * 24); // 1 hour
         }
         return response.data;
     } catch (error) {
-        // console.log(error, 'facebookLogin error')
+        console.log(error, 'socialLogin error')
     }
 };
-export const facebookSignup = async (data) => {
+
+export const socialSignup = async (data, socialAccType, account_type) => {
     try {
-        const response = await axios.post(`${process.env.REACT_APP_API_URL}auth/facebookSignup`, { accountType: "employer", accessToken: data.accessToken });
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}auth/socialSignup`, {
+            socialAccType: socialAccType,
+            accountType: account_type,
+            accessToken: socialAccType === 'facebook' ? data.accessToken : data.access_token
+
+        });
+        console.log(response, 'socialSignup')
         if (response.data.token) {
             setItemWithExpiration('findcv_user', response.data.token, 3600000 * 24); // 1 hour
         }
         return response.data.token;
     } catch (error) {
-        console.log(error, 'facebookSignup error')
+        console.log(error, 'socialSignup error')
     }
 };

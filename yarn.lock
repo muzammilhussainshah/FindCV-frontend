@@ -7192,6 +7192,7 @@ __metadata:
     react-dom: ^18.3.1
     react-facebook-login: ^4.1.1
     react-flags: ^0.1.18
+    react-google-login: ^5.2.2
     react-helmet: ^6.1.0
     react-hot-toast: ^2.4.1
     react-i18next: ^14.1.0
@@ -11912,6 +11913,19 @@ __metadata:
   peerDependencies:
     react: 0.13 - 16.x
   checksum: 929e69fac9499400c2b3f17482d82e9c5fa39ca020b54d2b5699cdf32f066b6c560cc666f1a10cffe21c7a46b3acafcc5d943ba8e3d5fe0ff9f264968669e41d
+  languageName: node
+  linkType: hard
+
+"react-google-login@npm:^5.2.2":
+  version: 5.2.2
+  resolution: "react-google-login@npm:5.2.2"
+  dependencies:
+    "@types/react": "*"
+    prop-types: ^15.6.0
+  peerDependencies:
+    react: ^16 || ^17
+    react-dom: ^16 || ^17
+  checksum: 29199c7035c3c1070a82241dc4063628d693f35a1736d292e3db736e52da825e8a53f9287b0b12b08a50d676973ce1349a4d8243cd849ca25fed6a4284378880
   languageName: node
   linkType: hard
 

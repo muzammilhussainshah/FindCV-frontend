@@ -1,49 +1,50 @@
-import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserByToken } from '../../../app/features/userSlice';
-import { useFormik } from 'formik';
-import Yup from '../../../utils/yupExtensions';
-import toast from 'react-hot-toast';
 
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+
+import Yup from '../../../utils/yupExtensions';
+import Button from '../../UI/Buttons/Button/Button';
 import FormField from '../../UI/FormUI/FormField/FormField';
 import FormOptionField from '../../UI/FormUI/FormOptionField/FormOptionField';
-import Button from '../../UI/Buttons/Button/Button';
-
-import { facebookSignup, signup } from '../../../services/authService';
+import { useFormik } from 'formik';
+import { socialSignup, signup } from '../../../services/authService';
+import { fetchUserByToken, setUser } from '../../../app/features/userSlice';
 
 function CreateAccountForm(props) {
     const { t } = useTranslation();
     const dispatch = useDispatch();
 
-    const fbUser = useSelector((state) => state.user.fbUser);
+    const userData = useSelector((state) => state.user.userData);
     const user = useSelector((state) => state.user.user);
     const [formLoading, setFormLoading] = useState(false);
-
     const navigate = useNavigate();
 
     useEffect(() => {
         if (user) {
             navigate('/welcome');
         }
-    }, [navigate, user]);
-
-
+        return () => {
+            dispatch(setUser(null));
+        }
+    }, [navigate, user,dispatch]);
+ 
     const formik = useFormik({
         initialValues: {
-            email: fbUser?.email || '',
+            email: userData?.email || '',
             password: '',
             password_repeat: '',
             account_type: 'employer'
         },
-        validationSchema: !fbUser && Yup.object({
+        validationSchema: !userData && Yup.object({
             email: Yup.string().email(t('forms.create_account.invalid_email_address')).required(t('forms.create_account.required')),
             password: Yup.string().min(8, t('forms.create_account.must_be_at_least_8_characters')).required(t('forms.create_account.required')),
             password_repeat: Yup.string().oneOf([Yup.ref('password'), null], t('forms.create_account.passwords_must_match')).required(t('forms.create_account.required'))
         }),
         onSubmit: async (values) => {
-            if (fbUser) {
+            if (userData) {
                 await delete values.password
                 await delete values.password_repeat
             }
@@ -52,7 +53,7 @@ function CreateAccountForm(props) {
             }
             setFormLoading(true);
 
-            toast.promise(fbUser ? facebookSignup(fbUser) : signup(values.email, values.password, values.account_type), {
+            toast.promise(userData ? socialSignup(userData, userData.provider, values.account_type) : signup(values.email, values.password, values.account_type), {
                 loading: t('forms.create_account.creating_account'),
                 success: <b>{t('forms.create_account.account_created_successfully')}</b>,
                 error: (err) => {
@@ -60,7 +61,7 @@ function CreateAccountForm(props) {
                 },
             })
                 .then((response) => {
-                    !fbUser ?
+                    !userData ?
                         toast.promise(dispatch(fetchUserByToken(response)), {
                             loading: t('forms.create_account.logging_in'),
                             success: <b>{t('forms.create_account.successfully_logged_in')}</b>,
@@ -100,12 +101,12 @@ function CreateAccountForm(props) {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.email}
-                    readOnly={!!fbUser} // Make the email field read-only if fbUser exists
-                    // disabled={!!fbUser} // Disable the email field if fbUser exists
+                    readOnly={!!userData} // Make the email field read-only if userData exists
+                    // disabled={!!userData} // Disable the email field if userData exists
                     error={formik.touched.email && formik.errors.email}
                 />
             </div>
-            {!fbUser &&
+            {!userData &&
                 <>
                     <div>
                         <FormField
