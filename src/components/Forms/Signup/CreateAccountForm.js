@@ -3,15 +3,18 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import {
+    useDispatch,
+    useSelector
+} from 'react-redux';
 
 import Yup from '../../../utils/yupExtensions';
 import Button from '../../UI/Buttons/Button/Button';
 import FormField from '../../UI/FormUI/FormField/FormField';
 import FormOptionField from '../../UI/FormUI/FormOptionField/FormOptionField';
 import { useFormik } from 'formik';
+import { fetchUserByToken, } from '../../../app/features/userSlice';
 import { socialSignup, signup } from '../../../services/authService';
-import { fetchUserByToken, setUser } from '../../../app/features/userSlice';
 
 function CreateAccountForm(props) {
     const { t } = useTranslation();
@@ -25,7 +28,7 @@ function CreateAccountForm(props) {
     useEffect(() => {
         if (user) {
             navigate('/welcome');
-        } 
+        }
     }, [navigate, user, dispatch]);
 
     const formik = useFormik({

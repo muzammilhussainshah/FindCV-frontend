@@ -1,14 +1,21 @@
-import deepEqual from 'deep-equal';
-import { useEffect, useState, useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import {
+    useEffect,
+    useState,
+    useCallback
+} from 'react';
 
+import deepEqual from 'deep-equal';
+import {
+    useLocation,
+    useNavigate
+} from 'react-router-dom';
+
+import styles from './JobsList.module.css';
 import JobsCard from '../JobsCard/JobsCard';
 import Pagination from '../../Pagination/Pagination';
 import BlockLoader from '../../../../../components/UI/Loaders/BlockLoader';
-
 import { getJobsList } from '../../../../../services/jobService';
 
-import styles from './JobsList.module.css';
 
 function JobsList({ per_page, max_pages, hide_url_params = false, filters, onPageChange, onFetchJobs, children, ...props }) {
     const navigate = useNavigate();
@@ -50,7 +57,6 @@ function JobsList({ per_page, max_pages, hide_url_params = false, filters, onPag
     useEffect(() => {
         getJobsList(page, per_page, max_pages, filters)
             .then((response) => {
-                // console.log(response);
                 setJobs(response.jobs);
                 setTotalPages(response.totalPages);
                 setLoading(false);
@@ -68,7 +74,7 @@ function JobsList({ per_page, max_pages, hide_url_params = false, filters, onPag
             .catch((error) => {
                 console.log(error);
             });
-    // eslint-disable-next-line
+        // eslint-disable-next-line
     }, [page, filtersList, per_page]);
 
     const handlePageChange = (value) => {

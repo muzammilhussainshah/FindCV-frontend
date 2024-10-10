@@ -1,13 +1,12 @@
 import { useTranslation } from 'react-i18next';
 import { useMemo } from 'react';
+
 import Select, { components } from 'react-select';
 import Flag from 'react-flags';
-
 import countryList from 'country-list';
 import languageList from 'language-list';
 
 import { formatLanguageCodeEmoji } from '../../../../utils/formatHelpers';
-
 import styles from './FormSelectField.module.css';
 
 function FormSelectField({ hasBorder, error, label, type, value, options, onFormikChange, onChange, children, ...props }) {

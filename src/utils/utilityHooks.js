@@ -1,3 +1,8 @@
+import axios from "axios";
+import {
+    useEffect,
+    useState
+} from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
@@ -35,19 +40,28 @@ export const useGetCompanyIndustriesHook = () => {
 
 export const useGetJobCategoriesHook = () => {
     const { t } = useTranslation();
+    const [jobCategories, setJobCategories] = useState([]);
 
-    const job_category_codes = ["accounting", "administrative", "advertising", "agriculture", "architecture", "automotive", "banking", "biotechnology", "business_development", "business_strategy", "charity", "chemical_engineering", "civil_engineering", "communications", "community_services", "construction", "consulting", "content", "creative", "customer_service", "data", "design", "distribution", "education", "engineering", "environmental", "executive", "facilities", "finance", "food_services", "fundraising", "general_business", "government", "graphic_design", "healthcare", "hospitality", "human_resources", "information_technology", "insurance", "internet", "journalism", "law", "logistics", "management", "manufacturing", "marketing", "media", "medical", "nonprofit", "nursing", "operations", "pharmaceutical", "product_management", "project_management", "public_relations", "quality_assurance", "real_estate", "research", "retail", "sales", "science", "security", "social_media", "software_development", "sports", "strategy", "supply_chain", "technical_support", "technology", "telecommunications", "training", "transportation", "travel", "web_design"];
-    const job_categories = [];
+    useEffect(() => {
+        const fetchJobCategories = async () => {
+            try {
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}job/getJobsCategory`);
+                const data = await response.data;
+                setJobCategories(data.map(category => ({
+                    value: category.value,
+                    label: t(`general.job_category.${category.label}`)
+                })));
+            } catch (error) {
+                console.error('Error fetching job categories:', error);
+            }
+        };
 
-    job_category_codes.forEach(job_category => {
-        job_categories.push({
-            value: job_category,
-            label: t(`general.job_category.${job_category}`)
-        });
-    });
+        fetchJobCategories();
+    }, [t]);
 
-    return job_categories;
+    return jobCategories;
 };
+
 
 export const useGetEducationLevelsHook = () => {
     const { t } = useTranslation();
@@ -161,7 +175,7 @@ export const useGetCurrenciesHook = (includeCurrencies = []) => {
     currencies_list.forEach(currency => {
 
         if (includeCurrencies.length > 0) {
-            
+
             if (includeCurrencies.includes(currency.code)) {
                 currencies.push({
                     value: currency.code,
@@ -202,7 +216,7 @@ export const useGetQueryParam = (param) => {
 
 export const useDebounce = (func, wait) => {
     let timeout;
-    return function(...args) {
+    return function (...args) {
         clearTimeout(timeout);
         timeout = setTimeout(() => func.apply(this, args), wait);
     };
@@ -211,17 +225,17 @@ export const useDebounce = (func, wait) => {
 export const useGetCities = (includeCountry = []) => {
     const { t } = useTranslation();
 
-    const city_codes_sar = ["riyadh","jeddah","mecca","medina","dammam","khobar","dhahran","tabuk","qatif","al_hasa","hofuf","jubail","abha","khamis_mushait","najran","jizan","taif","al_khafji","yanbu","al_kharj","buraidah","al_jouf","hail","arar","sakaka","al_mubarraz","unaizah","ras_tanura","rabigh","al_lith"];
-    const city_codes_oman = ["muscat","salalah","sohar","nizwa","sur","ibra","barka","rustaq","buraimi","ibri","khasab","matrah","seeb","samail","al_ashkharah","bidiyah","badiyah","bahla","al_kamil_wal_wafi","adam","al_mudhaibi","al_suwaiq","al_awabi","al_buraimi","al_hamra","duqm","dank","shinas","liwa","mahwit","masirah"];
-    const city_codes_kuwait = ["kuwait_city","hawalli","salmiya","farwaniya","jleeb_al_shuyoukh","fahaheel","mangaf","abu_halifa","mahboula","al_jahra","sabah_al_salem","sulaibikhat","raqai","mishref","jabriya","shalim","al_zour","wafra","abdali","al_ardiyah"];
-    const city_codes_bahrein = ["manama","muharraq","riffa","hamad_town","isa_town","sitra","jidhafs","zallaq","duraz","budaiya","bilad_al_qadeem","ain_adari","seef","saar","janabiyah","busaiteen","jasra","karzakan","malikiya","diraz","maameer","buri","hidd","al_dar"];
-    const city_codes_qatar = ["doha","al_rayyan","al_wakrah","umm_said","madinat_ash_shamal","al_khor","al_shahaniya","dukhan","mesaieed","ras_laffan","al_wukair","al_thakhira","al_ghuwariyah","al_jumaliyah","fuwayrit","al_karanaah","ash_shihaniyah","simaismah"];
-    const city_codes_uae = ["abu_dhabi","dubai","sharjah","al_ain","ajman","ras_al_khaimah","fujairah","umm_al_quwain","khor_fakkan","dibba_al_fujairah","kalba","al_dhaid","al_madam","al_jazirah_al_hamra","masafi","hili","al_qua"];
+    const city_codes_sar = ["riyadh", "jeddah", "mecca", "medina", "dammam", "khobar", "dhahran", "tabuk", "qatif", "al_hasa", "hofuf", "jubail", "abha", "khamis_mushait", "najran", "jizan", "taif", "al_khafji", "yanbu", "al_kharj", "buraidah", "al_jouf", "hail", "arar", "sakaka", "al_mubarraz", "unaizah", "ras_tanura", "rabigh", "al_lith"];
+    const city_codes_oman = ["muscat", "salalah", "sohar", "nizwa", "sur", "ibra", "barka", "rustaq", "buraimi", "ibri", "khasab", "matrah", "seeb", "samail", "al_ashkharah", "bidiyah", "badiyah", "bahla", "al_kamil_wal_wafi", "adam", "al_mudhaibi", "al_suwaiq", "al_awabi", "al_buraimi", "al_hamra", "duqm", "dank", "shinas", "liwa", "mahwit", "masirah"];
+    const city_codes_kuwait = ["kuwait_city", "hawalli", "salmiya", "farwaniya", "jleeb_al_shuyoukh", "fahaheel", "mangaf", "abu_halifa", "mahboula", "al_jahra", "sabah_al_salem", "sulaibikhat", "raqai", "mishref", "jabriya", "shalim", "al_zour", "wafra", "abdali", "al_ardiyah"];
+    const city_codes_bahrein = ["manama", "muharraq", "riffa", "hamad_town", "isa_town", "sitra", "jidhafs", "zallaq", "duraz", "budaiya", "bilad_al_qadeem", "ain_adari", "seef", "saar", "janabiyah", "busaiteen", "jasra", "karzakan", "malikiya", "diraz", "maameer", "buri", "hidd", "al_dar"];
+    const city_codes_qatar = ["doha", "al_rayyan", "al_wakrah", "umm_said", "madinat_ash_shamal", "al_khor", "al_shahaniya", "dukhan", "mesaieed", "ras_laffan", "al_wukair", "al_thakhira", "al_ghuwariyah", "al_jumaliyah", "fuwayrit", "al_karanaah", "ash_shihaniyah", "simaismah"];
+    const city_codes_uae = ["abu_dhabi", "dubai", "sharjah", "al_ain", "ajman", "ras_al_khaimah", "fujairah", "umm_al_quwain", "khor_fakkan", "dibba_al_fujairah", "kalba", "al_dhaid", "al_madam", "al_jazirah_al_hamra", "masafi", "hili", "al_qua"];
 
     const cities = [];
 
     if (includeCountry.length > 0) {
-        
+
         if (includeCountry.includes("SA")) {
             city_codes_sar.forEach(city_code => {
                 cities.push({
@@ -248,7 +262,7 @@ export const useGetCities = (includeCountry = []) => {
                 });
             });
         }
-        
+
         if (includeCountry.includes("KW")) {
             city_codes_kuwait.forEach(city_code => {
                 cities.push({

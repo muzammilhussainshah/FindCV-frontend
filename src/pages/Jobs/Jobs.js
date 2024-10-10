@@ -60,7 +60,7 @@ function Jobs() {
     }
 
     const handleFilterChange = (value) => {
-        
+
         switch (value.target.name) {
             case 'filter_job_type':
                 setJobType(value.target.value);
@@ -216,7 +216,7 @@ function Jobs() {
                         </div>
                     </div>
 
-                    <JobsList 
+                    <JobsList
                         per_page={10}
                         filters={filters}
                         onFetchJobs={handleUpdateJobsCounters}
@@ -228,5 +228,5 @@ function Jobs() {
         </div>
     );
 }
-    
+
 export default Jobs;
