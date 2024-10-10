@@ -34,7 +34,12 @@
  }
 
  .googleIcon {
-     height: 15px;
-     width: 15px;
-     background-color: red;
+     height: 17px;
+     width: 17px;
+ }
+
+ .facebookIcon {
+     height: 25px;
+     width: 25px;
+
  }

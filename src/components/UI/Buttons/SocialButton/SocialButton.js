@@ -58,6 +58,7 @@ function SocialButton({ type }) {
                 setFormLoading(false); // Stop loading spinner once done
             });
     }
+    
     const responseFacebook = async (response) => {
         if (formLoading) {
             return;
@@ -89,7 +90,7 @@ function SocialButton({ type }) {
                 <img
                     src={GoogleIcon}
                     alt="google-icon"
-                    style={{ height: 17, width: 17 }}
+                    className={styles.googleIcon}
                 />
             </div>
             <FacebookLogin
@@ -97,7 +98,7 @@ function SocialButton({ type }) {
                 fields="name,email,picture"
                 cssClass={styles.fbButtonContainer}
                 textButton={''}
-                icon={<img src={FacebookWhite} style={{ height: 25, width: 25 }} alt="facebook-icon" />}
+                icon={<img src={FacebookWhite} className={styles.facebookIcon} alt="facebook-icon" />}
                 callback={(response) => { if (response?.accessToken) responseFacebook(response) }} />
 
         </div>

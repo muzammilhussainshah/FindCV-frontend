@@ -1,18 +1,20 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import SimpleLink from '../UI/Buttons/SimpleLink/SimpleLink';
-import Button from '../UI/Buttons/Button/Button';
-import BubbleButton from '../UI/Buttons/BubbleButton/BubbleButton';
+import {
+    useSelector,
+    useDispatch
+} from 'react-redux';
 
+import Button from '../UI/Buttons/Button/Button';
+import styles from './defaultHeader.module.css';
+import logoImage from '../../assets/images/logo.png';
+import SimpleLink from '../UI/Buttons/SimpleLink/SimpleLink';
+import BubbleButton from '../UI/Buttons/BubbleButton/BubbleButton';
+import userAvatarPlaceholder from '../../assets/images/other/user_avatar_placeholder.svg';
 import { logoutUser } from '../../app/features/userSlice';
 import { setShowLogoutButton } from '../../app/features/headerUISlice';
-
-import styles from './defaultHeader.module.css';
-
-import logoImage from '../../assets/images/logo.png';
-import userAvatarPlaceholder from '../../assets/images/other/user_avatar_placeholder.svg';
 
 function DefaultHeader() {
     const navigate = useNavigate();
@@ -71,9 +73,9 @@ function DefaultHeader() {
     }
 
     const handleLogout = () => {
-        if (window?.FB?.logout) {
-            window.FB.logout(() => { });
-        }
+        // if (window?.FB?.logout) {
+        //     window.FB.logout(() => { });
+        // }
         dispatch(logoutUser());
         dispatch(setShowLogoutButton(false));
         navigate('/login');

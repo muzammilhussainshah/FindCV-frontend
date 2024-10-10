@@ -72,11 +72,7 @@ export const socialLogin = async (data, socialAccType) => {
             socialAccType: socialAccType,
             accessToken: socialAccType === 'facebook' ? data.accessToken : data.access_token
         });
-        console.log(response, 'socialLogin')
-        if (response.data.token) {
-            // save token
-            setItemWithExpiration('findcv_user', response.data.token, 3600000 * 24); // 1 hour
-        }
+        if (response.data.token) setItemWithExpiration('findcv_user', response.data.token, 3600000 * 24); // 1 hour
         return response.data;
     } catch (error) {
         console.log(error, 'socialLogin error')
@@ -91,10 +87,8 @@ export const socialSignup = async (data, socialAccType, account_type) => {
             accessToken: socialAccType === 'facebook' ? data.accessToken : data.access_token
 
         });
-        console.log(response, 'socialSignup')
-        if (response.data.token) {
-            setItemWithExpiration('findcv_user', response.data.token, 3600000 * 24); // 1 hour
-        }
+        if (response.data.token) setItemWithExpiration('findcv_user', response.data.token, 3600000 * 24); // 1 hour
+
         return response.data.token;
     } catch (error) {
         console.log(error, 'socialSignup error')

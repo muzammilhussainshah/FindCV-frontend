@@ -1,10 +1,10 @@
-import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+
 import { Helmet } from 'react-helmet';
+import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { setBackButtonLink } from '../../app/features/headerUISlice';
-
 import CreateAccountForm from '../../components/Forms/Signup/CreateAccountForm';
 
 function ResetPassword() {
@@ -13,7 +13,6 @@ function ResetPassword() {
 
     useEffect(() => {
         dispatch(setBackButtonLink('/login'));
-    
         // Optionally, reset the visibility when the component unmounts
         return () => {
           dispatch(setBackButtonLink(false));
