@@ -12,12 +12,10 @@ export const fetchUserByToken = createAsyncThunk(
   async (token, { rejectWithValue }) => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_API_URL}user/getUserByToken/${token}`);
-      console.log(response, 'response fetchUserByToken')
-      return response.data;
+       return response.data;
     }
     catch (error) {
-      console.log(error, 'error fetchUserByToken')
-      return rejectWithValue(error.response.data);
+       return rejectWithValue(error.response.data);
     }
   }
 );

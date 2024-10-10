@@ -4,8 +4,7 @@ import { setItemWithExpiration } from '../utils/localStorageHelpers';
 
 export const signup = async (email, password, account_type) => {
     try {
-        console.log(email, password, account_type, 'signup')
-        const response = await axios.post(`${process.env.REACT_APP_API_URL}auth/signup`, { email, password, account_type });
+         const response = await axios.post(`${process.env.REACT_APP_API_URL}auth/signup`, { email, password, account_type });
         // const response = await axios.post(`${process.env.REACT_APP_API_URL}auth/signup`, { email, password, account_type });
         if (response.data) {
             // save token
