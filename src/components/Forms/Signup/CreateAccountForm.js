@@ -25,10 +25,7 @@ function CreateAccountForm(props) {
     useEffect(() => {
         if (user) {
             navigate('/welcome');
-        }
-        // return () => {
-        //     dispatch(setUser(null));
-        // }
+        } 
     }, [navigate, user, dispatch]);
 
     const formik = useFormik({

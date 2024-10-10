@@ -9,8 +9,11 @@ import styles from './signupHeader.module.css';
 import logoImage from '../../assets/images/logo-white.png';
 import BubbleButton from '../UI/Buttons/BubbleButton/BubbleButton';
 import LanguageSwitch from '../UI/LanguageSwitch/LanguageSwitch';
-import { logoutUser } from '../../app/features/userSlice';
 import { setShowLogoutButton } from '../../app/features/headerUISlice';
+import {
+    logoutUser,
+    setUser
+} from '../../app/features/userSlice';
 
 function SignupHeader() {
     const { t } = useTranslation();
@@ -38,6 +41,7 @@ function SignupHeader() {
                             icon={'arrow-back'}
                             icon_position={'left'}
                             iconOnlyOnMobile
+                            callBack={() => { dispatch(setUser(null)) }}
                             to={backButtonLink}
                             style={{ marginLeft: 20 }}>
                             {t('signupHeader.back')}

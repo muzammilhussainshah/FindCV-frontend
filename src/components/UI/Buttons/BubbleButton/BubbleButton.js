@@ -1,8 +1,7 @@
 import LinkWrapper from '../../../wrappers/LinkWrapper';
 import styles from './BubbleButton.module.css';
 
-function BubbleButton({ className, small, dark, icon, icon_position, iconOnlyOnMobile, children, ...props }) {
-    // console.log(props);
+function BubbleButton({ className, small, dark, icon, icon_position, iconOnlyOnMobile, children, callBack, ...props }) {
 
     const icon_class = icon ? `icon-${icon}` : '';
     const icon_position_class = icon_position ? `icon-${icon_position}` : '';
@@ -16,7 +15,7 @@ function BubbleButton({ className, small, dark, icon, icon_position, iconOnlyOnM
     if (dark) {
         buttonClass += ` ${styles.dark}`;
     }
-    
+
     if (iconOnlyOnMobile) {
         buttonClass += ` ${styles.iconOnlyOnMobile}`;
     }
@@ -39,7 +38,7 @@ function BubbleButton({ className, small, dark, icon, icon_position, iconOnlyOnM
     }
     else {
         return (
-            <LinkWrapper className={buttonClass} {...props}>
+            <LinkWrapper onClick={callBack} className={buttonClass} {...props}>
                 <span>{children}</span>
             </LinkWrapper>
         );

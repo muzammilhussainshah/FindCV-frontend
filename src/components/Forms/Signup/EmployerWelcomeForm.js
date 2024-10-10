@@ -22,7 +22,7 @@ function EmployerWelcomeForm(props) {
     const userData = useSelector((state) => state.user.userData);
     const { t } = useTranslation();
     const [formLoading, setFormLoading] = useState(false);
-    console.log(userData, 'userData')
+    
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -35,8 +35,7 @@ function EmployerWelcomeForm(props) {
         }
     }, [navigate, user]);
 
-    // console.log(userData.name.split(' '),'')
-    const formik = useFormik({
+     const formik = useFormik({
         initialValues: {
             first_name: userData?.name?.split(' ')[0] ? userData?.name?.split(' ')[0] : '',
             last_name: userData?.name.split(' ')[1] ? userData?.name?.split(' ')[1] : '',
