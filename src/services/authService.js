@@ -4,15 +4,16 @@ import { setItemWithExpiration } from '../utils/localStorageHelpers';
 
 export const signup = async (email, password, account_type) => {
     try {
+        console.log(email, password, account_type, 'signup')
         const response = await axios.post(`${process.env.REACT_APP_API_URL}auth/signup`, { email, password, account_type });
+        // const response = await axios.post(`${process.env.REACT_APP_API_URL}auth/signup`, { email, password, account_type });
         if (response.data) {
             // save token
             setItemWithExpiration('findcv_user', response.data.token, 3600000 * 24); // 1 hour
         }
-        return response.data.token;
+         return response.data.token;
     } catch (error) {
-
-        if (error.response.data.error === 'User already exists with this email') {
+         if (error.response.data.error === 'User already exists with this email') {
             error.response.data.error = i18n.t('forms.create_account.user_already_exists_with_this_email');
             error.response.data['field'] = 'email';
             throw error;
@@ -75,22 +76,20 @@ export const socialLogin = async (data, socialAccType) => {
         if (response.data.token) setItemWithExpiration('findcv_user', response.data.token, 3600000 * 24); // 1 hour
         return response.data;
     } catch (error) {
-        console.log(error, 'socialLogin error')
-    }
+     }
 };
 
 export const socialSignup = async (data, socialAccType, account_type) => {
     try {
-        const response = await axios.post(`${process.env.REACT_APP_API_URL}auth/socialSignup`, {
+         const response = await axios.post(`${process.env.REACT_APP_API_URL}auth/socialSignup`, {
             socialAccType: socialAccType,
             accountType: account_type,
-            accessToken: socialAccType === 'facebook' ? data.accessToken : data.access_token
-
+            accessToken: socialAccType === 'facebook' ? data.accessToken : data.access_token,
+            password: data.password
         });
         if (response.data.token) setItemWithExpiration('findcv_user', response.data.token, 3600000 * 24); // 1 hour
 
         return response.data.token;
     } catch (error) {
-        console.log(error, 'socialSignup error')
-    }
+     }
 };

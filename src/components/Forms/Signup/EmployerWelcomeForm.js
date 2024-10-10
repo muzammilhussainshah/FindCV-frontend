@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import Yup from '../../../utils/yupExtensions'; 
+import Yup from '../../../utils/yupExtensions';
 import toast from 'react-hot-toast';
 
 import { fetchUserByToken } from '../../../app/features/userSlice';
@@ -19,14 +19,15 @@ function EmployerWelcomeForm(props) {
     const dispatch = useDispatch();
     const user = useSelector(state => state.user.user);
     const userToken = useSelector(state => state.user.token);
+    const userData = useSelector((state) => state.user.userData);
     const { t } = useTranslation();
     const [formLoading, setFormLoading] = useState(false);
-
+    console.log(userData, 'userData')
     const navigate = useNavigate();
 
     useEffect(() => {
         if (user) {
-            
+
             if (user.registration_process === 'completed') {
                 navigate('/' + user.account_type + 's/' + user.slug);
             }
@@ -34,10 +35,11 @@ function EmployerWelcomeForm(props) {
         }
     }, [navigate, user]);
 
+    // console.log(userData.name.split(' '),'')
     const formik = useFormik({
         initialValues: {
-            first_name: '',
-            last_name: '',
+            first_name: userData?.name?.split(' ')[0] ? userData?.name?.split(' ')[0] : '',
+            last_name: userData?.name.split(' ')[1] ? userData?.name?.split(' ')[1] : '',
             city: '',
             country: '',
             company_name: '',
@@ -92,26 +94,26 @@ function EmployerWelcomeForm(props) {
                     return <b>{err.response.data.error}</b>;
                 },
             })
-            .then(() => {
-                toast.promise(dispatch(fetchUserByToken(userToken)), {
-                    loading: t('forms.login.receiving_data'),
-                    success: <b>{t('forms.login.user_verified')}</b>,
-                    error: (err) => {
-                        return <b>{err.response.data.error}</b>;
-                    },
-                });
-            })
-            .catch((error) => {
-                
-                if (error?.response?.data?.field) {
-                    formik.setErrors({
-                        [error.response.data.field]: error.response.data.error
+                .then(() => {
+                    toast.promise(dispatch(fetchUserByToken(userToken)), {
+                        loading: t('forms.login.receiving_data'),
+                        success: <b>{t('forms.login.user_verified')}</b>,
+                        error: (err) => {
+                            return <b>{err.response.data.error}</b>;
+                        },
                     });
-                }
+                })
+                .catch((error) => {
 
-                setFormLoading(false);
+                    if (error?.response?.data?.field) {
+                        formik.setErrors({
+                            [error.response.data.field]: error.response.data.error
+                        });
+                    }
 
-            });
+                    setFormLoading(false);
+
+                });
         },
     });
 
@@ -125,10 +127,10 @@ function EmployerWelcomeForm(props) {
     if (formik.values.employer_status === 'business') {
         conditionalFields = (
             <div>
-                <FormField 
-                    name="company_name" 
-                    type="text" 
-                    placeholder={t('forms.welcome_employer.company_name')} 
+                <FormField
+                    name="company_name"
+                    type="text"
+                    placeholder={t('forms.welcome_employer.company_name')}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.company_name}
@@ -141,8 +143,8 @@ function EmployerWelcomeForm(props) {
         conditionalFields = (
             <div>
                 <FormSelectField
-                    name="nationality" 
-                    type="nationality" 
+                    name="nationality"
+                    type="nationality"
                     placeholder={t('forms.welcome_employer.nationality')}
                     onFormikChange={formik.handleChange}
                     value={formik.values.nationality}
@@ -157,9 +159,9 @@ function EmployerWelcomeForm(props) {
     return (
         <form onSubmit={formik.handleSubmit} {...props}>
             <div>
-                <FormField 
-                    name="first_name" 
-                    type="text" 
+                <FormField
+                    name="first_name"
+                    type="text"
                     placeholder={t('forms.welcome_employer.first_name')}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -168,9 +170,9 @@ function EmployerWelcomeForm(props) {
                 />
             </div>
             <div>
-                <FormField 
-                    name="last_name" 
-                    type="text" 
+                <FormField
+                    name="last_name"
+                    type="text"
                     placeholder={t('forms.welcome_employer.last_name')}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -180,8 +182,8 @@ function EmployerWelcomeForm(props) {
             </div>
             <div>
                 <FormSelectField
-                    name="country" 
-                    type="country" 
+                    name="country"
+                    type="country"
                     placeholder={t('forms.welcome_employer.country')}
                     onFormikChange={formik.handleChange}
                     options={['QA', 'AE', 'SA', 'BH', 'KW', 'OM']}
@@ -191,8 +193,8 @@ function EmployerWelcomeForm(props) {
             </div>
             {formik.values.country &&
                 <div>
-                    <FormSelectField 
-                        name="city" 
+                    <FormSelectField
+                        name="city"
                         type="default"
                         placeholder={t('forms.welcome_employer.city')}
                         options={citiesOptions}
@@ -213,7 +215,7 @@ function EmployerWelcomeForm(props) {
                 />
             </div>
             {conditionalFields}
-            <Button type="submit" style={{display: 'block'}}>
+            <Button type="submit" style={{ display: 'block' }}>
                 {formLoading ? t('forms.welcome_employer.processing') : t('forms.welcome_employer.proceed')}
             </Button>
         </form>

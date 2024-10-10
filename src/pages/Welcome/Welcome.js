@@ -23,7 +23,6 @@ function Welcome() {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
     const emailToken = useGetQueryParam('token');
 
     const verifyEmailToken = useCallback((emailToken) => {
@@ -32,17 +31,17 @@ function Welcome() {
             success: t('general.UI.success'),
             error: t('general.UI.something_went_wrong'),
         })
-        .then((data) => {
-            dispatch(fetchUserByToken(userToken));
-        })
-        .catch((error) => {
-            toast.error(error.error);
-        });
+            .then((data) => {
+                dispatch(fetchUserByToken(userToken));
+            })
+            .catch((error) => {
+                toast.error(error.error);
+            });
     }, [dispatch, t, userToken]);
 
     useEffect(() => {
         if (user) {
-            
+
             if (user.registration_process === 'completed') {
                 navigate('/' + user.account_type + 's/' + user.slug);
             }
@@ -57,7 +56,7 @@ function Welcome() {
     let content = '';
 
     if (user.email_verified) {
-        
+
         if (user.account_type === 'employer') {
 
             content = <div>
@@ -67,7 +66,7 @@ function Welcome() {
 
         }
         else {
-            
+
             if (user.registration_process === '1') {
                 content = <div>
                     <span className={styles.step}>{t('welcome.step_1')}</span>
@@ -118,5 +117,5 @@ function Welcome() {
         </>
     );
 }
-    
+
 export default Welcome;

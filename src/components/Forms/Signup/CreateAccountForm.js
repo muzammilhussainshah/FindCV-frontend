@@ -26,11 +26,11 @@ function CreateAccountForm(props) {
         if (user) {
             navigate('/welcome');
         }
-        return () => {
-            dispatch(setUser(null));
-        }
-    }, [navigate, user,dispatch]);
- 
+        // return () => {
+        //     dispatch(setUser(null));
+        // }
+    }, [navigate, user, dispatch]);
+
     const formik = useFormik({
         initialValues: {
             email: userData?.email || '',
@@ -44,16 +44,12 @@ function CreateAccountForm(props) {
             password_repeat: Yup.string().oneOf([Yup.ref('password'), null], t('forms.create_account.passwords_must_match')).required(t('forms.create_account.required'))
         }),
         onSubmit: async (values) => {
-            if (userData) {
-                await delete values.password
-                await delete values.password_repeat
-            }
             if (formLoading) {
                 return;
             }
             setFormLoading(true);
 
-            toast.promise(userData ? socialSignup(userData, userData.provider, values.account_type) : signup(values.email, values.password, values.account_type), {
+            toast.promise(userData ? socialSignup({ ...userData, password: values.password, }, userData.provider, values.account_type) : signup(values.email, values.password, values.account_type), {
                 loading: t('forms.create_account.creating_account'),
                 success: <b>{t('forms.create_account.account_created_successfully')}</b>,
                 error: (err) => {
@@ -61,15 +57,16 @@ function CreateAccountForm(props) {
                 },
             })
                 .then((response) => {
-                    !userData ?
-                        toast.promise(dispatch(fetchUserByToken(response)), {
-                            loading: t('forms.create_account.logging_in'),
-                            success: <b>{t('forms.create_account.successfully_logged_in')}</b>,
-                            error: (err) => {
-                                return <b>{err.response.data.error}</b>;
-                            },
-                        }) :
-                        dispatch(fetchUserByToken(response))
+                    // !userData ?
+                    toast.promise(dispatch(fetchUserByToken(response)), {
+                        loading: t('forms.create_account.logging_in'),
+                        success: <b>{t('forms.create_account.successfully_logged_in')}</b>,
+                        error: (err) => {
+                            return <b>{err.response.data.error}</b>;
+                        },
+                    })
+                    // :
+                    // dispatch(fetchUserByToken(response))
                 })
                 .catch((error) => {
 
@@ -106,32 +103,32 @@ function CreateAccountForm(props) {
                     error={formik.touched.email && formik.errors.email}
                 />
             </div>
-            {!userData &&
-                <>
-                    <div>
-                        <FormField
-                            name="password"
-                            type="password"
-                            placeholder={t('forms.create_account.password')}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.password}
-                            error={formik.touched.password && formik.errors.password}
-                        />
-                    </div>
-                    <div>
-                        <FormField
-                            name="password_repeat"
-                            type="password"
-                            placeholder={t('forms.create_account.repeat_password')}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.password_repeat}
-                            error={formik.touched.password_repeat && formik.errors.password_repeat}
-                        />
-                    </div>
-                </>
-            }
+            {/* {!userData && */}
+            <>
+                <div>
+                    <FormField
+                        name="password"
+                        type="password"
+                        placeholder={t('forms.create_account.password')}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.password}
+                        error={formik.touched.password && formik.errors.password}
+                    />
+                </div>
+                <div>
+                    <FormField
+                        name="password_repeat"
+                        type="password"
+                        placeholder={t('forms.create_account.repeat_password')}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.password_repeat}
+                        error={formik.touched.password_repeat && formik.errors.password_repeat}
+                    />
+                </div>
+            </>
+            {/* // } */}
             <div>
                 <FormOptionField
                     name="account_type"

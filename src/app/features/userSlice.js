@@ -12,9 +12,11 @@ export const fetchUserByToken = createAsyncThunk(
   async (token, { rejectWithValue }) => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_API_URL}user/getUserByToken/${token}`);
+      console.log(response, 'response fetchUserByToken')
       return response.data;
     }
     catch (error) {
+      console.log(error, 'error fetchUserByToken')
       return rejectWithValue(error.response.data);
     }
   }
@@ -53,7 +55,7 @@ export const userReducer = createSlice({
       state.user.favourites = action.payload;
     },
     setUser: (state, action) => {
-       state.userData = action.payload;
+      state.userData = action.payload;
       // Set user and token data directly from the Facebook login response
     }
   },
