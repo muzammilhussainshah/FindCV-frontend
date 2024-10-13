@@ -1,0 +1,31 @@
+.buttonWrapper,
+.buttonWrapperAR {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.buttonWrapperAR {
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.buttonContainer {
+    width: auto !important;
+    height: 100% !important;
+    margin: 10px !important;
+ }
+
+/* Media query for screens with a max width of 475px */
+@media (max-width: 425px) {
+
+    .buttonWrapper,
+    .buttonWrapperAR {
+        display: block;
+    }
+
+    .buttonContainer {
+        margin: 10px !important;
+    }
+}

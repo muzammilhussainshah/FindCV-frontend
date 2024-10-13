@@ -334,6 +334,11 @@
             "job_location_country": "Job Location - Country",
             "job_location_city": "Job Location - City",
             "job_status": "Job Status"
+        },
+        "verifyOTP": {
+            "resend": "Resend code",
+            "Verify": "Verify",
+             "inputPlaceHolder": "Enter your OTP code"
         }
     },
     "signupHeader": {

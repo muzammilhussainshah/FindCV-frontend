@@ -334,6 +334,11 @@
             "job_location_country": "مكان الوظيفة – الدولة",
             "job_location_city": "مكان العمل – المدينة",
             "job_status": "الحالة الوظيفية"
+        },
+        "verifyOTP": {
+            "resend": "إعادة إرسال الرمز",
+            "Verify": "يؤكد",
+            "inputPlaceHolder": "أدخل رمز OTP الخاص بك"
         }
     },
     "signupHeader": {

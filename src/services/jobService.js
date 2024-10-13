@@ -5,8 +5,7 @@ export const updateJob = async (data) => {
     try {
         const response = await axios.post(`${process.env.REACT_APP_API_URL}job/update`, data);
         if (response.data) {
-            // console.log(response.data);
-        }
+         }
         return response.data;
     } catch (error) {
         throw error.response.data;
@@ -17,8 +16,7 @@ export const updateJobField = async (data) => {
     try {
         const response = await axios.post(`${process.env.REACT_APP_API_URL}job/updateField`, data);
         if (response.data) {
-            // console.log(response.data);
-        }
+         }
         return response.data;
     } catch (error) {
         throw error.response.data;
@@ -29,8 +27,7 @@ export const updateApplicationField = async (data) => {
     try {
         const response = await axios.post(`${process.env.REACT_APP_API_URL}job/updateApplicationField`, data);
         if (response.data) {
-            // console.log(response.data);
-        }
+         }
         return response.data;
     } catch (error) {
         throw error.response.data;

@@ -9,8 +9,7 @@ export const updateUser = async (data) => {
             }
         });
         if (response.data) {
-            // console.log(response.data);
-        }
+         }
         return response.data.token;
     } catch (error) {
         
@@ -48,8 +47,7 @@ export const userVerifyEmail = async (token, emailToken) => {
     try {
         const response = await axios.post(`${process.env.REACT_APP_API_URL}user/verifyEmail`, {token, emailToken});
         if (response.data) {
-            // console.log(response.data);
-        }
+         }
         return response.data;
     } catch (error) {
         throw error.response.data;

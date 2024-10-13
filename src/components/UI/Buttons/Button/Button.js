@@ -2,7 +2,6 @@ import LinkWrapper from '../../../wrappers/LinkWrapper';
 import styles from './Button.module.css';
 
 function Button({ className, color, icon, icon_position, disabled = false, outlined, children, ...props }) {
-    // console.log(props);
 
     const icon_class = icon ? `icon-${icon}` : '';
     const icon_position_class = icon_position ? `icon-${icon_position}` : '';
@@ -30,7 +29,7 @@ function Button({ className, color, icon, icon_position, disabled = false, outli
                 <span>{children}</span>
             </button>
         );
-    
+
     }
     else {
         return (
@@ -38,7 +37,7 @@ function Button({ className, color, icon, icon_position, disabled = false, outli
                 <span>{children}</span>
             </LinkWrapper>
         );
-    
+
     }
 }
 

@@ -1,9 +1,10 @@
 import { useEffect, useCallback } from 'react';
+import { Helmet } from 'react-helmet';
+
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import { Helmet } from 'react-helmet';
 
 import EmployerWelcomeForm from '../../components/Forms/Signup/EmployerWelcomeForm';
 import JobseekerWelcomeFormStep1 from '../../components/Forms/Signup/JobseekerWelcomeFormStep1';
@@ -11,11 +12,12 @@ import JobseekerWelcomeFormStep2 from '../../components/Forms/Signup/JobseekerWe
 import JobseekerWelcomeFormStep3 from '../../components/Forms/Signup/JobseekerWelcomeFormStep3';
 import JobseekerWelcomeFormStep4 from '../../components/Forms/Signup/JobseekerWelcomeFormStep4';
 
-import { useGetQueryParam } from '../../utils/utilityHooks';
 import { userVerifyEmail } from '../../services/userService';
+import { useGetQueryParam } from '../../utils/utilityHooks';
 import { fetchUserByToken } from '../../app/features/userSlice';
 
 import styles from './Welcome.module.css';
+import VerifyOTPForm from '../../components/Forms/Signup/VerifyOTPForm';
 
 function Welcome() {
     const userToken = useSelector(state => state.user.token);
@@ -105,6 +107,7 @@ function Welcome() {
             <div className={styles.verify_email}>
                 <p>{t('welcome.verify_email_message')} <strong>{user.email}</strong></p>
             </div>
+            <VerifyOTPForm email={user.email} accountType={user.account_type} token={userToken} />
         </div>;
     }
 
