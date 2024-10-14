@@ -16,7 +16,7 @@ export const useGetSkillsHook = () => {
                 const response = await axios.get(`${process.env.REACT_APP_API_URL}job/getJobsSkill`);
                 const data = response.data;
                 setSkills(data.map(skill => ({
-                    value: skill.value,
+                    value: skill.label,
                     label: t(`general.skill.${skill.label}`)
                 })));
             } catch (error) {
@@ -57,7 +57,7 @@ export const useGetJobCategoriesHook = () => {
                 const response = await axios.get(`${process.env.REACT_APP_API_URL}job/getJobsCategory`);
                 const data = await response.data;
                 setJobCategories(data.map(category => ({
-                    value: category.value,
+                    value: category.label,
                     label: t(`general.job_category.${category.label}`)
                 })));
             } catch (error) {

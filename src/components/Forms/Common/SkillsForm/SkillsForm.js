@@ -25,7 +25,7 @@ function SkillsForm({ onSubmit, excludeSkills, ...props }) {
     });
 
     let options = useGetSkillsHook();
-
+    console.log(options, 'options')
     if (excludeSkills) {
         options = options.filter(option => !excludeSkills.includes(option.value));
     }
@@ -38,7 +38,7 @@ function SkillsForm({ onSubmit, excludeSkills, ...props }) {
         <form onSubmit={formik.handleSubmit} {...props}>
             <div>
                 <FormSelectField
-                    name="skills" 
+                    name="skills"
                     type="default"
                     placeholder={t('forms.skills.your_skills')}
                     isMulti
